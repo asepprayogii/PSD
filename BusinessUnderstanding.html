@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>&lt;no title&gt; &#8212; My sample book</title>
+    <title>Bussiness Understanding &#8212; My sample book</title>
   
   
   
@@ -60,8 +60,6 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'BusinessUnderstanding';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Mendeskripsikan Data" href="DataUNderstanding.html" />
-    <link rel="prev" title="Welcome to your Jupyter Book" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -123,6 +121,8 @@
     <div class="bd-container__inner bd-page-width">
       
       
+      
+        
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -368,7 +368,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>Bussiness Understanding</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -377,9 +377,12 @@ document.write(`
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#judul-dataset">Judul Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-tujuan-bisnis">Menentukan Tujuan Bisnis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-rencana-proyek">Membuat Rencana Proyek</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menilai-situasi-dan-kondisi">Menilai Situasi dan Kondisi</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -390,7 +393,55 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  
+  <section class="tex2jax_ignore mathjax_ignore" id="bussiness-understanding">
+<h1>Bussiness Understanding<a class="headerlink" href="#bussiness-understanding" title="Link to this heading">#</a></h1>
+<section id="judul-dataset">
+<h2>Judul Dataset<a class="headerlink" href="#judul-dataset" title="Link to this heading">#</a></h2>
+<p>“Iris Flower Dataset”  <a class="reference external" href="https://www.kaggle.com/datasets/arshid/iris-flower-dataset">https://www.kaggle.com/datasets/arshid/iris-flower-dataset</a></p>
+</section>
+<section id="menentukan-tujuan-bisnis">
+<h2>Menentukan Tujuan Bisnis<a class="headerlink" href="#menentukan-tujuan-bisnis" title="Link to this heading">#</a></h2>
+<p><strong>Tujuan Utama:</strong> Tujuan dari proyek ini adalah untuk memahami karakteristik fisik yang membedakan tiga spesies bunga Iris (Setosa, Versicolor, dan Virginica). Analisis ini bertujuan untuk memberikan dasar bagi sistem identifikasi otomatis atau untuk membantu ahli botani dalam mengklasifikasikan bunga Iris berdasarkan pengukuran kelopak (petal) dan mahkota (sepal).</p>
+<p><strong>Tujuan Teknis:</strong> Secara teknis, proyek ini bertujuan untuk:</p>
+<ol class="arabic simple">
+<li><p>Membangun alur kerja data dari database cloud (MySQL &amp; PostgreSQL di Aiven) ke alat visualisasi (Power BI).</p></li>
+<li><p>Melakukan analisis data eksplorasi untuk mengekstrak statistik deskriptif kunci (min, max, rata-rata).</p></li>
+<li><p>Memvalidasi keseimbangan data antar kelas melalui visualisasi untuk memastikan setiap spesies terwakili dengan baik.</p></li>
+</ol>
+<p><strong>Kriteria Sukses:</strong> Proyek ini dianggap berhasil jika dasbor interaktif di Power BI berhasil dibuat, menampilkan semua metrik dan visualisasi yang diperlukan secara akurat, dengan data yang ditarik langsung dari kedua database.</p>
+</section>
+<section id="membuat-rencana-proyek">
+<h2>Membuat Rencana Proyek<a class="headerlink" href="#membuat-rencana-proyek" title="Link to this heading">#</a></h2>
+<p>Rencana proyek dibagi menjadi tahapan logis sebagai berikut:</p>
+<ol class="arabic simple">
+<li><p><strong>Langkah 1:</strong> Membuat dan mengkonfigurasi database MySQL dan PostgreSQL pada platform Aiven.</p></li>
+<li><p><strong>Langkah 2:</strong> Membuat skema tabel iris di kedua database dan mengimpor data dari file CSV menggunakan DBeaver.</p></li>
+<li><p><strong>Langkah 3:</strong> Menghubungkan database ke Power BI agar data bisa divisualisasikan secara interaktif.</p></li>
+<li><p><strong>Langkah 4:</strong> Melakukan eksplorasi data:</p>
+<ul class="simple">
+<li><p>Menghitung nilai minimum, maksimum, dan rata-rata tiap kolom numerik.</p></li>
+<li><p>Membuat grafik batang jumlah data tiap kelas (Setosa, Versicolor, Virginica).</p></li>
+</ul>
+</li>
+<li><p><strong>Langkah 5:</strong> Menyusun laporan insight dari hasil analisis.</p></li>
+</ol>
+</section>
+<section id="menilai-situasi-dan-kondisi">
+<h2>Menilai Situasi dan Kondisi<a class="headerlink" href="#menilai-situasi-dan-kondisi" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Sumber Daya:</strong></p>
+<ul>
+<li><p><strong>Data:</strong> Dataset Iris klasik yang terdiri dari 150 sampel, yang merupakan data bersih dan terstruktur dengan baik.</p></li>
+<li><p><strong>Infrastruktur:</strong> Database MySQL dan PostgreSQL yang dihosting di platform cloud Aiven.</p></li>
+<li><p><strong>Perangkat Lunak:</strong> DBeaver untuk manajemen database dan Power BI untuk analisis serta visualisasi.</p></li>
+</ul>
+</li>
+<li><p><strong>Risiko:</strong> Risiko utama dalam proyek ini adalah masalah konektivitas jaringan antara Power BI dan database cloud di Aiven, seperti timeout dan validasi sertifikat SSL. Risiko ini telah berhasil diidentifikasi dan diatasi selama tahap awal proyek.</p></li>
+<li><p><strong>Asumsi:</strong> Proyek ini mengasumsikan bahwa data yang disediakan dalam dataset Iris adalah akurat dan tidak memerlukan pembersihan data yang ekstensif (seperti penanganan nilai yang hilang atau outlier).</p></li>
+</ul>
+</section>
+</section>
+
     <script type="text/x-thebe-config">
     {
         requestKernel: true,
@@ -421,24 +472,6 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="intro.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Welcome to your Jupyter Book</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="DataUNderstanding.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Mendeskripsikan Data</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -454,9 +487,12 @@ document.write(`
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#judul-dataset">Judul Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-tujuan-bisnis">Menentukan Tujuan Bisnis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-rencana-proyek">Membuat Rencana Proyek</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menilai-situasi-dan-kondisi">Menilai Situasi dan Kondisi</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>
