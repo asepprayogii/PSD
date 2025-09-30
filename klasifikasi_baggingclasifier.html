@@ -1,32 +1,27 @@
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="./" >
-
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Klasifikasi Dan BaggingClassifier Pada Dataset Ecoli &#8212; My sample book</title>
-  
-  
-  
-  <script data-cfasync="false">
-    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
-  </script>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-  
-  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+    <script data-cfasync="false">
+      document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+      document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+    </script>
+
+    <!-- Loaded before other Sphinx assets -->
+    <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+    <link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+    <link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+    <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
@@ -35,11 +30,11 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
-  
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <!-- Pre-loaded scripts that we'll load fully later -->
+    <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+    <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+    <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
@@ -47,391 +42,359 @@
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
-    <script>let toggleHintShow = 'Click to show';</script>
-    <script>let toggleHintHide = 'Click to hide';</script>
-    <script>let toggleOpenOnPrint = 'true';</script>
+    <script>
+      let toggleHintShow = "Click to show";
+    </script>
+    <script>
+      let toggleHintHide = "Click to hide";
+    </script>
+    <script>
+      let toggleOpenOnPrint = "true";
+    </script>
     <script src="_static/togglebutton.js?v=4a39c7ea"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+      var togglebuttonSelector = ".toggle, .admonition.dropdown";
+    </script>
     <script src="_static/design-tabs.js?v=f930bc37"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>
+      window.THEBE_JS_URL = window.THEBE_JS_URL || "https://unpkg.com/thebe@0.8.2/lib/index.js";
+      window.thebe_selector = window.thebe_selector || ".thebe,.cell";
+      window.thebe_selector_input = window.thebe_selector_input || "pre";
+      window.thebe_selector_output = window.thebe_selector_output || ".output, .cell_output";
+    </script>
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'klasifikasi_baggingclasifier';</script>
+    <script>
+      window.togglebuttonSelector = window.togglebuttonSelector || ".toggle, .admonition.dropdown";
+    </script>
+    <script>
+      window.THEBE_JS_URL = window.THEBE_JS_URL || "https://unpkg.com/thebe@0.8.2/lib/index.js";
+      window.thebe_selector = window.thebe_selector || ".thebe,.cell";
+      window.thebe_selector_input = window.thebe_selector_input || "pre";
+      window.thebe_selector_output = window.thebe_selector_output || ".output, .cell_output";
+    </script>
+    <script>
+      DOCUMENTATION_OPTIONS.pagename = "klasifikasi_baggingclasifier";
+    </script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
   </head>
-  
-  
+
   <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+    <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
 
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+    <div id="pst-scroll-pixel-helper"></div>
 
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
-<form class="bd-search d-flex align-items-center"
-      action="search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         id="search-input"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+    <button type="button" class="btn rounded-pill" id="pst-back-to-top"><i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
-</div>
+    <input type="checkbox" class="sidebar-toggle" id="pst-primary-sidebar-checkbox" />
+    <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
 
-  
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
-    </header>
-  
+    <input type="checkbox" class="sidebar-toggle" id="pst-secondary-sidebar-checkbox" />
+    <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
 
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-        
-      
-      <div class="bd-sidebar-primary bd-sidebar">
-        
+    <div class="search-button__wrapper">
+      <div class="search-button__overlay"></div>
+      <div class="search-button__search-container">
+        <form class="bd-search d-flex align-items-center" action="search.html" method="get">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+          <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+        </form>
+      </div>
+    </div>
 
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-    
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
+    <div class="pst-async-banner-revealer d-none">
+      <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+    </div>
 
-  
-    
-  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none"></header>
 
-<a class="navbar-brand logo" href="intro.html">
-  
-  
-  
-  
-  
-  
-    <p class="title logo__title">My sample book</p>
-  
-</a></div>
-        <div class="sidebar-primary-item">
+    <div class="bd-container">
+      <div class="bd-container__inner bd-page-width">
+        <div class="bd-sidebar-primary bd-sidebar">
+          <div class="sidebar-header-items sidebar-primary__section"></div>
 
- <script>
- document.write(`
+          <div class="sidebar-primary-items__start sidebar-primary__section">
+            <div class="sidebar-primary-item">
+              <a class="navbar-brand logo" href="intro.html">
+                <img src="_static/asep.jpg" class="logo__image only-light" alt="My sample book - Home" />
+                <script>
+                  document.write(`<img src="_static/asep.jpg" class="logo__image only-dark" alt="My sample book - Home"/>`);
+                </script>
+              </a>
+            </div>
+            <div class="sidebar-primary-item">
+              <script>
+                document.write(`
    <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass"></i>
     <span class="search-button__default-text">Search</span>
     <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
    </button>
  `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item navbar-nav active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="intro.html">
-                    Welcome To My Profil
-                </a>
-            </li>
-        </ul>
-        <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="BusinessUnderstanding.html">Bussiness Understanding</a></li>
-<li class="toctree-l1"><a class="reference internal" href="DataUnderstanding.html">Data Understanding &amp; Explorasi Data</a></li>
+              </script>
+            </div>
+            <div class="sidebar-primary-item">
+              <nav class="bd-links bd-docs-nav" aria-label="Main">
+                <div class="bd-toc-item navbar-nav active">
+                  <ul class="nav bd-sidenav bd-sidenav__home-link">
+                    <li class="toctree-l1">
+                      <a class="reference internal" href="intro.html"> Welcome To My Profil </a>
+                    </li>
+                  </ul>
+                  <ul class="nav bd-sidenav">
+                    <li class="toctree-l1"><a class="reference internal" href="BusinessUnderstanding.html">Bussiness Understanding</a></li>
+                    <li class="toctree-l1"><a class="reference internal" href="DataUnderstanding.html">Data Understanding &amp; Explorasi Data</a></li>
+                    <li class="toctree-l1"><a class="reference internal" href="PreprocessingData.html">Preprocessing Data</a></li>
+                    <li class="toctree-l1"><a class="reference internal" href="PenyeimbanganData.html">Penyeimbangan Data Ecoli</a></li>
+                    <li class="toctree-l1"><a class="reference internal" href="klasifikasi_baggingclasifier.html">Klasifikasi Dan BaggingClassifier Pada Dataset Ecoli</a></li>
+                  </ul>
+                </div>
+              </nav>
+            </div>
+          </div>
 
+          <div class="sidebar-primary-items__end sidebar-primary__section"></div>
 
+          <div id="rtd-footer-container"></div>
+        </div>
 
-
-
-<li class="toctree-l1"><a class="reference internal" href="PreprocessingData.html">Preprocessing Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="PenyeimbanganData.html">Penyeimbangan Data Ecoli</a></li>
-
-
-
-</ul>
-
-    </div>
-</nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-  
-  <div id="rtd-footer-container"></div>
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-
-<div class="sbt-scroll-pixel-helper"></div>
+        <main id="main-content" class="bd-main" role="main">
+          <div class="sbt-scroll-pixel-helper"></div>
 
           <div class="bd-content">
             <div class="bd-article-container">
-              
               <div class="bd-header-article d-print-none">
-<div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <span class="fa-solid fa-bars"></span>
-</button></div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+                <div class="header-article-items header-article__inner">
+                  <div class="header-article-items__start">
+                    <div class="header-article-item">
+                      <button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+                        <span class="fa-solid fa-bars"></span>
+                      </button>
+                    </div>
+                  </div>
 
-<div class="article-header-buttons">
+                  <div class="header-article-items__end">
+                    <div class="header-article-item">
+                      <div class="article-header-buttons">
+                        <div class="dropdown dropdown-source-buttons">
+                          <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+                            <i class="fab fa-github"></i>
+                          </button>
+                          <ul class="dropdown-menu">
+                            <li>
+                              <a
+                                href="https://github.com/executablebooks/jupyter-book"
+                                target="_blank"
+                                class="btn btn-sm btn-source-repository-button dropdown-item"
+                                title="Source repository"
+                                data-bs-placement="left"
+                                data-bs-toggle="tooltip"
+                              >
+                                <span class="btn__icon-container">
+                                  <i class="fab fa-github"></i>
+                                </span>
+                                <span class="btn__text-container">Repository</span>
+                              </a>
+                            </li>
 
+                            <li>
+                              <a
+                                href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fklasifikasi_baggingclasifier.html&body=Your%20issue%20content%20here."
+                                target="_blank"
+                                class="btn btn-sm btn-source-issues-button dropdown-item"
+                                title="Open an issue"
+                                data-bs-placement="left"
+                                data-bs-toggle="tooltip"
+                              >
+                                <span class="btn__icon-container">
+                                  <i class="fas fa-lightbulb"></i>
+                                </span>
+                                <span class="btn__text-container">Open issue</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
 
+                        <div class="dropdown dropdown-download-buttons">
+                          <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+                            <i class="fas fa-download"></i>
+                          </button>
+                          <ul class="dropdown-menu">
+                            <li>
+                              <a href="_sources/klasifikasi_baggingclasifier.ipynb" target="_blank" class="btn btn-sm btn-download-source-button dropdown-item" title="Download source file" data-bs-placement="left" data-bs-toggle="tooltip">
+                                <span class="btn__icon-container">
+                                  <i class="fas fa-file"></i>
+                                </span>
+                                <span class="btn__text-container">.ipynb</span>
+                              </a>
+                            </li>
 
+                            <li>
+                              <button onclick="window.print()" class="btn btn-sm btn-download-pdf-button dropdown-item" title="Print to PDF" data-bs-placement="left" data-bs-toggle="tooltip">
+                                <span class="btn__icon-container">
+                                  <i class="fas fa-file-pdf"></i>
+                                </span>
+                                <span class="btn__text-container">.pdf</span>
+                              </button>
+                            </li>
+                          </ul>
+                        </div>
 
+                        <button onclick="toggleFullScreen()" class="btn btn-sm btn-fullscreen-button" title="Fullscreen mode" data-bs-placement="bottom" data-bs-toggle="tooltip">
+                          <span class="btn__icon-container">
+                            <i class="fas fa-expand"></i>
+                          </span>
+                        </button>
 
-<div class="dropdown dropdown-source-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
-    <i class="fab fa-github"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
-   class="btn btn-sm btn-source-repository-button dropdown-item"
-   title="Source repository"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="btn__text-container">Repository</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fklasifikasi_baggingclasifier.html&body=Your%20issue%20content%20here." target="_blank"
-   class="btn btn-sm btn-source-issues-button dropdown-item"
-   title="Open an issue"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="btn__text-container">Open issue</span>
-</a>
-</li>
-      
-  </ul>
-</div>
-
-
-
-
-
-
-<div class="dropdown dropdown-download-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
-    <i class="fas fa-download"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="_sources/klasifikasi_baggingclasifier.ipynb" target="_blank"
-   class="btn btn-sm btn-download-source-button dropdown-item"
-   title="Download source file"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="btn__text-container">.ipynb</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li>
-<button onclick="window.print()"
-  class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Print to PDF"
-  data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="btn__text-container">.pdf</span>
-</button>
-</li>
-      
-  </ul>
-</div>
-
-
-
-
-<button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
-  title="Fullscreen mode"
-  data-bs-placement="bottom" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-
-
-
-<script>
-document.write(`
+                        <script>
+                          document.write(`
   <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
     <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
     <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
 `);
-</script>
+                        </script>
 
-
-<script>
-document.write(`
+                        <script>
+                          document.write(`
   <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
-</script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</button>
-</div></div>
-      
-    </div>
-  
-</div>
-</div>
-              
-              
+                        </script>
+                        <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+                          <span class="fa-solid fa-list"></span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-<div id="jb-print-docs-body" class="onlyprint">
-    <h1>Klasifikasi Dan BaggingClassifier Pada Dataset Ecoli</h1>
-    <!-- Table of contents -->
-    <div id="print-main-content">
-        <div id="jb-print-toc">
-            
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Klasifikasi Dan BaggingClassifier Pada Dataset Ecoli</strong></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#klasifikasi-menggunakan-naive-bayes"><strong>1. Klasifikasi Menggunakan Naive Bayes</strong></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-klasifikasi-menggunakan-naive-bayes-pada-data-ecoli-sebelum-di-oversampling">1.1. Modeling Klasifikasi menggunakan Naive bayes pada data ecoli sebelum di oversampling</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-klasifikasi-menggunakan-naive-bayes-pada-data-ecoli-setelah-di-oversampling-menggunakan-adasyn">1.2. Modeling Klasifikasi menggunakan Naive bayes pada data Ecoli setelah di Oversampling menggunakan ADASYN</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-klasifikasi-menggunakan-naive-bayes-pada-data-ecoli-setelah-di-oversampling-menggunakan-smote">1.3. Modeling Klasifikasi menggunakan Naive bayes pada data ecoli setelah di oversampling menggunakan SMOTE</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perbandingan-akurasi-antara-data-sebelum-di-oversampling-dan-sesudah">1.4. Perbandingan akurasi antara data sebelum di oversampling dan sesudah</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#klasifikasi-menggunakan-random-forest"><strong>2. Klasifikasi Menggunakan Random Forest</strong></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-klasifikasi-menggunakan-random-forest-pada-data-ecoli-sebelum-di-oversampling">2.1. Modeling Klasifikasi menggunakan Random Forest pada data ecoli sebelum di oversampling</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-klasifikasi-menggunakan-random-forest-pada-data-ecoli-setelah-di-oversampling-menggunakan-adasyn">2.2. Modeling Klasifikasi menggunakan Random Forest pada data Ecoli setelah di Oversampling menggunakan ADASYN</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-klasifikasi-menggunakan-random-forest-pada-data-ecoli-setelah-di-oversampling-menggunakan-smote">2.3. Modeling Klasifikasi menggunakan Random Forest pada data Ecoli setelah di Oversampling menggunakan SMOTE</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">2.4. Perbandingan akurasi antara data sebelum di oversampling dan sesudah</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#bagging-classifier-naive-bayes"><strong>3. Bagging Classifier Naive Bayes</strong></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bagging-classifier-pada-data-yang-belum-di-lakukan-oversampling">3.1. Bagging Classifier pada data yang belum di lakukan oversampling</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#baggingclassifier-pada-data-yang-sudah-di-lakukan-oversampling-dengan-adasyn">3.2. BaggingClassifier pada data yang sudah di lakukan oversampling dengan ADASYN</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#baggingclassifier-pada-data-yang-sudah-di-lakukan-oversampling-dengan-smote">3.3. BaggingClassifier pada data yang sudah di lakukan oversampling dengan SMOTE</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perbandingan-akurasi-bagging-classifire-dengan-model-naive-bayes">3.4. Perbandingan Akurasi Bagging Classifire dengan model Naive Bayes</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#bagging-classifier-random-forest"><strong>4. Bagging Classifier Random Forest</strong></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">4.1. Bagging Classifier pada data yang belum di lakukan oversampling</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bagging-classifier-pada-data-yang-sudah-di-lakukan-oversampling-menggunakan-adasyn">4.2. Bagging Classifier pada data yang sudah di lakukan oversampling menggunakan ADASYN</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bagging-classifier-pada-data-yang-sudah-di-lakukan-oversampling-menggunakan-smote">4.3. Bagging Classifier pada data yang sudah di lakukan oversampling menggunakan SMOTE</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perbandingan-akurasi-bagging-classifire-dengan-model-random-forest">4.4. Perbandingan Akurasi Bagging Classifire dengan model Random Forest</a></li>
-</ul>
-</li>
-</ul>
+              <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Klasifikasi Dan BaggingClassifier Pada Dataset Ecoli</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                  <div id="jb-print-toc">
+                    <div>
+                      <h2>Contents</h2>
+                    </div>
+                    <nav aria-label="Page">
+                      <ul class="visible nav section-nav flex-column">
+                        <li class="toc-h1 nav-item toc-entry">
+                          <a class="reference internal nav-link" href="#"><strong>Klasifikasi Dan BaggingClassifier Pada Dataset Ecoli</strong></a>
+                        </li>
+                        <li class="toc-h1 nav-item toc-entry">
+                          <a class="reference internal nav-link" href="#klasifikasi-menggunakan-naive-bayes"><strong>1. Klasifikasi Menggunakan Naive Bayes</strong></a>
+                          <ul class="visible nav section-nav flex-column">
+                            <li class="toc-h2 nav-item toc-entry">
+                              <a class="reference internal nav-link" href="#modeling-klasifikasi-menggunakan-naive-bayes-pada-data-ecoli-sebelum-di-oversampling"
+                                >1.1. Modeling Klasifikasi menggunakan Naive bayes pada data ecoli sebelum di oversampling</a
+                              >
+                            </li>
+                            <li class="toc-h2 nav-item toc-entry">
+                              <a class="reference internal nav-link" href="#modeling-klasifikasi-menggunakan-naive-bayes-pada-data-ecoli-setelah-di-oversampling-menggunakan-adasyn"
+                                >1.2. Modeling Klasifikasi menggunakan Naive bayes pada data Ecoli setelah di Oversampling menggunakan ADASYN</a
+                              >
+                            </li>
+                            <li class="toc-h2 nav-item toc-entry">
+                              <a class="reference internal nav-link" href="#modeling-klasifikasi-menggunakan-naive-bayes-pada-data-ecoli-setelah-di-oversampling-menggunakan-smote"
+                                >1.3. Modeling Klasifikasi menggunakan Naive bayes pada data ecoli setelah di oversampling menggunakan SMOTE</a
+                              >
+                            </li>
+                            <li class="toc-h2 nav-item toc-entry">
+                              <a class="reference internal nav-link" href="#perbandingan-akurasi-antara-data-sebelum-di-oversampling-dan-sesudah">1.4. Perbandingan akurasi antara data sebelum di oversampling dan sesudah</a>
+                            </li>
+                          </ul>
+                        </li>
+                        <li class="toc-h1 nav-item toc-entry">
+                          <a class="reference internal nav-link" href="#klasifikasi-menggunakan-random-forest"><strong>2. Klasifikasi Menggunakan Random Forest</strong></a>
+                          <ul class="visible nav section-nav flex-column">
+                            <li class="toc-h2 nav-item toc-entry">
+                              <a class="reference internal nav-link" href="#modeling-klasifikasi-menggunakan-random-forest-pada-data-ecoli-sebelum-di-oversampling"
+                                >2.1. Modeling Klasifikasi menggunakan Random Forest pada data ecoli sebelum di oversampling</a
+                              >
+                            </li>
+                            <li class="toc-h2 nav-item toc-entry">
+                              <a class="reference internal nav-link" href="#modeling-klasifikasi-menggunakan-random-forest-pada-data-ecoli-setelah-di-oversampling-menggunakan-adasyn"
+                                >2.2. Modeling Klasifikasi menggunakan Random Forest pada data Ecoli setelah di Oversampling menggunakan ADASYN</a
+                              >
+                            </li>
+                            <li class="toc-h2 nav-item toc-entry">
+                              <a class="reference internal nav-link" href="#modeling-klasifikasi-menggunakan-random-forest-pada-data-ecoli-setelah-di-oversampling-menggunakan-smote"
+                                >2.3. Modeling Klasifikasi menggunakan Random Forest pada data Ecoli setelah di Oversampling menggunakan SMOTE</a
+                              >
+                            </li>
+                            <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">2.4. Perbandingan akurasi antara data sebelum di oversampling dan sesudah</a></li>
+                          </ul>
+                        </li>
+                        <li class="toc-h1 nav-item toc-entry">
+                          <a class="reference internal nav-link" href="#bagging-classifier-naive-bayes"><strong>3. Bagging Classifier Naive Bayes</strong></a>
+                          <ul class="visible nav section-nav flex-column">
+                            <li class="toc-h2 nav-item toc-entry">
+                              <a class="reference internal nav-link" href="#bagging-classifier-pada-data-yang-belum-di-lakukan-oversampling">3.1. Bagging Classifier pada data yang belum di lakukan oversampling</a>
+                            </li>
+                            <li class="toc-h2 nav-item toc-entry">
+                              <a class="reference internal nav-link" href="#baggingclassifier-pada-data-yang-sudah-di-lakukan-oversampling-dengan-adasyn">3.2. BaggingClassifier pada data yang sudah di lakukan oversampling dengan ADASYN</a>
+                            </li>
+                            <li class="toc-h2 nav-item toc-entry">
+                              <a class="reference internal nav-link" href="#baggingclassifier-pada-data-yang-sudah-di-lakukan-oversampling-dengan-smote">3.3. BaggingClassifier pada data yang sudah di lakukan oversampling dengan SMOTE</a>
+                            </li>
+                            <li class="toc-h2 nav-item toc-entry">
+                              <a class="reference internal nav-link" href="#perbandingan-akurasi-bagging-classifire-dengan-model-naive-bayes">3.4. Perbandingan Akurasi Bagging Classifire dengan model Naive Bayes</a>
+                            </li>
+                          </ul>
+                        </li>
+                        <li class="toc-h1 nav-item toc-entry">
+                          <a class="reference internal nav-link" href="#bagging-classifier-random-forest"><strong>4. Bagging Classifier Random Forest</strong></a>
+                          <ul class="visible nav section-nav flex-column">
+                            <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">4.1. Bagging Classifier pada data yang belum di lakukan oversampling</a></li>
+                            <li class="toc-h2 nav-item toc-entry">
+                              <a class="reference internal nav-link" href="#bagging-classifier-pada-data-yang-sudah-di-lakukan-oversampling-menggunakan-adasyn"
+                                >4.2. Bagging Classifier pada data yang sudah di lakukan oversampling menggunakan ADASYN</a
+                              >
+                            </li>
+                            <li class="toc-h2 nav-item toc-entry">
+                              <a class="reference internal nav-link" href="#bagging-classifier-pada-data-yang-sudah-di-lakukan-oversampling-menggunakan-smote"
+                                >4.3. Bagging Classifier pada data yang sudah di lakukan oversampling menggunakan SMOTE</a
+                              >
+                            </li>
+                            <li class="toc-h2 nav-item toc-entry">
+                              <a class="reference internal nav-link" href="#perbandingan-akurasi-bagging-classifire-dengan-model-random-forest">4.4. Perbandingan Akurasi Bagging Classifire dengan model Random Forest</a>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>
+                </div>
+              </div>
 
-            </nav>
-        </div>
-    </div>
-</div>
-
-              
-                
-<div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section class="tex2jax_ignore mathjax_ignore" id="klasifikasi-dan-baggingclassifier-pada-dataset-ecoli">
-<h1><strong>Klasifikasi Dan BaggingClassifier Pada Dataset Ecoli</strong><a class="headerlink" href="#klasifikasi-dan-baggingclassifier-pada-dataset-ecoli" title="Link to this heading">#</a></h1>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="klasifikasi-menggunakan-naive-bayes">
-<h1><strong>1. Klasifikasi Menggunakan Naive Bayes</strong><a class="headerlink" href="#klasifikasi-menggunakan-naive-bayes" title="Link to this heading">#</a></h1>
-<section id="modeling-klasifikasi-menggunakan-naive-bayes-pada-data-ecoli-sebelum-di-oversampling">
-<h2>1.1. Modeling Klasifikasi menggunakan Naive bayes pada data ecoli sebelum di oversampling<a class="headerlink" href="#modeling-klasifikasi-menggunakan-naive-bayes-pada-data-ecoli-sebelum-di-oversampling" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+              <div id="searchbox"></div>
+              <article class="bd-article">
+                <section class="tex2jax_ignore mathjax_ignore" id="klasifikasi-dan-baggingclassifier-pada-dataset-ecoli">
+                  <h1><strong>Klasifikasi Dan BaggingClassifier Pada Dataset Ecoli</strong><a class="headerlink" href="#klasifikasi-dan-baggingclassifier-pada-dataset-ecoli" title="Link to this heading">#</a></h1>
+                </section>
+                <section class="tex2jax_ignore mathjax_ignore" id="klasifikasi-menggunakan-naive-bayes">
+                  <h1><strong>1. Klasifikasi Menggunakan Naive Bayes</strong><a class="headerlink" href="#klasifikasi-menggunakan-naive-bayes" title="Link to this heading">#</a></h1>
+                  <section id="modeling-klasifikasi-menggunakan-naive-bayes-pada-data-ecoli-sebelum-di-oversampling">
+                    <h2>
+                      1.1. Modeling Klasifikasi menggunakan Naive bayes pada data ecoli sebelum di oversampling<a
+                        class="headerlink"
+                        href="#modeling-klasifikasi-menggunakan-naive-bayes-pada-data-ecoli-sebelum-di-oversampling"
+                        title="Link to this heading"
+                        >#</a
+                      >
+                    </h2>
+                    <div class="cell docutils container">
+                      <div class="cell_input docutils container">
+                        <div class="highlight-python notranslate">
+                          <div class="highlight">
+                            <pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
@@ -507,11 +470,14 @@ document.write(`
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Metrics&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nama kolom dataset: [&#39;id&#39;, &#39;sequence&#39;, &#39;mcg&#39;, &#39;gvh&#39;, &#39;lip&#39;, &#39;chg&#39;, &#39;aac&#39;, &#39;alm1&#39;, &#39;alm2&#39;, &#39;class&#39;]
+</pre>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="cell_output docutils container">
+                        <div class="output stream highlight-myst-ansi notranslate">
+                          <div class="highlight">
+                            <pre><span></span>Nama kolom dataset: [&#39;id&#39;, &#39;sequence&#39;, &#39;mcg&#39;, &#39;gvh&#39;, &#39;lip&#39;, &#39;chg&#39;, &#39;aac&#39;, &#39;alm1&#39;, &#39;alm2&#39;, &#39;class&#39;]
 
 Accuracy Score : 0.7941
 
@@ -528,18 +494,28 @@ Classification Report:
     accuracy                           0.79        68
    macro avg       0.68      0.72      0.66        68
 weighted avg       0.81      0.79      0.76        68
-</pre></div>
-</div>
-<img alt="_images/bf31adcb09c3060b09730efc251d7880e8f4861082a63ed7d32785d5911f0874.png" src="_images/bf31adcb09c3060b09730efc251d7880e8f4861082a63ed7d32785d5911f0874.png" />
-<img alt="_images/63e6d6fe7f149a67c7b8e31aeff7d4d722f4b01559df51cdfc37d5c277b83884.png" src="_images/63e6d6fe7f149a67c7b8e31aeff7d4d722f4b01559df51cdfc37d5c277b83884.png" />
-</div>
-</div>
-</section>
-<section id="modeling-klasifikasi-menggunakan-naive-bayes-pada-data-ecoli-setelah-di-oversampling-menggunakan-adasyn">
-<h2>1.2. Modeling Klasifikasi menggunakan Naive bayes pada data Ecoli setelah di Oversampling menggunakan ADASYN<a class="headerlink" href="#modeling-klasifikasi-menggunakan-naive-bayes-pada-data-ecoli-setelah-di-oversampling-menggunakan-adasyn" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre>
+                          </div>
+                        </div>
+                        <img alt="_images/bf31adcb09c3060b09730efc251d7880e8f4861082a63ed7d32785d5911f0874.png" src="_images/bf31adcb09c3060b09730efc251d7880e8f4861082a63ed7d32785d5911f0874.png" />
+                        <img alt="_images/63e6d6fe7f149a67c7b8e31aeff7d4d722f4b01559df51cdfc37d5c277b83884.png" src="_images/63e6d6fe7f149a67c7b8e31aeff7d4d722f4b01559df51cdfc37d5c277b83884.png" />
+                      </div>
+                    </div>
+                  </section>
+                  <section id="modeling-klasifikasi-menggunakan-naive-bayes-pada-data-ecoli-setelah-di-oversampling-menggunakan-adasyn">
+                    <h2>
+                      1.2. Modeling Klasifikasi menggunakan Naive bayes pada data Ecoli setelah di Oversampling menggunakan ADASYN<a
+                        class="headerlink"
+                        href="#modeling-klasifikasi-menggunakan-naive-bayes-pada-data-ecoli-setelah-di-oversampling-menggunakan-adasyn"
+                        title="Link to this heading"
+                        >#</a
+                      >
+                    </h2>
+                    <div class="cell docutils container">
+                      <div class="cell_input docutils container">
+                        <div class="highlight-python notranslate">
+                          <div class="highlight">
+                            <pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.naive_bayes</span><span class="w"> </span><span class="kn">import</span> <span class="n">GaussianNB</span>
@@ -613,11 +589,14 @@ weighted avg       0.81      0.79      0.76        68
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Metrics&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>accuracy_score : 0.8362068965517241
+</pre>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="cell_output docutils container">
+                        <div class="output stream highlight-myst-ansi notranslate">
+                          <div class="highlight">
+                            <pre><span></span>accuracy_score : 0.8362068965517241
 akurasi lengkap:
                precision    recall  f1-score   support
 
@@ -633,18 +612,28 @@ akurasi lengkap:
     accuracy                           0.84       232
    macro avg       0.86      0.84      0.82       232
 weighted avg       0.87      0.84      0.83       232
-</pre></div>
-</div>
-<img alt="_images/dbb7118bdcb49036c63e57c2ac462ceff7eeea2e1f01720c0ce34d8d1ef51124.png" src="_images/dbb7118bdcb49036c63e57c2ac462ceff7eeea2e1f01720c0ce34d8d1ef51124.png" />
-<img alt="_images/1a213d25f03f586c7c048768b917205c63463949fd3daf7155dc1063c558a2bc.png" src="_images/1a213d25f03f586c7c048768b917205c63463949fd3daf7155dc1063c558a2bc.png" />
-</div>
-</div>
-</section>
-<section id="modeling-klasifikasi-menggunakan-naive-bayes-pada-data-ecoli-setelah-di-oversampling-menggunakan-smote">
-<h2>1.3. Modeling Klasifikasi menggunakan Naive bayes pada data ecoli setelah di oversampling menggunakan SMOTE<a class="headerlink" href="#modeling-klasifikasi-menggunakan-naive-bayes-pada-data-ecoli-setelah-di-oversampling-menggunakan-smote" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre>
+                          </div>
+                        </div>
+                        <img alt="_images/dbb7118bdcb49036c63e57c2ac462ceff7eeea2e1f01720c0ce34d8d1ef51124.png" src="_images/dbb7118bdcb49036c63e57c2ac462ceff7eeea2e1f01720c0ce34d8d1ef51124.png" />
+                        <img alt="_images/1a213d25f03f586c7c048768b917205c63463949fd3daf7155dc1063c558a2bc.png" src="_images/1a213d25f03f586c7c048768b917205c63463949fd3daf7155dc1063c558a2bc.png" />
+                      </div>
+                    </div>
+                  </section>
+                  <section id="modeling-klasifikasi-menggunakan-naive-bayes-pada-data-ecoli-setelah-di-oversampling-menggunakan-smote">
+                    <h2>
+                      1.3. Modeling Klasifikasi menggunakan Naive bayes pada data ecoli setelah di oversampling menggunakan SMOTE<a
+                        class="headerlink"
+                        href="#modeling-klasifikasi-menggunakan-naive-bayes-pada-data-ecoli-setelah-di-oversampling-menggunakan-smote"
+                        title="Link to this heading"
+                        >#</a
+                      >
+                    </h2>
+                    <div class="cell docutils container">
+                      <div class="cell_input docutils container">
+                        <div class="highlight-python notranslate">
+                          <div class="highlight">
+                            <pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
@@ -718,11 +707,14 @@ weighted avg       0.87      0.84      0.83       232
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Metrics&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nama kolom dataset SMOTE: [&#39;mcg&#39;, &#39;gvh&#39;, &#39;lip&#39;, &#39;chg&#39;, &#39;aac&#39;, &#39;alm1&#39;, &#39;alm2&#39;, &#39;class&#39;]
+</pre>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="cell_output docutils container">
+                        <div class="output stream highlight-myst-ansi notranslate">
+                          <div class="highlight">
+                            <pre><span></span>Nama kolom dataset SMOTE: [&#39;mcg&#39;, &#39;gvh&#39;, &#39;lip&#39;, &#39;chg&#39;, &#39;aac&#39;, &#39;alm1&#39;, &#39;alm2&#39;, &#39;class&#39;]
 
 Accuracy Score (SMOTE): 0.8035
 
@@ -741,18 +733,21 @@ Classification Report (SMOTE):
     accuracy                           0.80       229
    macro avg       0.86      0.80      0.79       229
 weighted avg       0.86      0.80      0.79       229
-</pre></div>
-</div>
-<img alt="_images/df51d89c831499b9e02f2c4b0c010bea002b4d19cadcc04676f6a9f6232677ce.png" src="_images/df51d89c831499b9e02f2c4b0c010bea002b4d19cadcc04676f6a9f6232677ce.png" />
-<img alt="_images/27145ad48d00210748c205734afae1c45942ad39623857bd9c3090e90bbb37f4.png" src="_images/27145ad48d00210748c205734afae1c45942ad39623857bd9c3090e90bbb37f4.png" />
-</div>
-</div>
-</section>
-<section id="perbandingan-akurasi-antara-data-sebelum-di-oversampling-dan-sesudah">
-<h2>1.4. Perbandingan akurasi antara data sebelum di oversampling dan sesudah<a class="headerlink" href="#perbandingan-akurasi-antara-data-sebelum-di-oversampling-dan-sesudah" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># === Perbandingan Akurasi Data Asli, SMOTE, dan ADASYN ===</span>
+</pre>
+                          </div>
+                        </div>
+                        <img alt="_images/df51d89c831499b9e02f2c4b0c010bea002b4d19cadcc04676f6a9f6232677ce.png" src="_images/df51d89c831499b9e02f2c4b0c010bea002b4d19cadcc04676f6a9f6232677ce.png" />
+                        <img alt="_images/27145ad48d00210748c205734afae1c45942ad39623857bd9c3090e90bbb37f4.png" src="_images/27145ad48d00210748c205734afae1c45942ad39623857bd9c3090e90bbb37f4.png" />
+                      </div>
+                    </div>
+                  </section>
+                  <section id="perbandingan-akurasi-antara-data-sebelum-di-oversampling-dan-sesudah">
+                    <h2>1.4. Perbandingan akurasi antara data sebelum di oversampling dan sesudah<a class="headerlink" href="#perbandingan-akurasi-antara-data-sebelum-di-oversampling-dan-sesudah" title="Link to this heading">#</a></h2>
+                    <div class="cell docutils container">
+                      <div class="cell_input docutils container">
+                        <div class="highlight-python notranslate">
+                          <div class="highlight">
+                            <pre><span></span><span class="c1"># === Perbandingan Akurasi Data Asli, SMOTE, dan ADASYN ===</span>
 
 <span class="c1"># Akurasi data sebelum oversampling</span>
 <span class="n">akurasi</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">prediksi</span><span class="p">)</span>
@@ -813,24 +808,38 @@ weighted avg       0.86      0.80      0.79       229
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/8bfa0751ce07cfdeef1116353975e729a908893834a747789ede1c7ca802c6a4.png" src="_images/8bfa0751ce07cfdeef1116353975e729a908893834a747789ede1c7ca802c6a4.png" />
-<img alt="_images/d99d607da76cedfd61782a545248ab46c891fc58b56510aca5e34b0385d73ddd.png" src="_images/d99d607da76cedfd61782a545248ab46c891fc58b56510aca5e34b0385d73ddd.png" />
-</div>
-</div>
-<p>Hasil visualisasi perbandingan akurasi algoritma Naive Bayes menunjukkan bahwa pada data asli tingkat akurasi hanya sebesar 79,4%. Setelah dilakukan oversampling dengan metode SMOTE, akurasi mengalami peningkatan hingga 80,3%. Lebih lanjut, penerapan teknik ADASYN menghasilkan akurasi yang lebih tinggi, yaitu 83,6%. Temuan ini mengindikasikan bahwa strategi oversampling, terutama ADASYN, mampu memberikan kinerja yang lebih optimal dibandingkan data tanpa oversampling. Dengan demikian, penggunaan metode ini efektif dalam mengatasi permasalahan ketidakseimbangan kelas pada dataset.</p>
-</section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="klasifikasi-menggunakan-random-forest">
-<h1><strong>2. Klasifikasi Menggunakan Random Forest</strong><a class="headerlink" href="#klasifikasi-menggunakan-random-forest" title="Link to this heading">#</a></h1>
-<section id="modeling-klasifikasi-menggunakan-random-forest-pada-data-ecoli-sebelum-di-oversampling">
-<h2>2.1. Modeling Klasifikasi menggunakan Random Forest pada data ecoli sebelum di oversampling<a class="headerlink" href="#modeling-klasifikasi-menggunakan-random-forest-pada-data-ecoli-sebelum-di-oversampling" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="cell_output docutils container">
+                        <img alt="_images/8bfa0751ce07cfdeef1116353975e729a908893834a747789ede1c7ca802c6a4.png" src="_images/8bfa0751ce07cfdeef1116353975e729a908893834a747789ede1c7ca802c6a4.png" />
+                        <img alt="_images/d99d607da76cedfd61782a545248ab46c891fc58b56510aca5e34b0385d73ddd.png" src="_images/d99d607da76cedfd61782a545248ab46c891fc58b56510aca5e34b0385d73ddd.png" />
+                      </div>
+                    </div>
+                    <p>
+                      Hasil visualisasi perbandingan akurasi algoritma Naive Bayes menunjukkan bahwa pada data asli tingkat akurasi hanya sebesar 79,4%. Setelah dilakukan oversampling dengan metode SMOTE, akurasi mengalami peningkatan
+                      hingga 80,3%. Lebih lanjut, penerapan teknik ADASYN menghasilkan akurasi yang lebih tinggi, yaitu 83,6%. Temuan ini mengindikasikan bahwa strategi oversampling, terutama ADASYN, mampu memberikan kinerja yang lebih
+                      optimal dibandingkan data tanpa oversampling. Dengan demikian, penggunaan metode ini efektif dalam mengatasi permasalahan ketidakseimbangan kelas pada dataset.
+                    </p>
+                  </section>
+                </section>
+                <section class="tex2jax_ignore mathjax_ignore" id="klasifikasi-menggunakan-random-forest">
+                  <h1><strong>2. Klasifikasi Menggunakan Random Forest</strong><a class="headerlink" href="#klasifikasi-menggunakan-random-forest" title="Link to this heading">#</a></h1>
+                  <section id="modeling-klasifikasi-menggunakan-random-forest-pada-data-ecoli-sebelum-di-oversampling">
+                    <h2>
+                      2.1. Modeling Klasifikasi menggunakan Random Forest pada data ecoli sebelum di oversampling<a
+                        class="headerlink"
+                        href="#modeling-klasifikasi-menggunakan-random-forest-pada-data-ecoli-sebelum-di-oversampling"
+                        title="Link to this heading"
+                        >#</a
+                      >
+                    </h2>
+                    <div class="cell docutils container">
+                      <div class="cell_input docutils container">
+                        <div class="highlight-python notranslate">
+                          <div class="highlight">
+                            <pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
@@ -910,11 +919,14 @@ weighted avg       0.86      0.80      0.79       229
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Metrics&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kolom dataset: [&#39;id&#39;, &#39;sequence&#39;, &#39;mcg&#39;, &#39;gvh&#39;, &#39;lip&#39;, &#39;chg&#39;, &#39;aac&#39;, &#39;alm1&#39;, &#39;alm2&#39;, &#39;class&#39;]
+</pre>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="cell_output docutils container">
+                        <div class="output stream highlight-myst-ansi notranslate">
+                          <div class="highlight">
+                            <pre><span></span>Kolom dataset: [&#39;id&#39;, &#39;sequence&#39;, &#39;mcg&#39;, &#39;gvh&#39;, &#39;lip&#39;, &#39;chg&#39;, &#39;aac&#39;, &#39;alm1&#39;, &#39;alm2&#39;, &#39;class&#39;]
 Akurasi: 0.8676
 
 Classification Report:
@@ -930,18 +942,28 @@ Classification Report:
     accuracy                           0.87        68
    macro avg       0.89      0.88      0.87        68
 weighted avg       0.90      0.87      0.87        68
-</pre></div>
-</div>
-<img alt="_images/1209a3ad7e74b8f3eb2581d7f73d939fe49008346e7ae3b248f5202a2646fa5f.png" src="_images/1209a3ad7e74b8f3eb2581d7f73d939fe49008346e7ae3b248f5202a2646fa5f.png" />
-<img alt="_images/fc89587942ddc456670f153ff6120275c23c5fe89b70d2765bdc5a9310d483dd.png" src="_images/fc89587942ddc456670f153ff6120275c23c5fe89b70d2765bdc5a9310d483dd.png" />
-</div>
-</div>
-</section>
-<section id="modeling-klasifikasi-menggunakan-random-forest-pada-data-ecoli-setelah-di-oversampling-menggunakan-adasyn">
-<h2>2.2. Modeling Klasifikasi menggunakan Random Forest pada data Ecoli setelah di Oversampling menggunakan ADASYN<a class="headerlink" href="#modeling-klasifikasi-menggunakan-random-forest-pada-data-ecoli-setelah-di-oversampling-menggunakan-adasyn" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre>
+                          </div>
+                        </div>
+                        <img alt="_images/1209a3ad7e74b8f3eb2581d7f73d939fe49008346e7ae3b248f5202a2646fa5f.png" src="_images/1209a3ad7e74b8f3eb2581d7f73d939fe49008346e7ae3b248f5202a2646fa5f.png" />
+                        <img alt="_images/fc89587942ddc456670f153ff6120275c23c5fe89b70d2765bdc5a9310d483dd.png" src="_images/fc89587942ddc456670f153ff6120275c23c5fe89b70d2765bdc5a9310d483dd.png" />
+                      </div>
+                    </div>
+                  </section>
+                  <section id="modeling-klasifikasi-menggunakan-random-forest-pada-data-ecoli-setelah-di-oversampling-menggunakan-adasyn">
+                    <h2>
+                      2.2. Modeling Klasifikasi menggunakan Random Forest pada data Ecoli setelah di Oversampling menggunakan ADASYN<a
+                        class="headerlink"
+                        href="#modeling-klasifikasi-menggunakan-random-forest-pada-data-ecoli-setelah-di-oversampling-menggunakan-adasyn"
+                        title="Link to this heading"
+                        >#</a
+                      >
+                    </h2>
+                    <div class="cell docutils container">
+                      <div class="cell_input docutils container">
+                        <div class="highlight-python notranslate">
+                          <div class="highlight">
+                            <pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
@@ -1021,11 +1043,14 @@ weighted avg       0.90      0.87      0.87        68
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Metrics&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kolom dataset: [&#39;mcg&#39;, &#39;gvh&#39;, &#39;lip&#39;, &#39;chg&#39;, &#39;aac&#39;, &#39;alm1&#39;, &#39;alm2&#39;, &#39;class&#39;]
+</pre>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="cell_output docutils container">
+                        <div class="output stream highlight-myst-ansi notranslate">
+                          <div class="highlight">
+                            <pre><span></span>Kolom dataset: [&#39;mcg&#39;, &#39;gvh&#39;, &#39;lip&#39;, &#39;chg&#39;, &#39;aac&#39;, &#39;alm1&#39;, &#39;alm2&#39;, &#39;class&#39;]
 Akurasi: 0.9353
 
 Classification Report:
@@ -1043,18 +1068,28 @@ Classification Report:
     accuracy                           0.94       232
    macro avg       0.94      0.94      0.94       232
 weighted avg       0.94      0.94      0.94       232
-</pre></div>
-</div>
-<img alt="_images/a532ee7b5546e72262b7ce1fcf6f563c23031ebf6b700be3566a62fa09a57d8c.png" src="_images/a532ee7b5546e72262b7ce1fcf6f563c23031ebf6b700be3566a62fa09a57d8c.png" />
-<img alt="_images/61ace361474577e09720f0b42a0c56b36f844749a90bbe557e97ee7298edf149.png" src="_images/61ace361474577e09720f0b42a0c56b36f844749a90bbe557e97ee7298edf149.png" />
-</div>
-</div>
-</section>
-<section id="modeling-klasifikasi-menggunakan-random-forest-pada-data-ecoli-setelah-di-oversampling-menggunakan-smote">
-<h2>2.3. Modeling Klasifikasi menggunakan Random Forest pada data Ecoli setelah di Oversampling menggunakan SMOTE<a class="headerlink" href="#modeling-klasifikasi-menggunakan-random-forest-pada-data-ecoli-setelah-di-oversampling-menggunakan-smote" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre>
+                          </div>
+                        </div>
+                        <img alt="_images/a532ee7b5546e72262b7ce1fcf6f563c23031ebf6b700be3566a62fa09a57d8c.png" src="_images/a532ee7b5546e72262b7ce1fcf6f563c23031ebf6b700be3566a62fa09a57d8c.png" />
+                        <img alt="_images/61ace361474577e09720f0b42a0c56b36f844749a90bbe557e97ee7298edf149.png" src="_images/61ace361474577e09720f0b42a0c56b36f844749a90bbe557e97ee7298edf149.png" />
+                      </div>
+                    </div>
+                  </section>
+                  <section id="modeling-klasifikasi-menggunakan-random-forest-pada-data-ecoli-setelah-di-oversampling-menggunakan-smote">
+                    <h2>
+                      2.3. Modeling Klasifikasi menggunakan Random Forest pada data Ecoli setelah di Oversampling menggunakan SMOTE<a
+                        class="headerlink"
+                        href="#modeling-klasifikasi-menggunakan-random-forest-pada-data-ecoli-setelah-di-oversampling-menggunakan-smote"
+                        title="Link to this heading"
+                        >#</a
+                      >
+                    </h2>
+                    <div class="cell docutils container">
+                      <div class="cell_input docutils container">
+                        <div class="highlight-python notranslate">
+                          <div class="highlight">
+                            <pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
@@ -1134,11 +1169,14 @@ weighted avg       0.94      0.94      0.94       232
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Metrics&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kolom dataset: [&#39;mcg&#39;, &#39;gvh&#39;, &#39;lip&#39;, &#39;chg&#39;, &#39;aac&#39;, &#39;alm1&#39;, &#39;alm2&#39;, &#39;class&#39;]
+</pre>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="cell_output docutils container">
+                        <div class="output stream highlight-myst-ansi notranslate">
+                          <div class="highlight">
+                            <pre><span></span>Kolom dataset: [&#39;mcg&#39;, &#39;gvh&#39;, &#39;lip&#39;, &#39;chg&#39;, &#39;aac&#39;, &#39;alm1&#39;, &#39;alm2&#39;, &#39;class&#39;]
 Akurasi: 0.9607
 
 Classification Report:
@@ -1156,18 +1194,21 @@ Classification Report:
     accuracy                           0.96       229
    macro avg       0.96      0.96      0.96       229
 weighted avg       0.96      0.96      0.96       229
-</pre></div>
-</div>
-<img alt="_images/f2d6fd842486fdf5060cee893203daf25d214d8fb8ea5b04ae24737af9b7fa17.png" src="_images/f2d6fd842486fdf5060cee893203daf25d214d8fb8ea5b04ae24737af9b7fa17.png" />
-<img alt="_images/aa8d1d51010933ca860a33b448f4cd8910aad9c42c167939a7869e9951864cf6.png" src="_images/aa8d1d51010933ca860a33b448f4cd8910aad9c42c167939a7869e9951864cf6.png" />
-</div>
-</div>
-</section>
-<section id="id1">
-<h2>2.4. Perbandingan akurasi antara data sebelum di oversampling dan sesudah<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre>
+                          </div>
+                        </div>
+                        <img alt="_images/f2d6fd842486fdf5060cee893203daf25d214d8fb8ea5b04ae24737af9b7fa17.png" src="_images/f2d6fd842486fdf5060cee893203daf25d214d8fb8ea5b04ae24737af9b7fa17.png" />
+                        <img alt="_images/aa8d1d51010933ca860a33b448f4cd8910aad9c42c167939a7869e9951864cf6.png" src="_images/aa8d1d51010933ca860a33b448f4cd8910aad9c42c167939a7869e9951864cf6.png" />
+                      </div>
+                    </div>
+                  </section>
+                  <section id="id1">
+                    <h2>2.4. Perbandingan akurasi antara data sebelum di oversampling dan sesudah<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+                    <div class="cell docutils container">
+                      <div class="cell_input docutils container">
+                        <div class="highlight-python notranslate">
+                          <div class="highlight">
+                            <pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
@@ -1268,24 +1309,31 @@ weighted avg       0.96      0.96      0.96       229
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/cd31444ea62f356727f871e7d905c6558f82ddbb8918da8c02f300626486cbbd.png" src="_images/cd31444ea62f356727f871e7d905c6558f82ddbb8918da8c02f300626486cbbd.png" />
-<img alt="_images/f3b4d569bdad10c4bfe11f272bfd4fdf2ff850fa4e29b6887f04a08cb92c2413.png" src="_images/f3b4d569bdad10c4bfe11f272bfd4fdf2ff850fa4e29b6887f04a08cb92c2413.png" />
-</div>
-</div>
-<p>Berdasarkan grafik perbandingan akurasi klasifikasi Random Forest, terlihat bahwa pada data asli akurasi hanya mencapai 86,7%, namun setelah dilakukan oversampling dengan SMOTE akurasi meningkat signifikan menjadi 96,0%, dan dengan ADASYN akurasi meningkat lebih tinggi lagi hingga 93,5%. Hal ini menunjukkan bahwa penggunaan teknik oversampling, khususnya SMOTE, mampu memberikan hasil yang lebih baik dibandingkan data asli, sehingga model dapat mengatasi masalah ketidakseimbangan kelas dengan lebih efektif.</p>
-</section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="bagging-classifier-naive-bayes">
-<h1><strong>3. Bagging Classifier Naive Bayes</strong><a class="headerlink" href="#bagging-classifier-naive-bayes" title="Link to this heading">#</a></h1>
-<section id="bagging-classifier-pada-data-yang-belum-di-lakukan-oversampling">
-<h2>3.1. Bagging Classifier pada data yang belum di lakukan oversampling<a class="headerlink" href="#bagging-classifier-pada-data-yang-belum-di-lakukan-oversampling" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="cell_output docutils container">
+                        <img alt="_images/cd31444ea62f356727f871e7d905c6558f82ddbb8918da8c02f300626486cbbd.png" src="_images/cd31444ea62f356727f871e7d905c6558f82ddbb8918da8c02f300626486cbbd.png" />
+                        <img alt="_images/f3b4d569bdad10c4bfe11f272bfd4fdf2ff850fa4e29b6887f04a08cb92c2413.png" src="_images/f3b4d569bdad10c4bfe11f272bfd4fdf2ff850fa4e29b6887f04a08cb92c2413.png" />
+                      </div>
+                    </div>
+                    <p>
+                      Berdasarkan grafik perbandingan akurasi klasifikasi Random Forest, terlihat bahwa pada data asli akurasi hanya mencapai 86,7%, namun setelah dilakukan oversampling dengan SMOTE akurasi meningkat signifikan menjadi
+                      96,0%, dan dengan ADASYN akurasi meningkat lebih tinggi lagi hingga 93,5%. Hal ini menunjukkan bahwa penggunaan teknik oversampling, khususnya SMOTE, mampu memberikan hasil yang lebih baik dibandingkan data asli,
+                      sehingga model dapat mengatasi masalah ketidakseimbangan kelas dengan lebih efektif.
+                    </p>
+                  </section>
+                </section>
+                <section class="tex2jax_ignore mathjax_ignore" id="bagging-classifier-naive-bayes">
+                  <h1><strong>3. Bagging Classifier Naive Bayes</strong><a class="headerlink" href="#bagging-classifier-naive-bayes" title="Link to this heading">#</a></h1>
+                  <section id="bagging-classifier-pada-data-yang-belum-di-lakukan-oversampling">
+                    <h2>3.1. Bagging Classifier pada data yang belum di lakukan oversampling<a class="headerlink" href="#bagging-classifier-pada-data-yang-belum-di-lakukan-oversampling" title="Link to this heading">#</a></h2>
+                    <div class="cell docutils container">
+                      <div class="cell_input docutils container">
+                        <div class="highlight-python notranslate">
+                          <div class="highlight">
+                            <pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
@@ -1362,11 +1410,14 @@ weighted avg       0.96      0.96      0.96       229
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Metrics&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+</pre>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="cell_output docutils container">
+                        <div class="output stderr highlight-myst-ansi notranslate">
+                          <div class="highlight">
+                            <pre><span></span>/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
 /usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
@@ -1462,9 +1513,12 @@ weighted avg       0.96      0.96      0.96       229
   jointi = np.log(self.class_prior_[i])
 /usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Akurasi: 0.75
+</pre>
+                          </div>
+                        </div>
+                        <div class="output stream highlight-myst-ansi notranslate">
+                          <div class="highlight">
+                            <pre><span></span>Akurasi: 0.75
 Classification Report:
                precision    recall  f1-score   support
 
@@ -1479,18 +1533,25 @@ Classification Report:
     accuracy                           0.75        68
    macro avg       0.58      0.54      0.53        68
 weighted avg       0.74      0.75      0.72        68
-</pre></div>
-</div>
-<img alt="_images/6875a6fa60eb8832155e7f73f79a895c678ace69ee5762bdc755b0dbf85b4ab0.png" src="_images/6875a6fa60eb8832155e7f73f79a895c678ace69ee5762bdc755b0dbf85b4ab0.png" />
-<img alt="_images/f31878b2bf4bff21a4f6b3457631130350bee9bc2e8cee8b4c3c2acbc2625a36.png" src="_images/f31878b2bf4bff21a4f6b3457631130350bee9bc2e8cee8b4c3c2acbc2625a36.png" />
-</div>
-</div>
-</section>
-<section id="baggingclassifier-pada-data-yang-sudah-di-lakukan-oversampling-dengan-adasyn">
-<h2>3.2. BaggingClassifier pada data yang sudah di lakukan oversampling dengan ADASYN<a class="headerlink" href="#baggingclassifier-pada-data-yang-sudah-di-lakukan-oversampling-dengan-adasyn" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data_adasyn</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data_ecoli_adasyn.csv&quot;</span><span class="p">)</span>
+</pre>
+                          </div>
+                        </div>
+                        <img alt="_images/6875a6fa60eb8832155e7f73f79a895c678ace69ee5762bdc755b0dbf85b4ab0.png" src="_images/6875a6fa60eb8832155e7f73f79a895c678ace69ee5762bdc755b0dbf85b4ab0.png" />
+                        <img alt="_images/f31878b2bf4bff21a4f6b3457631130350bee9bc2e8cee8b4c3c2acbc2625a36.png" src="_images/f31878b2bf4bff21a4f6b3457631130350bee9bc2e8cee8b4c3c2acbc2625a36.png" />
+                      </div>
+                    </div>
+                  </section>
+                  <section id="baggingclassifier-pada-data-yang-sudah-di-lakukan-oversampling-dengan-adasyn">
+                    <h2>
+                      3.2. BaggingClassifier pada data yang sudah di lakukan oversampling dengan ADASYN<a class="headerlink" href="#baggingclassifier-pada-data-yang-sudah-di-lakukan-oversampling-dengan-adasyn" title="Link to this heading"
+                        >#</a
+                      >
+                    </h2>
+                    <div class="cell docutils container">
+                      <div class="cell_input docutils container">
+                        <div class="highlight-python notranslate">
+                          <div class="highlight">
+                            <pre><span></span><span class="n">data_adasyn</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data_ecoli_adasyn.csv&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">data_adasyn</span><span class="p">[</span><span class="s2">&quot;class&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
 <span class="n">x_adasyn</span> <span class="o">=</span> <span class="n">data_adasyn</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;class&quot;</span><span class="p">])</span>
 <span class="n">y_adasyn</span> <span class="o">=</span> <span class="n">data_adasyn</span><span class="p">[</span><span class="s2">&quot;class&quot;</span><span class="p">]</span>
@@ -1559,11 +1620,14 @@ weighted avg       0.74      0.75      0.72        68
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Metrics&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>class
+</pre>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="cell_output docutils container">
+                        <div class="output stream highlight-myst-ansi notranslate">
+                          <div class="highlight">
+                            <pre><span></span>class
 im     153
 imU    145
 om     144
@@ -1589,18 +1653,25 @@ Classification Report:
     accuracy                           0.86       232
    macro avg       0.87      0.86      0.85       232
 weighted avg       0.89      0.86      0.85       232
-</pre></div>
-</div>
-<img alt="_images/518b4a50541da1ea9e26e2f525882bc5d99de9a67a8a863120f8afb3f03889f7.png" src="_images/518b4a50541da1ea9e26e2f525882bc5d99de9a67a8a863120f8afb3f03889f7.png" />
-<img alt="_images/f88645ec4ea7dff90d1b311388cb602ec92ac41c467a65106f41750c5b4a0edf.png" src="_images/f88645ec4ea7dff90d1b311388cb602ec92ac41c467a65106f41750c5b4a0edf.png" />
-</div>
-</div>
-</section>
-<section id="baggingclassifier-pada-data-yang-sudah-di-lakukan-oversampling-dengan-smote">
-<h2>3.3. BaggingClassifier pada data yang sudah di lakukan oversampling dengan SMOTE<a class="headerlink" href="#baggingclassifier-pada-data-yang-sudah-di-lakukan-oversampling-dengan-smote" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data_smote</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data_ecoli_smote.csv&quot;</span><span class="p">)</span>
+</pre>
+                          </div>
+                        </div>
+                        <img alt="_images/518b4a50541da1ea9e26e2f525882bc5d99de9a67a8a863120f8afb3f03889f7.png" src="_images/518b4a50541da1ea9e26e2f525882bc5d99de9a67a8a863120f8afb3f03889f7.png" />
+                        <img alt="_images/f88645ec4ea7dff90d1b311388cb602ec92ac41c467a65106f41750c5b4a0edf.png" src="_images/f88645ec4ea7dff90d1b311388cb602ec92ac41c467a65106f41750c5b4a0edf.png" />
+                      </div>
+                    </div>
+                  </section>
+                  <section id="baggingclassifier-pada-data-yang-sudah-di-lakukan-oversampling-dengan-smote">
+                    <h2>
+                      3.3. BaggingClassifier pada data yang sudah di lakukan oversampling dengan SMOTE<a class="headerlink" href="#baggingclassifier-pada-data-yang-sudah-di-lakukan-oversampling-dengan-smote" title="Link to this heading"
+                        >#</a
+                      >
+                    </h2>
+                    <div class="cell docutils container">
+                      <div class="cell_input docutils container">
+                        <div class="highlight-python notranslate">
+                          <div class="highlight">
+                            <pre><span></span><span class="n">data_smote</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data_ecoli_smote.csv&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">data_smote</span><span class="p">[</span><span class="s2">&quot;class&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
 <span class="n">x_smote</span> <span class="o">=</span> <span class="n">data_smote</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;class&quot;</span><span class="p">])</span>
 <span class="n">y_smote</span> <span class="o">=</span> <span class="n">data_smote</span><span class="p">[</span><span class="s2">&quot;class&quot;</span><span class="p">]</span>
@@ -1670,11 +1741,14 @@ weighted avg       0.89      0.86      0.85       232
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Metrics&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>class
+</pre>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="cell_output docutils container">
+                        <div class="output stream highlight-myst-ansi notranslate">
+                          <div class="highlight">
+                            <pre><span></span>class
 cp     143
 im     143
 imS    143
@@ -1700,18 +1774,21 @@ Classification Report:
     accuracy                           0.93       229
    macro avg       0.93      0.93      0.92       229
 weighted avg       0.94      0.93      0.93       229
-</pre></div>
-</div>
-<img alt="_images/1c4ef6372de6bd6ac38fafbc0638db006bcf711f868b537a6c145032ea1eeef9.png" src="_images/1c4ef6372de6bd6ac38fafbc0638db006bcf711f868b537a6c145032ea1eeef9.png" />
-<img alt="_images/2e4559e83071d7c579ded4997ecc2659be6456428839ef8aee309de7c51c0df8.png" src="_images/2e4559e83071d7c579ded4997ecc2659be6456428839ef8aee309de7c51c0df8.png" />
-</div>
-</div>
-</section>
-<section id="perbandingan-akurasi-bagging-classifire-dengan-model-naive-bayes">
-<h2>3.4. Perbandingan Akurasi Bagging Classifire dengan model Naive Bayes<a class="headerlink" href="#perbandingan-akurasi-bagging-classifire-dengan-model-naive-bayes" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">label</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Data asli&#39;</span><span class="p">,</span> <span class="s1">&#39;SMOTE&#39;</span><span class="p">,</span> <span class="s1">&#39;ADASYN&#39;</span><span class="p">]</span>
+</pre>
+                          </div>
+                        </div>
+                        <img alt="_images/1c4ef6372de6bd6ac38fafbc0638db006bcf711f868b537a6c145032ea1eeef9.png" src="_images/1c4ef6372de6bd6ac38fafbc0638db006bcf711f868b537a6c145032ea1eeef9.png" />
+                        <img alt="_images/2e4559e83071d7c579ded4997ecc2659be6456428839ef8aee309de7c51c0df8.png" src="_images/2e4559e83071d7c579ded4997ecc2659be6456428839ef8aee309de7c51c0df8.png" />
+                      </div>
+                    </div>
+                  </section>
+                  <section id="perbandingan-akurasi-bagging-classifire-dengan-model-naive-bayes">
+                    <h2>3.4. Perbandingan Akurasi Bagging Classifire dengan model Naive Bayes<a class="headerlink" href="#perbandingan-akurasi-bagging-classifire-dengan-model-naive-bayes" title="Link to this heading">#</a></h2>
+                    <div class="cell docutils container">
+                      <div class="cell_input docutils container">
+                        <div class="highlight-python notranslate">
+                          <div class="highlight">
+                            <pre><span></span><span class="n">label</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Data asli&#39;</span><span class="p">,</span> <span class="s1">&#39;SMOTE&#39;</span><span class="p">,</span> <span class="s1">&#39;ADASYN&#39;</span><span class="p">]</span>
 <span class="n">temp</span> <span class="o">=</span> <span class="p">[</span><span class="n">akurasi</span><span class="p">,</span> <span class="n">akurasi_smote</span><span class="p">,</span> <span class="n">akurasi_adasyn</span><span class="p">]</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
@@ -1762,24 +1839,31 @@ weighted avg       0.94      0.93      0.93       229
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/9bf400c73e14b6ee6858fb833f0c6f8f60edb3f7f25866743110d356371a262a.png" src="_images/9bf400c73e14b6ee6858fb833f0c6f8f60edb3f7f25866743110d356371a262a.png" />
-<img alt="_images/2a8a4736e75ca6a014658006f7ef28cddc7d02856c27aa2e8113630947b00800.png" src="_images/2a8a4736e75ca6a014658006f7ef28cddc7d02856c27aa2e8113630947b00800.png" />
-</div>
-</div>
-<p>Berdasarkan hasil grafik perbandingan akurasi Bagging Classifier dengan Naive Bayes, terlihat bahwa akurasi pada data asli masih relatif rendah, yakni sekitar 75%. Namun, setelah dilakukan oversampling dengan SMOTE, akurasi meningkat menjadi 92,5%, dan dengan ADASYN akurasi kembali meningkat hingga 85,7%. Temuan ini menunjukkan bahwa penerapan teknik oversampling, terutama SMOTE, mampu meningkatkan kinerja model secara signifikan dibandingkan penggunaan data asli yang tidak seimbang pada Bagging Classifier dengan Naive Bayes.</p>
-</section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="bagging-classifier-random-forest">
-<h1><strong>4. Bagging Classifier Random Forest</strong><a class="headerlink" href="#bagging-classifier-random-forest" title="Link to this heading">#</a></h1>
-<section id="id2">
-<h2>4.1. Bagging Classifier pada data yang belum di lakukan oversampling<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="cell_output docutils container">
+                        <img alt="_images/9bf400c73e14b6ee6858fb833f0c6f8f60edb3f7f25866743110d356371a262a.png" src="_images/9bf400c73e14b6ee6858fb833f0c6f8f60edb3f7f25866743110d356371a262a.png" />
+                        <img alt="_images/2a8a4736e75ca6a014658006f7ef28cddc7d02856c27aa2e8113630947b00800.png" src="_images/2a8a4736e75ca6a014658006f7ef28cddc7d02856c27aa2e8113630947b00800.png" />
+                      </div>
+                    </div>
+                    <p>
+                      Berdasarkan hasil grafik perbandingan akurasi Bagging Classifier dengan Naive Bayes, terlihat bahwa akurasi pada data asli masih relatif rendah, yakni sekitar 75%. Namun, setelah dilakukan oversampling dengan SMOTE,
+                      akurasi meningkat menjadi 92,5%, dan dengan ADASYN akurasi kembali meningkat hingga 85,7%. Temuan ini menunjukkan bahwa penerapan teknik oversampling, terutama SMOTE, mampu meningkatkan kinerja model secara signifikan
+                      dibandingkan penggunaan data asli yang tidak seimbang pada Bagging Classifier dengan Naive Bayes.
+                    </p>
+                  </section>
+                </section>
+                <section class="tex2jax_ignore mathjax_ignore" id="bagging-classifier-random-forest">
+                  <h1><strong>4. Bagging Classifier Random Forest</strong><a class="headerlink" href="#bagging-classifier-random-forest" title="Link to this heading">#</a></h1>
+                  <section id="id2">
+                    <h2>4.1. Bagging Classifier pada data yang belum di lakukan oversampling<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+                    <div class="cell docutils container">
+                      <div class="cell_input docutils container">
+                        <div class="highlight-python notranslate">
+                          <div class="highlight">
+                            <pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
@@ -1874,11 +1958,14 @@ weighted avg       0.94      0.93      0.93       229
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Predicted Class&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Actual Class&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>======================================================================
+</pre>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="cell_output docutils container">
+                        <div class="output stream highlight-myst-ansi notranslate">
+                          <div class="highlight">
+                            <pre><span></span>======================================================================
 HASIL BAGGING CLASSIFIER (Random Forest) - DATA ORIGINAL
 ======================================================================
 Akurasi: 0.8676470588235294
@@ -1907,17 +1994,27 @@ Confusion Matrix:
  [ 0  0  0  0  4  0  0]
  [ 0  0  0  0  0  2  0]
  [ 1  1  0  0  0  0  9]]
-</pre></div>
-</div>
-<img alt="_images/80aa81b8dce61ab71d28c0ffd768c04ecc4bb62289798408d8b369f9ac47ffd5.png" src="_images/80aa81b8dce61ab71d28c0ffd768c04ecc4bb62289798408d8b369f9ac47ffd5.png" />
-</div>
-</div>
-</section>
-<section id="bagging-classifier-pada-data-yang-sudah-di-lakukan-oversampling-menggunakan-adasyn">
-<h2>4.2. Bagging Classifier pada data yang sudah di lakukan oversampling menggunakan ADASYN<a class="headerlink" href="#bagging-classifier-pada-data-yang-sudah-di-lakukan-oversampling-menggunakan-adasyn" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre>
+                          </div>
+                        </div>
+                        <img alt="_images/80aa81b8dce61ab71d28c0ffd768c04ecc4bb62289798408d8b369f9ac47ffd5.png" src="_images/80aa81b8dce61ab71d28c0ffd768c04ecc4bb62289798408d8b369f9ac47ffd5.png" />
+                      </div>
+                    </div>
+                  </section>
+                  <section id="bagging-classifier-pada-data-yang-sudah-di-lakukan-oversampling-menggunakan-adasyn">
+                    <h2>
+                      4.2. Bagging Classifier pada data yang sudah di lakukan oversampling menggunakan ADASYN<a
+                        class="headerlink"
+                        href="#bagging-classifier-pada-data-yang-sudah-di-lakukan-oversampling-menggunakan-adasyn"
+                        title="Link to this heading"
+                        >#</a
+                      >
+                    </h2>
+                    <div class="cell docutils container">
+                      <div class="cell_input docutils container">
+                        <div class="highlight-python notranslate">
+                          <div class="highlight">
+                            <pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
@@ -2012,11 +2109,14 @@ Confusion Matrix:
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Predicted Class&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Actual Class&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>======================================================================
+</pre>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="cell_output docutils container">
+                        <div class="output stream highlight-myst-ansi notranslate">
+                          <div class="highlight">
+                            <pre><span></span>======================================================================
 HASIL BAGGING CLASSIFIER (Random Forest) - DATA ADASYN
 ======================================================================
 Akurasi: 0.896551724137931
@@ -2047,17 +2147,27 @@ Confusion Matrix:
  [ 0  0  0  0  0 30  0  0]
  [ 0  0  0  0  0  0 22  0]
  [ 2  0  0  0  0  0  0 25]]
-</pre></div>
-</div>
-<img alt="_images/fc074a0e463ae9ebf4b23424ef8e72474ba5f03dace7136a1623457c2089d0d2.png" src="_images/fc074a0e463ae9ebf4b23424ef8e72474ba5f03dace7136a1623457c2089d0d2.png" />
-</div>
-</div>
-</section>
-<section id="bagging-classifier-pada-data-yang-sudah-di-lakukan-oversampling-menggunakan-smote">
-<h2>4.3. Bagging Classifier pada data yang sudah di lakukan oversampling menggunakan SMOTE<a class="headerlink" href="#bagging-classifier-pada-data-yang-sudah-di-lakukan-oversampling-menggunakan-smote" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre>
+                          </div>
+                        </div>
+                        <img alt="_images/fc074a0e463ae9ebf4b23424ef8e72474ba5f03dace7136a1623457c2089d0d2.png" src="_images/fc074a0e463ae9ebf4b23424ef8e72474ba5f03dace7136a1623457c2089d0d2.png" />
+                      </div>
+                    </div>
+                  </section>
+                  <section id="bagging-classifier-pada-data-yang-sudah-di-lakukan-oversampling-menggunakan-smote">
+                    <h2>
+                      4.3. Bagging Classifier pada data yang sudah di lakukan oversampling menggunakan SMOTE<a
+                        class="headerlink"
+                        href="#bagging-classifier-pada-data-yang-sudah-di-lakukan-oversampling-menggunakan-smote"
+                        title="Link to this heading"
+                        >#</a
+                      >
+                    </h2>
+                    <div class="cell docutils container">
+                      <div class="cell_input docutils container">
+                        <div class="highlight-python notranslate">
+                          <div class="highlight">
+                            <pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
@@ -2152,11 +2262,14 @@ Confusion Matrix:
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Predicted Class&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Actual Class&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>======================================================================
+</pre>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="cell_output docutils container">
+                        <div class="output stream highlight-myst-ansi notranslate">
+                          <div class="highlight">
+                            <pre><span></span>======================================================================
 HASIL BAGGING CLASSIFIER (Random Forest) - DATA SMOTE
 ======================================================================
 Akurasi: 0.9301310043668122
@@ -2187,17 +2300,20 @@ Confusion Matrix:
  [ 0  0  0  0  0 28  0  1]
  [ 0  0  0  0  0  0 19  0]
  [ 2  0  0  0  0  0  0 33]]
-</pre></div>
-</div>
-<img alt="_images/b7d687538427a72e9f98bc9e3b7dbfb335c1138b487b4b13133aecb7c3ea4f96.png" src="_images/b7d687538427a72e9f98bc9e3b7dbfb335c1138b487b4b13133aecb7c3ea4f96.png" />
-</div>
-</div>
-</section>
-<section id="perbandingan-akurasi-bagging-classifire-dengan-model-random-forest">
-<h2>4.4. Perbandingan Akurasi Bagging Classifire dengan model Random Forest<a class="headerlink" href="#perbandingan-akurasi-bagging-classifire-dengan-model-random-forest" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre>
+                          </div>
+                        </div>
+                        <img alt="_images/b7d687538427a72e9f98bc9e3b7dbfb335c1138b487b4b13133aecb7c3ea4f96.png" src="_images/b7d687538427a72e9f98bc9e3b7dbfb335c1138b487b4b13133aecb7c3ea4f96.png" />
+                      </div>
+                    </div>
+                  </section>
+                  <section id="perbandingan-akurasi-bagging-classifire-dengan-model-random-forest">
+                    <h2>4.4. Perbandingan Akurasi Bagging Classifire dengan model Random Forest<a class="headerlink" href="#perbandingan-akurasi-bagging-classifire-dengan-model-random-forest" title="Link to this heading">#</a></h2>
+                    <div class="cell docutils container">
+                      <div class="cell_input docutils container">
+                        <div class="highlight-python notranslate">
+                          <div class="highlight">
+                            <pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaggingClassifier</span><span class="p">,</span> <span class="n">RandomForestClassifier</span>
@@ -2325,146 +2441,172 @@ Confusion Matrix:
 
     <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/8a2cc4b9e8c4fb70548802ba742f1967a954495e31e412a164edcd441fb06ac8.png" src="_images/8a2cc4b9e8c4fb70548802ba742f1967a954495e31e412a164edcd441fb06ac8.png" />
-<img alt="_images/8fbc78de3b10a3bb2a2bac2df61e87879f74c68d40820e01302122b01ebf3780.png" src="_images/8fbc78de3b10a3bb2a2bac2df61e87879f74c68d40820e01302122b01ebf3780.png" />
-</div>
-</div>
-<p>Berdasarkan grafik perbandingan akurasi Bagging Classifier dengan model Random Forest, dapat disimpulkan bahwa akurasi data asli masih lebih rendah yaitu sekitar 86,7%, sedangkan setelah dilakukan oversampling dengan SMOTE akurasi meningkat signifikan hingga 93,0%, dan dengan ADASYN akurasi juga meningkat menjadi 89,6%. Hal ini menunjukkan bahwa teknik oversampling, khususnya SMOTE, mampu memperbaiki performa model dibandingkan data asli yang tidak seimbang.</p>
-</section>
-</section>
+</pre>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="cell_output docutils container">
+                        <img alt="_images/8a2cc4b9e8c4fb70548802ba742f1967a954495e31e412a164edcd441fb06ac8.png" src="_images/8a2cc4b9e8c4fb70548802ba742f1967a954495e31e412a164edcd441fb06ac8.png" />
+                        <img alt="_images/8fbc78de3b10a3bb2a2bac2df61e87879f74c68d40820e01302122b01ebf3780.png" src="_images/8fbc78de3b10a3bb2a2bac2df61e87879f74c68d40820e01302122b01ebf3780.png" />
+                      </div>
+                    </div>
+                    <p>
+                      Berdasarkan grafik perbandingan akurasi Bagging Classifier dengan model Random Forest, dapat disimpulkan bahwa akurasi data asli masih lebih rendah yaitu sekitar 86,7%, sedangkan setelah dilakukan oversampling dengan
+                      SMOTE akurasi meningkat signifikan hingga 93,0%, dan dengan ADASYN akurasi juga meningkat menjadi 89,6%. Hal ini menunjukkan bahwa teknik oversampling, khususnya SMOTE, mampu memperbaiki performa model dibandingkan
+                      data asli yang tidak seimbang.
+                    </p>
+                  </section>
+                </section>
 
-    <script type="text/x-thebe-config">
-    {
-        requestKernel: true,
-        binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
-            ref: "master",
-        },
-        codeMirrorConfig: {
-            theme: "abcdef",
-            mode: "python"
-        },
-        kernelOptions: {
-            name: "python3",
-            path: "./."
-        },
-        predefinedOutput: true
-    }
-    </script>
-    <script>kernelName = 'python3'</script>
+                <script type="text/x-thebe-config">
+                  {
+                      requestKernel: true,
+                      binderOptions: {
+                          repo: "binder-examples/jupyter-stacks-datascience",
+                          ref: "master",
+                      },
+                      codeMirrorConfig: {
+                          theme: "abcdef",
+                          mode: "python"
+                      },
+                      kernelOptions: {
+                          name: "python3",
+                          path: "./."
+                      },
+                      predefinedOutput: true
+                  }
+                </script>
+                <script>
+                  kernelName = "python3";
+                </script>
+              </article>
 
-                </article>
-              
-
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
-<div class="prev-next-area">
-</div>
-                </footer>
-              
+              <footer class="prev-next-footer d-print-none">
+                <div class="prev-next-area"></div>
+              </footer>
             </div>
-            
-            
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Klasifikasi Dan BaggingClassifier Pada Dataset Ecoli</strong></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#klasifikasi-menggunakan-naive-bayes"><strong>1. Klasifikasi Menggunakan Naive Bayes</strong></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-klasifikasi-menggunakan-naive-bayes-pada-data-ecoli-sebelum-di-oversampling">1.1. Modeling Klasifikasi menggunakan Naive bayes pada data ecoli sebelum di oversampling</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-klasifikasi-menggunakan-naive-bayes-pada-data-ecoli-setelah-di-oversampling-menggunakan-adasyn">1.2. Modeling Klasifikasi menggunakan Naive bayes pada data Ecoli setelah di Oversampling menggunakan ADASYN</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-klasifikasi-menggunakan-naive-bayes-pada-data-ecoli-setelah-di-oversampling-menggunakan-smote">1.3. Modeling Klasifikasi menggunakan Naive bayes pada data ecoli setelah di oversampling menggunakan SMOTE</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perbandingan-akurasi-antara-data-sebelum-di-oversampling-dan-sesudah">1.4. Perbandingan akurasi antara data sebelum di oversampling dan sesudah</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#klasifikasi-menggunakan-random-forest"><strong>2. Klasifikasi Menggunakan Random Forest</strong></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-klasifikasi-menggunakan-random-forest-pada-data-ecoli-sebelum-di-oversampling">2.1. Modeling Klasifikasi menggunakan Random Forest pada data ecoli sebelum di oversampling</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-klasifikasi-menggunakan-random-forest-pada-data-ecoli-setelah-di-oversampling-menggunakan-adasyn">2.2. Modeling Klasifikasi menggunakan Random Forest pada data Ecoli setelah di Oversampling menggunakan ADASYN</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-klasifikasi-menggunakan-random-forest-pada-data-ecoli-setelah-di-oversampling-menggunakan-smote">2.3. Modeling Klasifikasi menggunakan Random Forest pada data Ecoli setelah di Oversampling menggunakan SMOTE</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">2.4. Perbandingan akurasi antara data sebelum di oversampling dan sesudah</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#bagging-classifier-naive-bayes"><strong>3. Bagging Classifier Naive Bayes</strong></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bagging-classifier-pada-data-yang-belum-di-lakukan-oversampling">3.1. Bagging Classifier pada data yang belum di lakukan oversampling</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#baggingclassifier-pada-data-yang-sudah-di-lakukan-oversampling-dengan-adasyn">3.2. BaggingClassifier pada data yang sudah di lakukan oversampling dengan ADASYN</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#baggingclassifier-pada-data-yang-sudah-di-lakukan-oversampling-dengan-smote">3.3. BaggingClassifier pada data yang sudah di lakukan oversampling dengan SMOTE</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perbandingan-akurasi-bagging-classifire-dengan-model-naive-bayes">3.4. Perbandingan Akurasi Bagging Classifire dengan model Naive Bayes</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#bagging-classifier-random-forest"><strong>4. Bagging Classifier Random Forest</strong></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">4.1. Bagging Classifier pada data yang belum di lakukan oversampling</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bagging-classifier-pada-data-yang-sudah-di-lakukan-oversampling-menggunakan-adasyn">4.2. Bagging Classifier pada data yang sudah di lakukan oversampling menggunakan ADASYN</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bagging-classifier-pada-data-yang-sudah-di-lakukan-oversampling-menggunakan-smote">4.3. Bagging Classifier pada data yang sudah di lakukan oversampling menggunakan SMOTE</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perbandingan-akurasi-bagging-classifire-dengan-model-random-forest">4.4. Perbandingan Akurasi Bagging Classifire dengan model Random Forest</a></li>
-</ul>
-</li>
-</ul>
-
-  </nav></div>
-
-</div></div>
-              
-            
+            <div class="bd-sidebar-secondary bd-toc">
+              <div class="sidebar-secondary-items sidebar-secondary__inner">
+                <div class="sidebar-secondary-item">
+                  <div class="page-toc tocsection onthispage"><i class="fa-solid fa-list"></i> Contents</div>
+                  <nav class="bd-toc-nav page-toc">
+                    <ul class="visible nav section-nav flex-column">
+                      <li class="toc-h1 nav-item toc-entry">
+                        <a class="reference internal nav-link" href="#"><strong>Klasifikasi Dan BaggingClassifier Pada Dataset Ecoli</strong></a>
+                      </li>
+                      <li class="toc-h1 nav-item toc-entry">
+                        <a class="reference internal nav-link" href="#klasifikasi-menggunakan-naive-bayes"><strong>1. Klasifikasi Menggunakan Naive Bayes</strong></a>
+                        <ul class="visible nav section-nav flex-column">
+                          <li class="toc-h2 nav-item toc-entry">
+                            <a class="reference internal nav-link" href="#modeling-klasifikasi-menggunakan-naive-bayes-pada-data-ecoli-sebelum-di-oversampling"
+                              >1.1. Modeling Klasifikasi menggunakan Naive bayes pada data ecoli sebelum di oversampling</a
+                            >
+                          </li>
+                          <li class="toc-h2 nav-item toc-entry">
+                            <a class="reference internal nav-link" href="#modeling-klasifikasi-menggunakan-naive-bayes-pada-data-ecoli-setelah-di-oversampling-menggunakan-adasyn"
+                              >1.2. Modeling Klasifikasi menggunakan Naive bayes pada data Ecoli setelah di Oversampling menggunakan ADASYN</a
+                            >
+                          </li>
+                          <li class="toc-h2 nav-item toc-entry">
+                            <a class="reference internal nav-link" href="#modeling-klasifikasi-menggunakan-naive-bayes-pada-data-ecoli-setelah-di-oversampling-menggunakan-smote"
+                              >1.3. Modeling Klasifikasi menggunakan Naive bayes pada data ecoli setelah di oversampling menggunakan SMOTE</a
+                            >
+                          </li>
+                          <li class="toc-h2 nav-item toc-entry">
+                            <a class="reference internal nav-link" href="#perbandingan-akurasi-antara-data-sebelum-di-oversampling-dan-sesudah">1.4. Perbandingan akurasi antara data sebelum di oversampling dan sesudah</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li class="toc-h1 nav-item toc-entry">
+                        <a class="reference internal nav-link" href="#klasifikasi-menggunakan-random-forest"><strong>2. Klasifikasi Menggunakan Random Forest</strong></a>
+                        <ul class="visible nav section-nav flex-column">
+                          <li class="toc-h2 nav-item toc-entry">
+                            <a class="reference internal nav-link" href="#modeling-klasifikasi-menggunakan-random-forest-pada-data-ecoli-sebelum-di-oversampling"
+                              >2.1. Modeling Klasifikasi menggunakan Random Forest pada data ecoli sebelum di oversampling</a
+                            >
+                          </li>
+                          <li class="toc-h2 nav-item toc-entry">
+                            <a class="reference internal nav-link" href="#modeling-klasifikasi-menggunakan-random-forest-pada-data-ecoli-setelah-di-oversampling-menggunakan-adasyn"
+                              >2.2. Modeling Klasifikasi menggunakan Random Forest pada data Ecoli setelah di Oversampling menggunakan ADASYN</a
+                            >
+                          </li>
+                          <li class="toc-h2 nav-item toc-entry">
+                            <a class="reference internal nav-link" href="#modeling-klasifikasi-menggunakan-random-forest-pada-data-ecoli-setelah-di-oversampling-menggunakan-smote"
+                              >2.3. Modeling Klasifikasi menggunakan Random Forest pada data Ecoli setelah di Oversampling menggunakan SMOTE</a
+                            >
+                          </li>
+                          <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">2.4. Perbandingan akurasi antara data sebelum di oversampling dan sesudah</a></li>
+                        </ul>
+                      </li>
+                      <li class="toc-h1 nav-item toc-entry">
+                        <a class="reference internal nav-link" href="#bagging-classifier-naive-bayes"><strong>3. Bagging Classifier Naive Bayes</strong></a>
+                        <ul class="visible nav section-nav flex-column">
+                          <li class="toc-h2 nav-item toc-entry">
+                            <a class="reference internal nav-link" href="#bagging-classifier-pada-data-yang-belum-di-lakukan-oversampling">3.1. Bagging Classifier pada data yang belum di lakukan oversampling</a>
+                          </li>
+                          <li class="toc-h2 nav-item toc-entry">
+                            <a class="reference internal nav-link" href="#baggingclassifier-pada-data-yang-sudah-di-lakukan-oversampling-dengan-adasyn">3.2. BaggingClassifier pada data yang sudah di lakukan oversampling dengan ADASYN</a>
+                          </li>
+                          <li class="toc-h2 nav-item toc-entry">
+                            <a class="reference internal nav-link" href="#baggingclassifier-pada-data-yang-sudah-di-lakukan-oversampling-dengan-smote">3.3. BaggingClassifier pada data yang sudah di lakukan oversampling dengan SMOTE</a>
+                          </li>
+                          <li class="toc-h2 nav-item toc-entry">
+                            <a class="reference internal nav-link" href="#perbandingan-akurasi-bagging-classifire-dengan-model-naive-bayes">3.4. Perbandingan Akurasi Bagging Classifire dengan model Naive Bayes</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li class="toc-h1 nav-item toc-entry">
+                        <a class="reference internal nav-link" href="#bagging-classifier-random-forest"><strong>4. Bagging Classifier Random Forest</strong></a>
+                        <ul class="visible nav section-nav flex-column">
+                          <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">4.1. Bagging Classifier pada data yang belum di lakukan oversampling</a></li>
+                          <li class="toc-h2 nav-item toc-entry">
+                            <a class="reference internal nav-link" href="#bagging-classifier-pada-data-yang-sudah-di-lakukan-oversampling-menggunakan-adasyn"
+                              >4.2. Bagging Classifier pada data yang sudah di lakukan oversampling menggunakan ADASYN</a
+                            >
+                          </li>
+                          <li class="toc-h2 nav-item toc-entry">
+                            <a class="reference internal nav-link" href="#bagging-classifier-pada-data-yang-sudah-di-lakukan-oversampling-menggunakan-smote"
+                              >4.3. Bagging Classifier pada data yang sudah di lakukan oversampling menggunakan SMOTE</a
+                            >
+                          </li>
+                          <li class="toc-h2 nav-item toc-entry">
+                            <a class="reference internal nav-link" href="#perbandingan-akurasi-bagging-classifire-dengan-model-random-forest">4.4. Perbandingan Akurasi Bagging Classifire dengan model Random Forest</a>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+            </div>
           </div>
           <footer class="bd-footer-content">
-            
-<div class="bd-footer-content__inner container">
-  
-  <div class="footer-item">
-    
-<p class="component-author">
-By The Jupyter Book Community
-</p>
+            <div class="bd-footer-content__inner container">
+              <div class="footer-item">
+                <p class="component-author">By The Jupyter Book Community</p>
+              </div>
 
-  </div>
-  
-  <div class="footer-item">
-    
+              <div class="footer-item">
+                <p class="copyright">
+                  © Copyright 2023.
+                  <br />
+                </p>
+              </div>
 
-  <p class="copyright">
-    
-      © Copyright 2023.
-      <br/>
-    
-  </p>
+              <div class="footer-item"></div>
 
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-</div>
+              <div class="footer-item"></div>
+            </div>
           </footer>
-        
-
-      </main>
+        </main>
+      </div>
     </div>
-  </div>
-  
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-  <footer class="bd-footer">
-  </footer>
+    <!-- Scripts loaded after <body> so the DOM is not blocked -->
+    <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+    <script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <footer class="bd-footer"></footer>
   </body>
 </html>
