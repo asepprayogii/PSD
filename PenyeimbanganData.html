@@ -60,6 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'PenyeimbanganData';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Klasifikasi Dan BaggingClassifier Pada Dataset Ecoli" href="klasifikasi_baggingclasifier.html" />
     <link rel="prev" title="Preprocessing Data" href="PreprocessingData.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -175,16 +176,9 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="BusinessUnderstanding.html">Bussiness Understanding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DataUnderstanding.html">Data Understanding &amp; Explorasi Data</a></li>
-
-
-
-
-
 <li class="toctree-l1"><a class="reference internal" href="PreprocessingData.html">Preprocessing Data</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Penyeimbangan Data Ecoli</a></li>
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="klasifikasi_baggingclasifier.html"><strong>Klasifikasi Dan BaggingClassifier Pada Dataset Ecoli</strong></a></li>
 </ul>
 
     </div>
@@ -426,8 +420,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="penyeimbangan-data-ecoli-klasifikasi-dan-ensambled">
-<h1>Penyeimbangan Data Ecoli<a class="headerlink" href="#penyeimbangan-data-ecoli-klasifikasi-dan-ensambled" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="penyeimbangan-data-ecoli">
+<h1>Penyeimbangan Data Ecoli<a class="headerlink" href="#penyeimbangan-data-ecoli" title="Link to this heading">#</a></h1>
 <p>Penyeimbangan data <strong>Ecoli</strong> dilakukan untuk mengatasi masalah <em>class imbalance</em> (ketidakseimbangan kelas),<br />
 di mana jumlah data pada kelas mayoritas jauh lebih besar dibandingkan kelas minoritas.</p>
 <p>Jika kondisi ini tidak diperbaiki:</p>
@@ -559,45 +553,22 @@ Contoh script sederhana:</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting pymysql
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading pymysql-1.1.2-py3-none-any.whl.metadata (4.3 kB)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading pymysql-1.1.2-py3-none-any.whl (45 kB)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: pymysql
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Successfully installed pymysql-1.1.2
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pymysql in /usr/local/python/3.12.1/lib/python3.12/site-packages (1.1.2)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> A new release of pip is available: <span class=" -Color -Color-Red">25.1.1</span> -&gt; <span class=" -Color -Color-Green">25.2</span>
 <span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> To update, run: <span class=" -Color -Color-Green">python3 -m pip install --upgrade pip</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting imbalanced-learn
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading imbalanced_learn-0.14.0-py3-none-any.whl.metadata (8.8 kB)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numpy&lt;3,&gt;=1.25.2 in /home/codespace/.local/lib/python3.12/site-packages (from imbalanced-learn) (2.3.1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: imbalanced-learn in /usr/local/python/3.12.1/lib/python3.12/site-packages (0.14.0)
+Requirement already satisfied: numpy&lt;3,&gt;=1.25.2 in /home/codespace/.local/lib/python3.12/site-packages (from imbalanced-learn) (2.3.1)
 Requirement already satisfied: scipy&lt;2,&gt;=1.11.4 in /home/codespace/.local/lib/python3.12/site-packages (from imbalanced-learn) (1.16.0)
 Requirement already satisfied: scikit-learn&lt;2,&gt;=1.4.2 in /home/codespace/.local/lib/python3.12/site-packages (from imbalanced-learn) (1.7.0)
 Requirement already satisfied: joblib&lt;2,&gt;=1.2.0 in /home/codespace/.local/lib/python3.12/site-packages (from imbalanced-learn) (1.5.1)
 Requirement already satisfied: threadpoolctl&lt;4,&gt;=2.0.0 in /home/codespace/.local/lib/python3.12/site-packages (from imbalanced-learn) (3.6.0)
-Downloading imbalanced_learn-0.14.0-py3-none-any.whl (239 kB)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: imbalanced-learn
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Successfully installed imbalanced-learn-0.14.0
-
-<span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> A new release of pip is available: <span class=" -Color -Color-Red">25.1.1</span> -&gt; <span class=" -Color -Color-Green">25.2</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> A new release of pip is available: <span class=" -Color -Color-Red">25.1.1</span> -&gt; <span class=" -Color -Color-Green">25.2</span>
 <span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> To update, run: <span class=" -Color -Color-Green">python3 -m pip install --upgrade pip</span>
 </pre></div>
 </div>
@@ -862,9 +833,7 @@ DataFrame PCA (5 baris pertama):
 Sorted counts untuk iterasi: [2, 2, 5, 20, 35, 52, 77, 143]
 
 Iterasi 1: menggunakan k_neighbors=1
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hasil iterasi 1: [(&#39;cp&#39;, 143), (&#39;im&#39;, 77), (&#39;imL&#39;, 142), (&#39;imS&#39;, 2), (&#39;imU&#39;, 35), (&#39;om&#39;, 20), (&#39;omL&#39;, 5), (&#39;pp&#39;, 52)]
+Hasil iterasi 1: [(&#39;cp&#39;, 143), (&#39;im&#39;, 77), (&#39;imL&#39;, 142), (&#39;imS&#39;, 2), (&#39;imU&#39;, 35), (&#39;om&#39;, 20), (&#39;omL&#39;, 5), (&#39;pp&#39;, 52)]
 
 Iterasi 2: menggunakan k_neighbors=1
 Hasil iterasi 2: [(&#39;cp&#39;, 143), (&#39;im&#39;, 77), (&#39;imL&#39;, 142), (&#39;imS&#39;, 142), (&#39;imU&#39;, 35), (&#39;om&#39;, 20), (&#39;omL&#39;, 5), (&#39;pp&#39;, 52)]
@@ -873,24 +842,24 @@ Iterasi 3: menggunakan k_neighbors=4
 Hasil iterasi 3: [(&#39;cp&#39;, 143), (&#39;im&#39;, 77), (&#39;imL&#39;, 142), (&#39;imS&#39;, 142), (&#39;imU&#39;, 35), (&#39;om&#39;, 20), (&#39;omL&#39;, 144), (&#39;pp&#39;, 52)]
 
 Iterasi 4: menggunakan k_neighbors=19
-Hasil iterasi 4: [(&#39;cp&#39;, 143), (&#39;im&#39;, 77), (&#39;imL&#39;, 142), (&#39;imS&#39;, 142), (&#39;imU&#39;, 35), (&#39;om&#39;, 144), (&#39;omL&#39;, 144), (&#39;pp&#39;, 52)]
+Hasil iterasi 4: [(&#39;cp&#39;, 143), (&#39;im&#39;, 77), (&#39;imL&#39;, 142), (&#39;imS&#39;, 142), (&#39;imU&#39;, 35), (&#39;om&#39;, 146), (&#39;omL&#39;, 144), (&#39;pp&#39;, 52)]
 
 Iterasi 5: menggunakan k_neighbors=34
-Hasil iterasi 5: [(&#39;cp&#39;, 143), (&#39;im&#39;, 77), (&#39;imL&#39;, 142), (&#39;imS&#39;, 142), (&#39;imU&#39;, 144), (&#39;om&#39;, 144), (&#39;omL&#39;, 144), (&#39;pp&#39;, 52)]
+Hasil iterasi 5: [(&#39;cp&#39;, 143), (&#39;im&#39;, 77), (&#39;imL&#39;, 142), (&#39;imS&#39;, 142), (&#39;imU&#39;, 147), (&#39;om&#39;, 146), (&#39;omL&#39;, 144), (&#39;pp&#39;, 52)]
 
 Iterasi 6: menggunakan k_neighbors=51
-Hasil iterasi 6: [(&#39;cp&#39;, 143), (&#39;im&#39;, 77), (&#39;imL&#39;, 142), (&#39;imS&#39;, 142), (&#39;imU&#39;, 144), (&#39;om&#39;, 144), (&#39;omL&#39;, 144), (&#39;pp&#39;, 144)]
+Hasil iterasi 6: [(&#39;cp&#39;, 143), (&#39;im&#39;, 77), (&#39;imL&#39;, 142), (&#39;imS&#39;, 142), (&#39;imU&#39;, 147), (&#39;om&#39;, 146), (&#39;omL&#39;, 144), (&#39;pp&#39;, 146)]
 
 Iterasi 7: menggunakan k_neighbors=76
-Hasil iterasi 7: [(&#39;cp&#39;, 143), (&#39;im&#39;, 152), (&#39;imL&#39;, 142), (&#39;imS&#39;, 142), (&#39;imU&#39;, 144), (&#39;om&#39;, 144), (&#39;omL&#39;, 144), (&#39;pp&#39;, 144)]
+Hasil iterasi 7: [(&#39;cp&#39;, 143), (&#39;im&#39;, 153), (&#39;imL&#39;, 142), (&#39;imS&#39;, 142), (&#39;imU&#39;, 147), (&#39;om&#39;, 146), (&#39;omL&#39;, 144), (&#39;pp&#39;, 146)]
 
 Distribusi kelas setelah ADASYN:
-[(&#39;cp&#39;, 143), (&#39;im&#39;, 152), (&#39;imL&#39;, 142), (&#39;imS&#39;, 142), (&#39;imU&#39;, 144), (&#39;om&#39;, 144), (&#39;omL&#39;, 144), (&#39;pp&#39;, 144)]
+[(&#39;cp&#39;, 143), (&#39;im&#39;, 153), (&#39;imL&#39;, 142), (&#39;imS&#39;, 142), (&#39;imU&#39;, 147), (&#39;om&#39;, 146), (&#39;omL&#39;, 144), (&#39;pp&#39;, 146)]
 
 Total samples sebelum: 336
-Total samples setelah: 1155
-Data yang ditambahkan: 819
-✅ Data ADASYN disimpan ke &#39;data_ecoli_adasyn.csv&#39; - 1155 rows
+Total samples setelah: 1163
+Data yang ditambahkan: 827
+✅ Data ADASYN disimpan ke &#39;data_ecoli_adasyn.csv&#39; - 1163 rows
 </pre></div>
 </div>
 </div>
@@ -948,17 +917,17 @@ Data yang ditambahkan: 819
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/de8d421e7f67cc3e74665a38eceff97aa02589819f0b87129ce0d5195b56b25f.png" src="_images/de8d421e7f67cc3e74665a38eceff97aa02589819f0b87129ce0d5195b56b25f.png" />
+<img alt="_images/724e252f41b3c6f403ac61fc450ab04df6ddf2da0e67c57cb6e153e79683405d.png" src="_images/724e252f41b3c6f403ac61fc450ab04df6ddf2da0e67c57cb6e153e79683405d.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== SUMMARY ADASYN ===
 Peningkatan per kelas:
   cp: 0 samples (143 → 143)
-  im: +75 samples (77 → 152)
+  im: +76 samples (77 → 153)
   imL: +140 samples (2 → 142)
   imS: +140 samples (2 → 142)
-  imU: +109 samples (35 → 144)
-  om: +124 samples (20 → 144)
+  imU: +112 samples (35 → 147)
+  om: +126 samples (20 → 146)
   omL: +139 samples (5 → 144)
-  pp: +92 samples (52 → 144)
+  pp: +94 samples (52 → 146)
 </pre></div>
 </div>
 </div>
@@ -990,7 +959,7 @@ Peningkatan per kelas:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/0b981e3c05e80804fb5e6bf0cbbcbc48c55a049668da7b4d305927a7fc0865a0.png" src="_images/0b981e3c05e80804fb5e6bf0cbbcbc48c55a049668da7b4d305927a7fc0865a0.png" />
+<img alt="_images/a02134c978da578a7bf08449e9afa67d70504b3a0126f5925d947076710c7323.png" src="_images/a02134c978da578a7bf08449e9afa67d70504b3a0126f5925d947076710c7323.png" />
 </div>
 </div>
 </section>
@@ -1194,10 +1163,10 @@ Peningkatan per kelas:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a643765aaf061f014066a3d5163bce31844c9dd1c5ad47cdbf49c21976c7bae4.png" src="_images/a643765aaf061f014066a3d5163bce31844c9dd1c5ad47cdbf49c21976c7bae4.png" />
+<img alt="_images/c705eefe97f239bad283046270f778152b08948fd4ccc00ce2f06e9ad99cb47e.png" src="_images/c705eefe97f239bad283046270f778152b08948fd4ccc00ce2f06e9ad99cb47e.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== PERBANDINGAN KETIGA METODE ===
 Original  - Total: 336
-ADASYN    - Total: 1155, Penambahan: +819
+ADASYN    - Total: 1163, Penambahan: +827
 SMOTE     - Total: 1144, Penambahan: +808
 </pre></div>
 </div>
@@ -1244,6 +1213,15 @@ SMOTE     - Total: 1144, Penambahan: +808
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Preprocessing Data</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="klasifikasi_baggingclasifier.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Klasifikasi Dan BaggingClassifier Pada Dataset Ecoli</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
