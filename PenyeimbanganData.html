@@ -61,7 +61,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Klasifikasi Dan BaggingClassifier Pada Dataset Ecoli" href="klasifikasi_baggingclasifier.html" />
-    <link rel="prev" title="Preprocessing Data" href="PreprocessingData.html" />
+    <link rel="prev" title="KNN Regression Data (NO₂ Semarang)" href="ModeellingNO2Medan.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -174,11 +174,37 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="BusinessUnderstanding.html">Bussiness Understanding</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="BusinessUnderstanding.html">Business Understanding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="BusinessUnderstandingNO2Medan.html">Business Understanding</a></li>
+
+
+
+
+
+
+
+
+
+</ul>
+</details></li>
 <li class="toctree-l1"><a class="reference internal" href="DataUnderstanding.html">Data Understanding &amp; Explorasi Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="PreprocessingData.html">Preprocessing Data</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Penyeimbangan Data Ecoli</a></li>
-<li class="toctree-l1"><a class="reference internal" href="klasifikasi_baggingclasifier.html"><strong>Klasifikasi Dan BaggingClassifier Pada Dataset Ecoli</strong></a></li>
+
+
+
+
+
+<li class="toctree-l1 has-children"><a class="reference internal" href="PreprocessingData.html">Preprocessing Data</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="PreprocessingNO2Medan.html">Preprocessing (NO₂ Medan)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PreprocessingDataEcoliKNIME.html"><strong>Preprocessing Data Ecoli Menggunakan KNIME Analytics Platform</strong></a></li>
+
+
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="ModeellingNO2Medan.html">KNN Regression Data (NO₂ Semarang)</a></li>
+
+
+
+
 </ul>
 
     </div>
@@ -556,7 +582,7 @@ Contoh script sederhana:</p></li>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pymysql in /usr/local/python/3.12.1/lib/python3.12/site-packages (1.1.2)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> A new release of pip is available: <span class=" -Color -Color-Red">25.1.1</span> -&gt; <span class=" -Color -Color-Green">25.2</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> A new release of pip is available: <span class=" -Color -Color-Red">25.1.1</span> -&gt; <span class=" -Color -Color-Green">25.3</span>
 <span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> To update, run: <span class=" -Color -Color-Green">python3 -m pip install --upgrade pip</span>
 </pre></div>
 </div>
@@ -568,7 +594,7 @@ Requirement already satisfied: joblib&lt;2,&gt;=1.2.0 in /home/codespace/.local/
 Requirement already satisfied: threadpoolctl&lt;4,&gt;=2.0.0 in /home/codespace/.local/lib/python3.12/site-packages (from imbalanced-learn) (3.6.0)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> A new release of pip is available: <span class=" -Color -Color-Red">25.1.1</span> -&gt; <span class=" -Color -Color-Green">25.2</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> A new release of pip is available: <span class=" -Color -Color-Red">25.1.1</span> -&gt; <span class=" -Color -Color-Green">25.3</span>
 <span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> To update, run: <span class=" -Color -Color-Green">python3 -m pip install --upgrade pip</span>
 </pre></div>
 </div>
@@ -625,11 +651,7 @@ Requirement already satisfied: threadpoolctl&lt;4,&gt;=2.0.0 in /home/codespace/
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✅ Data berhasil dimuat dari Aiven!
-   Jumlah baris: 336
-   Nama kolom: [&#39;id&#39;, &#39;sequence&#39;, &#39;mcg&#39;, &#39;gvh&#39;, &#39;lip&#39;, &#39;chg&#39;, &#39;aac&#39;, &#39;alm1&#39;, &#39;alm2&#39;, &#39;class&#39;]
-✅ Data disimpan ke &#39;data_ecoli_original.csv&#39;
-   Shape: (336, 10)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Error: &#39;cryptography&#39; package is required for sha256_password or caching_sha2_password auth methods
 </pre></div>
 </div>
 </div>
@@ -693,22 +715,7 @@ Requirement already satisfied: threadpoolctl&lt;4,&gt;=2.0.0 in /home/codespace/
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Distribusi kelas:
-cp: 143 samples (42.6%)
-im: 77 samples (22.9%)
-imL: 2 samples (0.6%)
-imS: 2 samples (0.6%)
-imU: 35 samples (10.4%)
-om: 20 samples (6.0%)
-omL: 5 samples (1.5%)
-pp: 52 samples (15.5%)
-</pre></div>
-</div>
-<img alt="_images/6ed76799881ed52747c17b3f7d86fa807d2e98e93df2ca46b46130df3fa1a69c.png" src="_images/6ed76799881ed52747c17b3f7d86fa807d2e98e93df2ca46b46130df3fa1a69c.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kelas terbanyak: cp (42.6%)
-Kelas tersedikit: imL (0.6%)
-Rasio ketidakseimbangan: 71.5:1
-Status: TIDAK SEIMBANG
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data tidak tersedia!
 </pre></div>
 </div>
 </div>
@@ -752,33 +759,6 @@ Status: TIDAK SEIMBANG
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;PCA components shape:&quot;</span><span class="p">,</span> <span class="n">X_pca</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">DataFrame PCA (5 baris pertama):&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">dataframe_pca</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data shape: (336, 10)
-Columns: [&#39;id&#39;, &#39;sequence&#39;, &#39;mcg&#39;, &#39;gvh&#39;, &#39;lip&#39;, &#39;chg&#39;, &#39;aac&#39;, &#39;alm1&#39;, &#39;alm2&#39;, &#39;class&#39;]
-</pre></div>
-</div>
-<img alt="_images/b6a66cf83bdd702b0251c68e9d2857045b4820c8b5263813b69e8d8ed8cb2a0d.png" src="_images/b6a66cf83bdd702b0251c68e9d2857045b4820c8b5263813b69e8d8ed8cb2a0d.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total variance explained: 67.8%
-PCA components shape: (336, 2)
-
-DataFrame PCA (5 baris pertama):
-          PC1       PC2 class
-0   -0.286507 -0.033912    cp
-1   -0.293156 -0.317070    cp
-2   -0.105697  0.008691    cp
-3   -0.088433  0.111345    cp
-4   -0.367884 -0.199937    cp
-..        ...       ...   ...
-331  0.084373  0.255707    pp
-332 -0.138928  0.254940    pp
-333 -0.112290  0.170329    pp
-334 -0.106618  0.162533    pp
-335  0.108338  0.252528    pp
-
-[336 rows x 3 columns]
 </pre></div>
 </div>
 </div>
@@ -829,37 +809,17 @@ DataFrame PCA (5 baris pertama):
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Distribusi kelas sebelum ADASYN:
-[(&#39;cp&#39;, 143), (&#39;im&#39;, 77), (&#39;imL&#39;, 2), (&#39;imS&#39;, 2), (&#39;imU&#39;, 35), (&#39;om&#39;, 20), (&#39;omL&#39;, 5), (&#39;pp&#39;, 52)]
-Sorted counts untuk iterasi: [2, 2, 5, 20, 35, 52, 77, 143]
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Distribusi kelas sebelum ADASYN:&quot;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">Counter</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">nt</span> <span class="o">=</span> <span class="n">X</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">ns</span> <span class="o">=</span> <span class="n">y</span>
 
-Iterasi 1: menggunakan k_neighbors=1
-Hasil iterasi 1: [(&#39;cp&#39;, 143), (&#39;im&#39;, 77), (&#39;imL&#39;, 142), (&#39;imS&#39;, 2), (&#39;imU&#39;, 35), (&#39;om&#39;, 20), (&#39;omL&#39;, 5), (&#39;pp&#39;, 52)]
-
-Iterasi 2: menggunakan k_neighbors=1
-Hasil iterasi 2: [(&#39;cp&#39;, 143), (&#39;im&#39;, 77), (&#39;imL&#39;, 142), (&#39;imS&#39;, 142), (&#39;imU&#39;, 35), (&#39;om&#39;, 20), (&#39;omL&#39;, 5), (&#39;pp&#39;, 52)]
-
-Iterasi 3: menggunakan k_neighbors=4
-Hasil iterasi 3: [(&#39;cp&#39;, 143), (&#39;im&#39;, 77), (&#39;imL&#39;, 142), (&#39;imS&#39;, 142), (&#39;imU&#39;, 35), (&#39;om&#39;, 20), (&#39;omL&#39;, 144), (&#39;pp&#39;, 52)]
-
-Iterasi 4: menggunakan k_neighbors=19
-Hasil iterasi 4: [(&#39;cp&#39;, 143), (&#39;im&#39;, 77), (&#39;imL&#39;, 142), (&#39;imS&#39;, 142), (&#39;imU&#39;, 35), (&#39;om&#39;, 146), (&#39;omL&#39;, 144), (&#39;pp&#39;, 52)]
-
-Iterasi 5: menggunakan k_neighbors=34
-Hasil iterasi 5: [(&#39;cp&#39;, 143), (&#39;im&#39;, 77), (&#39;imL&#39;, 142), (&#39;imS&#39;, 142), (&#39;imU&#39;, 147), (&#39;om&#39;, 146), (&#39;omL&#39;, 144), (&#39;pp&#39;, 52)]
-
-Iterasi 6: menggunakan k_neighbors=51
-Hasil iterasi 6: [(&#39;cp&#39;, 143), (&#39;im&#39;, 77), (&#39;imL&#39;, 142), (&#39;imS&#39;, 142), (&#39;imU&#39;, 147), (&#39;om&#39;, 146), (&#39;omL&#39;, 144), (&#39;pp&#39;, 146)]
-
-Iterasi 7: menggunakan k_neighbors=76
-Hasil iterasi 7: [(&#39;cp&#39;, 143), (&#39;im&#39;, 153), (&#39;imL&#39;, 142), (&#39;imS&#39;, 142), (&#39;imU&#39;, 147), (&#39;om&#39;, 146), (&#39;omL&#39;, 144), (&#39;pp&#39;, 146)]
-
-Distribusi kelas setelah ADASYN:
-[(&#39;cp&#39;, 143), (&#39;im&#39;, 153), (&#39;imL&#39;, 142), (&#39;imS&#39;, 142), (&#39;imU&#39;, 147), (&#39;om&#39;, 146), (&#39;omL&#39;, 144), (&#39;pp&#39;, 146)]
-
-Total samples sebelum: 336
-Total samples setelah: 1163
-Data yang ditambahkan: 827
-✅ Data ADASYN disimpan ke &#39;data_ecoli_adasyn.csv&#39; - 1163 rows
+<span class="ne">NameError</span>: name &#39;y&#39; is not defined
 </pre></div>
 </div>
 </div>
@@ -917,17 +877,17 @@ Data yang ditambahkan: 827
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/724e252f41b3c6f403ac61fc450ab04df6ddf2da0e67c57cb6e153e79683405d.png" src="_images/724e252f41b3c6f403ac61fc450ab04df6ddf2da0e67c57cb6e153e79683405d.png" />
+<img alt="_images/f7ca4d32bbcf5461e4f6f236958437745d2248f63baf5fa4a7f4644e601c9cab.png" src="_images/f7ca4d32bbcf5461e4f6f236958437745d2248f63baf5fa4a7f4644e601c9cab.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== SUMMARY ADASYN ===
 Peningkatan per kelas:
   cp: 0 samples (143 → 143)
-  im: +76 samples (77 → 153)
+  im: +77 samples (77 → 154)
   imL: +140 samples (2 → 142)
   imS: +140 samples (2 → 142)
-  imU: +112 samples (35 → 147)
-  om: +126 samples (20 → 146)
+  imU: +111 samples (35 → 146)
+  om: +124 samples (20 → 144)
   omL: +139 samples (5 → 144)
-  pp: +94 samples (52 → 146)
+  pp: +91 samples (52 → 143)
 </pre></div>
 </div>
 </div>
@@ -959,7 +919,7 @@ Peningkatan per kelas:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a02134c978da578a7bf08449e9afa67d70504b3a0126f5925d947076710c7323.png" src="_images/a02134c978da578a7bf08449e9afa67d70504b3a0126f5925d947076710c7323.png" />
+<img alt="_images/a489dbf7acd7e59ace66a08fc96a9dc20fcf9e27953e85c29412a70cbae0a2d2.png" src="_images/a489dbf7acd7e59ace66a08fc96a9dc20fcf9e27953e85c29412a70cbae0a2d2.png" />
 </div>
 </div>
 </section>
@@ -1055,7 +1015,7 @@ Data yang ditambahkan: 808
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/631a3c8740fc5eb7b37c92d7dea82119c5759173e71d99d2770c239c88dcc9a3.png" src="_images/631a3c8740fc5eb7b37c92d7dea82119c5759173e71d99d2770c239c88dcc9a3.png" />
+<img alt="_images/859696e7d86194e1b9f32d69c07e8d5a1f6822a2f8f3919357f93c3895f0f12d.png" src="_images/859696e7d86194e1b9f32d69c07e8d5a1f6822a2f8f3919357f93c3895f0f12d.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== SUMMARY SMOTE ===
 Peningkatan per kelas:
   cp: 0 samples (143 → 143)
@@ -1094,7 +1054,7 @@ Peningkatan per kelas:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/9c49ebb486ab64cc05480eda6153ed8be0cf577def40c5501481574cc2927bc1.png" src="_images/9c49ebb486ab64cc05480eda6153ed8be0cf577def40c5501481574cc2927bc1.png" />
+<img alt="_images/3a5095a087a010c29f1980124a7d887b3d63a0ba35c05d7b00543db897709053.png" src="_images/3a5095a087a010c29f1980124a7d887b3d63a0ba35c05d7b00543db897709053.png" />
 </div>
 </div>
 </section>
@@ -1163,10 +1123,10 @@ Peningkatan per kelas:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/c705eefe97f239bad283046270f778152b08948fd4ccc00ce2f06e9ad99cb47e.png" src="_images/c705eefe97f239bad283046270f778152b08948fd4ccc00ce2f06e9ad99cb47e.png" />
+<img alt="_images/efa3f2c0e6f79b1fcda85ce2b50e4a4ffc5692a884dc51f2660f9514d5fc7c18.png" src="_images/efa3f2c0e6f79b1fcda85ce2b50e4a4ffc5692a884dc51f2660f9514d5fc7c18.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== PERBANDINGAN KETIGA METODE ===
 Original  - Total: 336
-ADASYN    - Total: 1163, Penambahan: +827
+ADASYN    - Total: 1158, Penambahan: +822
 SMOTE     - Total: 1144, Penambahan: +808
 </pre></div>
 </div>
@@ -1206,12 +1166,12 @@ SMOTE     - Total: 1144, Penambahan: +808
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="PreprocessingData.html"
+       href="ModeellingNO2Medan.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Preprocessing Data</p>
+        <p class="prev-next-title">KNN Regression Data (NO₂ Semarang)</p>
       </div>
     </a>
     <a class="right-next"

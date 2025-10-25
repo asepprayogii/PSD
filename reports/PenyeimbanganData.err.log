@@ -1,0 +1,76 @@
+Traceback (most recent call last):
+  File "/home/codespace/.local/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 154, in wrapped
+    asyncio.get_running_loop()
+RuntimeError: no running event loop
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/codespace/.local/lib/python3.12/site-packages/nbclient/client.py", line 1319, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 158, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/asyncio/base_events.py", line 684, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/home/codespace/.local/lib/python3.12/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/codespace/.local/lib/python3.12/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+print("Distribusi kelas sebelum ADASYN:")
+print(f"{sorted(Counter(y).items())}")
+
+nt = X
+ns = y
+
+temp = sorted(class_counts)
+print(f"Sorted counts untuk iterasi: {temp}")
+
+for i in range(0, 7):
+    n = max(1, temp[i] - 1)
+
+    print(f"\nIterasi {i+1}: menggunakan k_neighbors={n}")
+
+    try:
+        nt, ns = ADASYN(n_neighbors=n, sampling_strategy='minority').fit_resample(nt, ns)
+        print(f"Hasil iterasi {i+1}: {sorted(Counter(ns).items())}")
+    except Exception as e:
+        print(f"Error pada iterasi {i+1}: {e}")
+        break
+
+print(f"\nDistribusi kelas setelah ADASYN:")
+print(f"{sorted(Counter(ns).items())}")
+
+print(f"\nTotal samples sebelum: {len(y)}")
+print(f"Total samples setelah: {len(ns)}")
+print(f"Data yang ditambahkan: {len(ns) - len(y)}")
+
+# Convert ADASYN ke CSV
+df_adasyn = pd.DataFrame(nt, columns=['mcg', 'gvh', 'lip', 'chg', 'aac', 'alm1', 'alm2'])
+df_adasyn['class'] = ns
+df_adasyn.to_csv('data_ecoli_adasyn.csv', index=False)
+print(f"✅ Data ADASYN disimpan ke 'data_ecoli_adasyn.csv' - {len(df_adasyn)} rows")
+------------------
+
+----- stdout -----
+Distribusi kelas sebelum ADASYN:
+------------------
+
+[31m---------------------------------------------------------------------------[39m
+[31mNameError[39m                                 Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[6][39m[32m, line 2[39m
+[32m      1[39m [38;5;28mprint[39m([33m"[39m[33mDistribusi kelas sebelum ADASYN:[39m[33m"[39m)
+[32m----> [39m[32m2[39m [38;5;28mprint[39m([33mf[39m[33m"[39m[38;5;132;01m{[39;00m[38;5;28msorted[39m(Counter([43my[49m).items())[38;5;132;01m}[39;00m[33m"[39m)
+[32m      4[39m nt = X
+[32m      5[39m ns = y
+
+[31mNameError[39m: name 'y' is not defined
+
