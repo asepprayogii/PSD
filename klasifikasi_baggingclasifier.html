@@ -173,7 +173,8 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="BusinessUnderstanding.html">Business Understanding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="BusinessUnderstanding_overview.html">Business Understanding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="BusinessUnderstanding.html">Business Understanding (detail)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="BusinessUnderstandingNO2Medan.html">Business Understanding</a></li>
 
 
@@ -186,24 +187,49 @@
 
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="DataUnderstanding.html">Data Understanding &amp; Explorasi Data</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="DataUnderstanding_overview.html">Data Understanding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="DataUnderstanding.html">Data Understanding &amp; Explorasi Data</a></li>
 
 
 
 
 
-<li class="toctree-l1 has-children"><a class="reference internal" href="PreprocessingData.html">Preprocessing Data</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="DataUnderstandingNO2Medan.html">Data Understanding</a></li>
+
+
+
+
+
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="PreprocessingData_overview.html">Preprocessing Data</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="PreprocessingData.html">Preprocessing (detail)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="PreprocessingNO2Medan.html">Preprocessing (NO₂ Medan)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="PreprocessingDataEcoliKNIME.html"><strong>Preprocessing Data Ecoli Menggunakan KNIME Analytics Platform</strong></a></li>
 
 
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="ModeellingNO2Medan.html">KNN Regression Data (NO₂ Semarang)</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="Modeelling_overview.html">Modelling</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ModeellingNO2Medan.html">KNN Regression Data (NO₂ Semarang)</a></li>
 
 
 
 
+<li class="toctree-l2"><a class="reference internal" href="PenyeimbanganData.html">Penyeimbangan Data Ecoli</a></li>
+
+
+
+<li class="toctree-l2 current active"><a class="current reference internal" href="#"><strong>Klasifikasi Dan BaggingClassifier Pada Dataset Ecoli</strong></a></li>
+
+
+
+
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -449,7 +475,7 @@ document.write(`
 <h2>1.1. Modeling Klasifikasi menggunakan Naive bayes pada data ecoli sebelum di oversampling<a class="headerlink" href="#modeling-klasifikasi-menggunakan-naive-bayes-pada-data-ecoli-sebelum-di-oversampling" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
@@ -548,8 +574,8 @@ Classification Report:
 weighted avg       0.81      0.79      0.76        68
 </pre></div>
 </div>
-<img alt="_images/bf31adcb09c3060b09730efc251d7880e8f4861082a63ed7d32785d5911f0874.png" src="_images/bf31adcb09c3060b09730efc251d7880e8f4861082a63ed7d32785d5911f0874.png" />
-<img alt="_images/63e6d6fe7f149a67c7b8e31aeff7d4d722f4b01559df51cdfc37d5c277b83884.png" src="_images/63e6d6fe7f149a67c7b8e31aeff7d4d722f4b01559df51cdfc37d5c277b83884.png" />
+<img alt="_images/998153f3796bfce3c99d9b5329a2a5cb79a7b10aeb20bc66f9c5e2de4b65125a.png" src="_images/998153f3796bfce3c99d9b5329a2a5cb79a7b10aeb20bc66f9c5e2de4b65125a.png" />
+<img alt="_images/c5c44df69115757d31ee3222c92bd66eac6a8ffaab55c778df70d432dea2e5c8.png" src="_images/c5c44df69115757d31ee3222c92bd66eac6a8ffaab55c778df70d432dea2e5c8.png" />
 </div>
 </div>
 </section>
@@ -557,7 +583,7 @@ weighted avg       0.81      0.79      0.76        68
 <h2>1.2. Modeling Klasifikasi menggunakan Naive bayes pada data Ecoli setelah di Oversampling menggunakan ADASYN<a class="headerlink" href="#modeling-klasifikasi-menggunakan-naive-bayes-pada-data-ecoli-setelah-di-oversampling-menggunakan-adasyn" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.naive_bayes</span><span class="w"> </span><span class="kn">import</span> <span class="n">GaussianNB</span>
@@ -635,26 +661,26 @@ weighted avg       0.81      0.79      0.76        68
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>accuracy_score : 0.8362068965517241
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>accuracy_score : 0.8454935622317596
 akurasi lengkap:
                precision    recall  f1-score   support
 
-          cp       1.00      0.97      0.98        30
-          im       0.86      0.43      0.57        28
-         imL       1.00      0.59      0.75        32
-         imS       0.97      1.00      0.99        33
-         imU       0.71      0.83      0.77        30
-          om       0.97      0.93      0.95        30
-         omL       0.61      1.00      0.76        22
-          pp       0.72      0.96      0.83        27
+          cp       0.97      1.00      0.98        29
+          im       0.94      0.54      0.68        28
+         imL       1.00      0.71      0.83        34
+         imS       0.86      1.00      0.93        31
+         imU       0.72      0.72      0.72        29
+          om       0.97      0.89      0.93        36
+         omL       0.69      1.00      0.81        24
+          pp       0.70      0.95      0.81        22
 
-    accuracy                           0.84       232
-   macro avg       0.86      0.84      0.82       232
-weighted avg       0.87      0.84      0.83       232
+    accuracy                           0.85       233
+   macro avg       0.86      0.85      0.84       233
+weighted avg       0.87      0.85      0.84       233
 </pre></div>
 </div>
-<img alt="_images/dbb7118bdcb49036c63e57c2ac462ceff7eeea2e1f01720c0ce34d8d1ef51124.png" src="_images/dbb7118bdcb49036c63e57c2ac462ceff7eeea2e1f01720c0ce34d8d1ef51124.png" />
-<img alt="_images/1a213d25f03f586c7c048768b917205c63463949fd3daf7155dc1063c558a2bc.png" src="_images/1a213d25f03f586c7c048768b917205c63463949fd3daf7155dc1063c558a2bc.png" />
+<img alt="_images/796b7016169a582c6aeaf908c61823c3fbb60bb466c1c9f3d515d81c3ff27fc8.png" src="_images/796b7016169a582c6aeaf908c61823c3fbb60bb466c1c9f3d515d81c3ff27fc8.png" />
+<img alt="_images/ba22a863f657bfebed5019fc9955f6ab5f9ebdc78e7ac5add1c565f58210f432.png" src="_images/ba22a863f657bfebed5019fc9955f6ab5f9ebdc78e7ac5add1c565f58210f432.png" />
 </div>
 </div>
 </section>
@@ -662,7 +688,7 @@ weighted avg       0.87      0.84      0.83       232
 <h2>1.3. Modeling Klasifikasi menggunakan Naive bayes pada data ecoli setelah di oversampling menggunakan SMOTE<a class="headerlink" href="#modeling-klasifikasi-menggunakan-naive-bayes-pada-data-ecoli-setelah-di-oversampling-menggunakan-smote" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
@@ -761,8 +787,8 @@ Classification Report (SMOTE):
 weighted avg       0.86      0.80      0.79       229
 </pre></div>
 </div>
-<img alt="_images/df51d89c831499b9e02f2c4b0c010bea002b4d19cadcc04676f6a9f6232677ce.png" src="_images/df51d89c831499b9e02f2c4b0c010bea002b4d19cadcc04676f6a9f6232677ce.png" />
-<img alt="_images/27145ad48d00210748c205734afae1c45942ad39623857bd9c3090e90bbb37f4.png" src="_images/27145ad48d00210748c205734afae1c45942ad39623857bd9c3090e90bbb37f4.png" />
+<img alt="_images/8c54f89bb590fa8caedf00fbe6b6b5ab0ae956d9a7d0143023f82865ba8cd0e0.png" src="_images/8c54f89bb590fa8caedf00fbe6b6b5ab0ae956d9a7d0143023f82865ba8cd0e0.png" />
+<img alt="_images/14964d86d3564ccbb340d36ba68fa5e468fdb961740b0a99661f5ce86ff83af7.png" src="_images/14964d86d3564ccbb340d36ba68fa5e468fdb961740b0a99661f5ce86ff83af7.png" />
 </div>
 </div>
 </section>
@@ -770,7 +796,7 @@ weighted avg       0.86      0.80      0.79       229
 <h2>1.4. Perbandingan akurasi antara data sebelum di oversampling dan sesudah<a class="headerlink" href="#perbandingan-akurasi-antara-data-sebelum-di-oversampling-dan-sesudah" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># === Perbandingan Akurasi Data Asli, SMOTE, dan ADASYN ===</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># === Perbandingan Akurasi Data Asli, SMOTE, dan ADASYN ===</span>
 
 <span class="c1"># Akurasi data sebelum oversampling</span>
 <span class="n">akurasi</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">prediksi</span><span class="p">)</span>
@@ -835,8 +861,8 @@ weighted avg       0.86      0.80      0.79       229
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/8bfa0751ce07cfdeef1116353975e729a908893834a747789ede1c7ca802c6a4.png" src="_images/8bfa0751ce07cfdeef1116353975e729a908893834a747789ede1c7ca802c6a4.png" />
-<img alt="_images/d99d607da76cedfd61782a545248ab46c891fc58b56510aca5e34b0385d73ddd.png" src="_images/d99d607da76cedfd61782a545248ab46c891fc58b56510aca5e34b0385d73ddd.png" />
+<img alt="_images/21b5ecb26321d1233e6a56c979e71392640e97c12444551b8ebaeba4a139a65c.png" src="_images/21b5ecb26321d1233e6a56c979e71392640e97c12444551b8ebaeba4a139a65c.png" />
+<img alt="_images/f3d6d2b0a8c8427ae981b0ee458bd9f4333722c597e36949c2665327b35c8ee8.png" src="_images/f3d6d2b0a8c8427ae981b0ee458bd9f4333722c597e36949c2665327b35c8ee8.png" />
 </div>
 </div>
 <p>Hasil visualisasi perbandingan akurasi algoritma Naive Bayes menunjukkan bahwa pada data asli tingkat akurasi hanya sebesar 79,4%. Setelah dilakukan oversampling dengan metode SMOTE, akurasi mengalami peningkatan hingga 80,3%. Lebih lanjut, penerapan teknik ADASYN menghasilkan akurasi yang lebih tinggi, yaitu 83,6%. Temuan ini mengindikasikan bahwa strategi oversampling, terutama ADASYN, mampu memberikan kinerja yang lebih optimal dibandingkan data tanpa oversampling. Dengan demikian, penggunaan metode ini efektif dalam mengatasi permasalahan ketidakseimbangan kelas pada dataset.</p>
@@ -848,7 +874,7 @@ weighted avg       0.86      0.80      0.79       229
 <h2>2.1. Modeling Klasifikasi menggunakan Random Forest pada data ecoli sebelum di oversampling<a class="headerlink" href="#modeling-klasifikasi-menggunakan-random-forest-pada-data-ecoli-sebelum-di-oversampling" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
@@ -950,8 +976,8 @@ Classification Report:
 weighted avg       0.90      0.87      0.87        68
 </pre></div>
 </div>
-<img alt="_images/1209a3ad7e74b8f3eb2581d7f73d939fe49008346e7ae3b248f5202a2646fa5f.png" src="_images/1209a3ad7e74b8f3eb2581d7f73d939fe49008346e7ae3b248f5202a2646fa5f.png" />
-<img alt="_images/fc89587942ddc456670f153ff6120275c23c5fe89b70d2765bdc5a9310d483dd.png" src="_images/fc89587942ddc456670f153ff6120275c23c5fe89b70d2765bdc5a9310d483dd.png" />
+<img alt="_images/e5a7563388afc5161d872c003e11b6eb470a98dfe7ce1f53e4866948815e937b.png" src="_images/e5a7563388afc5161d872c003e11b6eb470a98dfe7ce1f53e4866948815e937b.png" />
+<img alt="_images/62bd3f86d62732e61364d3fe305c92cfeefd0cae711b87c56776e1c8111fa14b.png" src="_images/62bd3f86d62732e61364d3fe305c92cfeefd0cae711b87c56776e1c8111fa14b.png" />
 </div>
 </div>
 </section>
@@ -959,7 +985,7 @@ weighted avg       0.90      0.87      0.87        68
 <h2>2.2. Modeling Klasifikasi menggunakan Random Forest pada data Ecoli setelah di Oversampling menggunakan ADASYN<a class="headerlink" href="#modeling-klasifikasi-menggunakan-random-forest-pada-data-ecoli-setelah-di-oversampling-menggunakan-adasyn" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
@@ -1044,27 +1070,27 @@ weighted avg       0.90      0.87      0.87        68
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kolom dataset: [&#39;mcg&#39;, &#39;gvh&#39;, &#39;lip&#39;, &#39;chg&#39;, &#39;aac&#39;, &#39;alm1&#39;, &#39;alm2&#39;, &#39;class&#39;]
-Akurasi: 0.9353
+Akurasi: 0.9528
 
 Classification Report:
                precision    recall  f1-score   support
 
-          cp       0.91      1.00      0.95        29
-          im       0.86      0.77      0.81        31
+          cp       0.97      1.00      0.98        29
+          im       0.84      0.84      0.84        31
          imL       1.00      1.00      1.00        28
          imS       1.00      1.00      1.00        28
-         imU       0.77      0.83      0.80        29
+         imU       0.83      0.83      0.83        30
           om       1.00      1.00      1.00        29
          omL       1.00      1.00      1.00        29
-          pp       0.96      0.90      0.93        29
+          pp       1.00      0.97      0.98        29
 
-    accuracy                           0.94       232
-   macro avg       0.94      0.94      0.94       232
-weighted avg       0.94      0.94      0.94       232
+    accuracy                           0.95       233
+   macro avg       0.95      0.95      0.95       233
+weighted avg       0.95      0.95      0.95       233
 </pre></div>
 </div>
-<img alt="_images/a532ee7b5546e72262b7ce1fcf6f563c23031ebf6b700be3566a62fa09a57d8c.png" src="_images/a532ee7b5546e72262b7ce1fcf6f563c23031ebf6b700be3566a62fa09a57d8c.png" />
-<img alt="_images/61ace361474577e09720f0b42a0c56b36f844749a90bbe557e97ee7298edf149.png" src="_images/61ace361474577e09720f0b42a0c56b36f844749a90bbe557e97ee7298edf149.png" />
+<img alt="_images/91234fc6af6f817e0dd9f280e5a1cc33581e871c97c057937c3aac56ede17c05.png" src="_images/91234fc6af6f817e0dd9f280e5a1cc33581e871c97c057937c3aac56ede17c05.png" />
+<img alt="_images/cee4df3c0925651b14a86a93a71cf2a05d2a6818641b62f893acd569e6e1aca1.png" src="_images/cee4df3c0925651b14a86a93a71cf2a05d2a6818641b62f893acd569e6e1aca1.png" />
 </div>
 </div>
 </section>
@@ -1072,7 +1098,7 @@ weighted avg       0.94      0.94      0.94       232
 <h2>2.3. Modeling Klasifikasi menggunakan Random Forest pada data Ecoli setelah di Oversampling menggunakan SMOTE<a class="headerlink" href="#modeling-klasifikasi-menggunakan-random-forest-pada-data-ecoli-setelah-di-oversampling-menggunakan-smote" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
@@ -1158,8 +1184,9 @@ weighted avg       0.94      0.94      0.94       232
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kolom dataset: [&#39;mcg&#39;, &#39;gvh&#39;, &#39;lip&#39;, &#39;chg&#39;, &#39;aac&#39;, &#39;alm1&#39;, &#39;alm2&#39;, &#39;class&#39;]
 Akurasi: 0.9607
-
-Classification Report:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Classification Report:
                precision    recall  f1-score   support
 
           cp       0.88      1.00      0.93        28
@@ -1176,8 +1203,8 @@ Classification Report:
 weighted avg       0.96      0.96      0.96       229
 </pre></div>
 </div>
-<img alt="_images/f2d6fd842486fdf5060cee893203daf25d214d8fb8ea5b04ae24737af9b7fa17.png" src="_images/f2d6fd842486fdf5060cee893203daf25d214d8fb8ea5b04ae24737af9b7fa17.png" />
-<img alt="_images/aa8d1d51010933ca860a33b448f4cd8910aad9c42c167939a7869e9951864cf6.png" src="_images/aa8d1d51010933ca860a33b448f4cd8910aad9c42c167939a7869e9951864cf6.png" />
+<img alt="_images/c2d26e3ef7f43f07711ce785449fe16929400363e3e884c43090dfb7fb52a90d.png" src="_images/c2d26e3ef7f43f07711ce785449fe16929400363e3e884c43090dfb7fb52a90d.png" />
+<img alt="_images/1099100ab9854824501f80ad3bbb0b85644e7387e85dc43bfd83b5210c8bd3b6.png" src="_images/1099100ab9854824501f80ad3bbb0b85644e7387e85dc43bfd83b5210c8bd3b6.png" />
 </div>
 </div>
 </section>
@@ -1185,7 +1212,7 @@ weighted avg       0.96      0.96      0.96       229
 <h2>2.4. Perbandingan akurasi antara data sebelum di oversampling dan sesudah<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
@@ -1290,8 +1317,8 @@ weighted avg       0.96      0.96      0.96       229
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/cd31444ea62f356727f871e7d905c6558f82ddbb8918da8c02f300626486cbbd.png" src="_images/cd31444ea62f356727f871e7d905c6558f82ddbb8918da8c02f300626486cbbd.png" />
-<img alt="_images/f3b4d569bdad10c4bfe11f272bfd4fdf2ff850fa4e29b6887f04a08cb92c2413.png" src="_images/f3b4d569bdad10c4bfe11f272bfd4fdf2ff850fa4e29b6887f04a08cb92c2413.png" />
+<img alt="_images/31d9f05b3420b18d12a316ae8aaad038018a54249e15850866fc86f0119b00ea.png" src="_images/31d9f05b3420b18d12a316ae8aaad038018a54249e15850866fc86f0119b00ea.png" />
+<img alt="_images/892e5764ef6405d284d6e6ed7bc63c4fd27458f1cd414a211e2432e4ea12beda.png" src="_images/892e5764ef6405d284d6e6ed7bc63c4fd27458f1cd414a211e2432e4ea12beda.png" />
 </div>
 </div>
 <p>Berdasarkan grafik perbandingan akurasi klasifikasi Random Forest, terlihat bahwa pada data asli akurasi hanya mencapai 86,7%, namun setelah dilakukan oversampling dengan SMOTE akurasi meningkat signifikan menjadi 96,0%, dan dengan ADASYN akurasi meningkat lebih tinggi lagi hingga 93,5%. Hal ini menunjukkan bahwa penggunaan teknik oversampling, khususnya SMOTE, mampu memberikan hasil yang lebih baik dibandingkan data asli, sehingga model dapat mengatasi masalah ketidakseimbangan kelas dengan lebih efektif.</p>
@@ -1303,7 +1330,7 @@ weighted avg       0.96      0.96      0.96       229
 <h2>3.1. Bagging Classifier pada data yang belum di lakukan oversampling<a class="headerlink" href="#bagging-classifier-pada-data-yang-belum-di-lakukan-oversampling" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
@@ -1384,101 +1411,101 @@ weighted avg       0.96      0.96      0.96       229
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
-/usr/local/lib/python3.12/dist-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
+/home/codespace/.local/lib/python3.12/site-packages/sklearn/naive_bayes.py:512: RuntimeWarning: divide by zero encountered in log
   jointi = np.log(self.class_prior_[i])
 </pre></div>
 </div>
@@ -1499,8 +1526,8 @@ Classification Report:
 weighted avg       0.74      0.75      0.72        68
 </pre></div>
 </div>
-<img alt="_images/6875a6fa60eb8832155e7f73f79a895c678ace69ee5762bdc755b0dbf85b4ab0.png" src="_images/6875a6fa60eb8832155e7f73f79a895c678ace69ee5762bdc755b0dbf85b4ab0.png" />
-<img alt="_images/f31878b2bf4bff21a4f6b3457631130350bee9bc2e8cee8b4c3c2acbc2625a36.png" src="_images/f31878b2bf4bff21a4f6b3457631130350bee9bc2e8cee8b4c3c2acbc2625a36.png" />
+<img alt="_images/6edcfa17bbefb5d9134090898a10e9dc6dfa1a0e1e539d38dc5ce0cb1da65d51.png" src="_images/6edcfa17bbefb5d9134090898a10e9dc6dfa1a0e1e539d38dc5ce0cb1da65d51.png" />
+<img alt="_images/0575896a0cdf33e2db5021b16927f99c051059d180237553973a669959b5aa1e.png" src="_images/0575896a0cdf33e2db5021b16927f99c051059d180237553973a669959b5aa1e.png" />
 </div>
 </div>
 </section>
@@ -1508,7 +1535,7 @@ weighted avg       0.74      0.75      0.72        68
 <h2>3.2. BaggingClassifier pada data yang sudah di lakukan oversampling dengan ADASYN<a class="headerlink" href="#baggingclassifier-pada-data-yang-sudah-di-lakukan-oversampling-dengan-adasyn" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data_adasyn</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data_ecoli_adasyn.csv&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_adasyn</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data_ecoli_adasyn.csv&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">data_adasyn</span><span class="p">[</span><span class="s2">&quot;class&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
 <span class="n">x_adasyn</span> <span class="o">=</span> <span class="n">data_adasyn</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;class&quot;</span><span class="p">])</span>
 <span class="n">y_adasyn</span> <span class="o">=</span> <span class="n">data_adasyn</span><span class="p">[</span><span class="s2">&quot;class&quot;</span><span class="p">]</span>
@@ -1583,34 +1610,36 @@ weighted avg       0.74      0.75      0.72        68
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>class
 im     153
-imU    145
-om     144
+imU    147
+om     146
+pp     146
 omL    144
-pp     144
 cp     143
 imL    142
 imS    142
 Name: count, dtype: int64
-accuracy_score : 0.8577586206896551
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>accuracy_score : 0.8669527896995708
 Classification Report:
                precision    recall  f1-score   support
 
-          cp       1.00      0.97      0.98        30
-          im       0.88      0.50      0.64        28
-         imL       1.00      0.62      0.77        32
-         imS       1.00      1.00      1.00        33
-         imU       0.71      0.90      0.79        30
-          om       0.97      0.93      0.95        30
-         omL       0.63      1.00      0.77        22
-          pp       0.81      0.96      0.88        27
+          cp       0.97      1.00      0.98        29
+          im       0.94      0.54      0.68        28
+         imL       1.00      0.74      0.85        34
+         imS       0.89      1.00      0.94        31
+         imU       0.76      0.86      0.81        29
+          om       0.97      0.89      0.93        36
+         omL       0.71      1.00      0.83        24
+          pp       0.78      0.95      0.86        22
 
-    accuracy                           0.86       232
-   macro avg       0.87      0.86      0.85       232
-weighted avg       0.89      0.86      0.85       232
+    accuracy                           0.87       233
+   macro avg       0.88      0.87      0.86       233
+weighted avg       0.89      0.87      0.86       233
 </pre></div>
 </div>
-<img alt="_images/518b4a50541da1ea9e26e2f525882bc5d99de9a67a8a863120f8afb3f03889f7.png" src="_images/518b4a50541da1ea9e26e2f525882bc5d99de9a67a8a863120f8afb3f03889f7.png" />
-<img alt="_images/f88645ec4ea7dff90d1b311388cb602ec92ac41c467a65106f41750c5b4a0edf.png" src="_images/f88645ec4ea7dff90d1b311388cb602ec92ac41c467a65106f41750c5b4a0edf.png" />
+<img alt="_images/e40cf57db409cab561ae3d94f9cfaadf591bd4fad5a2f1e270954e095c5a4b35.png" src="_images/e40cf57db409cab561ae3d94f9cfaadf591bd4fad5a2f1e270954e095c5a4b35.png" />
+<img alt="_images/197647c2690ccf81825dcc053780581c1df5bff6b50b84ce9a3dc91d0beadf56.png" src="_images/197647c2690ccf81825dcc053780581c1df5bff6b50b84ce9a3dc91d0beadf56.png" />
 </div>
 </div>
 </section>
@@ -1618,7 +1647,7 @@ weighted avg       0.89      0.86      0.85       232
 <h2>3.3. BaggingClassifier pada data yang sudah di lakukan oversampling dengan SMOTE<a class="headerlink" href="#baggingclassifier-pada-data-yang-sudah-di-lakukan-oversampling-dengan-smote" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data_smote</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data_ecoli_smote.csv&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_smote</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data_ecoli_smote.csv&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">data_smote</span><span class="p">[</span><span class="s2">&quot;class&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
 <span class="n">x_smote</span> <span class="o">=</span> <span class="n">data_smote</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;class&quot;</span><span class="p">])</span>
 <span class="n">y_smote</span> <span class="o">=</span> <span class="n">data_smote</span><span class="p">[</span><span class="s2">&quot;class&quot;</span><span class="p">]</span>
@@ -1702,7 +1731,9 @@ om     143
 omL    143
 pp     143
 Name: count, dtype: int64
-Akurasi :  0.925764192139738
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Akurasi :  0.925764192139738
 Classification Report:
                precision    recall  f1-score   support
 
@@ -1720,8 +1751,8 @@ Classification Report:
 weighted avg       0.94      0.93      0.93       229
 </pre></div>
 </div>
-<img alt="_images/1c4ef6372de6bd6ac38fafbc0638db006bcf711f868b537a6c145032ea1eeef9.png" src="_images/1c4ef6372de6bd6ac38fafbc0638db006bcf711f868b537a6c145032ea1eeef9.png" />
-<img alt="_images/2e4559e83071d7c579ded4997ecc2659be6456428839ef8aee309de7c51c0df8.png" src="_images/2e4559e83071d7c579ded4997ecc2659be6456428839ef8aee309de7c51c0df8.png" />
+<img alt="_images/a7a8afdf08e186ff8de1bae83206fbc4d9196950a6e106fde7ea5fd7db820995.png" src="_images/a7a8afdf08e186ff8de1bae83206fbc4d9196950a6e106fde7ea5fd7db820995.png" />
+<img alt="_images/02eb38d7a59074e1da17e15e1011407e7a3d48560a93b2c54d9bdf333057d099.png" src="_images/02eb38d7a59074e1da17e15e1011407e7a3d48560a93b2c54d9bdf333057d099.png" />
 </div>
 </div>
 </section>
@@ -1729,7 +1760,7 @@ weighted avg       0.94      0.93      0.93       229
 <h2>3.4. Perbandingan Akurasi Bagging Classifire dengan model Naive Bayes<a class="headerlink" href="#perbandingan-akurasi-bagging-classifire-dengan-model-naive-bayes" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">label</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Data asli&#39;</span><span class="p">,</span> <span class="s1">&#39;SMOTE&#39;</span><span class="p">,</span> <span class="s1">&#39;ADASYN&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">label</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Data asli&#39;</span><span class="p">,</span> <span class="s1">&#39;SMOTE&#39;</span><span class="p">,</span> <span class="s1">&#39;ADASYN&#39;</span><span class="p">]</span>
 <span class="n">temp</span> <span class="o">=</span> <span class="p">[</span><span class="n">akurasi</span><span class="p">,</span> <span class="n">akurasi_smote</span><span class="p">,</span> <span class="n">akurasi_adasyn</span><span class="p">]</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
@@ -1784,8 +1815,8 @@ weighted avg       0.94      0.93      0.93       229
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/9bf400c73e14b6ee6858fb833f0c6f8f60edb3f7f25866743110d356371a262a.png" src="_images/9bf400c73e14b6ee6858fb833f0c6f8f60edb3f7f25866743110d356371a262a.png" />
-<img alt="_images/2a8a4736e75ca6a014658006f7ef28cddc7d02856c27aa2e8113630947b00800.png" src="_images/2a8a4736e75ca6a014658006f7ef28cddc7d02856c27aa2e8113630947b00800.png" />
+<img alt="_images/1f53aec3800941576b36e1eddec8b4579407c72d3c2ca0827f0b48bcebf28cac.png" src="_images/1f53aec3800941576b36e1eddec8b4579407c72d3c2ca0827f0b48bcebf28cac.png" />
+<img alt="_images/b3e13e8cfde689dcd310e0bbd0e683b3e91deebbdb35f868df8cf31f5a601d04.png" src="_images/b3e13e8cfde689dcd310e0bbd0e683b3e91deebbdb35f868df8cf31f5a601d04.png" />
 </div>
 </div>
 <p>Berdasarkan hasil grafik perbandingan akurasi Bagging Classifier dengan Naive Bayes, terlihat bahwa akurasi pada data asli masih relatif rendah, yakni sekitar 75%. Namun, setelah dilakukan oversampling dengan SMOTE, akurasi meningkat menjadi 92,5%, dan dengan ADASYN akurasi kembali meningkat hingga 85,7%. Temuan ini menunjukkan bahwa penerapan teknik oversampling, terutama SMOTE, mampu meningkatkan kinerja model secara signifikan dibandingkan penggunaan data asli yang tidak seimbang pada Bagging Classifier dengan Naive Bayes.</p>
@@ -1797,7 +1828,7 @@ weighted avg       0.94      0.93      0.93       229
 <h2>4.1. Bagging Classifier pada data yang belum di lakukan oversampling<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
@@ -1927,7 +1958,7 @@ Confusion Matrix:
  [ 1  1  0  0  0  0  9]]
 </pre></div>
 </div>
-<img alt="_images/80aa81b8dce61ab71d28c0ffd768c04ecc4bb62289798408d8b369f9ac47ffd5.png" src="_images/80aa81b8dce61ab71d28c0ffd768c04ecc4bb62289798408d8b369f9ac47ffd5.png" />
+<img alt="_images/236eb55bf0bac250308bc5d9f4feb9315c1fc86e70b35acd1f175ea8145ee83c.png" src="_images/236eb55bf0bac250308bc5d9f4feb9315c1fc86e70b35acd1f175ea8145ee83c.png" />
 </div>
 </div>
 </section>
@@ -1935,7 +1966,7 @@ Confusion Matrix:
 <h2>4.2. Bagging Classifier pada data yang sudah di lakukan oversampling menggunakan ADASYN<a class="headerlink" href="#bagging-classifier-pada-data-yang-sudah-di-lakukan-oversampling-menggunakan-adasyn" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
@@ -2037,37 +2068,37 @@ Confusion Matrix:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>======================================================================
 HASIL BAGGING CLASSIFIER (Random Forest) - DATA ADASYN
 ======================================================================
-Akurasi: 0.896551724137931
+Akurasi: 0.8626609442060086
 
 Classification Report:
                precision    recall  f1-score   support
 
-           1       0.88      0.93      0.90        30
-           2       0.67      0.64      0.65        28
-           3       1.00      1.00      1.00        31
-           4       1.00      1.00      1.00        32
-           5       0.76      0.69      0.72        32
-           6       1.00      1.00      1.00        30
-           7       1.00      1.00      1.00        22
-           8       0.86      0.93      0.89        27
+           1       0.87      0.93      0.90        29
+           2       0.65      0.57      0.61        30
+           3       1.00      1.00      1.00        33
+           4       0.97      1.00      0.98        30
+           5       0.68      0.74      0.71        31
+           6       0.97      0.88      0.92        32
+           7       1.00      1.00      1.00        24
+           8       0.76      0.79      0.78        24
 
-    accuracy                           0.90       232
-   macro avg       0.90      0.90      0.90       232
-weighted avg       0.89      0.90      0.89       232
+    accuracy                           0.86       233
+   macro avg       0.86      0.86      0.86       233
+weighted avg       0.86      0.86      0.86       233
 
 
 Confusion Matrix:
- [[28  0  0  0  0  0  0  2]
- [ 2 18  0  0  7  0  0  1]
- [ 0  0 31  0  0  0  0  0]
- [ 0  0  0 32  0  0  0  0]
- [ 0  9  0  0 22  0  0  1]
- [ 0  0  0  0  0 30  0  0]
- [ 0  0  0  0  0  0 22  0]
- [ 2  0  0  0  0  0  0 25]]
+ [[27  0  0  0  0  0  0  2]
+ [ 1 17  0  0 11  1  0  0]
+ [ 0  0 33  0  0  0  0  0]
+ [ 0  0  0 30  0  0  0  0]
+ [ 0  8  0  0 23  0  0  0]
+ [ 0  0  0  0  0 28  0  4]
+ [ 0  0  0  0  0  0 24  0]
+ [ 3  1  0  1  0  0  0 19]]
 </pre></div>
 </div>
-<img alt="_images/fc074a0e463ae9ebf4b23424ef8e72474ba5f03dace7136a1623457c2089d0d2.png" src="_images/fc074a0e463ae9ebf4b23424ef8e72474ba5f03dace7136a1623457c2089d0d2.png" />
+<img alt="_images/83279dd777b33d742f640e50e9834b318738b5df1a7a3e98597672e5b93a4d3f.png" src="_images/83279dd777b33d742f640e50e9834b318738b5df1a7a3e98597672e5b93a4d3f.png" />
 </div>
 </div>
 </section>
@@ -2075,7 +2106,7 @@ Confusion Matrix:
 <h2>4.3. Bagging Classifier pada data yang sudah di lakukan oversampling menggunakan SMOTE<a class="headerlink" href="#bagging-classifier-pada-data-yang-sudah-di-lakukan-oversampling-menggunakan-smote" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
@@ -2207,7 +2238,7 @@ Confusion Matrix:
  [ 2  0  0  0  0  0  0 33]]
 </pre></div>
 </div>
-<img alt="_images/b7d687538427a72e9f98bc9e3b7dbfb335c1138b487b4b13133aecb7c3ea4f96.png" src="_images/b7d687538427a72e9f98bc9e3b7dbfb335c1138b487b4b13133aecb7c3ea4f96.png" />
+<img alt="_images/bb2ea22d14e89512c84dcfa9200dc92e6b74342da113132dd3ecebcecaa95e31.png" src="_images/bb2ea22d14e89512c84dcfa9200dc92e6b74342da113132dd3ecebcecaa95e31.png" />
 </div>
 </div>
 </section>
@@ -2215,7 +2246,7 @@ Confusion Matrix:
 <h2>4.4. Perbandingan Akurasi Bagging Classifire dengan model Random Forest<a class="headerlink" href="#perbandingan-akurasi-bagging-classifire-dengan-model-random-forest" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaggingClassifier</span><span class="p">,</span> <span class="n">RandomForestClassifier</span>
@@ -2347,8 +2378,8 @@ Confusion Matrix:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/8a2cc4b9e8c4fb70548802ba742f1967a954495e31e412a164edcd441fb06ac8.png" src="_images/8a2cc4b9e8c4fb70548802ba742f1967a954495e31e412a164edcd441fb06ac8.png" />
-<img alt="_images/8fbc78de3b10a3bb2a2bac2df61e87879f74c68d40820e01302122b01ebf3780.png" src="_images/8fbc78de3b10a3bb2a2bac2df61e87879f74c68d40820e01302122b01ebf3780.png" />
+<img alt="_images/23b695e9691cb46f47e58e06c5cff7f4fa209b79a44affc6875fcec3ded9355a.png" src="_images/23b695e9691cb46f47e58e06c5cff7f4fa209b79a44affc6875fcec3ded9355a.png" />
+<img alt="_images/f88b27fec845b06fe99b60043a8f3a34cc5ce508dea24ac012704069e651958e.png" src="_images/f88b27fec845b06fe99b60043a8f3a34cc5ce508dea24ac012704069e651958e.png" />
 </div>
 </div>
 <p>Berdasarkan grafik perbandingan akurasi Bagging Classifier dengan model Random Forest, dapat disimpulkan bahwa akurasi data asli masih lebih rendah yaitu sekitar 86,7%, sedangkan setelah dilakukan oversampling dengan SMOTE akurasi meningkat signifikan hingga 93,0%, dan dengan ADASYN akurasi juga meningkat menjadi 89,6%. Hal ini menunjukkan bahwa teknik oversampling, khususnya SMOTE, mampu memperbaiki performa model dibandingkan data asli yang tidak seimbang.</p>
