@@ -1,0 +1,710 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Business Understanding &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'BusinessUnderstandingNO2Medan';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Data Understanding &amp; Explorasi Data (Iris)" href="DataUnderstanding.html" />
+    <link rel="prev" title="Bussiness Understanding" href="BusinessUnderstanding.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.jpg" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/logo.jpg" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome — Asep Prayogi
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Business Understanding</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="BusinessUnderstanding.html">Business Understanding (Iris)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Business Understanding</a></li>
+
+
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Understanding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="DataUnderstanding.html">Data Understanding &amp; Explorasi Data (Iris)</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="ExplorasiDataNo2Medan.html">Explorasi Data (NO2 Medan)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DataUnderstandingNO2Medan.html">Data Understanding (NO2 Medan)</a></li>
+
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Preprocessing Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="PreprocessingData.html">Preprocessing (Iris)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PreprocessingNO2Medan.html">Preprocessing (NO2 Medan)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PreprocessingDataEcoliKNIME.html"><strong>Preprocessing Data Ecoli Menggunakan KNIME (Pra UTS)</strong></a></li>
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Modelling</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ModeellingNO2Medan.html">KNN Regression Data (NO₂ Medan)</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="PenyeimbanganDataEcoli.html">Penyeimbangan Data (Ecoli)</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="klasifikasi_baggingclasifier.html"><strong>Klasifikasi Dan BaggingClassifier(Ecoli)</strong></a></li>
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FBusinessUnderstandingNO2Medan.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/BusinessUnderstandingNO2Medan.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Business Understanding</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Business Understanding</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#studi-kasus-prediksi-kualitas-udara-no2-kota-medan-menggunakan-data-geojson-dan-model-k-nn-regression">Studi Kasus: Prediksi Kualitas Udara (NO₂) Kota Medan Menggunakan Data GeoJSON dan Model K-NN Regression</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#latar-belakang-masalah">1. Latar Belakang Masalah</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-bisnis">2. Tujuan Bisnis</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#permasalahan-bisnis">3. Permasalahan Bisnis</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sasaran-business-objective">4. Sasaran (Business Objective)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dampak-bisnis-business-value">5. Dampak Bisnis (Business Value)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lingkup-studi-scope">6. Lingkup Studi (Scope)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#rencana-teknis-analisis">7. Rencana Teknis Analisis</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#indikator-keberhasilan-success-criteria">8. Indikator Keberhasilan (Success Criteria)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ringkasan">9. Ringkasan</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="business-understanding">
+<h1>Business Understanding<a class="headerlink" href="#business-understanding" title="Link to this heading">#</a></h1>
+<section id="studi-kasus-prediksi-kualitas-udara-no2-kota-medan-menggunakan-data-geojson-dan-model-k-nn-regression">
+<h2>Studi Kasus: Prediksi Kualitas Udara (NO₂) Kota Medan Menggunakan Data GeoJSON dan Model K-NN Regression<a class="headerlink" href="#studi-kasus-prediksi-kualitas-udara-no2-kota-medan-menggunakan-data-geojson-dan-model-k-nn-regression" title="Link to this heading">#</a></h2>
+</section>
+</section>
+<section id="latar-belakang-masalah">
+<h1>1. Latar Belakang Masalah<a class="headerlink" href="#latar-belakang-masalah" title="Link to this heading">#</a></h1>
+<p>Kota Medan merupakan salah satu kota besar di Indonesia dengan tingkat aktivitas transportasi dan industri yang tinggi. Aktivitas tersebut menghasilkan emisi gas Nitrogen Dioksida (NO₂), salah satu indikator utama kualitas udara. Kadar NO₂ yang tinggi berdampak negatif terhadap kesehatan masyarakat dan lingkungan.</p>
+<p>Untuk mengantisipasi peningkatan polusi udara, diperlukan sistem prediksi yang mampu memperkirakan konsentrasi NO₂ pada hari berikutnya (H+1). Dengan adanya prediksi ini, pemerintah daerah dan masyarakat dapat melakukan tindakan pencegahan lebih dini seperti pembatasan kendaraan, peringatan kesehatan, dan pengendalian emisi industri.</p>
+</section>
+<section id="tujuan-bisnis">
+<h1>2. Tujuan Bisnis<a class="headerlink" href="#tujuan-bisnis" title="Link to this heading">#</a></h1>
+<p>Proyek ini bertujuan untuk:</p>
+<ol class="arabic simple">
+<li><p>Mengambil data spasial wilayah Kota Medan (GeoJSON) sebagai batas area pengambilan data.</p></li>
+<li><p>Mengumpulkan data konsentrasi NO₂ harian dari citra satelit Sentinel-5P melalui Copernicus Data Space Ecosystem (CDSE).</p></li>
+<li><p>Melakukan pemrosesan dan analisis data untuk membangun model prediksi kualitas udara (NO₂) menggunakan <strong>K-Nearest Neighbors Regression (K-NN)</strong>.</p></li>
+</ol>
+<p>Secara khusus, penelitian ini akan menghasilkan prediksi nilai konsentrasi NO₂ untuk hari berikutnya (H+1) berdasarkan data historis beberapa hari sebelumnya.</p>
+</section>
+<section id="permasalahan-bisnis">
+<h1>3. Permasalahan Bisnis<a class="headerlink" href="#permasalahan-bisnis" title="Link to this heading">#</a></h1>
+<ol class="arabic simple">
+<li><p>Bagaimana cara memanfaatkan data spasial (GeoJSON) dan data pengamatan satelit untuk membangun dataset NO₂ harian Kota Medan?</p></li>
+<li><p>Bagaimana cara menangani data yang memiliki nilai hilang (missing values) agar hasil prediksi lebih akurat?</p></li>
+<li><p>Berapa lag (jumlah hari sebelumnya) yang optimal untuk digunakan sebagai fitur dalam model K-NN Regression agar hasil prediksi paling akurat?</p></li>
+</ol>
+</section>
+<section id="sasaran-business-objective">
+<h1>4. Sasaran (Business Objective)<a class="headerlink" href="#sasaran-business-objective" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Menghasilkan model K-NN Regression yang mampu memprediksi konsentrasi NO₂ di Kota Medan untuk hari berikutnya (H+1).</p></li>
+<li><p>Menganalisis pengaruh jumlah lag (fitur historis) terhadap akurasi model.</p></li>
+<li><p>Menyediakan data hasil prediksi dan evaluasi performa model menggunakan metrik seperti RMSE dan R².</p></li>
+</ul>
+</section>
+<section id="dampak-bisnis-business-value">
+<h1>5. Dampak Bisnis (Business Value)<a class="headerlink" href="#dampak-bisnis-business-value" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Pemerintah dapat menggunakan hasil prediksi untuk memberikan peringatan dini kualitas udara.</p></li>
+<li><p>Masyarakat dapat merencanakan aktivitas harian berdasarkan kondisi udara yang diprediksi.</p></li>
+<li><p>Data dan model dapat digunakan untuk penelitian lanjutan di bidang pemantauan lingkungan dan perencanaan kebijakan berbasis data.</p></li>
+</ul>
+</section>
+<section id="lingkup-studi-scope">
+<h1>6. Lingkup Studi (Scope)<a class="headerlink" href="#lingkup-studi-scope" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p><strong>Wilayah penelitian:</strong> Kota Medan (berdasarkan file GeoJSON).</p></li>
+<li><p><strong>Variabel utama:</strong> Konsentrasi NO₂ (µmol/m² atau mol/m²).</p></li>
+<li><p><strong>Sumber data:</strong> Sentinel-5P (produk TROPOMI) diambil melalui OpenEO atau Copernicus Data Space Ecosystem.</p></li>
+<li><p><strong>Periode data:</strong> 1 bulan terakhir.</p></li>
+<li><p><strong>Target prediksi:</strong> Nilai NO₂ untuk hari berikutnya (H+1).</p></li>
+</ul>
+</section>
+<section id="rencana-teknis-analisis">
+<h1>7. Rencana Teknis Analisis<a class="headerlink" href="#rencana-teknis-analisis" title="Link to this heading">#</a></h1>
+<p>Langkah-langkah teknis yang dilakukan dalam penelitian ini adalah sebagai berikut:</p>
+<ol class="arabic simple">
+<li><p><strong>Mengumpulkan Data</strong></p>
+<ul class="simple">
+<li><p>Mengambil data NO₂ dari area Kota Medan berdasarkan GeoJSON.</p></li>
+<li><p>Menyimpan hasil pengambilan data ke dalam format <code class="docutils literal notranslate"><span class="pre">.csv</span></code>.</p></li>
+</ul>
+</li>
+<li><p><strong>Memproses Data</strong></p>
+<ul class="simple">
+<li><p>Melakukan pembersihan data dan penanganan <em>missing values</em> menggunakan metode <strong>interpolasi</strong> (misalnya linear interpolation).</p></li>
+<li><p>Memastikan tidak ada anomali atau nilai ekstrem yang dapat mengganggu model.</p></li>
+</ul>
+</li>
+<li><p><strong>Membentuk Data Supervised</strong></p>
+<ul class="simple">
+<li><p>Mengonversi data deret waktu (time series) menjadi data supervised learning dengan membuat fitur lag (misalnya NO₂ pada hari sebelumnya: t-1, t-2, dst).</p></li>
+<li><p>Lag ini digunakan sebagai fitur untuk memprediksi nilai NO₂ hari berikutnya (t+1).</p></li>
+</ul>
+</li>
+<li><p><strong>Normalisasi Data</strong></p>
+<ul class="simple">
+<li><p>Melakukan normalisasi data agar semua fitur berada pada skala yang sama.</p></li>
+<li><p>Menggunakan salah satu metode berikut:</p>
+<ul>
+<li><p><strong>Min-Max Scaling</strong></p></li>
+<li><p><strong>Z-Score Standardization (StandardScaler dari sklearn)</strong></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Membangun Model K-NN Regression</strong></p>
+<ul class="simple">
+<li><p>Melatih model <strong>K-Nearest Neighbors Regression</strong> menggunakan data hasil preprocessing.</p></li>
+<li><p>Melakukan eksperimen dengan beberapa konfigurasi lag (misalnya lag = 1, 3, 5, dst).</p></li>
+<li><p>Mengevaluasi performa model menggunakan metrik:</p>
+<ul>
+<li><p>Root Mean Square Error (RMSE)</p></li>
+<li><p>Coefficient of Determination (R²)</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="indikator-keberhasilan-success-criteria">
+<h1>8. Indikator Keberhasilan (Success Criteria)<a class="headerlink" href="#indikator-keberhasilan-success-criteria" title="Link to this heading">#</a></h1>
+<p><strong>Kuantitatif:</strong></p>
+<ul class="simple">
+<li><p>Model memiliki nilai <strong>RMSE sekecil mungkin</strong> dan <strong>R² mendekati 1</strong>.</p></li>
+</ul>
+<p><strong>Kualitatif:</strong></p>
+<ul class="simple">
+<li><p>Hasil prediksi NO₂ dapat divisualisasikan secara grafis (misalnya dengan matplotlib).</p></li>
+<li><p>Distribusi prediksi menunjukkan tren yang sesuai dengan pola data historis.</p></li>
+</ul>
+</section>
+<section id="ringkasan">
+<h1>9. Ringkasan<a class="headerlink" href="#ringkasan" title="Link to this heading">#</a></h1>
+<p>Penelitian ini berfokus pada prediksi kualitas udara di Kota Medan berdasarkan konsentrasi NO₂. Data diperoleh dari satelit Sentinel-5P dan diproses menjadi dataset siap pakai untuk model K-NN Regression. Dengan pendekatan ini, diharapkan dapat diperoleh model prediksi yang akurat dan dapat memberikan manfaat praktis dalam pengendalian kualitas udara di masa depan.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="BusinessUnderstanding.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Bussiness Understanding</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="DataUnderstanding.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Data Understanding &amp; Explorasi Data (Iris)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Business Understanding</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#studi-kasus-prediksi-kualitas-udara-no2-kota-medan-menggunakan-data-geojson-dan-model-k-nn-regression">Studi Kasus: Prediksi Kualitas Udara (NO₂) Kota Medan Menggunakan Data GeoJSON dan Model K-NN Regression</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#latar-belakang-masalah">1. Latar Belakang Masalah</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-bisnis">2. Tujuan Bisnis</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#permasalahan-bisnis">3. Permasalahan Bisnis</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sasaran-business-objective">4. Sasaran (Business Objective)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dampak-bisnis-business-value">5. Dampak Bisnis (Business Value)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lingkup-studi-scope">6. Lingkup Studi (Scope)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#rencana-teknis-analisis">7. Rencana Teknis Analisis</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#indikator-keberhasilan-success-criteria">8. Indikator Keberhasilan (Success Criteria)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ringkasan">9. Ringkasan</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
