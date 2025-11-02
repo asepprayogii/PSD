@@ -1,6 +1,9 @@
-streamlit
-pandas
-numpy==1.26.4   # Ganti dengan versi yang Anda dapatkan!
-scikit-learn==1.3.2 # Ganti dengan versi yang Anda dapatkan!
-joblib
+jupyter-book
 matplotlib
+numpy
+streamlit
+librosa
+numpy
+pandas
+seaborn
+scikit-learn
