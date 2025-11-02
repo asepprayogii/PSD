@@ -7,4 +7,4 @@ Sejak kecil, saya terbiasa menyeimbangkan dunia akademik dengan olahraga seperti
 
 Saya memiliki ketertarikan pada *Data Analisis*, dengan semangat untuk terus belajar dan memberikan kontribusi nyata di bidang akademik maupun masyarakat.
 
-```{tableofcontents}
+```
