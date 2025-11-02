@@ -1,11 +1,10 @@
-# Welcome to your Jupyter Book
+# Welcome — Asep Prayogi
 
-This is a small sample book to give you a feel for how book content is
-structured.
-It shows off a few of the major file types, as well as some sample content.
-It does not go in-depth into any particular topic - check out [the Jupyter Book documentation](https://jupyterbook.org) for more information.
+Halo! Saya *Asep Prayogi* (NIM 230411100073), mahasiswa aktif *Teknik Informatika Universitas Trunojoyo Madura*.  
+Saya berasal dari *Sidamanik, Kabupaten Simalungun*, dan dapat dihubungi melalui email: [asepprayogi1235@gmail.com](mailto:asepprayogi1235@gmail.com).
 
-Check out the content pages bundled with this sample book to see more.
+Sejak kecil, saya terbiasa menyeimbangkan dunia akademik dengan olahraga seperti futsal, sepak bola, badminton, dan jogging — kegiatan yang melatih disiplin dan kerja sama.  
+
+Saya memiliki ketertarikan pada *Data Analisis*, dengan semangat untuk terus belajar dan memberikan kontribusi nyata di bidang akademik maupun masyarakat.
 
 ```{tableofcontents}
-```
