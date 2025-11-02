@@ -1,0 +1,1256 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>KNN Regression Data (NO₂ Medan) &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ModeellingNO2Medan';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.jpg" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/logo.jpg" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Content with notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="markdown-notebooks.html">Notebooks with MyST Markdown</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FModeellingNO2Medan.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/ModeellingNO2Medan.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>KNN Regression Data (NO₂ Medan)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penerapan-pada-prediksi-no2-kota-medan">Penerapan pada Prediksi NO₂ Kota Medan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mengapa-nilai-r2-dan-mse-rendah-pada-eksperimen">Mengapa Nilai R² dan MSE Rendah pada Eksperimen?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-data-no2-medan">Modeling Data NO₂ Medan</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tahapan-modeling">Tahapan Modeling:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definisikan-batas-ambang-threshold-dan-buat-labels"><strong>Definisikan Batas Ambang (Threshold) dan Buat Labels</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prediksi-nilai-no2-satu-hari-ke-depan"><strong>Prediksi Nilai NO2 Satu Hari Ke Depan</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ringkasan-hasil"><strong>Ringkasan Hasil</strong></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="knn-regression-data-no2-medan">
+<h1>KNN Regression Data (NO₂ Medan)<a class="headerlink" href="#knn-regression-data-no2-medan" title="Link to this heading">#</a></h1>
+<p><strong>K-Nearest Neighbors (KNN) Regression</strong> merupakan salah satu metode <em>machine learning</em> berbasis jarak yang digunakan untuk melakukan prediksi nilai kontinu.<br />
+Prinsip utama KNN Regression adalah melakukan estimasi nilai target berdasarkan <strong>kedekatan data baru</strong> dengan beberapa data historis yang memiliki karakteristik serupa (<em>nearest neighbors</em>).</p>
+<p>Pada saat proses prediksi, algoritma akan:</p>
+<ol class="arabic simple">
+<li><p>Menghitung jarak antara data baru dengan seluruh data historis (menggunakan metrik seperti Euclidean Distance).</p></li>
+<li><p>Memilih <strong>K tetangga terdekat (nearest neighbors)</strong> berdasarkan jarak terkecil.</p></li>
+<li><p>Mengambil <strong>rata-rata nilai target</strong> dari tetangga terdekat tersebut sebagai hasil prediksi.</p></li>
+</ol>
+<section id="penerapan-pada-prediksi-no2-kota-medan">
+<h2>Penerapan pada Prediksi NO₂ Kota Medan<a class="headerlink" href="#penerapan-pada-prediksi-no2-kota-medan" title="Link to this heading">#</a></h2>
+<p>Dalam konteks kasus <strong>prediksi konsentrasi Nitrogen Dioksida (NO₂)</strong>, nilai <em>lag</em> (misalnya NO₂ dua hingga lima hari sebelumnya) digunakan sebagai <strong>fitur masukan (features)</strong>.<br />
+Fitur-fitur ini merepresentasikan kondisi historis dari konsentrasi NO₂.</p>
+<p>KNN kemudian akan mencari periode masa lalu yang memiliki pola <em>lag</em> serupa, kemudian memprediksi <strong>kadar NO₂ untuk hari berikutnya</strong> berdasarkan <strong>rata-rata kadar NO₂ dari periode-periode yang mirip tersebut</strong>.</p>
+<p>Pendekatan ini cocok untuk data deret waktu yang memiliki pola perubahan tidak terlalu tajam, karena KNN mengandalkan kesamaan pola data sebelumnya untuk memperkirakan nilai di masa depan.</p>
+</section>
+<section id="mengapa-nilai-r2-dan-mse-rendah-pada-eksperimen">
+<h2>Mengapa Nilai R² dan MSE Rendah pada Eksperimen?<a class="headerlink" href="#mengapa-nilai-r2-dan-mse-rendah-pada-eksperimen" title="Link to this heading">#</a></h2>
+<p>Nilai <strong>R-Squared (R²)</strong> yang rendah menunjukkan bahwa model belum mampu menjelaskan variasi kadar NO₂ dengan baik.<br />
+Hal ini wajar karena model hanya menggunakan data <em>lag</em> (2–5 hari sebelumnya) sebagai prediktor, tanpa memasukkan <strong>variabel lingkungan lain</strong> seperti:</p>
+<ul class="simple">
+<li><p>Suhu udara</p></li>
+<li><p>Kelembapan</p></li>
+<li><p>Curah hujan</p></li>
+<li><p>Arah dan kecepatan angin</p></li>
+<li><p>Aktivitas lalu lintas atau industri</p></li>
+</ul>
+<p>Faktor-faktor tersebut memiliki pengaruh besar terhadap fluktuasi kadar NO₂ di atmosfer.<br />
+Akibatnya, KNN hanya dapat “menebak” pola berdasarkan kemiripan historis dari satu variabel (NO₂), sehingga performa model menjadi terbatas.</p>
+</section>
+<section id="modeling-data-no2-medan">
+<h2>Modeling Data NO₂ Medan<a class="headerlink" href="#modeling-data-no2-medan" title="Link to this heading">#</a></h2>
+<p>Proses modeling dilakukan berdasarkan hasil eksperimen pada tahap konversi <em>supervised learning</em> dengan jumlah <em>lag</em> berbeda.<br />
+Tujuannya adalah membandingkan seberapa besar pengaruh jumlah <em>lag features</em> terhadap performa model KNN Regression.</p>
+<section id="tahapan-modeling">
+<h3>Tahapan Modeling:<a class="headerlink" href="#tahapan-modeling" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Import Library</strong><br />
+Mengimpor pustaka yang dibutuhkan seperti <code class="docutils literal notranslate"><span class="pre">pandas</span></code>, <code class="docutils literal notranslate"><span class="pre">numpy</span></code>, <code class="docutils literal notranslate"><span class="pre">sklearn</span></code>, dan <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">KNeighborsRegressor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">r2_score</span><span class="p">,</span> <span class="n">mean_absolute_error</span><span class="p">,</span> <span class="n">mean_absolute_percentage_error</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">joblib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Membaca Dokumen</strong><br />
+Membaca dataset hasil konversi <em>supervised</em> (lag 2–5 hari) yang telah disimpan dalam format CSV.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">day1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;no2_results/day1_supervised.csv&#39;</span><span class="p">)</span>
+<span class="n">day2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;no2_results/day2_supervised.csv&#39;</span><span class="p">)</span>
+<span class="n">day3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;no2_results/day3_supervised.csv&#39;</span><span class="p">)</span>
+<span class="n">day4</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;no2_results/day4_supervised.csv&#39;</span><span class="p">)</span>
+<span class="n">day5</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;no2_results/day5_supervised.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p><strong>Modelling</strong></p></li>
+</ol>
+</section>
+</section>
+<section id="definisikan-batas-ambang-threshold-dan-buat-labels">
+<h2><strong>Definisikan Batas Ambang (Threshold) dan Buat Labels</strong><a class="headerlink" href="#definisikan-batas-ambang-threshold-dan-buat-labels" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">70</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;DEFINISIKAN THRESHOLD DAN BUAT LABELS&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">70</span><span class="p">)</span>
+
+<span class="c1"># Gunakan 75th percentile sebagai threshold dari day1_supervised.csv</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">day1_for_threshold</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;no2_results/day1_supervised.csv&#39;</span><span class="p">)</span>
+    <span class="c1"># Assuming &#39;NO2&#39; column in day1_supervised is the target (NO2(t))</span>
+    <span class="n">threshold</span> <span class="o">=</span> <span class="n">day1_for_threshold</span><span class="p">[</span><span class="s2">&quot;NO2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Definisi Threshold:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - Menggunakan: 75th percentile dari day1_supervised.csv&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - Nilai threshold: </span><span class="si">{</span><span class="n">threshold</span><span class="si">:</span><span class="s2">.8f</span><span class="si">}</span><span class="s2"> mol/m²&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  - Label 0 (AMAN):      NO2 ≤ </span><span class="si">{</span><span class="n">threshold</span><span class="si">:</span><span class="s2">.8f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - Label 1 (BERBAHAYA): NO2 &gt; </span><span class="si">{</span><span class="n">threshold</span><span class="si">:</span><span class="s2">.8f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Buat binary labels untuk evaluasi nanti (setelah regression)</span>
+    <span class="c1"># Gunakan data dari day1_supervised.csv untuk membuat labels</span>
+    <span class="n">binary_labels</span> <span class="o">=</span> <span class="p">(</span><span class="n">day1_for_threshold</span><span class="p">[</span><span class="s2">&quot;NO2&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+
+    <span class="c1"># Statistik label</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Distribusi Label (untuk evaluasi threshold):&quot;</span><span class="p">)</span>
+    <span class="n">label_counts</span> <span class="o">=</span> <span class="n">binary_labels</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+    <span class="c1"># Ensure both labels exist in label_counts for printing and plotting</span>
+    <span class="n">label_0_count</span> <span class="o">=</span> <span class="n">label_counts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">label_1_count</span> <span class="o">=</span> <span class="n">label_counts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - Label 0 (AMAN):      </span><span class="si">{</span><span class="n">label_0_count</span><span class="si">}</span><span class="s2"> samples (</span><span class="si">{</span><span class="n">label_0_count</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">binary_labels</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - Label 1 (BERBAHAYA): </span><span class="si">{</span><span class="n">label_1_count</span><span class="si">}</span><span class="s2"> samples (</span><span class="si">{</span><span class="n">label_1_count</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">binary_labels</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%)&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Visualisasi class distribution</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+    <span class="n">labels_text</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;AMAN&#39;</span><span class="p">,</span> <span class="s1">&#39;BERBAHAYA&#39;</span><span class="p">]</span>
+    <span class="n">colors_bar</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">]</span>
+    <span class="c1"># Use the retrieved counts for plotting</span>
+    <span class="n">plot_counts</span> <span class="o">=</span> <span class="p">[</span><span class="n">label_0_count</span><span class="p">,</span> <span class="n">label_1_count</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">labels_text</span><span class="p">,</span> <span class="n">plot_counts</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors_bar</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Distribusi Kelas Berdasarkan Threshold&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Jumlah Samples&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">plot_counts</span><span class="p">):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="o">+</span> <span class="mi">5</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Threshold berhasil didefinisikan&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CATATAN: Model akan memprediksi nilai NO2 (regression), lalu threshold diterapkan&quot;</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">[ERROR] File day1_supervised.csv tidak ditemukan.&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tidak dapat mendefinisikan threshold.&quot;</span><span class="p">)</span>
+    <span class="c1"># Set threshold to None or a default value if file not found</span>
+    <span class="n">threshold</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Threshold tidak didefinisikan.&quot;</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">[ERROR] Kolom &#39;NO2&#39; tidak ditemukan di day1_supervised.csv.&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pastikan day1_supervised.csv memiliki kolom &#39;NO2&#39;.&quot;</span><span class="p">)</span>
+    <span class="n">threshold</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Threshold tidak didefinisikan.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>======================================================================
+DEFINISIKAN THRESHOLD DAN BUAT LABELS
+======================================================================
+
+Definisi Threshold:
+  - Menggunakan: 75th percentile dari day1_supervised.csv
+  - Nilai threshold: 0.00003806 mol/m²
+
+  - Label 0 (AMAN):      NO2 ≤ 0.00003806
+  - Label 1 (BERBAHAYA): NO2 &gt; 0.00003806
+
+Distribusi Label (untuk evaluasi threshold):
+  - Label 0 (AMAN):      296 samples (74.9%)
+  - Label 1 (BERBAHAYA): 99 samples (25.1%)
+</pre></div>
+</div>
+<img alt="_images/44243ba229f2628c369970095a94317b2c9e54b8adcc5eae2c09911c2cf5d351.png" src="_images/44243ba229f2628c369970095a94317b2c9e54b8adcc5eae2c09911c2cf5d351.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Threshold berhasil didefinisikan
+CATATAN: Model akan memprediksi nilai NO2 (regression), lalu threshold diterapkan
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">day1</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;NO2&#39;</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">day1</span><span class="p">[</span><span class="s1">&#39;NO2&#39;</span><span class="p">]</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">X_train_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="n">knn</span> <span class="o">=</span> <span class="n">KNeighborsRegressor</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">day1_predict</span> <span class="o">=</span> <span class="n">knn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_scaled</span><span class="p">)</span>
+<span class="n">r2_day1</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">day1_predict</span><span class="p">)</span>
+<span class="n">mse_day1</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">day1_predict</span><span class="p">)</span>
+<span class="n">mae_day1</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">day1_predict</span><span class="p">)</span>
+<span class="n">mape_day1</span> <span class="o">=</span> <span class="n">mean_absolute_percentage_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">day1_predict</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MSE:&quot;</span><span class="p">,</span> <span class="n">mse_day1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MAE:&quot;</span><span class="p">,</span> <span class="n">mae_day1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;R2:&quot;</span><span class="p">,</span> <span class="n">r2_day1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MAPE: </span><span class="si">{</span><span class="n">mape_day1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">knn</span><span class="p">,</span> <span class="s1">&#39;saved_models/knn_model_day1.pkl&#39;</span><span class="p">)</span>
+<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">scaler</span><span class="p">,</span> <span class="s1">&#39;saved_models/scaler_day1.pkl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 8.741734765981554e-11
+MAE: 7.38364597554012e-06
+R2: 0.2065806928532351
+MAPE: 26.33%
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;saved_models/scaler_day1.pkl&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">day2</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;NO2&#39;</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">day2</span><span class="p">[</span><span class="s1">&#39;NO2&#39;</span><span class="p">]</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">X_train_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="n">knn</span> <span class="o">=</span> <span class="n">KNeighborsRegressor</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">day2_predict</span> <span class="o">=</span> <span class="n">knn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_scaled</span><span class="p">)</span>
+<span class="n">r2_day2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">day2_predict</span><span class="p">)</span>
+<span class="n">mse_day2</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">day2_predict</span><span class="p">)</span>
+<span class="n">mae_day2</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">day2_predict</span><span class="p">)</span>
+<span class="n">mape_day2</span> <span class="o">=</span> <span class="n">mean_absolute_percentage_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">day2_predict</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MSE:&quot;</span><span class="p">,</span> <span class="n">mse_day2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MAE:&quot;</span><span class="p">,</span> <span class="n">mae_day2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;R2:&quot;</span><span class="p">,</span> <span class="n">r2_day2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MAPE: </span><span class="si">{</span><span class="n">mape_day2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">knn</span><span class="p">,</span> <span class="s1">&#39;saved_models/knn_model_day2.pkl&#39;</span><span class="p">)</span>
+<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">scaler</span><span class="p">,</span> <span class="s1">&#39;saved_models/scaler_day2.pkl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 1.1641574264470848e-10
+MAE: 8.093202888997373e-06
+R2: 0.10352771500919755
+MAPE: 52.36%
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;saved_models/scaler_day2.pkl&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">day3</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;NO2&#39;</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">day3</span><span class="p">[</span><span class="s1">&#39;NO2&#39;</span><span class="p">]</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">X_train_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="n">knn</span> <span class="o">=</span> <span class="n">KNeighborsRegressor</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">day3_predict</span> <span class="o">=</span> <span class="n">knn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_scaled</span><span class="p">)</span>
+<span class="n">r2_day3</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">day3_predict</span><span class="p">)</span>
+<span class="n">mse_day3</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">day3_predict</span><span class="p">)</span>
+<span class="n">mae_day3</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">day3_predict</span><span class="p">)</span>
+<span class="n">mape_day3</span> <span class="o">=</span> <span class="n">mean_absolute_percentage_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">day3_predict</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MSE:&quot;</span><span class="p">,</span> <span class="n">mse_day3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MAE:&quot;</span><span class="p">,</span> <span class="n">mae_day3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;R2:&quot;</span><span class="p">,</span> <span class="n">r2_day3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MAPE: </span><span class="si">{</span><span class="n">mape_day3</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">knn</span><span class="p">,</span> <span class="s1">&#39;saved_models/knn_model_day3.pkl&#39;</span><span class="p">)</span>
+<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">scaler</span><span class="p">,</span> <span class="s1">&#39;saved_models/scaler_day3.pkl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 7.571730142514304e-11
+MAE: 6.77846775387606e-06
+R2: 0.2671736899179844
+MAPE: 51.65%
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;saved_models/scaler_day3.pkl&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">day4</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;NO2&#39;</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">day4</span><span class="p">[</span><span class="s1">&#39;NO2&#39;</span><span class="p">]</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">X_train_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="n">knn</span> <span class="o">=</span> <span class="n">KNeighborsRegressor</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">day4_predict</span> <span class="o">=</span> <span class="n">knn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_scaled</span><span class="p">)</span>
+<span class="n">r2_day4</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">day4_predict</span><span class="p">)</span>
+<span class="n">mse_day4</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">day4_predict</span><span class="p">)</span>
+<span class="n">mae_day4</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">day4_predict</span><span class="p">)</span>
+<span class="n">mape_day4</span> <span class="o">=</span> <span class="n">mean_absolute_percentage_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">day4_predict</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MSE:&quot;</span><span class="p">,</span> <span class="n">mse_day4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MAE:&quot;</span><span class="p">,</span> <span class="n">mae_day4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;R2:&quot;</span><span class="p">,</span> <span class="n">r2_day4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MAPE: </span><span class="si">{</span><span class="n">mape_day4</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">knn</span><span class="p">,</span> <span class="s1">&#39;saved_models/knn_model_day4.pkl&#39;</span><span class="p">)</span>
+<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">scaler</span><span class="p">,</span> <span class="s1">&#39;saved_models/scaler_day4.pkl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 8.013404373962427e-11
+MAE: 6.854367786574172e-06
+R2: 0.12462552445345898
+MAPE: 25.43%
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;saved_models/scaler_day4.pkl&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">day5</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;NO2&#39;</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">day5</span><span class="p">[</span><span class="s1">&#39;NO2&#39;</span><span class="p">]</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">X_train_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="n">knn</span> <span class="o">=</span> <span class="n">KNeighborsRegressor</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">day5_predict</span> <span class="o">=</span> <span class="n">knn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_scaled</span><span class="p">)</span>
+<span class="n">r2_day5</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">day5_predict</span><span class="p">)</span>
+<span class="n">mse_day5</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">day5_predict</span><span class="p">)</span>
+<span class="n">mae_day5</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">day5_predict</span><span class="p">)</span>
+<span class="n">mape_day5</span> <span class="o">=</span> <span class="n">mean_absolute_percentage_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">day5_predict</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MSE:&quot;</span><span class="p">,</span> <span class="n">mse_day5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MAE:&quot;</span><span class="p">,</span> <span class="n">mae_day5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;R2:&quot;</span><span class="p">,</span> <span class="n">r2_day5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MAPE: </span><span class="si">{</span><span class="n">mape_day5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">knn</span><span class="p">,</span> <span class="s1">&#39;saved_models/knn_model_day5.pkl&#39;</span><span class="p">)</span>
+<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">scaler</span><span class="p">,</span> <span class="s1">&#39;saved_models/scaler_day5.pkl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 6.985561952526327e-11
+MAE: 6.4370416922265665e-06
+R2: 0.1388936252749925
+MAPE: 24.11%
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;saved_models/scaler_day5.pkl&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;1 hari&#39;</span><span class="p">,</span> <span class="s1">&#39;2 hari&#39;</span><span class="p">,</span> <span class="s1">&#39;3 hari&#39;</span><span class="p">,</span> <span class="s1">&#39;4 hari&#39;</span><span class="p">,</span> <span class="s1">&#39;5 hari&#39;</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">mape_day1</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="n">mape_day2</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="n">mape_day3</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="n">mape_day4</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="n">mape_day5</span> <span class="o">*</span> <span class="mi">100</span><span class="p">]</span>
+
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#E74C3C&#39;</span><span class="p">,</span> <span class="s1">&#39;#F39C12&#39;</span><span class="p">,</span> <span class="s1">&#39;#F1C40F&#39;</span><span class="p">,</span> <span class="s1">&#39;#27AE60&#39;</span><span class="p">,</span> <span class="s1">&#39;#2E86AB&#39;</span><span class="p">]</span>
+<span class="n">bars</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">bar</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">bars</span><span class="p">):</span>
+    <span class="n">height</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">bar</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span><span class="o">/</span><span class="mf">2.</span><span class="p">,</span> <span class="n">height</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+             <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span>
+             <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Mean Absolute Percentage Error (MAPE) for Different Days&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Jumlah Hari&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;MAPE (%)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/9ebdd5c4ab0a0d92dedeeb88f73eaa944a2385597beb01ba31be5227b411635f.png" src="_images/9ebdd5c4ab0a0d92dedeeb88f73eaa944a2385597beb01ba31be5227b411635f.png" />
+</div>
+</div>
+</section>
+<section id="prediksi-nilai-no2-satu-hari-ke-depan">
+<h2><strong>Prediksi Nilai NO2 Satu Hari Ke Depan</strong><a class="headerlink" href="#prediksi-nilai-no2-satu-hari-ke-depan" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">70</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;LANGKAH 9: PREDIKSI NILAI NO2 SATU HARI KE DEPAN&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">70</span><span class="p">)</span>
+
+<span class="c1"># Definisikan threshold (pastikan sel sebelumnya sudah dijalankan untuk mendefinisikan threshold)</span>
+<span class="k">if</span> <span class="s1">&#39;threshold&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">locals</span><span class="p">()</span> <span class="ow">and</span> <span class="s1">&#39;threshold&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">():</span>
+     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">[INFO] Variabel &#39;threshold&#39; belum didefinisikan.&quot;</span><span class="p">)</span>
+     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mencoba memuat threshold dari day1_supervised.csv...&quot;</span><span class="p">)</span>
+     <span class="k">try</span><span class="p">:</span>
+         <span class="n">day1_for_threshold</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;no2_results/day1_supervised.csv&#39;</span><span class="p">)</span>
+         <span class="n">threshold</span> <span class="o">=</span> <span class="n">day1_for_threshold</span><span class="p">[</span><span class="s2">&quot;NO2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span>
+         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - Threshold dimuat: </span><span class="si">{</span><span class="n">threshold</span><span class="si">:</span><span class="s2">.8f</span><span class="si">}</span><span class="s2"> mol/m²&quot;</span><span class="p">)</span>
+     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">[ERROR] Gagal memuat threshold: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Menggunakan nilai threshold default.&quot;</span><span class="p">)</span>
+         <span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.00005</span> <span class="c1"># Default fallback value</span>
+
+
+<span class="c1"># Ambil nilai NO2(t-1) dari baris terakhir day1_supervised.csv</span>
+<span class="c1"># Karena model day1 menggunakan lag 1 (NO2(t-1)) untuk memprediksi NO2(t)</span>
+<span class="c1"># Kita perlu nilai NO2(t-1) dari baris terakhir day1 untuk memprediksi NO2(t) (besok)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">last_day_original</span> <span class="o">=</span> <span class="n">day1</span><span class="p">[</span><span class="s1">&#39;t-1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Menggunakan nilai &#39;t-1&#39; terakhir dari day1_supervised.csv sebagai input.&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - Nilai input (NO2(t-1)): </span><span class="si">{</span><span class="n">last_day_original</span><span class="si">:</span><span class="s2">.8f</span><span class="si">}</span><span class="s2"> mol/m²&quot;</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">[ERROR] Kolom &#39;t-1&#39; tidak ditemukan di day1_supervised.csv.&quot;</span><span class="p">)</span>
+     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pastikan day1_supervised.csv memiliki kolom &#39;t-1&#39;.&quot;</span><span class="p">)</span>
+     <span class="n">last_day_original</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<span class="k">if</span> <span class="n">last_day_original</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="c1"># Load scaler dan model yang sesuai dengan day1</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">knn_model_day1</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;saved_models/knn_model_day1.pkl&#39;</span><span class="p">)</span>
+        <span class="n">scaler_day1</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;saved_models/scaler_day1.pkl&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Scaler dan model day1 berhasil dimuat.&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">[ERROR] File model atau scaler day1 tidak ditemukan.&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pastikan model dan scaler untuk day1 sudah disimpan.&quot;</span><span class="p">)</span>
+        <span class="n">knn_model_day1</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># Set to None to prevent errors later</span>
+        <span class="n">scaler_day1</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+    <span class="k">if</span> <span class="n">knn_model_day1</span> <span class="ow">and</span> <span class="n">scaler_day1</span><span class="p">:</span>
+        <span class="c1"># Normalisasi menggunakan parameter dari scaler day1</span>
+        <span class="c1"># Input untuk scaler harus dalam bentuk 2D array/dataframe</span>
+        <span class="c1"># Convert to DataFrame with correct feature name before scaling</span>
+        <span class="n">last_day_original_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="n">last_day_original</span><span class="p">]],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;t-1&#39;</span><span class="p">])</span>
+        <span class="n">last_day_scaled</span> <span class="o">=</span> <span class="n">scaler_day1</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">last_day_original_df</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Data hari ini (Ternormalisasi dengan scaler day1):&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - NO2(t-1): </span><span class="si">{</span><span class="n">last_day_scaled</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Reshape untuk input model (model day1 expects 1 feature)</span>
+        <span class="n">X_tomorrow</span> <span class="o">=</span> <span class="n">last_day_scaled</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Prediksi nilai NO2 (regresi) menggunakan model day1</span>
+        <span class="n">pred_no2_value</span> <span class="o">=</span> <span class="n">knn_model_day1</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_tomorrow</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># Terapkan threshold (gunakan threshold yang sama seperti sebelumnya jika sudah didefinisikan)</span>
+        <span class="c1"># Pastikan variabel &#39;threshold&#39; sudah didefinisikan di sel sebelumnya</span>
+        <span class="k">if</span> <span class="s1">&#39;threshold&#39;</span> <span class="ow">in</span> <span class="nb">locals</span><span class="p">()</span> <span class="ow">or</span> <span class="s1">&#39;threshold&#39;</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">():</span>
+            <span class="n">pred_status</span> <span class="o">=</span> <span class="s1">&#39;BERBAHAYA&#39;</span> <span class="k">if</span> <span class="n">pred_no2_value</span> <span class="o">&gt;</span> <span class="n">threshold</span> <span class="k">else</span> <span class="s1">&#39;AMAN&#39;</span>
+            <span class="n">difference_from_threshold</span> <span class="o">=</span> <span class="n">pred_no2_value</span> <span class="o">-</span> <span class="n">threshold</span>
+            <span class="n">percentage_diff</span> <span class="o">=</span> <span class="p">(</span><span class="n">difference_from_threshold</span> <span class="o">/</span> <span class="n">threshold</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">70</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;HASIL PREDIKSI NO2 HARI BESOK (SATU HARI KE DEPAN)&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">70</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">[A] PREDIKSI NILAI NO2 (Regresi):&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - NO2 Prediksi: </span><span class="si">{</span><span class="n">pred_no2_value</span><span class="si">:</span><span class="s2">.8f</span><span class="si">}</span><span class="s2"> mol/m²&quot;</span><span class="p">)</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">[B] PENERAPAN THRESHOLD:&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - Threshold: </span><span class="si">{</span><span class="n">threshold</span><span class="si">:</span><span class="s2">.8f</span><span class="si">}</span><span class="s2"> mol/m²&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - Status: </span><span class="si">{</span><span class="n">pred_status</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - Selisih: </span><span class="si">{</span><span class="n">difference_from_threshold</span><span class="si">:</span><span class="s2">.8f</span><span class="si">}</span><span class="s2"> mol/m²&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - Persentase: </span><span class="si">{</span><span class="n">percentage_diff</span><span class="si">:</span><span class="s2">+.2f</span><span class="si">}</span><span class="s2">% dari threshold&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">pred_status</span> <span class="o">==</span> <span class="s1">&#39;BERBAHAYA&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">percentage_diff</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">⚠ PERINGATAN TINGGI: NO2 diprediksi </span><span class="si">{</span><span class="n">percentage_diff</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">% DI ATAS threshold!&quot;</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   → Prediksi SANGAT BERBAHAYA, ambil tindakan pencegahan!&quot;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">percentage_diff</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">⚠ PERINGATAN SEDANG: NO2 diprediksi </span><span class="si">{</span><span class="n">percentage_diff</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">% di atas threshold&quot;</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   → Status BERBAHAYA, waspadai kualitas udara!&quot;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">⚠ PERINGATAN: NO2 diprediksi </span><span class="si">{</span><span class="n">percentage_diff</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">% di atas threshold&quot;</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   → Status BERBAHAYA, perlu monitoring!&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">percentage_diff</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✓ HATI-HATI: NO2 diprediksi hanya </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">percentage_diff</span><span class="p">)</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">% DI BAWAH threshold&quot;</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   → Status masih AMAN, tapi mendekati batas ambang!&quot;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✓ AMAN: NO2 diprediksi </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">percentage_diff</span><span class="p">)</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">% di bawah threshold&quot;</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   → Kualitas udara dalam batas aman&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Visualisasi prediksi dan data terakhir (t-3, t-2, t-1, Prediksi t)</span>
+            <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+            <span class="c1"># Ambil 3 data aktual terakhir sebelum input t-1</span>
+            <span class="c1"># Ini memerlukan akses ke data asli sebelum supervised learning.</span>
+            <span class="c1"># Jika data asli tidak tersedia, kita bisa mencoba mengambil dari day1_supervised.csv</span>
+            <span class="c1"># day1_supervised.csv memiliki kolom NO2 (actual t) dan t-1 (actual t-1)</span>
+            <span class="c1"># Untuk mendapatkan t-2 dan t-3, kita perlu melihat baris-baris sebelumnya di day1</span>
+            <span class="c1"># atau idealnya dari data asli.</span>
+            <span class="c1"># Untuk demonstrasi, kita akan coba ambil dari day1_supervised.csv, yang mungkin tidak 100% akurat</span>
+            <span class="c1"># merepresentasikan t-3, t-2 dari deret waktu asli jika ada pemotongan data.</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">day1_data_for_plot</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;no2_results/day1_supervised.csv&#39;</span><span class="p">)</span>
+                <span class="c1"># Ambil 3 nilai NO2 aktual terakhir dari kolom &#39;NO2&#39; di day1_supervised</span>
+                <span class="c1"># Ini adalah nilai t dari 3 baris terakhir</span>
+                <span class="n">actual_last_3_t_values</span> <span class="o">=</span> <span class="n">day1_data_for_plot</span><span class="p">[</span><span class="s1">&#39;NO2&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]</span><span class="o">.</span><span class="n">values</span>
+
+                <span class="c1"># Nilai input t-1 sudah kita punya: last_day_original</span>
+
+                <span class="c1"># Data untuk plot: Actual t-3, Actual t-2, Actual t-1 (input), Prediksi t</span>
+                <span class="c1"># Labelnya akan disesuaikan</span>
+                <span class="n">days_plot</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Actual</span><span class="se">\n</span><span class="s1">(t-3)&#39;</span><span class="p">,</span> <span class="s1">&#39;Actual</span><span class="se">\n</span><span class="s1">(t-2)&#39;</span><span class="p">,</span> <span class="s1">&#39;Actual</span><span class="se">\n</span><span class="s1">(t-1)&#39;</span><span class="p">,</span> <span class="s1">&#39;PREDIKSI</span><span class="se">\n</span><span class="s1">(t)&#39;</span><span class="p">]</span>
+                <span class="c1"># Untuk mendapatkan t-3, t-2, t-1 aktual, kita perlu melihat data asli</span>
+                <span class="c1"># Menggunakan day1_supervised.csv:</span>
+                <span class="c1"># last_day_original (t-1) adalah input. Nilai NO2 di baris yang sama adalah t.</span>
+                <span class="c1"># Nilai t-1 di baris sebelumnya adalah t-2, nilai t-1 di dua baris sebelumnya adalah t-3, dst.</span>
+                <span class="c1"># Mari kita ambil 3 nilai &#39;NO2&#39; terakhir dari day1_supervised.csv</span>
+                <span class="c1"># dan nilai &#39;t-1&#39; terakhir (yang merupakan input kita)</span>
+                <span class="c1"># Ini mungkin tidak merepresentasikan t-3, t-2, t-1 dari deret waktu asli secara sempurna</span>
+                <span class="c1"># jika supervised_df dipotong.</span>
+                <span class="c1"># Solusi yang lebih tepat adalah memuat data asli dan mengambil 4 nilai terakhir.</span>
+
+                <span class="c1"># Coba ambil 4 nilai NO2 terakhir dari kolom &#39;NO2&#39; di day1_supervised</span>
+                <span class="c1"># Ini seharusnya merepresentasikan t-3, t-2, t-1, dan t dari 4 baris terakhir data asli</span>
+                <span class="c1"># sebelum supervised conversion (jika tidak ada pemotongan data awal)</span>
+                <span class="c1"># Ambil 4 nilai NO2 terakhir dari day1_supervised[&#39;NO2&#39;]</span>
+                <span class="c1"># Karena day1_supervised [NO2, t-1], kolom NO2 adalah target (t)</span>
+                <span class="c1"># Jadi 4 nilai terakhir di kolom NO2 adalah t, t-1, t-2, t-3 dari data asli</span>
+                <span class="c1"># Urutannya terbalik, jadi kita ambil 4 nilai terakhir dan balik urutannya</span>
+
+                <span class="n">recent_actual_values</span> <span class="o">=</span> <span class="n">day1_data_for_plot</span><span class="p">[</span><span class="s1">&#39;NO2&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">:]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+                <span class="c1"># recent_actual_values sekarang berisi [t-3, t-2, t-1, t] dari 4 baris terakhir data asli</span>
+                <span class="c1"># (jika supervised_df tidak dipotong di awal)</span>
+
+                <span class="c1"># Data untuk plot: t-3, t-2, t-1 (actual), t (predicted)</span>
+                <span class="c1"># Kita ambil 3 nilai pertama dari recent_actual_values sebagai t-3, t-2, t-1 actual</span>
+                <span class="c1"># Dan nilai prediksi kita sebagai t predicted</span>
+                <span class="n">values_plot</span> <span class="o">=</span> <span class="n">recent_actual_values</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">pred_no2_value</span><span class="p">]</span>
+
+
+                <span class="n">colors_bar_plot</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lightgray&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span> <span class="k">if</span> <span class="n">pred_status</span> <span class="o">==</span> <span class="s1">&#39;BERBAHAYA&#39;</span> <span class="k">else</span> <span class="s1">&#39;green&#39;</span><span class="p">]</span>
+                <span class="n">edgecolors_bar_plot</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;black&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span>
+                <span class="n">linewidths_bar_plot</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span>
+
+
+                <span class="n">bars</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">days_plot</span><span class="p">,</span> <span class="n">values_plot</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors_bar_plot</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="n">edgecolors_bar_plot</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">linewidths_bar_plot</span><span class="p">)</span>
+
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">[WARN] Gagal mengambil data aktual t-3, t-2, t-1 untuk visualisasi: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hanya akan menampilkan plot Hari Ini (t-1 input) dan Prediksi Besok.&quot;</span><span class="p">)</span>
+                 <span class="n">days_plot</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Hari Ini</span><span class="se">\n</span><span class="s1">(t-1)&#39;</span><span class="p">,</span> <span class="s1">&#39;PREDIKSI</span><span class="se">\n</span><span class="s1">(t)&#39;</span><span class="p">]</span>
+                 <span class="n">values_plot</span> <span class="o">=</span> <span class="p">[</span><span class="n">last_day_original</span><span class="p">,</span> <span class="n">pred_no2_value</span><span class="p">]</span>
+                 <span class="n">colors_bar_plot</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;skyblue&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span> <span class="k">if</span> <span class="n">pred_status</span> <span class="o">==</span> <span class="s1">&#39;BERBAHAYA&#39;</span> <span class="k">else</span> <span class="s1">&#39;green&#39;</span><span class="p">]</span>
+                 <span class="n">edgecolors_bar_plot</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;black&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span>
+                 <span class="n">linewidths_bar_plot</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span>
+                 <span class="n">bars</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">days_plot</span><span class="p">,</span> <span class="n">values_plot</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors_bar_plot</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="n">edgecolors_bar_plot</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">linewidths_bar_plot</span><span class="p">)</span>
+
+
+            <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Threshold=</span><span class="si">{</span><span class="n">threshold</span><span class="si">:</span><span class="s1">.8f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Nilai NO2 (mol/m²)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Prediksi NO2 Besok: </span><span class="si">{</span><span class="n">pred_status</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+
+            <span class="c1"># Tambah label nilai di atas bar</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">bars</span><span class="p">,</span> <span class="n">values_plot</span><span class="p">)):</span>
+                <span class="n">height</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">bar</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span><span class="o">/</span><span class="mf">2.</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span>
+                        <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">val</span><span class="si">:</span><span class="s1">.8f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+                        <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+            <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+        <span class="k">else</span><span class="p">:</span>
+             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">[INFO] Variabel &#39;threshold&#39; belum didefinisikan.&quot;</span><span class="p">)</span>
+             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tidak dapat menerapkan threshold atau menampilkan visualisasi dengan threshold.&quot;</span><span class="p">)</span>
+             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">HASIL PREDIKSI NILAI NO2 (Regresi): </span><span class="si">{</span><span class="n">pred_no2_value</span><span class="si">:</span><span class="s2">.8f</span><span class="si">}</span><span class="s2"> mol/m²&quot;</span><span class="p">)</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">70</span><span class="p">)</span>
+
+<span class="c1"># Bagian tabel perbandingan 3 data terakhir (tetap ditampilkan)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>======================================================================
+LANGKAH 9: PREDIKSI NILAI NO2 SATU HARI KE DEPAN
+======================================================================
+
+Menggunakan nilai &#39;t-1&#39; terakhir dari day1_supervised.csv sebagai input.
+  - Nilai input (NO2(t-1)): 0.00003859 mol/m²
+
+Scaler dan model day1 berhasil dimuat.
+
+Data hari ini (Ternormalisasi dengan scaler day1):
+  - NO2(t-1): 0.5579
+
+======================================================================
+HASIL PREDIKSI NO2 HARI BESOK (SATU HARI KE DEPAN)
+======================================================================
+
+[A] PREDIKSI NILAI NO2 (Regresi):
+  - NO2 Prediksi: 0.00003236 mol/m²
+
+[B] PENERAPAN THRESHOLD:
+  - Threshold: 0.00003806 mol/m²
+  - Status: AMAN
+  - Selisih: -0.00000570 mol/m²
+  - Persentase: -14.99% dari threshold
+
+✓ AMAN: NO2 diprediksi 15.0% di bawah threshold
+   → Kualitas udara dalam batas aman
+</pre></div>
+</div>
+<img alt="_images/9271c9caf8dc08f17c7a809cc4cea276d18c00ec0ec144e1d7047636c5854333.png" src="_images/9271c9caf8dc08f17c7a809cc4cea276d18c00ec0ec144e1d7047636c5854333.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>======================================================================
+</pre></div>
+</div>
+</div>
+</div>
+<p>Setelah seluruh model dilatih, dilakukan perbandingan menggunakan tiga metrik utama:</p>
+<ul class="simple">
+<li><p><strong>R² (Coefficient of Determination)</strong> — mengukur seberapa besar variasi data target yang dapat dijelaskan oleh model. Nilai mendekati 1 menunjukkan model mampu menjelaskan data dengan baik.</p></li>
+<li><p><strong>MSE (Mean Squared Error)</strong> — mengukur rata-rata kesalahan kuadrat antara nilai prediksi dan nilai aktual. Semakin kecil nilainya, semakin baik performa model.</p></li>
+<li><p><strong>MAPE (Mean Absolute Percentage Error)</strong> — mengukur rata-rata kesalahan prediksi dalam bentuk persentase terhadap nilai aktual. Nilai MAPE yang kecil (misalnya &lt;10%) menunjukkan akurasi model yang sangat baik.</p></li>
+</ul>
+<section id="ringkasan-hasil">
+<h3><strong>Ringkasan Hasil</strong><a class="headerlink" href="#ringkasan-hasil" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">70</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;RINGKASAN HASIL PREDIKSI NO2 (KNN REGRESSION)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">70</span><span class="p">)</span>
+
+<span class="c1"># Informasi umum (sesuaikan jika perlu)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">RINGKASAN UMUM:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - Lokasi Data: Kota Medan&quot;</span><span class="p">)</span>
+<span class="c1"># Asumsikan periode data dari day1_supervised.csv</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">day1_info</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;no2_results/day1_supervised.csv&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - Total samples (setelah supervised transformation): </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">day1_info</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - Total samples (setelah supervised transformation): Tidak diketahui (day1_supervised.csv tidak ditemukan)&quot;</span><span class="p">)</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">MODELING (KNN Regression dengan Berbagai Jumlah Lag):&quot;</span><span class="p">)</span>
+<span class="c1"># Ambil MAPE dari variabel yang sudah ada</span>
+<span class="n">mape_values</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Lag 1 Hari&#39;</span><span class="p">:</span> <span class="n">mape_day1</span> <span class="o">*</span> <span class="mi">100</span> <span class="k">if</span> <span class="s1">&#39;mape_day1&#39;</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;N/A&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Lag 2 Hari&#39;</span><span class="p">:</span> <span class="n">mape_day2</span> <span class="o">*</span> <span class="mi">100</span> <span class="k">if</span> <span class="s1">&#39;mape_day2&#39;</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;N/A&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Lag 3 Hari&#39;</span><span class="p">:</span> <span class="n">mape_day3</span> <span class="o">*</span> <span class="mi">100</span> <span class="k">if</span> <span class="s1">&#39;mape_day3&#39;</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;N/A&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Lag 4 Hari&#39;</span><span class="p">:</span> <span class="n">mape_day4</span> <span class="o">*</span> <span class="mi">100</span> <span class="k">if</span> <span class="s1">&#39;mape_day4&#39;</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;N/A&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Lag 5 Hari&#39;</span><span class="p">:</span> <span class="n">mape_day5</span> <span class="o">*</span> <span class="mi">100</span> <span class="k">if</span> <span class="s1">&#39;mape_day5&#39;</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;N/A&#39;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="n">lag</span><span class="p">,</span> <span class="n">mape_val</span> <span class="ow">in</span> <span class="n">mape_values</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mape_val</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - MAPE Model </span><span class="si">{</span><span class="n">lag</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">mape_val</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - MAPE Model </span><span class="si">{</span><span class="n">lag</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">mape_val</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Informasi Threshold (dari sel sebelumnya)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">DEFINISI THRESHOLD:&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="s1">&#39;threshold&#39;</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">()</span> <span class="ow">or</span> <span class="s1">&#39;threshold&#39;</span> <span class="ow">in</span> <span class="nb">locals</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - Threshold: </span><span class="si">{</span><span class="n">threshold</span><span class="si">:</span><span class="s2">.8f</span><span class="si">}</span><span class="s2"> mol/m²&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - Berdasarkan: 75th percentile dari data Day 1&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - Threshold: Belum didefinisikan&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># Hasil Prediksi Hari Besok (dari sel prediksi)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">HASIL PREDIKSI SATU HARI KE DEPAN:&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="s1">&#39;pred_no2_value&#39;</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">()</span> <span class="ow">or</span> <span class="s1">&#39;pred_no2_value&#39;</span> <span class="ow">in</span> <span class="nb">locals</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - Nilai Prediksi NO2: </span><span class="si">{</span><span class="n">pred_no2_value</span><span class="si">:</span><span class="s2">.8f</span><span class="si">}</span><span class="s2"> mol/m²&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s1">&#39;threshold&#39;</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">()</span> <span class="ow">or</span> <span class="s1">&#39;threshold&#39;</span> <span class="ow">in</span> <span class="nb">locals</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - Threshold: </span><span class="si">{</span><span class="n">threshold</span><span class="si">:</span><span class="s2">.8f</span><span class="si">}</span><span class="s2"> mol/m²&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - Status Prediksi: </span><span class="si">{</span><span class="n">pred_status</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;percentage_diff&#39;</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">()</span> <span class="ow">or</span> <span class="s1">&#39;percentage_diff&#39;</span> <span class="ow">in</span> <span class="nb">locals</span><span class="p">():</span>
+             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - Persentase dari Threshold: </span><span class="si">{</span><span class="n">percentage_diff</span><span class="si">:</span><span class="s2">+.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - Status Prediksi: Tidak dapat ditentukan (threshold belum didefinisikan)&quot;</span><span class="p">)</span>
+
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - Prediksi belum dijalankan.&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">70</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>======================================================================
+RINGKASAN HASIL PREDIKSI NO2 (KNN REGRESSION)
+======================================================================
+
+RINGKASAN UMUM:
+  - Lokasi Data: Kota Medan
+  - Total samples (setelah supervised transformation): 395
+
+MODELING (KNN Regression dengan Berbagai Jumlah Lag):
+  - MAPE Model Lag 1 Hari: 26.33%
+  - MAPE Model Lag 2 Hari: 52.36%
+  - MAPE Model Lag 3 Hari: 51.65%
+  - MAPE Model Lag 4 Hari: 25.43%
+  - MAPE Model Lag 5 Hari: 24.11%
+
+DEFINISI THRESHOLD:
+  - Threshold: 0.00003806 mol/m²
+  - Berdasarkan: 75th percentile dari data Day 1
+
+HASIL PREDIKSI SATU HARI KE DEPAN:
+  - Nilai Prediksi NO2: 0.00003236 mol/m²
+  - Threshold: 0.00003806 mol/m²
+  - Status Prediksi: AMAN
+  - Persentase dari Threshold: -14.99%
+
+======================================================================
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penerapan-pada-prediksi-no2-kota-medan">Penerapan pada Prediksi NO₂ Kota Medan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mengapa-nilai-r2-dan-mse-rendah-pada-eksperimen">Mengapa Nilai R² dan MSE Rendah pada Eksperimen?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-data-no2-medan">Modeling Data NO₂ Medan</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tahapan-modeling">Tahapan Modeling:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definisikan-batas-ambang-threshold-dan-buat-labels"><strong>Definisikan Batas Ambang (Threshold) dan Buat Labels</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prediksi-nilai-no2-satu-hari-ke-depan"><strong>Prediksi Nilai NO2 Satu Hari Ke Depan</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ringkasan-hasil"><strong>Ringkasan Hasil</strong></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
