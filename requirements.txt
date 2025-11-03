@@ -7,3 +7,10 @@ numpy
 pandas
 seaborn
 scikit-learn
+streamlit==1.51.0
+librosa==0.10.2
+numpy==1.26.4
+scikit-learn==1.5.2
+joblib==1.4.2
+pydub==0.25.1
+streamlit-audiorecorder==0.0.6
