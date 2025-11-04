@@ -12,7 +12,9 @@ from sklearn.preprocessing import StandardScaler, LabelEncoder
 try:
     from streamlit_audiorecorder import audiorecorder
     HAS_RECORDER = True
-except Exception:
+except Exception as e: # Tangkap dan tampilkan error
+    import streamlit as st # Pastikan st sudah diimpor jika ini di bagian paling atas
+    st.error(f"❌ Kesalahan saat memuat streamlit-audiorecorder: {e}") 
     HAS_RECORDER = False
 
 # =====================================================
