@@ -8,15 +8,6 @@ import sklearn
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 
-# Optional recorder lib (tidak fatal jika belum terinstall)
-try:
-    from streamlit_audiorecorder import audiorecorder
-    HAS_RECORDER = True
-except Exception as e: # Tangkap dan tampilkan error
-    import streamlit as st # Pastikan st sudah diimpor jika ini di bagian paling atas
-    st.error(f"❌ Kesalahan saat memuat streamlit-audiorecorder: {e}") 
-    HAS_RECORDER = False
-
 # =====================================================
 # 🎨 Styling & Tampilan Streamlit
 # =====================================================
@@ -58,7 +49,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.markdown('<div class="title">🎧 Prediksi Audio — Buka atau Tutup</div>', unsafe_allow_html=True)
-st.caption("Unggah file audio (.wav) atau rekam langsung, sistem akan menebak apakah kondisi **Buka** atau **Tutup**")
+st.caption("Rekam suara langsung atau unggah file audio (.wav), sistem akan menebak apakah kondisi **Buka** atau **Tutup**")
 
 # =====================================================
 # 🛠 Helper: patch monotonic_cst (heuristik)
@@ -171,11 +162,29 @@ def extract_features_fixed(file_path, sr=22050, n_mfcc=13):
     """Extract features yang PERSIS seperti di training notebook"""
     try:
         # Load audio file (force sr to sr param)
-        y, sr = librosa.load(file_path, sr=sr)
-        st.write(f"🔍 Debug: Audio length = {len(y)}, Sample rate = {sr}")
+        y, original_sr = librosa.load(file_path, sr=None)
+        st.write(f"🔍 Debug: Original SR = {original_sr}, Target SR = {sr}")
+        
+        # Resample jika perlu
+        if original_sr != sr:
+            y = librosa.resample(y, orig_sr=original_sr, target_sr=sr)
+            st.write(f"✅ Resampled dari {original_sr} Hz ke {sr} Hz")
+        
+        st.write(f"🔍 Debug: Audio length = {len(y)}, Duration = {len(y)/sr:.2f}s")
 
+        # PENTING: Trim silence di awal dan akhir
+        y_trimmed, _ = librosa.effects.trim(y, top_db=20)
+        st.write(f"🔍 Debug: After trim = {len(y_trimmed)} samples")
+        
+        # Gunakan audio yang sudah di-trim
+        y = y_trimmed
+        
         # Normalisasi audio (PENTING!)
         y = librosa.util.normalize(y)
+        
+        # Debug: Check energy level
+        energy = np.sum(y**2) / len(y)
+        st.write(f"🔍 Debug: Audio energy = {energy:.6f}")
 
         # Ekstraksi MFCC dengan parameter konsisten
         mfcc = librosa.feature.mfcc(
@@ -202,6 +211,9 @@ def extract_features_fixed(file_path, sr=22050, n_mfcc=13):
         ])
 
         st.write(f"✅ Fitur berhasil diekstraksi: {len(features)} dimensi")
+        st.write(f"🔍 MFCC mean range: [{mfcc_mean.min():.2f}, {mfcc_mean.max():.2f}]")
+        st.write(f"🔍 Spectral centroid: {spectral_centroid:.2f} Hz")
+        
         return features
 
     except Exception as e:
@@ -239,45 +251,45 @@ def safe_predict(model, features_scaled):
             return 0, None, 50.0
 
 # =====================================================
-# 📤 UI: Rekam Suara (opsional) + Upload
+# 📤 UI: Rekam Suara Bawaan Streamlit + Upload
 # =====================================================
-st.markdown("### 🎙️ Rekam suara (opsional) / Upload file")
-recorded_tmp_path = None
+st.markdown("### 🎙️ Pilih Metode Input Audio")
 
-if HAS_RECORDER:
-    st.info("Fitur rekam tersedia — klik tombol untuk mulai merekam.")
-    recorded_bytes = audiorecorder("Mulai Rekam", "Stop")
-    if recorded_bytes:
-        # save to temporary file
-        tmp_rec = tempfile.NamedTemporaryFile(delete=False, suffix=".wav")
-        tmp_rec.write(recorded_bytes)
-        tmp_rec.flush()
-        tmp_rec.close()
-        recorded_tmp_path = tmp_rec.name
-        st.success("✅ Rekaman tersimpan (sementara)")
-        st.audio(recorded_tmp_path)
-else:
-    st.info("Untuk merekam langsung, install `streamlit-audiorecorder`. Aplikasi tetap menerima upload .wav.")
+# Tabs untuk memilih metode input
+tab1, tab2 = st.tabs(["🎤 Rekam Suara", "📁 Upload File"])
 
-uploaded_file = st.file_uploader("📁 Pilih file audio (.wav)", type=["wav"])
+audio_source = None
+
+with tab1:
+    st.info("Klik tombol rekam di bawah untuk merekam suara Anda langsung dari browser")
+    audio_bytes = st.audio_input("Rekam suara Anda")
+    
+    if audio_bytes:
+        audio_source = audio_bytes
+        st.success("✅ Audio berhasil direkam!")
+        st.audio(audio_bytes)
+
+with tab2:
+    uploaded_file = st.file_uploader("📁 Pilih file audio (.wav)", type=["wav"])
+    
+    if uploaded_file:
+        audio_source = uploaded_file
+        st.success("✅ File berhasil diunggah!")
+        st.audio(uploaded_file)
 
 # =====================================================
-# 🔁 Tentukan file audio yang akan dipakai (prioritas rekaman dulu)
+# 🔁 Proses audio source menjadi file temporary
 # =====================================================
 temp_audio_path = None
-# If recorded exists, prefer that
-if recorded_tmp_path and os.path.exists(recorded_tmp_path):
-    temp_audio_path = recorded_tmp_path
-# else if user uploaded file, save it to a temp file
-elif uploaded_file is not None:
-    with tempfile.NamedTemporaryFile(delete=False, suffix='.wav') as tmp_file:
-        tmp_file.write(uploaded_file.read())
-        temp_audio_path = tmp_file.name
 
-# Tampilkan audio player & basic info jika ada temp_audio_path
-if temp_audio_path:
+if audio_source is not None:
     try:
-        st.audio(temp_audio_path)
+        # Simpan ke temporary file
+        with tempfile.NamedTemporaryFile(delete=False, suffix='.wav') as tmp_file:
+            tmp_file.write(audio_source.read())
+            temp_audio_path = tmp_file.name
+        
+        # Tampilkan info audio
         y, sr = librosa.load(temp_audio_path, sr=None)
         duration = librosa.get_duration(y=y, sr=sr)
         st.info(f"🎵 Info Audio: Durasi: {duration:.2f} detik, Sample rate: {sr} Hz")
@@ -295,7 +307,7 @@ if temp_audio_path:
 # =====================================================
 if st.button("🔮 Prediksi Audio", type="primary"):
     if not temp_audio_path:
-        st.warning("Silakan upload atau rekam audio terlebih dahulu.")
+        st.warning("⚠️ Silakan rekam atau upload audio terlebih dahulu.")
     else:
         try:
             with st.spinner("🔄 Memproses audio dan mengekstraksi fitur..."):
@@ -400,17 +412,15 @@ if st.button("🔮 Prediksi Audio", type="primary"):
             try:
                 if temp_audio_path and os.path.exists(temp_audio_path):
                     os.unlink(temp_audio_path)
-                if recorded_tmp_path and os.path.exists(recorded_tmp_path):
-                    os.unlink(recorded_tmp_path)
             except Exception:
                 pass
 
 else:
     st.info("""
     **📋 Petunjuk Penggunaan:**
-    1. (Opsional) Rekam suara langsung atau upload audio WAV
+    1. Pilih metode input: **Rekam Suara** atau **Upload File**
     2. Pastikan audio berisi suara "buka" atau "tutup" yang jelas
-    3. Klik tombol "Prediksi Audio"
+    3. Klik tombol "🔮 Prediksi Audio"
     4. Sistem akan menampilkan hasil klasifikasi
     """)
 
@@ -462,4 +472,9 @@ with st.expander("🎵 Tips Rekam Audio yang Bagus"):
     - Background noise
     - Audio terlalu pendek (<0.5 detik)
     - Terlalu dekat dengan microphone (clipping)
+    
+    **Catatan Penting:**
+    - Fitur rekam memerlukan izin akses microphone dari browser
+    - Pastikan browser Anda mendukung Web Audio API
+    - Rekaman akan otomatis dalam format WAV
     """)
