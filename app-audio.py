@@ -2,10 +2,8 @@ import streamlit as st
 import numpy as np
 import librosa
 import joblib
-import soundfile as sf
 import tempfile
 import os
-from sklearn.ensemble import RandomForestClassifier
 
 # Set page config
 st.set_page_config(
@@ -14,7 +12,6 @@ st.set_page_config(
     layout="centered"
 )
 
-# Load model and preprocessing objects
 @st.cache_resource
 def load_model():
     try:
@@ -27,22 +24,18 @@ def load_model():
         return None, None, None
 
 def extract_features(file_path, sr=22050, n_mfcc=13):
-    """Extract features dari audio file (sama seperti training)"""
     try:
         y, sr = librosa.load(file_path, sr=sr)
         
-        # MFCC features
         mfcc = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=n_mfcc)
         mfcc_mean = np.mean(mfcc, axis=1)
         mfcc_std = np.std(mfcc, axis=1)
         
-        # Additional features
         spectral_centroid = np.mean(librosa.feature.spectral_centroid(y=y, sr=sr))
         zero_crossing_rate = np.mean(librosa.feature.zero_crossing_rate(y))
         chroma_stft = np.mean(librosa.feature.chroma_stft(y=y, sr=sr))
         rms_energy = np.mean(librosa.feature.rms(y=y))
         
-        # Combine features
         features = np.concatenate([
             mfcc_mean,
             mfcc_std,
@@ -55,137 +48,206 @@ def extract_features(file_path, sr=22050, n_mfcc=13):
         st.error(f"Error processing audio: {e}")
         return None
 
-def detect_speaker(audio_features, model, scaler, label_encoder):
-    """Deteksi speaker dan command"""
+def detect_speaker_advanced(audio_path):
+    """Deteksi speaker berdasarkan karakteristik audio yang lebih advance"""
     try:
-        # Scale features
-        features_scaled = scaler.transform(audio_features.reshape(1, -1))
+        y, sr = librosa.load(audio_path, sr=None)
         
-        # Predict
-        prediction = model.predict(features_scaled)[0]
-        command = label_encoder.inverse_transform([prediction])[0]
+        # Ekstrak fitur untuk deteksi speaker
+        duration = librosa.get_duration(y=y, sr=sr)
+        rms_energy = np.sqrt(np.mean(y**2))
+        spectral_centroid = np.mean(librosa.feature.spectral_centroid(y=y, sr=sr))
+        zero_crossing_rate = np.mean(librosa.feature.zero_crossing_rate(y))
         
-        return command
+        # Analisis pitch/frekuensi dasar
+        pitches, magnitudes = librosa.piptrack(y=y, sr=sr)
+        pitch_mean = np.mean(pitches[pitches > 0]) if np.any(pitches > 0) else 0
+        
+        # Heuristic rules berdasarkan analisis suara
+        # (Ini bisa disesuaikan dengan karakteristik suara Asep & Yotan Anda)
+        
+        # Rule 1: Berdasarkan energy (suara keras/lembut)
+        # Rule 2: Berdasarkan pitch (suara tinggi/rendah)
+        # Rule 3: Berdasarkan spectral centroid (bright/dark voice)
+        
+        st.write("🔍 **Analisis Karakteristik Suara:**")
+        st.write(f"   - Energy: {rms_energy:.4f}")
+        st.write(f"   - Pitch rata-rata: {pitch_mean:.1f} Hz")
+        st.write(f"   - Spectral Centroid: {spectral_centroid:.1f}")
+        st.write(f"   - Zero Crossing Rate: {zero_crossing_rate:.4f}")
+        
+        # LOGIC DETEKSI SPEAKER (SESUAIKAN DENGAN DATA ANDA)
+        # Contoh heuristic - sesuaikan threshold berdasarkan data nyata
+        
+        if rms_energy > 0.03 and pitch_mean < 180:
+            return "Asep"
+        elif rms_energy <= 0.03 and pitch_mean >= 180:
+            return "Yotan"
+        else:
+            # Fallback berdasarkan kombinasi fitur
+            if spectral_centroid > 1500 and zero_crossing_rate > 0.08:
+                return "Asep"
+            else:
+                return "Yotan"
+                
     except Exception as e:
-        st.error(f"Error in prediction: {e}")
-        return None
+        st.error(f"Error in speaker detection: {e}")
+        return "Tidak Diketahui"
 
 def main():
     st.title("🎤 Voice Command Detector")
-    st.write("Deteksi suara Asep dan Yotan untuk perintah 'Buka' dan 'Tutup'")
+    st.write("Deteksi perintah 'Buka' dan 'Tutup' + identifikasi speaker")
     
     # Load model
     model, scaler, label_encoder = load_model()
     
     if model is None:
-        st.error("Model tidak dapat dimuat. Pastikan file model tersedia.")
+        st.error("Model tidak dapat dimuat.")
         return
     
-    # File uploader
-    uploaded_file = st.file_uploader(
-        "Unggah file audio (format .wav)", 
-        type=['wav'],
-        help="Unggah file audio berisi perintah 'Buka' atau 'Tutup' dari Asep atau Yotan"
-    )
-    
-    # Atau rekaman langsung
+    # Tampilkan info model
     st.write("---")
-    st.subheader("Atau rekam suara langsung")
+    st.subheader("🔍 Model Info")
+    st.write(f"**Model bisa deteksi:** {list(label_encoder.classes_)}")
+    st.info("ℹ️ Model ini hanya bisa membedakan **KATA** (Buka/Tutup). Speaker dideteksi secara terpisah.")
     
-    # Streamlit audio recorder (menggunakan st.audio dengan file upload)
-    recorded_audio = st.file_uploader(
-        "Rekam dan unggah audio", 
-        type=['wav'],
-        key="recorder",
-        help="Rekam suara Anda dan unggah file hasil rekaman"
-    )
+    # Audio recorder
+    st.write("---")
+    st.subheader("🎙️ Rekam Suara")
     
-    audio_file = uploaded_file or recorded_audio
+    audio_bytes = st.audio_input("Rekam suara Anda (ucapkan 'Buka' atau 'Tutup'):")
     
-    if audio_file is not None:
-        # Display audio player
-        st.audio(audio_file, format='audio/wav')
-        
-        # Save uploaded file to temporary file
+    if audio_bytes is not None:
         with tempfile.NamedTemporaryFile(delete=False, suffix='.wav') as tmp_file:
-            tmp_file.write(audio_file.read())
+            tmp_file.write(audio_bytes.getvalue())
             tmp_path = tmp_file.name
         
-        try:
-            # Extract features
-            with st.spinner("Menganalisis audio..."):
-                features = extract_features(tmp_path)
-            
-            if features is not None:
-                # Detect speaker and command
-                command = detect_speaker(features, model, scaler, label_encoder)
+        st.audio(audio_bytes, format='audio/wav')
+        
+        col1, col2 = st.columns(2)
+        with col1:
+            predict_command = st.button("🎯 **Deteksi Perintah**", type="primary", use_container_width=True)
+        with col2:
+            detect_speaker = st.button("👤 **Deteksi Speaker**", type="secondary", use_container_width=True)
+        
+        if predict_command:
+            try:
+                with st.spinner("Menganalisis perintah..."):
+                    features = extract_features(tmp_path)
                 
-                if command is not None:
-                    # Simple speaker detection based on audio characteristics
-                    # Anda bisa menambahkan model deteksi speaker yang lebih canggih di sini
-                    duration = librosa.get_duration(filename=tmp_path)
-                    y, sr = librosa.load(tmp_path, sr=None)
-                    rms_energy = np.sqrt(np.mean(y**2))
+                if features is not None:
+                    features_scaled = scaler.transform(features.reshape(1, -1))
+                    prediction = model.predict(features_scaled)[0]
+                    predicted_command = label_encoder.inverse_transform([prediction])[0]
                     
-                    # Heuristic sederhana untuk membedakan speaker
-                    # (Ini adalah placeholder - Anda perlu model deteksi speaker yang sebenarnya)
-                    if rms_energy > 0.05:  # Threshold contoh
-                        detected_speaker = "Asep"
-                    else:
-                        detected_speaker = "Yotan"
+                    # Show probabilities
+                    probabilities = model.predict_proba(features_scaled)[0]
                     
-                    # Display results
-                    st.success("✅ Analisis selesai!")
+                    st.write("---")
+                    st.subheader("📊 Hasil Deteksi Perintah")
                     
                     col1, col2 = st.columns(2)
                     
                     with col1:
-                        st.subheader("🔊 Hasil Deteksi")
-                        st.write(f"**Speaker:** {detected_speaker}")
-                        st.write(f"**Perintah:** {command}")
+                        st.write("**Probabilitas:**")
+                        for i, (class_name, prob) in enumerate(zip(label_encoder.classes_, probabilities)):
+                            color = "🟢" if prob == max(probabilities) else "⚪"
+                            st.write(f"{color} {class_name}: {prob:.3f} ({prob*100:.1f}%)")
                     
                     with col2:
-                        st.subheader("🎯 Status Pintu")
-                        if command == "Buka":
-                            st.success(f"🚪 Pintu sudah **DIBUKA** oleh {detected_speaker}")
+                        st.write("**Hasil:**")
+                        if predicted_command == "Buka":
+                            st.success(f"**Perintah: {predicted_command}** 🚪")
+                            st.balloons()
                         else:
-                            st.warning(f"🚪 Pintu sudah **DITUTUP** oleh {detected_speaker}")
-                    
-                    # Audio analysis info
-                    with st.expander("📊 Informasi Analisis Audio"):
-                        st.write(f"Durasi audio: {duration:.2f} detik")
-                        st.write(f"Sample rate: {sr} Hz")
-                        st.write(f"Energy level: {rms_energy:.4f}")
-                        st.write(f"Jumlah fitur: {len(features)}")
+                            st.warning(f"**Perintah: {predicted_command}** 🚪")
                 
                 else:
-                    st.error("❌ Gagal melakukan prediksi")
+                    st.error("Gagal mengekstrak fitur audio")
             
-            else:
-                st.error("❌ Gagal mengekstrak fitur dari audio")
+            except Exception as e:
+                st.error(f"Error: {e}")
         
-        except Exception as e:
-            st.error(f"❌ Error processing audio: {e}")
+        if detect_speaker:
+            try:
+                with st.spinner("Menganalisis speaker..."):
+                    detected_speaker = detect_speaker_advanced(tmp_path)
+                
+                st.write("---")
+                st.subheader("👤 Hasil Deteksi Speaker")
+                
+                if detected_speaker == "Asep":
+                    st.success(f"**Speaker: {detected_speaker}** 🔊")
+                else:
+                    st.info(f"**Speaker: {detected_speaker}** 🔊")
+                    
+            except Exception as e:
+                st.error(f"Error deteksi speaker: {e}")
         
-        finally:
-            # Clean up temporary file
-            if os.path.exists(tmp_path):
-                os.unlink(tmp_path)
+        # Tombol kombinasi
+        st.write("---")
+        if st.button("🚀 **DETEKSI LENGKAP**", type="primary"):
+            try:
+                with st.spinner("Analisis lengkap..."):
+                    # Deteksi perintah
+                    features = extract_features(tmp_path)
+                    features_scaled = scaler.transform(features.reshape(1, -1))
+                    prediction = model.predict(features_scaled)[0]
+                    predicted_command = label_encoder.inverse_transform([prediction])[0]
+                    
+                    # Deteksi speaker
+                    detected_speaker = detect_speaker_advanced(tmp_path)
+                
+                st.write("---")
+                st.subheader("🎯 HASIL LENGKAP")
+                
+                col1, col2 = st.columns(2)
+                
+                with col1:
+                    st.write("**Deteksi Perintah:**")
+                    if predicted_command == "Buka":
+                        st.success(f"**{predicted_command}** 🚪")
+                    else:
+                        st.warning(f"**{predicted_command}** 🚪")
+                
+                with col2:
+                    st.write("**Deteksi Speaker:**")
+                    if detected_speaker == "Asep":
+                        st.success(f"**{detected_speaker}** 🔊")
+                    else:
+                        st.info(f"**{detected_speaker}** 🔊")
+                
+                # Final result
+                st.write("---")
+                st.subheader("🔔 STATUS PINTU")
+                if predicted_command == "Buka":
+                    st.success(f"🚪 **Pintu sudah DIBUKA oleh {detected_speaker}**")
+                    st.balloons()
+                else:
+                    st.warning(f"🚪 **Pintu sudah DITUTUP oleh {detected_speaker}**")
+                    
+            except Exception as e:
+                st.error(f"Error analisis lengkap: {e}")
+        
+        # Cleanup
+        if os.path.exists(tmp_path):
+            os.unlink(tmp_path)
     
     # Instructions
     with st.expander("ℹ️ Petunjuk Penggunaan"):
         st.write("""
-        1. **Unggah file audio** (.wav) yang berisi suara Asep atau Yotan
-        2. **Atau rekam suara** langsung dan unggah file rekaman
-        3. Sistem akan mendeteksi:
-           - Apakah suara berasal dari Asep atau Yotan
-           - Perintah 'Buka' atau 'Tutup'
-        4. Hasil akan ditampilkan dalam bentuk status pintu
+        **Cara penggunaan:**
+        1. **Rekam suara** - ucapkan "Buka" atau "Tutup" dengan jelas
+        2. **Pilih analisis:**
+           - 🎯 **Deteksi Perintah**: Hanya deteksi kata "Buka"/"Tutup"
+           - 👤 **Deteksi Speaker**: Hanya deteksi speaker Asep/Yotan  
+           - 🚀 **Deteksi Lengkap**: Deteksi perintah + speaker
+        3. **Lihat hasil** dan status pintu
         
         **Catatan:** 
-        - Hanya suara Asep dan Yotan yang akan diproses
-        - Suara lainnya tidak akan melakukan prediksi
-        - Format audio: WAV, sample rate 22050 Hz
+        - Model saat ini hanya terlatih untuk deteksi **KATA**
+        - Deteksi speaker menggunakan heuristic sederhana
+        - Untuk akurasi lebih tinggi, perlu model deteksi speaker terpisah
         """)
 
 if __name__ == "__main__":
