@@ -421,12 +421,6 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Modelling Suara Buka Tutup &amp; Deployment</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-libraries-load-data">1: Import Libraries &amp; Load Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-random-forest-model">2: Train Random Forest Model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-evaluation">3: Model Evaluation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-performance">4: Visualisasi Performance</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-importance-analysis">5: Feature Importance Analysis</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#detailed-classification-report">6: Detailed Classification Report</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-model">7:  Save Model</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#link-deploy-clasification-suara-buka-tutup"><strong>Link Deploy Clasification Suara Buka Tutup</strong></a></li>
@@ -450,321 +444,945 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">joblib</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomForestClassifier</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">classification_report</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Libraries imported successfully&quot;</span><span class="p">)</span>
-
-<span class="c1"># Load preprocessed data</span>
-<span class="n">X_train_scaled</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;X_train.npy&#39;</span><span class="p">)</span>
-<span class="n">X_val_scaled</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;X_val.npy&#39;</span><span class="p">)</span>
-<span class="n">y_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;y_train.npy&#39;</span><span class="p">)</span>
-<span class="n">y_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;y_val.npy&#39;</span><span class="p">)</span>
-
-<span class="c1"># Load preprocessing objects</span>
-<span class="n">label_encoder</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;label_encoder.pkl&#39;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training data: </span><span class="si">{</span><span class="n">X_train_scaled</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Validation data: </span><span class="si">{</span><span class="n">X_val_scaled</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Classes: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">label_encoder</span><span class="o">.</span><span class="n">classes_</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="c1"># Train model and make predictions</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="n">y_val_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_val_scaled</span><span class="p">)</span>
-
-<span class="c1"># Classification report</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Classification Report:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_val_pred</span><span class="p">,</span> <span class="n">target_names</span><span class="o">=</span><span class="n">label_encoder</span><span class="o">.</span><span class="n">classes_</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Libraries imported successfully
-Training data: (300, 30)
-Validation data: (100, 30)
-Classes: [&#39;Buka&#39;, &#39;Tutup&#39;]
-
-Classification Report:
-              precision    recall  f1-score   support
-
-        Buka       1.00      1.00      1.00        50
-       Tutup       1.00      1.00      1.00        50
-
-    accuracy                           1.00       100
-   macro avg       1.00      1.00      1.00       100
-weighted avg       1.00      1.00      1.00       100
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="train-random-forest-model">
-<h2>2: Train Random Forest Model<a class="headerlink" href="#train-random-forest-model" title="Link to this heading">#</a></h2>
-<p>Membuat model Random Forest dengan 100 trees dan max depth 10, kemudian melatihnya menggunakan data training.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Training Random Forest Model&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
-
-<span class="c1"># Initialize Random Forest</span>
-<span class="n">rf_model</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span>
-    <span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-    <span class="n">max_depth</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
-    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
-    <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span>
-<span class="p">)</span>
-
-<span class="c1"># Train model</span>
-<span class="n">rf_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Model training completed&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of trees: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">rf_model</span><span class="o">.</span><span class="n">estimators_</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Random Forest Model
-========================================
-Model training completed
-Number of trees: 100
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="model-evaluation">
-<h2>3: Model Evaluation<a class="headerlink" href="#model-evaluation" title="Link to this heading">#</a></h2>
-<p>Menghitung akurasi model pada data training dan validation, serta melakukan cross-validation untuk menguji konsistensi performa.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">cross_val_score</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Model Evaluation&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
-
-<span class="c1"># Predictions</span>
-<span class="n">y_train_pred</span> <span class="o">=</span> <span class="n">rf_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">)</span>
-<span class="n">y_val_pred</span> <span class="o">=</span> <span class="n">rf_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_val_scaled</span><span class="p">)</span>
-
-<span class="c1"># Calculate accuracies</span>
-<span class="n">train_accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">y_train_pred</span><span class="p">)</span>
-<span class="n">val_accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_val_pred</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training Accuracy: </span><span class="si">{</span><span class="n">train_accuracy</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Validation Accuracy: </span><span class="si">{</span><span class="n">val_accuracy</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="c1"># Cross-validation</span>
-<span class="n">cv_scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">rf_model</span><span class="p">,</span> <span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cross-validation scores: </span><span class="si">{</span><span class="n">cv_scores</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean CV Accuracy: </span><span class="si">{</span><span class="n">cv_scores</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> (+/- </span><span class="si">{</span><span class="n">cv_scores</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model Evaluation
-========================================
-Training Accuracy: 1.0000
-Validation Accuracy: 1.0000
-Cross-validation scores: [1. 1. 1. 1. 1.]
-Mean CV Accuracy: 1.0000 (+/- 0.0000)
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="visualisasi-performance">
-<h2>4: Visualisasi Performance<a class="headerlink" href="#visualisasi-performance" title="Link to this heading">#</a></h2>
-<p>Menampilkan confusion matrix untuk melihat distribusi prediksi dan grafik perbandingan akurasi training vs validation.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Performance Visualization&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-
-<span class="c1"># Confusion Matrix</span>
-<span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_val_pred</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">cm</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">,</span> 
-            <span class="n">xticklabels</span><span class="o">=</span><span class="n">label_encoder</span><span class="o">.</span><span class="n">classes_</span><span class="p">,</span> 
-            <span class="n">yticklabels</span><span class="o">=</span><span class="n">label_encoder</span><span class="o">.</span><span class="n">classes_</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Confusion Matrix&#39;</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Predicted&#39;</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Actual&#39;</span><span class="p">)</span>
-
-<span class="c1"># Accuracy Comparison</span>
-<span class="n">accuracies</span> <span class="o">=</span> <span class="p">[</span><span class="n">train_accuracy</span><span class="p">,</span> <span class="n">val_accuracy</span><span class="p">]</span>
-<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Training&#39;</span><span class="p">,</span> <span class="s1">&#39;Validation&#39;</span><span class="p">]</span>
-<span class="n">bars</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">accuracies</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">])</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Training vs Validation Accuracy&#39;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Accuracy&#39;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-
-<span class="c1"># Add value labels on bars</span>
-<span class="k">for</span> <span class="n">bar</span><span class="p">,</span> <span class="n">accuracy</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bars</span><span class="p">,</span> <span class="n">accuracies</span><span class="p">):</span>
-    <span class="n">height</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span>
-    <span class="n">ax2</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">bar</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span><span class="o">/</span><span class="mf">2.</span><span class="p">,</span> <span class="n">height</span> <span class="o">+</span> <span class="mf">0.01</span><span class="p">,</span>
-             <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">accuracy</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Performance Visualization
-========================================
-</pre></div>
-</div>
-<img alt="_images/c3423d151d2679de803e40022f22b8bcaad97c269c43a9a864bda485d5c0da31.png" src="_images/c3423d151d2679de803e40022f22b8bcaad97c269c43a9a864bda485d5c0da31.png" />
-</div>
-</div>
-</section>
-<section id="feature-importance-analysis">
-<h2>5: Feature Importance Analysis<a class="headerlink" href="#feature-importance-analysis" title="Link to this heading">#</a></h2>
-<p>Menganalisis dan memvisualisasikan 15 fitur paling penting yang mempengaruhi keputusan model dalam klasifikasi.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">confusion_matrix</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span><span class="p">,</span> <span class="n">cross_val_score</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span><span class="p">,</span> <span class="n">LabelEncoder</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.svm</span><span class="w"> </span><span class="kn">import</span> <span class="n">SVC</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">classification_report</span><span class="p">,</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">accuracy_score</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">GradientBoostingClassifier</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">joblib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Performance Visualization&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Modeling libraries imported successfully!&quot;</span><span class="p">)</span>
 
-<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="c1"># Load data fitur yang sudah dibersihkan</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">df_features</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;audio_features_clean.csv&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;📊 Loaded feature dataset: </span><span class="si">{</span><span class="n">df_features</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Columns: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">df_features</span><span class="o">.</span><span class="n">columns</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>  <span class="c1"># Tampilkan 10 kolom pertama</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Cannot load features file. Please run feature extraction first.&quot;</span><span class="p">)</span>
+    <span class="n">df_features</span> <span class="o">=</span> <span class="kc">None</span>
 
-<span class="c1"># Confusion Matrix</span>
-<span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_val_pred</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">cm</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">,</span> 
-            <span class="n">xticklabels</span><span class="o">=</span><span class="n">label_encoder</span><span class="o">.</span><span class="n">classes_</span><span class="p">,</span> 
-            <span class="n">yticklabels</span><span class="o">=</span><span class="n">label_encoder</span><span class="o">.</span><span class="n">classes_</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Confusion Matrix&#39;</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Predicted&#39;</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Actual&#39;</span><span class="p">)</span>
-
-<span class="c1"># Accuracy Comparison</span>
-<span class="n">accuracies</span> <span class="o">=</span> <span class="p">[</span><span class="n">train_accuracy</span><span class="p">,</span> <span class="n">val_accuracy</span><span class="p">]</span>
-<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Training&#39;</span><span class="p">,</span> <span class="s1">&#39;Validation&#39;</span><span class="p">]</span>
-<span class="n">bars</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">accuracies</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">])</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Training vs Validation Accuracy&#39;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Accuracy&#39;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-
-<span class="c1"># Add value labels on bars</span>
-<span class="k">for</span> <span class="n">bar</span><span class="p">,</span> <span class="n">accuracy</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bars</span><span class="p">,</span> <span class="n">accuracies</span><span class="p">):</span>
-    <span class="n">height</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span>
-    <span class="n">ax2</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">bar</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span><span class="o">/</span><span class="mf">2.</span><span class="p">,</span> <span class="n">height</span> <span class="o">+</span> <span class="mf">0.01</span><span class="p">,</span>
-             <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">accuracy</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="k">if</span> <span class="n">df_features</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">📈 Dataset Info:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total samples: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df_features</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Persons: </span><span class="si">{</span><span class="n">df_features</span><span class="p">[</span><span class="s1">&#39;person&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Commands: </span><span class="si">{</span><span class="n">df_features</span><span class="p">[</span><span class="s1">&#39;command&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Split distribution:</span><span class="se">\n</span><span class="si">{</span><span class="n">df_features</span><span class="p">[</span><span class="s1">&#39;split&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Performance Visualization
-========================================
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✅ Modeling libraries imported successfully!
+📊 Loaded feature dataset: (1480, 92)
+Columns: [&#39;rms_energy&#39;, &#39;zcr&#39;, &#39;energy_entropy&#39;, &#39;mean&#39;, &#39;std&#39;, &#39;skewness&#39;, &#39;kurtosis&#39;, &#39;max_amp&#39;, &#39;min_amp&#39;, &#39;range_amp&#39;]...
+
+📈 Dataset Info:
+Total samples: 1480
+Persons: [&#39;ardi&#39; &#39;asep&#39;]
+Commands: [&#39;buka&#39; &#39;tutup&#39;]
+Split distribution:
+split
+train    1400
+val        80
+Name: count, dtype: int64
 </pre></div>
 </div>
-<img alt="_images/c3423d151d2679de803e40022f22b8bcaad97c269c43a9a864bda485d5c0da31.png" src="_images/c3423d151d2679de803e40022f22b8bcaad97c269c43a9a864bda485d5c0da31.png" />
 </div>
 </div>
-</section>
-<section id="detailed-classification-report">
-<h2>6: Detailed Classification Report<a class="headerlink" href="#detailed-classification-report" title="Link to this heading">#</a></h2>
-<p>Menampilkan laporan klasifikasi detail termasuk precision, recall, dan F1-score untuk setiap kelas.</p>
+<p>PISAHKAN LABEL</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">joblib</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomForestClassifier</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">classification_report</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">prepare_features_and_labels</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Siapkan fitur dan label untuk training dan validation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Filter kolom fitur (exclude metadata)</span>
+    <span class="n">feature_columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">col</span> <span class="ow">not</span> <span class="ow">in</span> 
+                      <span class="p">[</span><span class="s1">&#39;split&#39;</span><span class="p">,</span> <span class="s1">&#39;person&#39;</span><span class="p">,</span> <span class="s1">&#39;command&#39;</span><span class="p">,</span> <span class="s1">&#39;file&#39;</span><span class="p">,</span> <span class="s1">&#39;is_augmented&#39;</span><span class="p">]]</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🎯 Using </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">feature_columns</span><span class="p">)</span><span class="si">}</span><span class="s2"> features for modeling&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Pisahkan data train dan validation</span>
+    <span class="n">train_data</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;split&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;train&#39;</span><span class="p">]</span>
+    <span class="n">val_data</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;split&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;val&#39;</span><span class="p">]</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;📚 Training samples: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">train_data</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🧪 Validation samples: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">val_data</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Prepare features and labels untuk berbagai skenario</span>
+    <span class="n">scenarios</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;person_identification&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;train_X&#39;</span><span class="p">:</span> <span class="n">train_data</span><span class="p">[</span><span class="n">feature_columns</span><span class="p">],</span>
+            <span class="s1">&#39;train_y&#39;</span><span class="p">:</span> <span class="n">train_data</span><span class="p">[</span><span class="s1">&#39;person&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;val_X&#39;</span><span class="p">:</span> <span class="n">val_data</span><span class="p">[</span><span class="n">feature_columns</span><span class="p">],</span>
+            <span class="s1">&#39;val_y&#39;</span><span class="p">:</span> <span class="n">val_data</span><span class="p">[</span><span class="s1">&#39;person&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Identify Person (Asep vs Ardi)&#39;</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;command_identification&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;train_X&#39;</span><span class="p">:</span> <span class="n">train_data</span><span class="p">[</span><span class="n">feature_columns</span><span class="p">],</span>
+            <span class="s1">&#39;train_y&#39;</span><span class="p">:</span> <span class="n">train_data</span><span class="p">[</span><span class="s1">&#39;command&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;val_X&#39;</span><span class="p">:</span> <span class="n">val_data</span><span class="p">[</span><span class="n">feature_columns</span><span class="p">],</span>
+            <span class="s1">&#39;val_y&#39;</span><span class="p">:</span> <span class="n">val_data</span><span class="p">[</span><span class="s1">&#39;command&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Identify Command (Buka vs Tutup)&#39;</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;combined_identification&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;train_X&#39;</span><span class="p">:</span> <span class="n">train_data</span><span class="p">[</span><span class="n">feature_columns</span><span class="p">],</span>
+            <span class="s1">&#39;train_y&#39;</span><span class="p">:</span> <span class="n">train_data</span><span class="p">[</span><span class="s1">&#39;person&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">train_data</span><span class="p">[</span><span class="s1">&#39;command&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;val_X&#39;</span><span class="p">:</span> <span class="n">val_data</span><span class="p">[</span><span class="n">feature_columns</span><span class="p">],</span>
+            <span class="s1">&#39;val_y&#39;</span><span class="p">:</span> <span class="n">val_data</span><span class="p">[</span><span class="s1">&#39;person&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">val_data</span><span class="p">[</span><span class="s1">&#39;command&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Combined (Person + Command)&#39;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="n">scenarios</span><span class="p">,</span> <span class="n">feature_columns</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Libraries imported successfully&quot;</span><span class="p">)</span>
-
-<span class="c1"># Load preprocessed data</span>
-<span class="n">X_train_scaled</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;X_train.npy&#39;</span><span class="p">)</span>
-<span class="n">X_val_scaled</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;X_val.npy&#39;</span><span class="p">)</span>
-<span class="n">y_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;y_train.npy&#39;</span><span class="p">)</span>
-<span class="n">y_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;y_val.npy&#39;</span><span class="p">)</span>
-
-<span class="c1"># Load preprocessing objects</span>
-<span class="n">label_encoder</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;label_encoder.pkl&#39;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training data: </span><span class="si">{</span><span class="n">X_train_scaled</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Validation data: </span><span class="si">{</span><span class="n">X_val_scaled</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Classes: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">label_encoder</span><span class="o">.</span><span class="n">classes_</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="c1"># Train model</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-
-<span class="c1"># Make predictions</span>
-<span class="n">y_val_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_val_scaled</span><span class="p">)</span>
-
-<span class="c1"># Classification report</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Classification Report:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_val_pred</span><span class="p">,</span> <span class="n">target_names</span><span class="o">=</span><span class="n">label_encoder</span><span class="o">.</span><span class="n">classes_</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">df_features</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">scenarios</span><span class="p">,</span> <span class="n">feature_columns</span> <span class="o">=</span> <span class="n">prepare_features_and_labels</span><span class="p">(</span><span class="n">df_features</span><span class="p">)</span>
+    
+    <span class="c1"># Tampilkan distribusi label</span>
+    <span class="k">for</span> <span class="n">scenario_name</span><span class="p">,</span> <span class="n">scenario_data</span> <span class="ow">in</span> <span class="n">scenarios</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">📊 </span><span class="si">{</span><span class="n">scenario_data</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Train labels: </span><span class="si">{</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">scenario_data</span><span class="p">[</span><span class="s1">&#39;train_y&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Val labels: </span><span class="si">{</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">scenario_data</span><span class="p">[</span><span class="s1">&#39;val_y&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Libraries imported successfully
-Training data: (300, 30)
-Validation data: (100, 30)
-Classes: [&#39;Buka&#39;, &#39;Tutup&#39;]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>🎯 Using 87 features for modeling
+📚 Training samples: 1400
+🧪 Validation samples: 80
 
-Classification Report:
+📊 Identify Person (Asep vs Ardi):
+Train labels: {&#39;ardi&#39;: 700, &#39;asep&#39;: 700}
+Val labels: {&#39;ardi&#39;: 40, &#39;asep&#39;: 40}
+
+📊 Identify Command (Buka vs Tutup):
+Train labels: {&#39;buka&#39;: 700, &#39;tutup&#39;: 700}
+Val labels: {&#39;buka&#39;: 40, &#39;tutup&#39;: 40}
+
+📊 Combined (Person + Command):
+Train labels: {&#39;ardi_buka&#39;: 350, &#39;ardi_tutup&#39;: 350, &#39;asep_buka&#39;: 350, &#39;asep_tutup&#39;: 350}
+Val labels: {&#39;ardi_buka&#39;: 20, &#39;ardi_tutup&#39;: 20, &#39;asep_buka&#39;: 20, &#39;asep_tutup&#39;: 20}
+</pre></div>
+</div>
+</div>
+</div>
+<p>MEMBUAT MODEL LATIH RANDOM FOREST</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">train_and_evaluate_models</span><span class="p">(</span><span class="n">scenarios</span><span class="p">,</span> <span class="n">feature_columns</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Train dan evaluate multiple models untuk setiap skenario</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">models</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;SVM&#39;</span><span class="p">:</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span>
+        <span class="s1">&#39;KNN&#39;</span><span class="p">:</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">5</span><span class="p">),</span>
+        <span class="s1">&#39;LogisticRegression&#39;</span><span class="p">:</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">),</span>
+        <span class="s1">&#39;GradientBoosting&#39;</span><span class="p">:</span> <span class="n">GradientBoostingClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="k">for</span> <span class="n">scenario_name</span><span class="p">,</span> <span class="n">scenario_data</span> <span class="ow">in</span> <span class="n">scenarios</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">🎯 Training models for: </span><span class="si">{</span><span class="n">scenario_data</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+        
+        <span class="c1"># Scale features</span>
+        <span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+        <span class="n">X_train_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">scenario_data</span><span class="p">[</span><span class="s1">&#39;train_X&#39;</span><span class="p">])</span>
+        <span class="n">X_val_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">scenario_data</span><span class="p">[</span><span class="s1">&#39;val_X&#39;</span><span class="p">])</span>
+        
+        <span class="c1"># Encode labels</span>
+        <span class="n">le</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+        <span class="n">y_train_encoded</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">scenario_data</span><span class="p">[</span><span class="s1">&#39;train_y&#39;</span><span class="p">])</span>
+        <span class="n">y_val_encoded</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">scenario_data</span><span class="p">[</span><span class="s1">&#39;val_y&#39;</span><span class="p">])</span>
+        
+        <span class="n">scenario_results</span> <span class="o">=</span> <span class="p">{}</span>
+        
+        <span class="k">for</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🔄 Training </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+            
+            <span class="c1"># Train model</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">y_train_encoded</span><span class="p">)</span>
+            
+            <span class="c1"># Predict</span>
+            <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_val_scaled</span><span class="p">)</span>
+            
+            <span class="c1"># Calculate accuracy</span>
+            <span class="n">accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_val_encoded</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+            
+            <span class="n">scenario_results</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="n">model</span><span class="p">,</span>
+                <span class="s1">&#39;scaler&#39;</span><span class="p">:</span> <span class="n">scaler</span><span class="p">,</span>
+                <span class="s1">&#39;label_encoder&#39;</span><span class="p">:</span> <span class="n">le</span><span class="p">,</span>
+                <span class="s1">&#39;accuracy&#39;</span><span class="p">:</span> <span class="n">accuracy</span><span class="p">,</span>
+                <span class="s1">&#39;predictions&#39;</span><span class="p">:</span> <span class="n">y_pred</span><span class="p">,</span>
+                <span class="s1">&#39;true_labels&#39;</span><span class="p">:</span> <span class="n">y_val_encoded</span>
+            <span class="p">}</span>
+            
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2"> Accuracy: </span><span class="si">{</span><span class="n">accuracy</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Find best model</span>
+        <span class="n">best_model_name</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">scenario_results</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">scenario_results</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+        <span class="n">best_accuracy</span> <span class="o">=</span> <span class="n">scenario_results</span><span class="p">[</span><span class="n">best_model_name</span><span class="p">][</span><span class="s1">&#39;accuracy&#39;</span><span class="p">]</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">🏆 Best model for </span><span class="si">{</span><span class="n">scenario_data</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">best_model_name</span><span class="si">}</span><span class="s2"> (Accuracy: </span><span class="si">{</span><span class="n">best_accuracy</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+        
+        <span class="n">results</span><span class="p">[</span><span class="n">scenario_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;scenario_data&#39;</span><span class="p">:</span> <span class="n">scenario_data</span><span class="p">,</span>
+            <span class="s1">&#39;models&#39;</span><span class="p">:</span> <span class="n">scenario_results</span><span class="p">,</span>
+            <span class="s1">&#39;best_model&#39;</span><span class="p">:</span> <span class="n">best_model_name</span><span class="p">,</span>
+            <span class="s1">&#39;feature_columns&#39;</span><span class="p">:</span> <span class="n">feature_columns</span>
+        <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="n">results</span>
+
+<span class="k">if</span> <span class="n">df_features</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">train_and_evaluate_models</span><span class="p">(</span><span class="n">scenarios</span><span class="p">,</span> <span class="n">feature_columns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>🎯 Training models for: Identify Person (Asep vs Ardi)
+==================================================
+🔄 Training SVM...
+✅ SVM Accuracy: 1.0000
+🔄 Training KNN...
+✅ KNN Accuracy: 1.0000
+🔄 Training LogisticRegression...
+✅ LogisticRegression Accuracy: 1.0000
+🔄 Training GradientBoosting...
+✅ GradientBoosting Accuracy: 1.0000
+
+🏆 Best model for Identify Person (Asep vs Ardi): SVM (Accuracy: 1.0000)
+
+🎯 Training models for: Identify Command (Buka vs Tutup)
+==================================================
+🔄 Training SVM...
+✅ SVM Accuracy: 0.8375
+🔄 Training KNN...
+✅ KNN Accuracy: 0.8625
+🔄 Training LogisticRegression...
+✅ LogisticRegression Accuracy: 0.8125
+🔄 Training GradientBoosting...
+✅ GradientBoosting Accuracy: 0.8625
+
+🏆 Best model for Identify Command (Buka vs Tutup): KNN (Accuracy: 0.8625)
+
+🎯 Training models for: Combined (Person + Command)
+==================================================
+🔄 Training SVM...
+✅ SVM Accuracy: 0.8500
+🔄 Training KNN...
+✅ KNN Accuracy: 0.8625
+🔄 Training LogisticRegression...
+✅ LogisticRegression Accuracy: 0.8125
+🔄 Training GradientBoosting...
+✅ GradientBoosting Accuracy: 0.8625
+
+🏆 Best model for Combined (Person + Command): KNN (Accuracy: 0.8625)
+</pre></div>
+</div>
+</div>
+</div>
+<p>evaluasi model data validation</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">detailed_validation_evaluation</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Evaluasi detail untuk setiap skenario di data validation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">scenario_name</span><span class="p">,</span> <span class="n">scenario_result</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">scenario_data</span> <span class="o">=</span> <span class="n">scenario_result</span><span class="p">[</span><span class="s1">&#39;scenario_data&#39;</span><span class="p">]</span>
+        <span class="n">best_model_name</span> <span class="o">=</span> <span class="n">scenario_result</span><span class="p">[</span><span class="s1">&#39;best_model&#39;</span><span class="p">]</span>
+        <span class="n">best_model_info</span> <span class="o">=</span> <span class="n">scenario_result</span><span class="p">[</span><span class="s1">&#39;models&#39;</span><span class="p">][</span><span class="n">best_model_name</span><span class="p">]</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">60</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;📊 DETAILED EVALUATION: </span><span class="si">{</span><span class="n">scenario_data</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🏆 Best Model: </span><span class="si">{</span><span class="n">best_model_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">60</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Classification report</span>
+        <span class="n">y_true</span> <span class="o">=</span> <span class="n">best_model_info</span><span class="p">[</span><span class="s1">&#39;true_labels&#39;</span><span class="p">]</span>
+        <span class="n">y_pred</span> <span class="o">=</span> <span class="n">best_model_info</span><span class="p">[</span><span class="s1">&#39;predictions&#39;</span><span class="p">]</span>
+        <span class="n">le</span> <span class="o">=</span> <span class="n">best_model_info</span><span class="p">[</span><span class="s1">&#39;label_encoder&#39;</span><span class="p">]</span>
+        
+        <span class="n">class_names</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">classes_</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🎯 Accuracy: </span><span class="si">{</span><span class="n">best_model_info</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">📋 Classification Report:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">target_names</span><span class="o">=</span><span class="n">class_names</span><span class="p">))</span>
+        
+        <span class="c1"># Cross-validation scores</span>
+        <span class="n">scaler</span> <span class="o">=</span> <span class="n">best_model_info</span><span class="p">[</span><span class="s1">&#39;scaler&#39;</span><span class="p">]</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">best_model_info</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">]</span>
+        
+        <span class="n">X_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">scenario_data</span><span class="p">[</span><span class="s1">&#39;train_X&#39;</span><span class="p">][</span><span class="n">scenario_result</span><span class="p">[</span><span class="s1">&#39;feature_columns&#39;</span><span class="p">]])</span>
+        <span class="n">y_encoded</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">scenario_data</span><span class="p">[</span><span class="s1">&#39;train_y&#39;</span><span class="p">])</span>
+        
+        <span class="n">cv_scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_scaled</span><span class="p">,</span> <span class="n">y_encoded</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;📊 Cross-Validation Scores: </span><span class="si">{</span><span class="n">cv_scores</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;📊 CV Mean Accuracy: </span><span class="si">{</span><span class="n">cv_scores</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> (+/- </span><span class="si">{</span><span class="n">cv_scores</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Per-class accuracy</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">🎯 Per-class Accuracy:&quot;</span><span class="p">)</span>
+        <span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+        <span class="n">per_class_accuracy</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">diagonal</span><span class="p">()</span> <span class="o">/</span> <span class="n">cm</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">class_name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">class_names</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">per_class_accuracy</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">df_features</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">detailed_validation_evaluation</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>============================================================
+📊 DETAILED EVALUATION: Identify Person (Asep vs Ardi)
+🏆 Best Model: SVM
+============================================================
+🎯 Accuracy: 1.0000
+
+📋 Classification Report:
               precision    recall  f1-score   support
 
-        Buka       1.00      1.00      1.00        50
-       Tutup       1.00      1.00      1.00        50
+        ardi       1.00      1.00      1.00        40
+        asep       1.00      1.00      1.00        40
 
-    accuracy                           1.00       100
-   macro avg       1.00      1.00      1.00       100
-weighted avg       1.00      1.00      1.00       100
+    accuracy                           1.00        80
+   macro avg       1.00      1.00      1.00        80
+weighted avg       1.00      1.00      1.00        80
+
+📊 Cross-Validation Scores: [1. 1. 1. 1. 1.]
+📊 CV Mean Accuracy: 1.0000 (+/- 0.0000)
+
+🎯 Per-class Accuracy:
+  ardi: 1.0000
+  asep: 1.0000
+
+============================================================
+📊 DETAILED EVALUATION: Identify Command (Buka vs Tutup)
+🏆 Best Model: KNN
+============================================================
+🎯 Accuracy: 0.8625
+
+📋 Classification Report:
+              precision    recall  f1-score   support
+
+        buka       0.89      0.82      0.86        40
+       tutup       0.84      0.90      0.87        40
+
+    accuracy                           0.86        80
+   macro avg       0.86      0.86      0.86        80
+weighted avg       0.86      0.86      0.86        80
+
+📊 Cross-Validation Scores: [1.         1.         0.73214286 0.4        0.425     ]
+📊 CV Mean Accuracy: 0.7114 (+/- 0.5261)
+
+🎯 Per-class Accuracy:
+  buka: 0.8250
+  tutup: 0.9000
+
+============================================================
+📊 DETAILED EVALUATION: Combined (Person + Command)
+🏆 Best Model: KNN
+============================================================
+🎯 Accuracy: 0.8625
+
+📋 Classification Report:
+              precision    recall  f1-score   support
+
+   ardi_buka       1.00      1.00      1.00        20
+  ardi_tutup       1.00      1.00      1.00        20
+   asep_buka       0.76      0.65      0.70        20
+  asep_tutup       0.70      0.80      0.74        20
+
+    accuracy                           0.86        80
+   macro avg       0.87      0.86      0.86        80
+weighted avg       0.87      0.86      0.86        80
+
+📊 Cross-Validation Scores: [0.73214286 0.70714286 0.67857143 0.65357143 0.75357143]
+📊 CV Mean Accuracy: 0.7050 (+/- 0.0718)
+
+🎯 Per-class Accuracy:
+  ardi_buka: 1.0000
+  ardi_tutup: 1.0000
+  asep_buka: 0.6500
+  asep_tutup: 0.8000
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section id="save-model">
-<h2>7:  Save Model<a class="headerlink" href="#save-model" title="Link to this heading">#</a></h2>
-<p>Menyimpan model yang sudah dilatih ke file pickle untuk digunakan pada tahap deployment atau inferensi.</p>
+<p>confusion matrix</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Saving Model&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_confusion_matrices</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plot confusion matrix untuk setiap skenario</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+    <span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+    
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="p">(</span><span class="n">scenario_name</span><span class="p">,</span> <span class="n">scenario_result</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+        <span class="k">if</span> <span class="n">idx</span> <span class="o">&gt;=</span> <span class="mi">4</span><span class="p">:</span>  <span class="c1"># Max 4 plots</span>
+            <span class="k">break</span>
+            
+        <span class="n">best_model_name</span> <span class="o">=</span> <span class="n">scenario_result</span><span class="p">[</span><span class="s1">&#39;best_model&#39;</span><span class="p">]</span>
+        <span class="n">best_model_info</span> <span class="o">=</span> <span class="n">scenario_result</span><span class="p">[</span><span class="s1">&#39;models&#39;</span><span class="p">][</span><span class="n">best_model_name</span><span class="p">]</span>
+        
+        <span class="n">y_true</span> <span class="o">=</span> <span class="n">best_model_info</span><span class="p">[</span><span class="s1">&#39;true_labels&#39;</span><span class="p">]</span>
+        <span class="n">y_pred</span> <span class="o">=</span> <span class="n">best_model_info</span><span class="p">[</span><span class="s1">&#39;predictions&#39;</span><span class="p">]</span>
+        <span class="n">le</span> <span class="o">=</span> <span class="n">best_model_info</span><span class="p">[</span><span class="s1">&#39;label_encoder&#39;</span><span class="p">]</span>
+        <span class="n">class_names</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">classes_</span>
+        
+        <span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+        
+        <span class="c1"># Plot confusion matrix</span>
+        <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">cm</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">,</span> 
+                   <span class="n">xticklabels</span><span class="o">=</span><span class="n">class_names</span><span class="p">,</span> <span class="n">yticklabels</span><span class="o">=</span><span class="n">class_names</span><span class="p">,</span>
+                   <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+        
+        <span class="n">axes</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">scenario_result</span><span class="p">[</span><span class="s2">&quot;scenario_data&quot;</span><span class="p">][</span><span class="s2">&quot;description&quot;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
+                           <span class="sa">f</span><span class="s1">&#39;Best Model: </span><span class="si">{</span><span class="n">best_model_name</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
+                           <span class="sa">f</span><span class="s1">&#39;Accuracy: </span><span class="si">{</span><span class="n">best_model_info</span><span class="p">[</span><span class="s2">&quot;accuracy&quot;</span><span class="p">]</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Predicted&#39;</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Actual&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Hide unused subplots</span>
+    <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">),</span> <span class="mi">4</span><span class="p">):</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
-<span class="c1"># Save the trained model</span>
-<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">rf_model</span><span class="p">,</span> <span class="s1">&#39;random_forest_model.pkl&#39;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Model saved as &#39;random_forest_model.pkl&#39;&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Model training and evaluation completed successfully&quot;</span><span class="p">)</span>
-
-<span class="c1"># Final summary</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Model Training Summary:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Feature Space: </span><span class="si">{</span><span class="n">X_train_scaled</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> features&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training Samples: </span><span class="si">{</span><span class="n">X_train_scaled</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Validation Samples: </span><span class="si">{</span><span class="n">X_val_scaled</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Classes: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">label_encoder</span><span class="o">.</span><span class="n">classes_</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">df_features</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">plot_confusion_matrices</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving Model
-========================================
-Model saved as &#39;random_forest_model.pkl&#39;
-Model training and evaluation completed successfully
+<img alt="_images/1eee9c7262960c2834e27b6658305e6a2e8e9dd11fe79a5fddccfedc1a47d352.png" src="_images/1eee9c7262960c2834e27b6658305e6a2e8e9dd11fe79a5fddccfedc1a47d352.png" />
+</div>
+</div>
+<p>fitur importance</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">analyze_feature_importance</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Analisis feature importance untuk model yang bisa memberikan importance</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🔍 FEATURE IMPORTANCE ANALYSIS&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">scenario_name</span><span class="p">,</span> <span class="n">scenario_result</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">📊 Scenario: </span><span class="si">{</span><span class="n">scenario_result</span><span class="p">[</span><span class="s1">&#39;scenario_data&#39;</span><span class="p">][</span><span class="s1">&#39;description&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Hanya untuk model yang memiliki feature_importance_</span>
+        <span class="k">for</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">model_info</span> <span class="ow">in</span> <span class="n">scenario_result</span><span class="p">[</span><span class="s1">&#39;models&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">model</span> <span class="o">=</span> <span class="n">model_info</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">]</span>
+            
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s1">&#39;feature_importances_&#39;</span><span class="p">):</span>
+                <span class="n">importance_scores</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">feature_importances_</span>
+                <span class="n">feature_importance_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+                    <span class="s1">&#39;feature&#39;</span><span class="p">:</span> <span class="n">scenario_result</span><span class="p">[</span><span class="s1">&#39;feature_columns&#39;</span><span class="p">],</span>
+                    <span class="s1">&#39;importance&#39;</span><span class="p">:</span> <span class="n">importance_scores</span>
+                <span class="p">})</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;importance&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">🏆 </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2"> - Top 10 Features:&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">feature_importance_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+                
+                <span class="c1"># Plot top features</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+                <span class="n">top_features</span> <span class="o">=</span> <span class="n">feature_importance_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">top_features</span><span class="p">[</span><span class="s1">&#39;feature&#39;</span><span class="p">],</span> <span class="n">top_features</span><span class="p">[</span><span class="s1">&#39;importance&#39;</span><span class="p">])</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Top 10 Features - </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">scenario_result</span><span class="p">[</span><span class="s2">&quot;scenario_data&quot;</span><span class="p">][</span><span class="s2">&quot;description&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Importance&#39;</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+            
+            <span class="k">elif</span> <span class="n">model_name</span> <span class="o">==</span> <span class="s1">&#39;LogisticRegression&#39;</span><span class="p">:</span>
+                <span class="c1"># Untuk Logistic Regression, gunakan absolute coefficients</span>
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s1">&#39;coef_&#39;</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                        <span class="n">importance_scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">importance_scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
+                    
+                    <span class="n">feature_importance_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+                        <span class="s1">&#39;feature&#39;</span><span class="p">:</span> <span class="n">scenario_result</span><span class="p">[</span><span class="s1">&#39;feature_columns&#39;</span><span class="p">],</span>
+                        <span class="s1">&#39;importance&#39;</span><span class="p">:</span> <span class="n">importance_scores</span>
+                    <span class="p">})</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;importance&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                    
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">🏆 </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2"> - Top 10 Features (Absolute Coefficients):&quot;</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">feature_importance_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
 
-Model Training Summary:
-Feature Space: 30 features
-Training Samples: 300
-Validation Samples: 100
-Classes: [&#39;Buka&#39;, &#39;Tutup&#39;]
+<span class="k">if</span> <span class="n">df_features</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">analyze_feature_importance</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>🔍 FEATURE IMPORTANCE ANALYSIS
+==================================================
+
+📊 Scenario: Identify Person (Asep vs Ardi)
+
+🏆 LogisticRegression - Top 10 Features (Absolute Coefficients):
+           feature  importance
+19      mfcc_1_max    0.547843
+26      mfcc_3_min    0.488701
+70        chroma_3    0.427440
+50      mfcc_9_min    0.420439
+38      mfcc_6_min    0.415648
+6         kurtosis    0.401279
+24     mfcc_3_mean    0.388018
+27      mfcc_3_max    0.361758
+2   energy_entropy    0.356192
+5         skewness    0.344096
+
+🏆 GradientBoosting - Top 10 Features:
+        feature  importance
+48  mfcc_9_mean    0.271460
+8       min_amp    0.220926
+63  mfcc_12_max    0.101959
+3          mean    0.067998
+27   mfcc_3_max    0.034788
+26   mfcc_3_min    0.030129
+19   mfcc_1_max    0.022892
+38   mfcc_6_min    0.022820
+18   mfcc_1_min    0.020339
+81      rms_std    0.017360
+</pre></div>
+</div>
+<img alt="_images/8a0828017247b4987373383156d37c7506c29eb4071dc5c4b50b8de5e0e1c6f4.png" src="_images/8a0828017247b4987373383156d37c7506c29eb4071dc5c4b50b8de5e0e1c6f4.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>📊 Scenario: Identify Command (Buka vs Tutup)
+
+🏆 LogisticRegression - Top 10 Features (Absolute Coefficients):
+           feature  importance
+19      mfcc_1_max    0.547843
+26      mfcc_3_min    0.488701
+70        chroma_3    0.427440
+50      mfcc_9_min    0.420439
+38      mfcc_6_min    0.415648
+6         kurtosis    0.401279
+24     mfcc_3_mean    0.388018
+27      mfcc_3_max    0.361758
+2   energy_entropy    0.356192
+5         skewness    0.344096
+
+🏆 GradientBoosting - Top 10 Features:
+        feature  importance
+48  mfcc_9_mean    0.271460
+8       min_amp    0.220926
+63  mfcc_12_max    0.101959
+3          mean    0.067998
+27   mfcc_3_max    0.034788
+26   mfcc_3_min    0.030129
+19   mfcc_1_max    0.022892
+38   mfcc_6_min    0.022820
+18   mfcc_1_min    0.020339
+81      rms_std    0.017360
+</pre></div>
+</div>
+<img alt="_images/46024b802fc4c1a6c8de56083ed496e347b1ced91a50251258f1ff54b7c830e0.png" src="_images/46024b802fc4c1a6c8de56083ed496e347b1ced91a50251258f1ff54b7c830e0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>📊 Scenario: Combined (Person + Command)
+
+🏆 LogisticRegression - Top 10 Features (Absolute Coefficients):
+           feature  importance
+19      mfcc_1_max    0.547843
+26      mfcc_3_min    0.488701
+70        chroma_3    0.427440
+50      mfcc_9_min    0.420439
+38      mfcc_6_min    0.415648
+6         kurtosis    0.401279
+24     mfcc_3_mean    0.388018
+27      mfcc_3_max    0.361758
+2   energy_entropy    0.356192
+5         skewness    0.344096
+
+🏆 GradientBoosting - Top 10 Features:
+        feature  importance
+48  mfcc_9_mean    0.271460
+8       min_amp    0.220926
+63  mfcc_12_max    0.101959
+3          mean    0.067998
+27   mfcc_3_max    0.034788
+26   mfcc_3_min    0.030129
+19   mfcc_1_max    0.022892
+38   mfcc_6_min    0.022820
+18   mfcc_1_min    0.020339
+81      rms_std    0.017360
+</pre></div>
+</div>
+<img alt="_images/2dc7d32879d5f47d907c638af45a6dc9650c2c1b4d43a98786b949d12b061f9a.png" src="_images/2dc7d32879d5f47d907c638af45a6dc9650c2c1b4d43a98786b949d12b061f9a.png" />
+</div>
+</div>
+<p>prediksi suara buka tutup</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">librosa</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">librosa.display</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">noisereduce</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nr</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Audio</span>
+
+<span class="c1"># Copy fungsi preprocessing dan feature extraction yang diperlukan untuk prediksi</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">preprocess_for_prediction</span><span class="p">(</span><span class="n">audio_path</span><span class="p">,</span> <span class="n">target_sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mf">2.0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Preprocessing untuk prediksi audio baru</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Load audio dengan librosa</span>
+        <span class="n">audio</span><span class="p">,</span> <span class="n">sr</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">audio_path</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">target_sr</span><span class="p">)</span>
+        
+        <span class="c1"># 1. Noise Reduction</span>
+        <span class="n">audio_clean</span> <span class="o">=</span> <span class="n">nr</span><span class="o">.</span><span class="n">reduce_noise</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">audio</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span> <span class="n">prop_decrease</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+        
+        <span class="c1"># 2. Normalize audio</span>
+        <span class="n">audio_norm</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">audio_clean</span><span class="p">)</span>
+        
+        <span class="c1"># 3. Trim silence</span>
+        <span class="n">audio_trim</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">trim</span><span class="p">(</span><span class="n">audio_norm</span><span class="p">,</span> <span class="n">top_db</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+        
+        <span class="c1"># 4. Fixed length processing</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">audio_trim</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">int</span><span class="p">(</span><span class="n">duration</span> <span class="o">*</span> <span class="n">target_sr</span><span class="p">):</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">audio_trim</span><span class="p">)</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">duration</span> <span class="o">*</span> <span class="n">target_sr</span><span class="p">))</span> <span class="o">//</span> <span class="mi">2</span>
+            <span class="n">audio_fixed</span> <span class="o">=</span> <span class="n">audio_trim</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">start</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">duration</span> <span class="o">*</span> <span class="n">target_sr</span><span class="p">)]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">padding</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">duration</span> <span class="o">*</span> <span class="n">target_sr</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">audio_trim</span><span class="p">)</span>
+            <span class="n">audio_fixed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">audio_trim</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">padding</span><span class="p">),</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;constant&#39;</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">audio_fixed</span><span class="p">,</span> <span class="n">target_sr</span>
+    
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error preprocessing </span><span class="si">{</span><span class="n">audio_path</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">extract_features_for_prediction</span><span class="p">(</span><span class="n">audio</span><span class="p">,</span> <span class="n">sr</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Ekstrak fitur untuk prediksi audio baru</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="c1"># Basic Time Domain Features</span>
+    <span class="n">features</span><span class="p">[</span><span class="s1">&#39;rms_energy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">audio</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+    <span class="n">features</span><span class="p">[</span><span class="s1">&#39;zcr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">zero_crossing_rate</span><span class="p">(</span><span class="n">audio</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">features</span><span class="p">[</span><span class="s1">&#39;energy_entropy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="o">-</span><span class="n">audio</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">audio</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">1e-10</span><span class="p">))</span>
+    
+    <span class="c1"># Statistical Features</span>
+    <span class="n">features</span><span class="p">[</span><span class="s1">&#39;mean&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">audio</span><span class="p">)</span>
+    <span class="n">features</span><span class="p">[</span><span class="s1">&#39;std&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">audio</span><span class="p">)</span>
+    <span class="n">features</span><span class="p">[</span><span class="s1">&#39;skewness&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">audio</span><span class="p">)</span><span class="o">.</span><span class="n">skew</span><span class="p">()</span>
+    <span class="n">features</span><span class="p">[</span><span class="s1">&#39;kurtosis&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">audio</span><span class="p">)</span><span class="o">.</span><span class="n">kurtosis</span><span class="p">()</span>
+    <span class="n">features</span><span class="p">[</span><span class="s1">&#39;max_amp&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">audio</span><span class="p">))</span>
+    <span class="n">features</span><span class="p">[</span><span class="s1">&#39;min_amp&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">audio</span><span class="p">)</span>
+    <span class="n">features</span><span class="p">[</span><span class="s1">&#39;range_amp&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">features</span><span class="p">[</span><span class="s1">&#39;max_amp&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">features</span><span class="p">[</span><span class="s1">&#39;min_amp&#39;</span><span class="p">]</span>
+    
+    <span class="c1"># Spectral Features</span>
+    <span class="n">stft</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">librosa</span><span class="o">.</span><span class="n">stft</span><span class="p">(</span><span class="n">audio</span><span class="p">))</span>
+    
+    <span class="n">spectral_centroid</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">spectral_centroid</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="n">stft</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">features</span><span class="p">[</span><span class="s1">&#39;spectral_centroid_mean&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">spectral_centroid</span><span class="p">)</span>
+    <span class="n">features</span><span class="p">[</span><span class="s1">&#39;spectral_centroid_std&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">spectral_centroid</span><span class="p">)</span>
+    
+    <span class="n">spectral_rolloff</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">spectral_rolloff</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="n">stft</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">features</span><span class="p">[</span><span class="s1">&#39;spectral_rolloff_mean&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">spectral_rolloff</span><span class="p">)</span>
+    <span class="n">features</span><span class="p">[</span><span class="s1">&#39;spectral_rolloff_std&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">spectral_rolloff</span><span class="p">)</span>
+    
+    <span class="n">spectral_flux</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">stft</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">features</span><span class="p">[</span><span class="s1">&#39;spectral_flux_mean&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">spectral_flux</span><span class="p">)</span>
+    <span class="n">features</span><span class="p">[</span><span class="s1">&#39;spectral_flux_std&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">spectral_flux</span><span class="p">)</span>
+    
+    <span class="c1"># MFCC Statistics</span>
+    <span class="n">mfccs</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">mfcc</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">audio</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span> <span class="n">n_mfcc</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">13</span><span class="p">):</span>
+        <span class="n">features</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;mfcc_</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">_mean&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mfccs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">features</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;mfcc_</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">_std&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">mfccs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    
+    <span class="c1"># Chroma Features</span>
+    <span class="n">chroma</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">chroma_stft</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">audio</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">)</span>
+    <span class="n">chroma_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">chroma</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">):</span>
+        <span class="n">features</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;chroma_</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">chroma_mean</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    
+    <span class="c1"># Temporal Features</span>
+    <span class="n">frame_length</span> <span class="o">=</span> <span class="mi">1024</span>
+    <span class="n">hop_length</span> <span class="o">=</span> <span class="mi">512</span>
+    <span class="n">rms</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">rms</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">audio</span><span class="p">,</span> <span class="n">frame_length</span><span class="o">=</span><span class="n">frame_length</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="n">hop_length</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">features</span><span class="p">[</span><span class="s1">&#39;rms_mean&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">rms</span><span class="p">)</span>
+    <span class="n">features</span><span class="p">[</span><span class="s1">&#39;rms_std&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">rms</span><span class="p">)</span>
+    
+    <span class="c1"># Additional Statistical Moments</span>
+    <span class="n">features</span><span class="p">[</span><span class="s1">&#39;percentile_25&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">audio</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+    <span class="n">features</span><span class="p">[</span><span class="s1">&#39;percentile_50&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">audio</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+    <span class="n">features</span><span class="p">[</span><span class="s1">&#39;percentile_75&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">audio</span><span class="p">,</span> <span class="mi">75</span><span class="p">)</span>
+    <span class="n">features</span><span class="p">[</span><span class="s1">&#39;iqr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">features</span><span class="p">[</span><span class="s1">&#39;percentile_75&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">features</span><span class="p">[</span><span class="s1">&#39;percentile_25&#39;</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">features</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">predict_new_audio</span><span class="p">(</span><span class="n">audio_path</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="n">target_scenario</span><span class="o">=</span><span class="s1">&#39;combined_identification&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Prediksi audio baru menggunakan model yang sudah dilatih</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🎯 PREDICTING NEW AUDIO: </span><span class="si">{</span><span class="n">audio_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Preprocess audio baru</span>
+        <span class="n">processed_audio</span><span class="p">,</span> <span class="n">sr</span> <span class="o">=</span> <span class="n">preprocess_for_prediction</span><span class="p">(</span><span class="n">audio_path</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">processed_audio</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Failed to preprocess audio&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+        
+        <span class="c1"># Extract features</span>
+        <span class="n">features</span> <span class="o">=</span> <span class="n">extract_features_for_prediction</span><span class="p">(</span><span class="n">processed_audio</span><span class="p">,</span> <span class="n">sr</span><span class="p">)</span>
+        
+        <span class="c1"># Create feature vector</span>
+        <span class="n">scenario_result</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="n">target_scenario</span><span class="p">]</span>
+        <span class="n">feature_columns</span> <span class="o">=</span> <span class="n">scenario_result</span><span class="p">[</span><span class="s1">&#39;feature_columns&#39;</span><span class="p">]</span>
+        
+        <span class="n">feature_vector</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">feature_columns</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">features</span><span class="p">:</span>
+                <span class="n">feature_vector</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">features</span><span class="p">[</span><span class="n">feature</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">feature_vector</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Default value jika feature tidak ada</span>
+        
+        <span class="n">feature_vector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">feature_vector</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        
+        <span class="c1"># Get best model untuk skenario</span>
+        <span class="n">best_model_name</span> <span class="o">=</span> <span class="n">scenario_result</span><span class="p">[</span><span class="s1">&#39;best_model&#39;</span><span class="p">]</span>
+        <span class="n">best_model_info</span> <span class="o">=</span> <span class="n">scenario_result</span><span class="p">[</span><span class="s1">&#39;models&#39;</span><span class="p">][</span><span class="n">best_model_name</span><span class="p">]</span>
+        
+        <span class="c1"># Scale features</span>
+        <span class="n">feature_vector_scaled</span> <span class="o">=</span> <span class="n">best_model_info</span><span class="p">[</span><span class="s1">&#39;scaler&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">feature_vector</span><span class="p">)</span>
+        
+        <span class="c1"># Predict</span>
+        <span class="n">prediction_encoded</span> <span class="o">=</span> <span class="n">best_model_info</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">feature_vector_scaled</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        
+        <span class="c1"># Untuk model yang punya predict_proba</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">best_model_info</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">],</span> <span class="s1">&#39;predict_proba&#39;</span><span class="p">):</span>
+            <span class="n">prediction_proba</span> <span class="o">=</span> <span class="n">best_model_info</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">feature_vector_scaled</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">confidence</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">prediction_proba</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Untuk model tanpa probability, set confidence ke 1.0</span>
+            <span class="n">prediction_proba</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">confidence</span> <span class="o">=</span> <span class="mf">1.0</span>
+        
+        <span class="c1"># Decode prediction</span>
+        <span class="n">prediction</span> <span class="o">=</span> <span class="n">best_model_info</span><span class="p">[</span><span class="s1">&#39;label_encoder&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">([</span><span class="n">prediction_encoded</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ Prediction: </span><span class="si">{</span><span class="n">prediction</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;📊 Confidence: </span><span class="si">{</span><span class="n">confidence</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Tampilkan semua probabilities jika available</span>
+        <span class="k">if</span> <span class="n">prediction_proba</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">classes</span> <span class="o">=</span> <span class="n">best_model_info</span><span class="p">[</span><span class="s1">&#39;label_encoder&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">classes_</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;📈 Class Probabilities:&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">class_name</span><span class="p">,</span> <span class="n">prob</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">classes</span><span class="p">,</span> <span class="n">prediction_proba</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   </span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">prob</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">prediction</span><span class="p">,</span> <span class="n">confidence</span>
+        
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Prediction error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">traceback</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Detailed error: </span><span class="si">{</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">demo_predictions</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Demo prediksi menggunakan data validation yang sebenarnya</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🎪 DEMO PREDICTIONS&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">30</span><span class="p">)</span>
+    
+    <span class="c1"># Cari file audio yang benar-benar ada di dataset</span>
+    <span class="n">demo_samples</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">split</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">]:</span>
+        <span class="n">split_path</span> <span class="o">=</span> <span class="s2">&quot;datasetaudio/val&quot;</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">split_path</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">person</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">split_path</span><span class="p">):</span>
+                <span class="n">person_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">split_path</span><span class="p">,</span> <span class="n">person</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">person_path</span><span class="p">):</span>
+                    <span class="k">for</span> <span class="n">command</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;buka&#39;</span><span class="p">,</span> <span class="s1">&#39;tutup&#39;</span><span class="p">]:</span>
+                        <span class="n">command_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">person_path</span><span class="p">,</span> <span class="n">command</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">command_path</span><span class="p">):</span>
+                            <span class="n">wav_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">command_path</span><span class="p">)</span> <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.wav&#39;</span><span class="p">)]</span>
+                            <span class="k">if</span> <span class="n">wav_files</span><span class="p">:</span>
+                                <span class="c1"># Ambil 1 file per kombinasi person-command</span>
+                                <span class="n">demo_samples</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                                    <span class="s1">&#39;person&#39;</span><span class="p">:</span> <span class="n">person</span><span class="p">,</span>
+                                    <span class="s1">&#39;command&#39;</span><span class="p">:</span> <span class="n">command</span><span class="p">,</span>
+                                    <span class="s1">&#39;file&#39;</span><span class="p">:</span> <span class="n">wav_files</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                    <span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">command_path</span><span class="p">,</span> <span class="n">wav_files</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                                <span class="p">})</span>
+                                <span class="k">break</span>
+    
+    <span class="c1"># Batasi demo ke 3 samples</span>
+    <span class="n">demo_samples</span> <span class="o">=</span> <span class="n">demo_samples</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+    
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">demo_samples</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Tidak ditemukan file audio untuk demo&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+    
+    <span class="n">correct_predictions</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">total_predictions</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">sample</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">demo_samples</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">🔊 Sample </span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   File: </span><span class="si">{</span><span class="n">sample</span><span class="p">[</span><span class="s1">&#39;file&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   True Label: </span><span class="si">{</span><span class="n">sample</span><span class="p">[</span><span class="s1">&#39;person&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">sample</span><span class="p">[</span><span class="s1">&#39;command&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Path: </span><span class="si">{</span><span class="n">sample</span><span class="p">[</span><span class="s1">&#39;path&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Check if file exists</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="s1">&#39;path&#39;</span><span class="p">]):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   ❌ File tidak ditemukan: </span><span class="si">{</span><span class="n">sample</span><span class="p">[</span><span class="s1">&#39;path&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">continue</span>
+        
+        <span class="c1"># Predict</span>
+        <span class="n">prediction</span><span class="p">,</span> <span class="n">confidence</span> <span class="o">=</span> <span class="n">predict_new_audio</span><span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="s1">&#39;path&#39;</span><span class="p">],</span> <span class="n">results</span><span class="p">,</span> <span class="s1">&#39;combined_identification&#39;</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">prediction</span><span class="p">:</span>
+            <span class="n">true_label</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">sample</span><span class="p">[</span><span class="s1">&#39;person&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">sample</span><span class="p">[</span><span class="s1">&#39;command&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">is_correct</span> <span class="o">=</span> <span class="n">prediction</span> <span class="o">==</span> <span class="n">true_label</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;✅ CORRECT&quot;</span> <span class="k">if</span> <span class="n">is_correct</span> <span class="k">else</span> <span class="s2">&quot;❌ WRONG&quot;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2"> - Confidence: </span><span class="si">{</span><span class="n">confidence</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="n">is_correct</span><span class="p">:</span>
+                <span class="n">correct_predictions</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">total_predictions</span> <span class="o">+=</span> <span class="mi">1</span>
+    
+    <span class="k">if</span> <span class="n">total_predictions</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">accuracy</span> <span class="o">=</span> <span class="n">correct_predictions</span> <span class="o">/</span> <span class="n">total_predictions</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">🎯 Demo Accuracy: </span><span class="si">{</span><span class="n">accuracy</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">correct_predictions</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">total_predictions</span><span class="si">}</span><span class="s2"> correct)&quot;</span><span class="p">)</span>
+
+<span class="c1"># Save models untuk penggunaan future</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">save_models</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Simpan model dan preprocessing objects</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">joblib</span>
+    
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s1">&#39;saved_models&#39;</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">scenario_name</span><span class="p">,</span> <span class="n">scenario_result</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">best_model_name</span> <span class="o">=</span> <span class="n">scenario_result</span><span class="p">[</span><span class="s1">&#39;best_model&#39;</span><span class="p">]</span>
+        <span class="n">best_model_info</span> <span class="o">=</span> <span class="n">scenario_result</span><span class="p">[</span><span class="s1">&#39;models&#39;</span><span class="p">][</span><span class="n">best_model_name</span><span class="p">]</span>
+        
+        <span class="n">model_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="n">best_model_info</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;scaler&#39;</span><span class="p">:</span> <span class="n">best_model_info</span><span class="p">[</span><span class="s1">&#39;scaler&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;label_encoder&#39;</span><span class="p">:</span> <span class="n">best_model_info</span><span class="p">[</span><span class="s1">&#39;label_encoder&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;feature_columns&#39;</span><span class="p">:</span> <span class="n">scenario_result</span><span class="p">[</span><span class="s1">&#39;feature_columns&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;scenario_description&#39;</span><span class="p">:</span> <span class="n">scenario_result</span><span class="p">[</span><span class="s1">&#39;scenario_data&#39;</span><span class="p">][</span><span class="s1">&#39;description&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;accuracy&#39;</span><span class="p">:</span> <span class="n">best_model_info</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">]</span>
+        <span class="p">}</span>
+        
+        <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;saved_models/</span><span class="si">{</span><span class="n">scenario_name</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">best_model_name</span><span class="si">}</span><span class="s2">.joblib&quot;</span>
+        <span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">model_data</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;💾 Saved model: </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="s1">&#39;df_features&#39;</span> <span class="ow">in</span> <span class="nb">locals</span><span class="p">()</span> <span class="ow">and</span> <span class="n">df_features</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="c1"># Demo predictions dengan file yang benar-benar ada</span>
+    <span class="n">demo_predictions</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+    
+    <span class="c1"># Save models</span>
+    <span class="n">save_models</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">🎉 MODELING COMPLETED!&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">30</span><span class="p">)</span>
+    
+    <span class="c1"># Summary hasil akhir</span>
+    <span class="k">for</span> <span class="n">scenario_name</span><span class="p">,</span> <span class="n">scenario_result</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">best_model_name</span> <span class="o">=</span> <span class="n">scenario_result</span><span class="p">[</span><span class="s1">&#39;best_model&#39;</span><span class="p">]</span>
+        <span class="n">best_accuracy</span> <span class="o">=</span> <span class="n">scenario_result</span><span class="p">[</span><span class="s1">&#39;models&#39;</span><span class="p">][</span><span class="n">best_model_name</span><span class="p">][</span><span class="s1">&#39;accuracy&#39;</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;📊 </span><span class="si">{</span><span class="n">scenario_result</span><span class="p">[</span><span class="s1">&#39;scenario_data&#39;</span><span class="p">][</span><span class="s1">&#39;description&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Best Model: </span><span class="si">{</span><span class="n">best_model_name</span><span class="si">}</span><span class="s2"> | Accuracy: </span><span class="si">{</span><span class="n">best_accuracy</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">💡 Insights:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;• Person Identification: </span><span class="si">{</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;person_identification&#39;</span><span class="p">][</span><span class="s1">&#39;models&#39;</span><span class="p">][</span><span class="s1">&#39;SVM&#39;</span><span class="p">][</span><span class="s1">&#39;accuracy&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> → Excellent!&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;• Command Identification: </span><span class="si">{</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;command_identification&#39;</span><span class="p">][</span><span class="s1">&#39;models&#39;</span><span class="p">][</span><span class="s1">&#39;KNN&#39;</span><span class="p">][</span><span class="s1">&#39;accuracy&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> → Good!&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;• Combined Identification: </span><span class="si">{</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;combined_identification&#39;</span><span class="p">][</span><span class="s1">&#39;models&#39;</span><span class="p">][</span><span class="s1">&#39;KNN&#39;</span><span class="p">][</span><span class="s1">&#39;accuracy&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> → Good!&quot;</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">🚀 NEXT STEPS:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;1. Gunakan model yang disimpan di folder &#39;saved_models&#39;&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;2. Untuk prediksi audio baru, gunakan fungsi predict_new_audio()&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;3. Tingkatkan akurasi dengan menambah data training&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Data features tidak ditemukan. Pastikan preprocessing dan feature extraction sudah dijalankan.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>🎪 DEMO PREDICTIONS
+==============================
+
+🔊 Sample 1:
+   File: Recording_22.wav
+   True Label: ardi_buka
+   Path: datasetaudio/val/ardi/buka/Recording_22.wav
+🎯 PREDICTING NEW AUDIO: datasetaudio/val/ardi/buka/Recording_22.wav
+========================================
+✅ Prediction: asep_buka
+📊 Confidence: 0.4000
+📈 Class Probabilities:
+   ardi_buka: 0.0000
+   ardi_tutup: 0.2000
+   asep_buka: 0.4000
+   asep_tutup: 0.4000
+   ❌ WRONG - Confidence: 0.4000
+
+🔊 Sample 2:
+   File: buka_train_0007.wav
+   True Label: asep_buka
+   Path: datasetaudio/val/asep/buka/buka_train_0007.wav
+🎯 PREDICTING NEW AUDIO: datasetaudio/val/asep/buka/buka_train_0007.wav
+========================================
+✅ Prediction: asep_tutup
+📊 Confidence: 0.6000
+📈 Class Probabilities:
+   ardi_buka: 0.0000
+   ardi_tutup: 0.0000
+   asep_buka: 0.4000
+   asep_tutup: 0.6000
+   ❌ WRONG - Confidence: 0.6000
+
+🎯 Demo Accuracy: 0.0000 (0/2 correct)
+💾 Saved model: saved_models/person_identification_SVM.joblib
+💾 Saved model: saved_models/command_identification_KNN.joblib
+💾 Saved model: saved_models/combined_identification_KNN.joblib
+
+🎉 MODELING COMPLETED!
+==============================
+📊 Identify Person (Asep vs Ardi):
+   Best Model: SVM | Accuracy: 1.0000
+📊 Identify Command (Buka vs Tutup):
+   Best Model: KNN | Accuracy: 0.8625
+📊 Combined (Person + Command):
+   Best Model: KNN | Accuracy: 0.8625
+
+💡 Insights:
+• Person Identification: 1.0000 → Excellent!
+• Command Identification: 0.8625 → Good!
+• Combined Identification: 0.8625 → Good!
+
+🚀 NEXT STEPS:
+1. Gunakan model yang disimpan di folder &#39;saved_models&#39;
+2. Untuk prediksi audio baru, gunakan fungsi predict_new_audio()
+3. Tingkatkan akurasi dengan menambah data training
 </pre></div>
 </div>
 </div>
@@ -832,12 +1450,6 @@ Classes: [&#39;Buka&#39;, &#39;Tutup&#39;]
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Modelling Suara Buka Tutup &amp; Deployment</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-libraries-load-data">1: Import Libraries &amp; Load Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-random-forest-model">2: Train Random Forest Model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-evaluation">3: Model Evaluation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-performance">4: Visualisasi Performance</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-importance-analysis">5: Feature Importance Analysis</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#detailed-classification-report">6: Detailed Classification Report</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-model">7:  Save Model</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#link-deploy-clasification-suara-buka-tutup"><strong>Link Deploy Clasification Suara Buka Tutup</strong></a></li>
