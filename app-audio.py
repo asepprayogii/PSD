@@ -49,7 +49,7 @@ def extract_features(file_path, sr=22050, n_mfcc=13):
         return None
 
 def detect_speaker_advanced(audio_path):
-    """Deteksi speaker berdasarkan karakteristik audio yang lebih advance"""
+    """Deteksi speaker berdasarkan karakteristik audio"""
     try:
         y, sr = librosa.load(audio_path, sr=None)
         
@@ -59,16 +59,9 @@ def detect_speaker_advanced(audio_path):
         spectral_centroid = np.mean(librosa.feature.spectral_centroid(y=y, sr=sr))
         zero_crossing_rate = np.mean(librosa.feature.zero_crossing_rate(y))
         
-        # Analisis pitch/frekuensi dasar
+        # Analisis pitch
         pitches, magnitudes = librosa.piptrack(y=y, sr=sr)
         pitch_mean = np.mean(pitches[pitches > 0]) if np.any(pitches > 0) else 0
-        
-        # Heuristic rules berdasarkan analisis suara
-        # (Ini bisa disesuaikan dengan karakteristik suara Asep & Yotan Anda)
-        
-        # Rule 1: Berdasarkan energy (suara keras/lembut)
-        # Rule 2: Berdasarkan pitch (suara tinggi/rendah)
-        # Rule 3: Berdasarkan spectral centroid (bright/dark voice)
         
         st.write("🔍 **Analisis Karakteristik Suara:**")
         st.write(f"   - Energy: {rms_energy:.4f}")
@@ -76,15 +69,12 @@ def detect_speaker_advanced(audio_path):
         st.write(f"   - Spectral Centroid: {spectral_centroid:.1f}")
         st.write(f"   - Zero Crossing Rate: {zero_crossing_rate:.4f}")
         
-        # LOGIC DETEKSI SPEAKER (SESUAIKAN DENGAN DATA ANDA)
-        # Contoh heuristic - sesuaikan threshold berdasarkan data nyata
-        
+        # LOGIC DETEKSI SPEAKER - SESUAIKAN DENGAN DATA ANDA
         if rms_energy > 0.03 and pitch_mean < 180:
             return "Asep"
         elif rms_energy <= 0.03 and pitch_mean >= 180:
             return "Yotan"
         else:
-            # Fallback berdasarkan kombinasi fitur
             if spectral_centroid > 1500 and zero_crossing_rate > 0.08:
                 return "Asep"
             else:
@@ -111,18 +101,24 @@ def main():
     st.write(f"**Model bisa deteksi:** {list(label_encoder.classes_)}")
     st.info("ℹ️ Model ini hanya bisa membedakan **KATA** (Buka/Tutup). Speaker dideteksi secara terpisah.")
     
-    # Audio recorder
+    # File uploader sebagai ganti audio_input
     st.write("---")
-    st.subheader("🎙️ Rekam Suara")
+    st.subheader("🎙️ Upload File Audio")
     
-    audio_bytes = st.audio_input("Rekam suara Anda (ucapkan 'Buka' atau 'Tutup'):")
+    uploaded_file = st.file_uploader(
+        "Upload file audio WAV (rekam suara 'Buka' atau 'Tutup'):",
+        type=['wav'],
+        help="Rekam suara Anda terlebih dahulu, lalu upload file WAV-nya"
+    )
     
-    if audio_bytes is not None:
-        with tempfile.NamedTemporaryFile(delete=False, suffix='.wav') as tmp_file:
-            tmp_file.write(audio_bytes.getvalue())
-            tmp_path = tmp_file.name
+    if uploaded_file is not None:
+        # Display audio player
+        st.audio(uploaded_file, format='audio/wav')
         
-        st.audio(audio_bytes, format='audio/wav')
+        # Save uploaded file to temporary file
+        with tempfile.NamedTemporaryFile(delete=False, suffix='.wav') as tmp_file:
+            tmp_file.write(uploaded_file.read())
+            tmp_path = tmp_file.name
         
         col1, col2 = st.columns(2)
         with col1:
@@ -232,22 +228,25 @@ def main():
         # Cleanup
         if os.path.exists(tmp_path):
             os.unlink(tmp_path)
+    else:
+        st.info("📁 Silakan upload file audio WAV yang berisi suara 'Buka' atau 'Tutup'")
     
     # Instructions
     with st.expander("ℹ️ Petunjuk Penggunaan"):
         st.write("""
         **Cara penggunaan:**
-        1. **Rekam suara** - ucapkan "Buka" atau "Tutup" dengan jelas
-        2. **Pilih analisis:**
+        1. **Rekam suara** di aplikasi recorder (ucapkan "Buka" atau "Tutup")
+        2. **Save sebagai file WAV**
+        3. **Upload file** di atas
+        4. **Pilih analisis:**
            - 🎯 **Deteksi Perintah**: Hanya deteksi kata "Buka"/"Tutup"
            - 👤 **Deteksi Speaker**: Hanya deteksi speaker Asep/Yotan  
            - 🚀 **Deteksi Lengkap**: Deteksi perintah + speaker
-        3. **Lihat hasil** dan status pintu
         
         **Catatan:** 
-        - Model saat ini hanya terlatih untuk deteksi **KATA**
-        - Deteksi speaker menggunakan heuristic sederhana
-        - Untuk akurasi lebih tinggi, perlu model deteksi speaker terpisah
+        - Format file harus WAV
+        - Model terlatih untuk deteksi **KATA** (Buka/Tutup)
+        - Deteksi speaker menggunakan analisis karakteristik suara
         """)
 
 if __name__ == "__main__":
