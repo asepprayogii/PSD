@@ -421,6 +421,18 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-load-data">1: Import &amp; Load Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fungsi-preprocessing">2. Fungsi Preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-sebelum-dan-sesudah-dilakukan-preprocessing">3. Contoh Sebelum dan Sesudah dilakukan Preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-hasil-preprocessing">4. DATASET HASIL PREPROCESSING</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-extraction-statistik-time-series-suara-buka-tutup">Feature Extraction (Statistik Time Series) Suara Buka Tutup</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-dan-load-data">1. Import dan load data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fungsi-ekstraksi-fitur">2. Fungsi Ekstraksi Fitur</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bangun-dataset-fitur-dari-train-val">3. Bangun Dataset Fitur dari train &amp; val</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-importance-analysis-selection">4. Feature Importance Analysis &amp; Selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detail-analysis">5. Detail Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#outlier-detection-handling">6. Outlier Detection &amp; Handling</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -464,7 +476,9 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Fungsi Preprocessing</p>
+</section>
+<section id="fungsi-preprocessing">
+<h2>2. Fungsi Preprocessing<a class="headerlink" href="#fungsi-preprocessing" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">preprocess_audio</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">target_sr</span><span class="o">=</span><span class="n">TARGET_SR</span><span class="p">,</span> <span class="n">target_len</span><span class="o">=</span><span class="n">MAX_LEN</span><span class="p">,</span> <span class="n">noise_reduction</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -492,7 +506,9 @@ document.write(`
 </div>
 </div>
 </div>
-<p>CONTOH SEBELUM DAN SESUDAH PREPROCESSING</p>
+</section>
+<section id="contoh-sebelum-dan-sesudah-dilakukan-preprocessing">
+<h2>3. Contoh Sebelum dan Sesudah dilakukan Preprocessing<a class="headerlink" href="#contoh-sebelum-dan-sesudah-dilakukan-preprocessing" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">find_sample_file</span><span class="p">(</span><span class="n">train_dir</span><span class="p">,</span> <span class="n">speaker_pref</span><span class="o">=</span><span class="n">PREFERRED_SPEAKER</span><span class="p">,</span> <span class="n">action_pref</span><span class="o">=</span><span class="n">PREFERRED_ACTION</span><span class="p">,</span> <span class="n">target_idx</span><span class="o">=</span><span class="n">TARGET_INDEX</span><span class="p">):</span>
@@ -586,7 +602,9 @@ Sample rate setelah pr : 22050 Hz | Durasi baru  : 1.00 s
                 </audio>
               </div></div>
 </div>
-<p>DATASET HASIL PREPROCESSING</p>
+</section>
+<section id="dataset-hasil-preprocessing">
+<h2>4. DATASET HASIL PREPROCESSING<a class="headerlink" href="#dataset-hasil-preprocessing" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
@@ -806,8 +824,11 @@ Validation: 40/200 = 20.0%
 <img alt="_images/a61742b5dd31d661fb7cd94a520f96dcb6a585d3a4af0152073ab68487863e2a.png" src="_images/a61742b5dd31d661fb7cd94a520f96dcb6a585d3a4af0152073ab68487863e2a.png" />
 </div>
 </div>
-<p>Feature Extraction (Statistik Time Series) Suara Buka Tutup</p>
-<p>Import dan load data</p>
+</section>
+<section id="feature-extraction-statistik-time-series-suara-buka-tutup">
+<h2>Feature Extraction (Statistik Time Series) Suara Buka Tutup<a class="headerlink" href="#feature-extraction-statistik-time-series-suara-buka-tutup" title="Link to this heading">#</a></h2>
+<section id="import-dan-load-data">
+<h3>1. Import dan load data<a class="headerlink" href="#import-dan-load-data" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Feature extraction adapted for datasetaudio/train/{speaker}/{action} format</span>
@@ -834,9 +855,9 @@ Validation: 40/200 = 20.0%
 </div>
 </div>
 </div>
-<ol class="arabic simple" start="2">
-<li><p>Fungsi Ekstraksi Fitur</p></li>
-</ol>
+</section>
+<section id="fungsi-ekstraksi-fitur">
+<h3>2. Fungsi Ekstraksi Fitur<a class="headerlink" href="#fungsi-ekstraksi-fitur" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">extract_comprehensive_features</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">):</span>
@@ -1042,197 +1063,23 @@ Validation: 40/200 = 20.0%
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train feature extraction:   0%|          | 0/160 [00:00&lt;?, ?it/s]/usr/local/python/3.12.1/lib/python3.12/site-packages/librosa/core/spectrum.py:266: UserWarning: n_fft=1024 is too large for input signal of length=690
-  warnings.warn(
-/usr/local/python/3.12.1/lib/python3.12/site-packages/librosa/core/spectrum.py:266: UserWarning: n_fft=1024 is too large for input signal of length=345
-  warnings.warn(
-Train feature extraction:  11%|█         | 17/160 [00:07&lt;00:40,  3.57it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train feature extraction:  35%|███▌      | 56/160 [00:18&lt;00:31,  3.34it/s]/usr/local/python/3.12.1/lib/python3.12/site-packages/librosa/core/pitch.py:103: UserWarning: Trying to estimate tuning from empty frequency set.
-  return pitch_tuning(
-Train feature extraction: 100%|██████████| 160/160 [00:47&lt;00:00,  3.39it/s]
-Val feature extraction: 100%|██████████| 40/40 [00:10&lt;00:00,  3.78it/s]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train features shape: (160, 131)
-Val features shape  : (40, 131)
-Fitur tersimpan: features_train.csv / features_val.csv / .pkl
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">181</span>
+<span class="g g-Whitespace">    </span><span class="mi">178</span>     <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_records</span><span class="p">(</span><span class="n">records</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">179</span>     <span class="k">return</span> <span class="n">df</span>
+<span class="ne">--&gt; </span><span class="mi">181</span> <span class="n">df_train_feat</span> <span class="o">=</span> <span class="n">build_feature_dataframe</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Train feature extraction&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">182</span> <span class="n">df_val_feat</span>   <span class="o">=</span> <span class="n">build_feature_dataframe</span><span class="p">(</span><span class="n">val_data</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Val feature extraction&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">184</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Train features shape:&quot;</span><span class="p">,</span> <span class="n">df_train_feat</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>stat_mean</th>
-      <th>stat_std</th>
-      <th>stat_var</th>
-      <th>stat_skew</th>
-      <th>stat_kurt</th>
-      <th>stat_min</th>
-      <th>stat_max</th>
-      <th>stat_range</th>
-      <th>stat_median</th>
-      <th>stat_q25</th>
-      <th>...</th>
-      <th>tonnetz_4_std</th>
-      <th>tonnetz_5_mean</th>
-      <th>tonnetz_5_std</th>
-      <th>spec_entropy_mean</th>
-      <th>spec_entropy_std</th>
-      <th>stat_entropy</th>
-      <th>speaker</th>
-      <th>action</th>
-      <th>combined</th>
-      <th>filename</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>-0.016276</td>
-      <td>0.179102</td>
-      <td>0.032078</td>
-      <td>0.008991</td>
-      <td>1.368842</td>
-      <td>-0.882036</td>
-      <td>0.998849</td>
-      <td>1.880886</td>
-      <td>0.000000</td>
-      <td>-0.114197</td>
-      <td>...</td>
-      <td>0.027926</td>
-      <td>-0.015044</td>
-      <td>0.023741</td>
-      <td>5.792195</td>
-      <td>2.350596</td>
-      <td>-16.510247</td>
-      <td>asep</td>
-      <td>tutup</td>
-      <td>asep_tutup</td>
-      <td>Tutup8_aug_shift_30.wav</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>-0.000027</td>
-      <td>0.162744</td>
-      <td>0.026486</td>
-      <td>0.192526</td>
-      <td>8.484117</td>
-      <td>-0.843834</td>
-      <td>0.999998</td>
-      <td>1.843832</td>
-      <td>0.000000</td>
-      <td>-0.012093</td>
-      <td>...</td>
-      <td>0.043394</td>
-      <td>-0.005942</td>
-      <td>0.038967</td>
-      <td>3.878178</td>
-      <td>1.512613</td>
-      <td>-46.631310</td>
-      <td>yotan</td>
-      <td>tutup</td>
-      <td>yotan_tutup</td>
-      <td>tutup_12.wav</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>0.000064</td>
-      <td>0.205671</td>
-      <td>0.042300</td>
-      <td>0.436317</td>
-      <td>1.038379</td>
-      <td>-0.744213</td>
-      <td>0.999995</td>
-      <td>1.744208</td>
-      <td>0.000000</td>
-      <td>-0.098123</td>
-      <td>...</td>
-      <td>0.054517</td>
-      <td>0.092437</td>
-      <td>0.098517</td>
-      <td>3.281807</td>
-      <td>2.171091</td>
-      <td>-28.026650</td>
-      <td>yotan</td>
-      <td>tutup</td>
-      <td>yotan_tutup</td>
-      <td>tutup_4.wav</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>-0.048444</td>
-      <td>0.230336</td>
-      <td>0.053055</td>
-      <td>-0.132969</td>
-      <td>0.505848</td>
-      <td>-0.998175</td>
-      <td>0.851561</td>
-      <td>1.849736</td>
-      <td>-0.018028</td>
-      <td>-0.186683</td>
-      <td>...</td>
-      <td>0.022436</td>
-      <td>-0.020684</td>
-      <td>0.012506</td>
-      <td>6.161753</td>
-      <td>1.725480</td>
-      <td>-5.376562</td>
-      <td>asep</td>
-      <td>tutup</td>
-      <td>asep_tutup</td>
-      <td>Tutup10_aug_pitch_15.wav</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>-0.000096</td>
-      <td>0.111742</td>
-      <td>0.012486</td>
-      <td>0.723286</td>
-      <td>13.511356</td>
-      <td>-0.821675</td>
-      <td>0.999997</td>
-      <td>1.821671</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>...</td>
-      <td>0.038301</td>
-      <td>0.010803</td>
-      <td>0.024033</td>
-      <td>4.294136</td>
-      <td>3.093474</td>
-      <td>-74.861962</td>
-      <td>yotan</td>
-      <td>tutup</td>
-      <td>yotan_tutup</td>
-      <td>tutup_2_aug_noise_3.wav</td>
-    </tr>
-  </tbody>
-</table>
-<p>5 rows × 131 columns</p>
-</div></div></div>
+<span class="ne">NameError</span>: name &#39;train_data&#39; is not defined
+</pre></div>
 </div>
-<ol class="arabic simple" start="3">
-<li><p>Bangun Dataset Fitur dari train &amp; val</p></li>
-</ol>
+</div>
+</div>
+</section>
+<section id="bangun-dataset-fitur-dari-train-val">
+<h3>3. Bangun Dataset Fitur dari train &amp; val<a class="headerlink" href="#bangun-dataset-fitur-dari-train-val" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">tqdm</span>
@@ -1518,9 +1365,9 @@ Contoh hasil ekstraksi fitur (5 baris pertama):
 </div>
 </div>
 </div>
-<ol class="arabic simple" start="4">
-<li><p>Feature Importance Analysis &amp; Selection</p></li>
-</ol>
+</section>
+<section id="feature-importance-analysis-selection">
+<h3>4. Feature Importance Analysis &amp; Selection<a class="headerlink" href="#feature-importance-analysis-selection" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
@@ -1711,9 +1558,9 @@ Files saved: train_features_selected.csv, val_features_selected.csv
 </div>
 </div>
 </div>
-<ol class="arabic simple" start="5">
-<li><p>Detail Analysis</p></li>
-</ol>
+</section>
+<section id="detail-analysis">
+<h3>5. Detail Analysis<a class="headerlink" href="#detail-analysis" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
@@ -1824,9 +1671,9 @@ Informasi feature selection disimpan ke: feature_selection_info.json
 </div>
 </div>
 </div>
-<ol class="arabic simple" start="6">
-<li><p>Outlier Detection &amp; Handling</p></li>
-</ol>
+</section>
+<section id="outlier-detection-handling">
+<h3>6. Outlier Detection &amp; Handling<a class="headerlink" href="#outlier-detection-handling" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">IsolationForest</span>
@@ -2075,6 +1922,7 @@ Dataset clean disimpan:
 </div>
 </section>
 </section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -2141,6 +1989,18 @@ Dataset clean disimpan:
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-load-data">1: Import &amp; Load Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fungsi-preprocessing">2. Fungsi Preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-sebelum-dan-sesudah-dilakukan-preprocessing">3. Contoh Sebelum dan Sesudah dilakukan Preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-hasil-preprocessing">4. DATASET HASIL PREPROCESSING</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-extraction-statistik-time-series-suara-buka-tutup">Feature Extraction (Statistik Time Series) Suara Buka Tutup</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-dan-load-data">1. Import dan load data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fungsi-ekstraksi-fitur">2. Fungsi Ekstraksi Fitur</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bangun-dataset-fitur-dari-train-val">3. Bangun Dataset Fitur dari train &amp; val</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-importance-analysis-selection">4. Feature Importance Analysis &amp; Selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detail-analysis">5. Detail Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#outlier-detection-handling">6. Outlier Detection &amp; Handling</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

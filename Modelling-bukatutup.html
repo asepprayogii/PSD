@@ -421,9 +421,18 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Modelling Suara Buka Tutup &amp; Deployment</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-libraries-load-data">1: Import Libraries &amp; Load Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pisahkan-label">2. Pisahkan Label</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-model-latih-random-forest">3. Membuat Model Latih Random Forest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi-model-data-validation">4. Evaluasi Model Data Validation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">5. Confusion Matrix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitur-importance">6. Fitur Importance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prediksi-suara-buka-tutup">7. Prediksi Suara Buka Tutup</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#link-deploy-clasification-suara-buka-tutup"><strong>Link Deploy Clasification Suara Buka Tutup</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#link-deploy-clasification-suara-buka-tutup">Link Deploy Clasification Suara Buka Tutup</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#klik-disini-untuk-membuka-deploy-aplikasi-suara-buka-tutup"><strong><span class="xref myst">Klik disini untuk membuka deploy aplikasi Suara Buka Tutup</span></strong></a></li>
+</ul>
+</li>
 </ul>
 
             </nav>
@@ -827,7 +836,9 @@ Contoh baris fitur (X_train) dan label:
 </table>
 </div></div></div>
 </div>
-<p>PISAHKAN LABEL</p>
+</section>
+<section id="pisahkan-label">
+<h2>2. Pisahkan Label<a class="headerlink" href="#pisahkan-label" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">meta_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">,</span> <span class="s1">&#39;label_jenis&#39;</span><span class="p">,</span> <span class="s1">&#39;label_speaker&#39;</span><span class="p">,</span> <span class="s1">&#39;speaker&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span><span class="p">,</span> <span class="s1">&#39;filename&#39;</span><span class="p">]</span>
@@ -915,7 +926,9 @@ Contoh label (first 5):
 </table>
 </div></div></div>
 </div>
-<p>MEMBUAT MODEL LATIH RANDOM FOREST</p>
+</section>
+<section id="membuat-model-latih-random-forest">
+<h2>3. Membuat Model Latih Random Forest<a class="headerlink" href="#membuat-model-latih-random-forest" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomForestClassifier</span>
@@ -949,7 +962,9 @@ Contoh label (first 5):
 </div>
 </div>
 </div>
-<p>evaluasi model data validation</p>
+</section>
+<section id="evaluasi-model-data-validation">
+<h2>4. Evaluasi Model Data Validation<a class="headerlink" href="#evaluasi-model-data-validation" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">classification_report</span><span class="p">,</span> <span class="n">ConfusionMatrixDisplay</span>
@@ -1022,7 +1037,9 @@ weighted avg       0.95      0.95      0.95        38
 </div>
 </div>
 </div>
-<p>confusion matrix</p>
+</section>
+<section id="confusion-matrix">
+<h2>5. Confusion Matrix<a class="headerlink" href="#confusion-matrix" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Confusion Matrix</span>
@@ -1038,7 +1055,9 @@ weighted avg       0.95      0.95      0.95        38
 <img alt="_images/b4f1d123bfeaf437b1e3ed0b07321fc4427c33250f6a6cac8a72a15a84b6f7d0.png" src="_images/b4f1d123bfeaf437b1e3ed0b07321fc4427c33250f6a6cac8a72a15a84b6f7d0.png" />
 </div>
 </div>
-<p>fitur importance</p>
+</section>
+<section id="fitur-importance">
+<h2>6. Fitur Importance<a class="headerlink" href="#fitur-importance" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Feature importance untuk Buka/Tutup</span>
@@ -1192,7 +1211,9 @@ Dataset disimpan sebagai: speaker_dataset.csv
 </div>
 </div>
 </div>
-<p>prediksi suara buka tutup</p>
+</section>
+<section id="prediksi-suara-buka-tutup">
+<h2>7. Prediksi Suara Buka Tutup<a class="headerlink" href="#prediksi-suara-buka-tutup" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### ***Prediksi Suara Buka/Tutup + Speaker***</span>
@@ -1332,7 +1353,10 @@ P(yotan): 92.5%
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="link-deploy-clasification-suara-buka-tutup">
-<h1><strong><a class="reference external" href="https://suara-buka-tutup.streamlit.app//">Link Deploy Clasification Suara Buka Tutup</a></strong><a class="headerlink" href="#link-deploy-clasification-suara-buka-tutup" title="Link to this heading">#</a></h1>
+<h1>Link Deploy Clasification Suara Buka Tutup<a class="headerlink" href="#link-deploy-clasification-suara-buka-tutup" title="Link to this heading">#</a></h1>
+<section id="klik-disini-untuk-membuka-deploy-aplikasi-suara-buka-tutup">
+<h2><strong><a class="reference internal" href="#hhttps://app-audio-buka-tutup.streamlit.app///"><span class="xref myst">Klik disini untuk membuka deploy aplikasi Suara Buka Tutup</span></a></strong><a class="headerlink" href="#klik-disini-untuk-membuka-deploy-aplikasi-suara-buka-tutup" title="Link to this heading">#</a></h2>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1392,9 +1416,18 @@ P(yotan): 92.5%
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Modelling Suara Buka Tutup &amp; Deployment</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-libraries-load-data">1: Import Libraries &amp; Load Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pisahkan-label">2. Pisahkan Label</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-model-latih-random-forest">3. Membuat Model Latih Random Forest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi-model-data-validation">4. Evaluasi Model Data Validation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">5. Confusion Matrix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitur-importance">6. Fitur Importance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prediksi-suara-buka-tutup">7. Prediksi Suara Buka Tutup</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#link-deploy-clasification-suara-buka-tutup"><strong>Link Deploy Clasification Suara Buka Tutup</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#link-deploy-clasification-suara-buka-tutup">Link Deploy Clasification Suara Buka Tutup</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#klik-disini-untuk-membuka-deploy-aplikasi-suara-buka-tutup"><strong><span class="xref myst">Klik disini untuk membuka deploy aplikasi Suara Buka Tutup</span></strong></a></li>
+</ul>
+</li>
 </ul>
 
   </nav></div>
