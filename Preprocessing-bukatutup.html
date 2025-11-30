@@ -225,6 +225,7 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Preprocessing Suara Buka Tutup</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Modelling-bukatutup.html">Modelling Suara Buka Tutup &amp; Deployment</a></li>
 
+<li class="toctree-l1"><a class="reference internal" href="timeseriesDTW.html">Mencari Jarak Suara Menggunakan DTW</a></li>
 </ul>
 
     </div>
@@ -723,25 +724,25 @@ Sample rate setelah pr : 22050 Hz | Durasi baru  : 1.00 s
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Processing 50 files for asep/buka ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>asep/buka: 100%|██████████| 50/50 [00:00&lt;00:00, 414.03it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>asep/buka: 100%|██████████| 50/50 [00:01&lt;00:00, 43.01it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Processing 50 files for asep/tutup ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>asep/tutup: 100%|██████████| 50/50 [00:00&lt;00:00, 425.63it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>asep/tutup: 100%|██████████| 50/50 [00:01&lt;00:00, 35.57it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Processing 50 files for yotan/buka ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>yotan/buka: 100%|██████████| 50/50 [00:00&lt;00:00, 483.84it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>yotan/buka: 100%|██████████| 50/50 [00:00&lt;00:00, 55.56it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Processing 50 files for yotan/tutup ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>yotan/tutup: 100%|██████████| 50/50 [00:00&lt;00:00, 654.87it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>yotan/tutup: 100%|██████████| 50/50 [00:00&lt;00:00, 76.61it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✅ Data berhasil di-split:
@@ -1063,19 +1064,190 @@ Validation: 40/200 = 20.0%
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">181</span>
-<span class="g g-Whitespace">    </span><span class="mi">178</span>     <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_records</span><span class="p">(</span><span class="n">records</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">179</span>     <span class="k">return</span> <span class="n">df</span>
-<span class="ne">--&gt; </span><span class="mi">181</span> <span class="n">df_train_feat</span> <span class="o">=</span> <span class="n">build_feature_dataframe</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Train feature extraction&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">182</span> <span class="n">df_val_feat</span>   <span class="o">=</span> <span class="n">build_feature_dataframe</span><span class="p">(</span><span class="n">val_data</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Val feature extraction&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">184</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Train features shape:&quot;</span><span class="p">,</span> <span class="n">df_train_feat</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;train_data&#39; is not defined
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train feature extraction:   0%|          | 0/160 [00:00&lt;?, ?it/s]/usr/local/python/3.12.1/lib/python3.12/site-packages/librosa/core/spectrum.py:266: UserWarning: n_fft=1024 is too large for input signal of length=690
+  warnings.warn(
+/usr/local/python/3.12.1/lib/python3.12/site-packages/librosa/core/spectrum.py:266: UserWarning: n_fft=1024 is too large for input signal of length=345
+  warnings.warn(
+Train feature extraction:  35%|███▌      | 56/160 [00:16&lt;00:27,  3.72it/s]/usr/local/python/3.12.1/lib/python3.12/site-packages/librosa/core/pitch.py:103: UserWarning: Trying to estimate tuning from empty frequency set.
+  return pitch_tuning(
+Train feature extraction: 100%|██████████| 160/160 [00:45&lt;00:00,  3.55it/s]
+Val feature extraction: 100%|██████████| 40/40 [00:10&lt;00:00,  3.83it/s]
 </pre></div>
 </div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train features shape: (160, 131)
+Val features shape  : (40, 131)
+Fitur tersimpan: features_train.csv / features_val.csv / .pkl
+</pre></div>
 </div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>stat_mean</th>
+      <th>stat_std</th>
+      <th>stat_var</th>
+      <th>stat_skew</th>
+      <th>stat_kurt</th>
+      <th>stat_min</th>
+      <th>stat_max</th>
+      <th>stat_range</th>
+      <th>stat_median</th>
+      <th>stat_q25</th>
+      <th>...</th>
+      <th>tonnetz_4_std</th>
+      <th>tonnetz_5_mean</th>
+      <th>tonnetz_5_std</th>
+      <th>spec_entropy_mean</th>
+      <th>spec_entropy_std</th>
+      <th>stat_entropy</th>
+      <th>speaker</th>
+      <th>action</th>
+      <th>combined</th>
+      <th>filename</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-0.016276</td>
+      <td>0.179102</td>
+      <td>0.032078</td>
+      <td>0.008991</td>
+      <td>1.368842</td>
+      <td>-0.882036</td>
+      <td>0.998849</td>
+      <td>1.880886</td>
+      <td>0.000000</td>
+      <td>-0.114197</td>
+      <td>...</td>
+      <td>0.027926</td>
+      <td>-0.015044</td>
+      <td>0.023741</td>
+      <td>5.792195</td>
+      <td>2.350596</td>
+      <td>-16.510247</td>
+      <td>asep</td>
+      <td>tutup</td>
+      <td>asep_tutup</td>
+      <td>Tutup8_aug_shift_30.wav</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-0.000027</td>
+      <td>0.162744</td>
+      <td>0.026486</td>
+      <td>0.192526</td>
+      <td>8.484117</td>
+      <td>-0.843834</td>
+      <td>0.999998</td>
+      <td>1.843832</td>
+      <td>0.000000</td>
+      <td>-0.012093</td>
+      <td>...</td>
+      <td>0.043394</td>
+      <td>-0.005942</td>
+      <td>0.038967</td>
+      <td>3.878178</td>
+      <td>1.512613</td>
+      <td>-46.631310</td>
+      <td>yotan</td>
+      <td>tutup</td>
+      <td>yotan_tutup</td>
+      <td>tutup_12.wav</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.000064</td>
+      <td>0.205671</td>
+      <td>0.042300</td>
+      <td>0.436317</td>
+      <td>1.038379</td>
+      <td>-0.744213</td>
+      <td>0.999995</td>
+      <td>1.744208</td>
+      <td>0.000000</td>
+      <td>-0.098123</td>
+      <td>...</td>
+      <td>0.054517</td>
+      <td>0.092437</td>
+      <td>0.098517</td>
+      <td>3.281807</td>
+      <td>2.171091</td>
+      <td>-28.026650</td>
+      <td>yotan</td>
+      <td>tutup</td>
+      <td>yotan_tutup</td>
+      <td>tutup_4.wav</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-0.048444</td>
+      <td>0.230336</td>
+      <td>0.053055</td>
+      <td>-0.132969</td>
+      <td>0.505848</td>
+      <td>-0.998175</td>
+      <td>0.851561</td>
+      <td>1.849736</td>
+      <td>-0.018028</td>
+      <td>-0.186683</td>
+      <td>...</td>
+      <td>0.022436</td>
+      <td>-0.020684</td>
+      <td>0.012506</td>
+      <td>6.161753</td>
+      <td>1.725480</td>
+      <td>-5.376562</td>
+      <td>asep</td>
+      <td>tutup</td>
+      <td>asep_tutup</td>
+      <td>Tutup10_aug_pitch_15.wav</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-0.000096</td>
+      <td>0.111742</td>
+      <td>0.012486</td>
+      <td>0.723286</td>
+      <td>13.511356</td>
+      <td>-0.821675</td>
+      <td>0.999997</td>
+      <td>1.821671</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>0.038301</td>
+      <td>0.010803</td>
+      <td>0.024033</td>
+      <td>4.294136</td>
+      <td>3.093474</td>
+      <td>-74.861962</td>
+      <td>yotan</td>
+      <td>tutup</td>
+      <td>yotan_tutup</td>
+      <td>tutup_2_aug_noise_3.wav</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 131 columns</p>
+</div></div></div>
 </div>
 </section>
 <section id="bangun-dataset-fitur-dari-train-val">
@@ -1165,22 +1337,19 @@ Validation: 40/200 = 20.0%
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ekstraksi fitur komprehensif untuk TRAIN...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train feature extraction:   0%|          | 0/160 [00:00&lt;?, ?it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/python/3.12.1/lib/python3.12/site-packages/librosa/core/spectrum.py:266: UserWarning: n_fft=1024 is too large for input signal of length=690
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train feature extraction:   0%|          | 0/160 [00:00&lt;?, ?it/s]/usr/local/python/3.12.1/lib/python3.12/site-packages/librosa/core/spectrum.py:266: UserWarning: n_fft=1024 is too large for input signal of length=690
   warnings.warn(
 /usr/local/python/3.12.1/lib/python3.12/site-packages/librosa/core/spectrum.py:266: UserWarning: n_fft=1024 is too large for input signal of length=345
   warnings.warn(
-Train feature extraction:  35%|███▌      | 56/160 [00:18&lt;00:52,  1.96it/s]/usr/local/python/3.12.1/lib/python3.12/site-packages/librosa/core/pitch.py:103: UserWarning: Trying to estimate tuning from empty frequency set.
+Train feature extraction:  35%|███▌      | 56/160 [00:15&lt;00:26,  3.91it/s]/usr/local/python/3.12.1/lib/python3.12/site-packages/librosa/core/pitch.py:103: UserWarning: Trying to estimate tuning from empty frequency set.
   return pitch_tuning(
-Train feature extraction: 100%|██████████| 160/160 [00:46&lt;00:00,  3.41it/s]
+Train feature extraction: 100%|██████████| 160/160 [00:43&lt;00:00,  3.71it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ekstraksi fitur komprehensif untuk VAL...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Val feature extraction: 100%|██████████| 40/40 [00:10&lt;00:00,  3.64it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Val feature extraction: 100%|██████████| 40/40 [00:10&lt;00:00,  3.83it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total fitur diekstraksi: 130 fitur (kolom termasuk metadata)
@@ -1885,9 +2054,11 @@ VALIDATION SET (40 samples):
   Isolation Forest: 4 outliers (10.0%)
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_25983/476795135.py:84: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_3197/476795135.py:84: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
   train_outlier_by_class = train_df.groupby(&#39;label&#39;).apply(
-/tmp/ipykernel_25983/476795135.py:99: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_3197/476795135.py:99: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
   val_outlier_by_class = val_df.groupby(&#39;label&#39;).apply(
 </pre></div>
 </div>

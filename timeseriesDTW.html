@@ -1,0 +1,1401 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Mencari Jarak Suara Menggunakan DTW &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'timeseriesDTW';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Modelling Suara Buka Tutup &amp; Deployment" href="Modelling-bukatutup.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.jpg" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/logo.jpg" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome — Asep Prayogi
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Business Understanding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="BusinessUnderstanding.html">Business Understanding (Iris)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Understanding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="DataUnderstanding.html">Data Understanding &amp; Explorasi Data (Iris)</a></li>
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Preprocessing Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="PreprocessingData.html">Preprocessing (Iris)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PreprocessingDataEcoliKNIME.html"><strong>Preprocessing Data Ecoli Menggunakan KNIME (Pra UTS)</strong></a></li>
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Modelling</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="PenyeimbanganDataEcoli.html">Penyeimbangan Data (Ecoli)</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="klasifikasi_baggingclasifier.html"><strong>Klasifikasi Dan BaggingClassifier(Ecoli)</strong></a></li>
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Prediksi NO2 Kota Medan</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="BusinessUnderstandingNO2Medan.html">Business Understanding (NO2 Medan)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DataUnderstandingNO2Medan.html">Data Understanding (NO2 Medan)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PreprocessingNO2Medan.html">Preprocessing (NO2 Medan)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModeellingNO2Medan.html">KNN Regression Data (NO₂ Medan) &amp; Deployment</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Identifikasi Suara Buka Tutup</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="DataUnderstanding-bukatutup.html">Data Understanding Suara Buka Tutup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preprocessing-bukatutup.html">Preprocessing Suara Buka Tutup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Modelling-bukatutup.html">Modelling Suara Buka Tutup &amp; Deployment</a></li>
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Mencari Jarak Suara Menggunakan DTW</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FtimeseriesDTW.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/timeseriesDTW.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Mencari Jarak Suara Menggunakan DTW</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-time-warping-dtw">Dynamic Time Warping (DTW)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inti-kerja-dtw">Inti Kerja DTW</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suara-buka">Suara Buka</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-suara-waveforms">Visualisasi Suara Waveforms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-dynamic-time-warping">Perhitungan Dynamic Time Warping</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perangkingan-dan-perbandingan">Perangkingan dan Perbandingan</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suara-tutup">Suara Tutup</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Visualisasi Suara Waveforms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Perhitungan Dynamic Time Warping</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Perangkingan dan Perbandingan</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="mencari-jarak-suara-menggunakan-dtw">
+<h1>Mencari Jarak Suara Menggunakan DTW<a class="headerlink" href="#mencari-jarak-suara-menggunakan-dtw" title="Link to this heading">#</a></h1>
+<section id="dynamic-time-warping-dtw">
+<h2>Dynamic Time Warping (DTW)<a class="headerlink" href="#dynamic-time-warping-dtw" title="Link to this heading">#</a></h2>
+<p>Dynamic Time Warping (DTW) merupakan teknik untuk mengukur tingkat kesamaan antara dua deret waktu yang kemungkinan memiliki durasi berbeda. Dalam konteks pengenalan suara, DTW berperan dalam mencocokkan pola akustik dari dua sinyal suara meskipun kecepatan atau panjang pengucapannya tidak sama.</p>
+<p>DTW beroperasi dengan mencari lintasan penyesuaian (warping path) yang paling optimal di antara dua rangkaian fitur, contohnya fitur MFCC dari sampel audio dan audio input baru. Lintasan ini dipilih agar total jarak (biaya) antara kedua rangkaian menjadi minimum.</p>
+</section>
+<section id="inti-kerja-dtw">
+<h2>Inti Kerja DTW<a class="headerlink" href="#inti-kerja-dtw" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Perhitungan Jarak Lokal</strong> - Menghitung jarak antara setiap pasangan elemen fitur dari dua sinyal</p></li>
+<li><p><strong>Penyusunan Matriks Biaya Kumulatif</strong> - Membangun matriks menggunakan pemrograman dinamis</p></li>
+<li><p><strong>Pencarian Jalur Optimal</strong> - Menemukan lintasan melalui matriks yang meminimalkan total biaya</p></li>
+<li><p><strong>Pengambilan Nilai Akhir</strong> - Menggunakan nilai akhir sebagai jarak DTW</p></li>
+</ol>
+<p>Semakin rendah nilai DTW yang diperoleh, semakin tinggi kemiripan antara kedua pola suara tersebut.</p>
+</section>
+<section id="suara-buka">
+<h2>Suara Buka<a class="headerlink" href="#suara-buka" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">librosa</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">librosa.display</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ipd</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">DATASET_PATH</span> <span class="o">=</span> <span class="s2">&quot;gabunganaudio&quot;</span> 
+<span class="n">train_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATASET_PATH</span><span class="p">,</span> <span class="s2">&quot;train&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="visualisasi-suara-waveforms">
+<h3>Visualisasi Suara Waveforms<a class="headerlink" href="#visualisasi-suara-waveforms" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_all_tutup_timeseries</span><span class="p">(</span><span class="n">base_path</span><span class="p">,</span> <span class="n">max_files</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">tutup_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_path</span><span class="p">,</span> <span class="s2">&quot;buka&quot;</span><span class="p">)</span>
+    <span class="n">tutup_files</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">tutup_path</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">max_files</span><span class="p">:</span>
+        <span class="n">tutup_files</span> <span class="o">=</span> <span class="n">tutup_files</span><span class="p">[:</span><span class="n">max_files</span><span class="p">]</span>
+    
+    <span class="n">n_files</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tutup_files</span><span class="p">)</span>
+    
+
+    <span class="n">cols</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="p">(</span><span class="n">n_files</span> <span class="o">+</span> <span class="n">cols</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="n">cols</span>
+    
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">rows</span><span class="p">))</span>
+    
+    <span class="k">if</span> <span class="n">rows</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">filename</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tutup_files</span><span class="p">):</span>
+        <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tutup_path</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        
+        <span class="c1"># Load audio</span>
+        <span class="n">y</span><span class="p">,</span> <span class="n">sr</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        
+        <span class="c1"># Hitung time axis</span>
+        <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">/</span><span class="n">sr</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+        
+        <span class="c1"># Plot</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="n">i</span> <span class="o">//</span> <span class="n">cols</span>
+        <span class="n">col</span> <span class="o">=</span> <span class="n">i</span> <span class="o">%</span> <span class="n">cols</span>
+        
+        <span class="n">axes</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Buka - </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Waktu (detik)&#39;</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Amplitude&#39;</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tutup_files</span><span class="p">),</span> <span class="n">rows</span> <span class="o">*</span> <span class="n">cols</span><span class="p">):</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="n">i</span> <span class="o">//</span> <span class="n">cols</span>
+        <span class="n">col</span> <span class="o">=</span> <span class="n">i</span> <span class="o">%</span> <span class="n">cols</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">delaxes</span><span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">])</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Menampilkan </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">tutup_files</span><span class="p">)</span><span class="si">}</span><span class="s2"> file audio &#39;buka&#39;&quot;</span><span class="p">)</span>
+
+<span class="n">plot_all_tutup_timeseries</span><span class="p">(</span><span class="n">train_path</span><span class="p">,</span> <span class="n">max_files</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/bf6afe24dca28d09c169ca8de6765f8aa9aadda3e844ba35d671bee0a83f0fbe.png" src="_images/bf6afe24dca28d09c169ca8de6765f8aa9aadda3e844ba35d671bee0a83f0fbe.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Menampilkan 10 file audio &#39;buka&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="perhitungan-dynamic-time-warping">
+<h3>Perhitungan Dynamic Time Warping<a class="headerlink" href="#perhitungan-dynamic-time-warping" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dtaidistance</span><span class="w"> </span><span class="kn">import</span> <span class="n">dtw</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+
+<span class="c1"># def extract_features_for_dtw(audio_path, feature_type=&#39;mfcc&#39;):</span>
+<span class="c1">#     y, sr = librosa.load(audio_path, sr=22050)</span>
+<span class="c1">#     mel_spec = librosa.feature.melspectrogram(y=y, sr=sr, n_mels=128)</span>
+<span class="c1">#     mel_spec_db = librosa.power_to_db(mel_spec, ref=np.max)</span>
+<span class="c1">#     chroma = librosa.feature.chroma_stft(y=y, sr=sr)</span>
+
+<span class="c1">#     mel_6_mean = np.mean(mel_spec_db[6, :])  </span>
+<span class="c1">#     mel_6_std = np.std(mel_spec_db[6, :])    </span>
+<span class="c1">#     mel_7_mean = np.mean(mel_spec_db[7, :])   </span>
+<span class="c1">#     mel_7_std = np.std(mel_spec_db[7, :])    </span>
+<span class="c1">#     chroma_0_mean = np.mean(chroma[0, :])    </span>
+    
+<span class="c1">#     from scipy.stats import skew</span>
+<span class="c1">#     stat_skew = skew(y)</span>
+    
+<span class="c1">#     model_features = np.array([</span>
+<span class="c1">#         mel_7_std,      </span>
+<span class="c1">#         chroma_0_mean,</span>
+<span class="c1">#         mel_6_std,      </span>
+<span class="c1">#         stat_skew,      </span>
+<span class="c1">#         mel_7_mean </span>
+<span class="c1">#     ])</span>
+    
+<span class="c1">#     return model_features</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">extract_features_for_dtw</span><span class="p">(</span><span class="n">audio_path</span><span class="p">,</span> <span class="n">n_mfcc</span><span class="o">=</span><span class="mi">13</span><span class="p">):</span>
+    <span class="n">y</span><span class="p">,</span> <span class="n">sr</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">audio_path</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">)</span>
+    <span class="n">mfcc</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">mfcc</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span> <span class="n">n_mfcc</span><span class="o">=</span><span class="n">n_mfcc</span><span class="p">)</span>
+    <span class="n">seq</span> <span class="o">=</span> <span class="n">mfcc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
+    
+    <span class="k">return</span> <span class="n">seq</span>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_dtw_distances</span><span class="p">(</span><span class="n">new_audio_path</span><span class="p">,</span> <span class="n">train_path</span><span class="p">,</span> <span class="n">max_files</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># new_features = extract_features_for_dtw(new_audio_path, &#39;mfcc&#39;)</span>
+        <span class="n">new_features</span> <span class="o">=</span> <span class="n">extract_features_for_dtw</span><span class="p">(</span><span class="n">new_audio_path</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Errorrrrrrr&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    
+    <span class="n">tutup_train_files</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">train_labels</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="n">tutup_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">train_path</span><span class="p">,</span> <span class="s2">&quot;buka&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">tutup_path</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">tutup_path</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">((</span><span class="s1">&#39;.wav&#39;</span><span class="p">)):</span>
+                <span class="n">tutup_train_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tutup_path</span><span class="p">,</span> <span class="n">file</span><span class="p">))</span>
+                <span class="n">train_labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;buka&#39;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tutup_train_files</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">max_files</span><span class="p">:</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tutup_train_files</span><span class="p">),</span> <span class="n">max_files</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">tutup_train_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">tutup_train_files</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">]</span>
+        <span class="n">train_labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">train_labels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">]</span>
+    
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">train_file</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">tutup_train_files</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">)):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Ekstrak fitur dari file training</span>
+            <span class="c1"># train_features = extract_features_for_dtw(train_file, &#39;mfcc&#39;)</span>
+            <span class="n">train_features</span> <span class="o">=</span> <span class="n">extract_features_for_dtw</span><span class="p">(</span><span class="n">train_file</span><span class="p">)</span>
+            
+            <span class="c1"># Hitung jarak DTW</span>
+            <span class="n">dtw_distance</span> <span class="o">=</span> <span class="n">dtw</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">new_features</span><span class="p">,</span> <span class="n">train_features</span><span class="p">)</span>
+            
+            <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s1">&#39;rank&#39;</span><span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="s1">&#39;filename&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">train_file</span><span class="p">),</span>
+                <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">label</span><span class="p">,</span>
+                <span class="s1">&#39;dtw_distance&#39;</span><span class="p">:</span> <span class="n">dtw_distance</span><span class="p">,</span>
+                <span class="s1">&#39;file_path&#39;</span><span class="p">:</span> <span class="n">train_file</span>
+            <span class="p">})</span>
+            
+                
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Error processing </span><span class="si">{</span><span class="n">train_file</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">continue</span>
+    
+    <span class="n">df_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+    <span class="n">df_results</span> <span class="o">=</span> <span class="n">df_results</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;dtw_distance&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">df_results</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_results</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">df_results</span>
+
+<span class="c1"># Path audio baru</span>
+<span class="n">new_audio_path</span> <span class="o">=</span> <span class="s2">&quot;gabunganaudio/train/bukanew.wav&quot;</span>
+
+<span class="c1"># Hitung jarak DTW</span>
+<span class="n">dtw_results</span> <span class="o">=</span> <span class="n">calculate_dtw_distances</span><span class="p">(</span><span class="n">new_audio_path</span><span class="p">,</span> <span class="n">train_path</span><span class="p">,</span> <span class="n">max_files</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">dtw_results</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== RANKING JARAK DTW (Top 20) ===&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">dtw_results</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== STATISTIK HASIL ===&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total file dianalisis: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">dtw_results</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Jarak minimum: </span><span class="si">{</span><span class="n">dtw_results</span><span class="p">[</span><span class="s1">&#39;dtw_distance&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Jarak maksimum: </span><span class="si">{</span><span class="n">dtw_results</span><span class="p">[</span><span class="s1">&#39;dtw_distance&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Jarak rata-rata: </span><span class="si">{</span><span class="n">dtw_results</span><span class="p">[</span><span class="s1">&#39;dtw_distance&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== RANKING JARAK DTW (Top 20) ===
+ rank                 filename label  dtw_distance                                         file_path
+    1 buka_11_aug_shift_23.wav  buka    382.517769 gabunganaudio/train/buka/buka_11_aug_shift_23.wav
+    2  buka_11_aug_noise_3.wav  buka    392.582834  gabunganaudio/train/buka/buka_11_aug_noise_3.wav
+    3              buka_11.wav  buka    447.051853              gabunganaudio/train/buka/buka_11.wav
+    4  buka_2_aug_noise_28.wav  buka    466.331410  gabunganaudio/train/buka/buka_2_aug_noise_28.wav
+    5               Buka37.wav  buka    483.874080               gabunganaudio/train/buka/Buka37.wav
+    6              buka_18.wav  buka    499.659337              gabunganaudio/train/buka/buka_18.wav
+    7 buka_18_aug_noise_14.wav  buka    499.782593 gabunganaudio/train/buka/buka_18_aug_noise_14.wav
+    8              buka_12.wav  buka    510.688230              gabunganaudio/train/buka/buka_12.wav
+    9              buka_19.wav  buka    519.059877              gabunganaudio/train/buka/buka_19.wav
+   10               Buka11.wav  buka    522.181213               gabunganaudio/train/buka/Buka11.wav
+   11              buka_16.wav  buka    525.251487              gabunganaudio/train/buka/buka_16.wav
+   12 buka_15_aug_noise_24.wav  buka    535.851309 gabunganaudio/train/buka/buka_15_aug_noise_24.wav
+   13   buka_5_aug_noise_9.wav  buka    541.601878   gabunganaudio/train/buka/buka_5_aug_noise_9.wav
+   14              buka_13.wav  buka    545.225011              gabunganaudio/train/buka/buka_13.wav
+   15              buka_17.wav  buka    548.849905              gabunganaudio/train/buka/buka_17.wav
+   16              buka_15.wav  buka    549.044824              gabunganaudio/train/buka/buka_15.wav
+   17  buka_19_aug_speed_7.wav  buka    565.323110  gabunganaudio/train/buka/buka_19_aug_speed_7.wav
+   18               buka_2.wav  buka    570.292140               gabunganaudio/train/buka/buka_2.wav
+   19               buka_1.wav  buka    571.017403               gabunganaudio/train/buka/buka_1.wav
+   20               buka_7.wav  buka    571.789324               gabunganaudio/train/buka/buka_7.wav
+
+=== STATISTIK HASIL ===
+Total file dianalisis: 100
+Jarak minimum: 382.5178
+Jarak maksimum: 2314.7170
+Jarak rata-rata: 949.0564
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="perangkingan-dan-perbandingan">
+<h3>Perangkingan dan Perbandingan<a class="headerlink" href="#perangkingan-dan-perbandingan" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">visualize_dtw_results</span><span class="p">(</span><span class="n">dtw_results</span><span class="p">,</span> <span class="n">new_audio_path</span><span class="p">):</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+    
+    <span class="c1"># Top 20 ranking</span>
+    <span class="n">top_20</span> <span class="o">=</span> <span class="n">dtw_results</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span> <span class="k">if</span> <span class="n">label</span> <span class="o">==</span> <span class="s1">&#39;tutup&#39;</span> <span class="k">else</span> <span class="s1">&#39;blue&#39;</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">top_20</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]]</span>
+    
+    <span class="n">ax</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">top_20</span><span class="p">)),</span> <span class="n">top_20</span><span class="p">[</span><span class="s1">&#39;dtw_distance&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">top_20</span><span class="p">)))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;filename&#39;</span><span class="p">][:</span><span class="mi">15</span><span class="p">]</span><span class="si">}</span><span class="s2">...&quot;</span> 
+                        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">top_20</span><span class="o">.</span><span class="n">iterrows</span><span class="p">()],</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;DTW Distance&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Top 20 Terdekat (Merah=Tutup, Biru=Buka)&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    
+    <span class="c1"># Waveform comparison</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== PERBANDINGAN WAVEFORM ===&quot;</span><span class="p">)</span>
+    <span class="n">plot_waveform_comparison</span><span class="p">(</span><span class="n">new_audio_path</span><span class="p">,</span> <span class="n">dtw_results</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_waveform_comparison</span><span class="p">(</span><span class="n">new_audio_path</span><span class="p">,</span> <span class="n">top_matches</span><span class="p">):</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+    
+    <span class="c1"># Audio baru</span>
+    <span class="n">y_new</span><span class="p">,</span> <span class="n">sr_new</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">new_audio_path</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">)</span>
+    <span class="n">time_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_new</span><span class="p">)</span><span class="o">/</span><span class="n">sr_new</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_new</span><span class="p">))</span>
+    
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time_new</span><span class="p">,</span> <span class="n">y_new</span><span class="p">,</span> <span class="s1">&#39;g-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Audio Baru: </span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">new_audio_path</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Amplitude&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">top_matches</span><span class="o">.</span><span class="n">iterrows</span><span class="p">()):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">5</span><span class="p">:</span>
+            <span class="k">break</span>
+            
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">y_match</span><span class="p">,</span> <span class="n">sr_match</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;file_path&#39;</span><span class="p">],</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">)</span>
+            <span class="n">time_match</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_match</span><span class="p">)</span><span class="o">/</span><span class="n">sr_match</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_match</span><span class="p">))</span>
+            
+            <span class="n">row_idx</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+            <span class="n">col_idx</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span>
+            
+            <span class="k">if</span> <span class="n">row_idx</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span> <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;tutup&#39;</span> <span class="k">else</span> <span class="s1">&#39;blue&#39;</span>
+                <span class="n">axes</span><span class="p">[</span><span class="n">row_idx</span><span class="p">,</span> <span class="n">col_idx</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time_match</span><span class="p">,</span> <span class="n">y_match</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">axes</span><span class="p">[</span><span class="n">row_idx</span><span class="p">,</span> <span class="n">col_idx</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Rank </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;rank&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;filename&quot;</span><span class="p">][:</span><span class="mi">20</span><span class="p">]</span><span class="si">}</span><span class="s1">...</span><span class="se">\n</span><span class="s1">Label: </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">, Distance: </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;dtw_distance&quot;</span><span class="p">]</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="n">axes</span><span class="p">[</span><span class="n">row_idx</span><span class="p">,</span> <span class="n">col_idx</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">)</span>
+                <span class="n">axes</span><span class="p">[</span><span class="n">row_idx</span><span class="p">,</span> <span class="n">col_idx</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Amplitude&#39;</span><span class="p">)</span>
+                <span class="n">axes</span><span class="p">[</span><span class="n">row_idx</span><span class="p">,</span> <span class="n">col_idx</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error loading </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;filename&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">continue</span>
+    
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">dtw_results</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">visualize_dtw_results</span><span class="p">(</span><span class="n">dtw_results</span><span class="p">,</span> <span class="n">new_audio_path</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== SEMUA RANKING DTW (1-</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">dtw_results</span><span class="p">)</span><span class="si">}</span><span class="s2">) ===&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">dtw_results</span><span class="p">[[</span><span class="s1">&#39;rank&#39;</span><span class="p">,</span> <span class="s1">&#39;filename&#39;</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">,</span> <span class="s1">&#39;dtw_distance&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/9cd36c5cd0699c2e74787ccde666257e6201a52f5265ae3c12e822040ea31788.png" src="_images/9cd36c5cd0699c2e74787ccde666257e6201a52f5265ae3c12e822040ea31788.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== PERBANDINGAN WAVEFORM ===
+</pre></div>
+</div>
+<img alt="_images/08b024557ad13d76c378102c7d59e6210b7a1e981ebd79c9f43b64dc0ed1f50a.png" src="_images/08b024557ad13d76c378102c7d59e6210b7a1e981ebd79c9f43b64dc0ed1f50a.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== SEMUA RANKING DTW (1-100) ===
+ rank                 filename label  dtw_distance
+    1 buka_11_aug_shift_23.wav  buka    382.517769
+    2  buka_11_aug_noise_3.wav  buka    392.582834
+    3              buka_11.wav  buka    447.051853
+    4  buka_2_aug_noise_28.wav  buka    466.331410
+    5               Buka37.wav  buka    483.874080
+    6              buka_18.wav  buka    499.659337
+    7 buka_18_aug_noise_14.wav  buka    499.782593
+    8              buka_12.wav  buka    510.688230
+    9              buka_19.wav  buka    519.059877
+   10               Buka11.wav  buka    522.181213
+   11              buka_16.wav  buka    525.251487
+   12 buka_15_aug_noise_24.wav  buka    535.851309
+   13   buka_5_aug_noise_9.wav  buka    541.601878
+   14              buka_13.wav  buka    545.225011
+   15              buka_17.wav  buka    548.849905
+   16              buka_15.wav  buka    549.044824
+   17  buka_19_aug_speed_7.wav  buka    565.323110
+   18               buka_2.wav  buka    570.292140
+   19               buka_1.wav  buka    571.017403
+   20               buka_7.wav  buka    571.789324
+   21 buka_17_aug_speed_30.wav  buka    580.075830
+   22 buka_17_aug_speed_10.wav  buka    586.556769
+   23 buka_12_aug_shift_11.wav  buka    586.733915
+   24              buka_14.wav  buka    589.899303
+   25               Buka10.wav  buka    615.295331
+   26               buka_8.wav  buka    619.306442
+   27   buka_4_aug_shift_1.wav  buka    622.727368
+   28 buka_13_aug_pitch_25.wav  buka    622.958089
+   29               buka_3.wav  buka    626.962319
+   30   buka_2_aug_pitch_8.wav  buka    629.954066
+   31 buka_19_aug_speed_27.wav  buka    631.396567
+   32               Buka39.wav  buka    634.502044
+   33               Buka38.wav  buka    639.834207
+   34  buka_7_aug_pitch_15.wav  buka    640.230720
+   35               Buka48.wav  buka    646.568539
+   36  buka_14_aug_speed_6.wav  buka    650.918150
+   37  buka_13_aug_speed_5.wav  buka    652.066091
+   38 buka_16_aug_pitch_17.wav  buka    652.706193
+   39               Buka46.wav  buka    664.676002
+   40 buka_14_aug_speed_26.wav  buka    666.042135
+   41               buka_6.wav  buka    667.596412
+   42  buka_15_aug_speed_4.wav  buka    695.282047
+   43               buka_5.wav  buka    706.296923
+   44               buka_4.wav  buka    717.224316
+   45  buka_8_aug_shift_13.wav  buka    735.082648
+   46               Buka18.wav  buka    755.280784
+   47  buka_5_aug_pitch_29.wav  buka    758.338274
+   48                Buka3.wav  buka    784.932362
+   49  buka_4_aug_pitch_21.wav  buka    789.061468
+   50  buka_1_aug_shift_18.wav  buka    790.622342
+   51  buka_3_aug_shift_19.wav  buka    795.142165
+   52               buka_9.wav  buka    797.292528
+   53  buka_9_aug_noise_16.wav  buka    797.325765
+   54               Buka12.wav  buka    808.111340
+   55               Buka28.wav  buka    826.630019
+   56               Buka24.wav  buka    829.714409
+   57                Buka5.wav  buka    851.459592
+   58  buka_6_aug_speed_12.wav  buka    852.683595
+   59               Buka20.wav  buka    865.154936
+   60               Buka17.wav  buka    891.680261
+   61               Buka47.wav  buka    933.133364
+   62               Buka25.wav  buka    936.005609
+   63               Buka29.wav  buka    951.142077
+   64               Buka50.wav  buka    957.367778
+   65               Buka40.wav  buka   1006.572650
+   66  buka_20_aug_shift_2.wav  buka   1068.996609
+   67              buka_20.wav  buka   1100.263264
+   68                Buka2.wav  buka   1131.363116
+   69               Buka13.wav  buka   1140.365950
+   70                Buka8.wav  buka   1150.754318
+   71               Buka23.wav  buka   1176.041613
+   72               Buka45.wav  buka   1230.536925
+   73               Buka35.wav  buka   1253.777293
+   74               Buka14.wav  buka   1264.903455
+   75               Buka31.wav  buka   1274.017661
+   76                Buka6.wav  buka   1276.810381
+   77                Buka1.wav  buka   1326.218779
+   78           Buka1 copy.wav  buka   1326.218779
+   79               Buka41.wav  buka   1341.496739
+   80               Buka34.wav  buka   1377.812397
+   81               Buka36.wav  buka   1401.549410
+   82               Buka15.wav  buka   1416.006797
+   83                Buka9.wav  buka   1441.992545
+   84                Buka7.wav  buka   1509.431847
+   85               Buka21.wav  buka   1519.238707
+   86               Buka22.wav  buka   1519.238707
+   87 buka_10_aug_speed_20.wav  buka   1538.938758
+   88               Buka19.wav  buka   1548.983053
+   89               Buka43.wav  buka   1550.959703
+   90              buka_10.wav  buka   1558.685183
+   91               Buka32.wav  buka   1562.079063
+   92               Buka42.wav  buka   1593.204554
+   93               Buka30.wav  buka   1634.844182
+   94               Buka49.wav  buka   1641.325760
+   95               Buka44.wav  buka   1727.224942
+   96               Buka16.wav  buka   1733.980320
+   97               Buka33.wav  buka   1847.588090
+   98                Buka4.wav  buka   1897.660731
+   99               Buka26.wav  buka   2201.897137
+  100               Buka27.wav  buka   2314.717045
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="suara-tutup">
+<h2>Suara Tutup<a class="headerlink" href="#suara-tutup" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">librosa</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">librosa.display</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ipd</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">DATASET_PATH</span> <span class="o">=</span> <span class="s2">&quot;gabunganaudio&quot;</span> 
+<span class="n">train_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATASET_PATH</span><span class="p">,</span> <span class="s2">&quot;train&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id1">
+<h3>Visualisasi Suara Waveforms<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_all_tutup_timeseries</span><span class="p">(</span><span class="n">base_path</span><span class="p">,</span> <span class="n">max_files</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">tutup_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_path</span><span class="p">,</span> <span class="s2">&quot;tutup&quot;</span><span class="p">)</span>
+    <span class="n">tutup_files</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">tutup_path</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">max_files</span><span class="p">:</span>
+        <span class="n">tutup_files</span> <span class="o">=</span> <span class="n">tutup_files</span><span class="p">[:</span><span class="n">max_files</span><span class="p">]</span>
+    
+    <span class="n">n_files</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tutup_files</span><span class="p">)</span>
+    
+
+    <span class="n">cols</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="p">(</span><span class="n">n_files</span> <span class="o">+</span> <span class="n">cols</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="n">cols</span>
+    
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">rows</span><span class="p">))</span>
+    
+    <span class="k">if</span> <span class="n">rows</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">filename</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tutup_files</span><span class="p">):</span>
+        <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tutup_path</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        
+        <span class="c1"># Load audio</span>
+        <span class="n">y</span><span class="p">,</span> <span class="n">sr</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        
+        <span class="c1"># Hitung time axis</span>
+        <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">/</span><span class="n">sr</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+        
+        <span class="c1"># Plot</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="n">i</span> <span class="o">//</span> <span class="n">cols</span>
+        <span class="n">col</span> <span class="o">=</span> <span class="n">i</span> <span class="o">%</span> <span class="n">cols</span>
+        
+        <span class="n">axes</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Tutup - </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Waktu (detik)&#39;</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Amplitude&#39;</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tutup_files</span><span class="p">),</span> <span class="n">rows</span> <span class="o">*</span> <span class="n">cols</span><span class="p">):</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="n">i</span> <span class="o">//</span> <span class="n">cols</span>
+        <span class="n">col</span> <span class="o">=</span> <span class="n">i</span> <span class="o">%</span> <span class="n">cols</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">delaxes</span><span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">])</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Menampilkan </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">tutup_files</span><span class="p">)</span><span class="si">}</span><span class="s2"> file audio &#39;tutup&#39;&quot;</span><span class="p">)</span>
+
+<span class="n">plot_all_tutup_timeseries</span><span class="p">(</span><span class="n">train_path</span><span class="p">,</span> <span class="n">max_files</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/2f9a3504685da194d9e8ca37e620cb4142376b0c304562d1b46d826af3f7beda.png" src="_images/2f9a3504685da194d9e8ca37e620cb4142376b0c304562d1b46d826af3f7beda.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Menampilkan 10 file audio &#39;tutup&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id2">
+<h3>Perhitungan Dynamic Time Warping<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dtaidistance</span><span class="w"> </span><span class="kn">import</span> <span class="n">dtw</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+
+<span class="c1"># def extract_features_for_dtw(audio_path, feature_type=&#39;mfcc&#39;):</span>
+<span class="c1">#     y, sr = librosa.load(audio_path, sr=22050)</span>
+<span class="c1">#     mel_spec = librosa.feature.melspectrogram(y=y, sr=sr, n_mels=128)</span>
+<span class="c1">#     mel_spec_db = librosa.power_to_db(mel_spec, ref=np.max)</span>
+<span class="c1">#     chroma = librosa.feature.chroma_stft(y=y, sr=sr)</span>
+
+<span class="c1">#     mel_6_mean = np.mean(mel_spec_db[6, :])  </span>
+<span class="c1">#     mel_6_std = np.std(mel_spec_db[6, :])    </span>
+<span class="c1">#     mel_7_mean = np.mean(mel_spec_db[7, :])   </span>
+<span class="c1">#     mel_7_std = np.std(mel_spec_db[7, :])    </span>
+<span class="c1">#     chroma_0_mean = np.mean(chroma[0, :])    </span>
+    
+<span class="c1">#     from scipy.stats import skew</span>
+<span class="c1">#     stat_skew = skew(y)</span>
+    
+<span class="c1">#     model_features = np.array([</span>
+<span class="c1">#         mel_7_std,      </span>
+<span class="c1">#         chroma_0_mean,</span>
+<span class="c1">#         mel_6_std,      </span>
+<span class="c1">#         stat_skew,      </span>
+<span class="c1">#         mel_7_mean </span>
+<span class="c1">#     ])</span>
+    
+<span class="c1">#     return model_features</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">extract_features_for_dtw</span><span class="p">(</span><span class="n">audio_path</span><span class="p">,</span> <span class="n">n_mfcc</span><span class="o">=</span><span class="mi">13</span><span class="p">):</span>
+    <span class="n">y</span><span class="p">,</span> <span class="n">sr</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">audio_path</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">)</span>
+    <span class="n">mfcc</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">mfcc</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span> <span class="n">n_mfcc</span><span class="o">=</span><span class="n">n_mfcc</span><span class="p">)</span>
+    <span class="n">seq</span> <span class="o">=</span> <span class="n">mfcc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
+    
+    <span class="k">return</span> <span class="n">seq</span>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_dtw_distances</span><span class="p">(</span><span class="n">new_audio_path</span><span class="p">,</span> <span class="n">train_path</span><span class="p">,</span> <span class="n">max_files</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># new_features = extract_features_for_dtw(new_audio_path, &#39;mfcc&#39;)</span>
+        <span class="n">new_features</span> <span class="o">=</span> <span class="n">extract_features_for_dtw</span><span class="p">(</span><span class="n">new_audio_path</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Errorrrrrrr&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    
+    <span class="n">tutup_train_files</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">train_labels</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="n">tutup_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">train_path</span><span class="p">,</span> <span class="s2">&quot;tutup&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">tutup_path</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">tutup_path</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">((</span><span class="s1">&#39;.wav&#39;</span><span class="p">)):</span>
+                <span class="n">tutup_train_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tutup_path</span><span class="p">,</span> <span class="n">file</span><span class="p">))</span>
+                <span class="n">train_labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;tutup&#39;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tutup_train_files</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">max_files</span><span class="p">:</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tutup_train_files</span><span class="p">),</span> <span class="n">max_files</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">tutup_train_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">tutup_train_files</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">]</span>
+        <span class="n">train_labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">train_labels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">]</span>
+    
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">train_file</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">tutup_train_files</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">)):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Ekstrak fitur dari file training</span>
+            <span class="c1"># train_features = extract_features_for_dtw(train_file, &#39;mfcc&#39;)</span>
+            <span class="n">train_features</span> <span class="o">=</span> <span class="n">extract_features_for_dtw</span><span class="p">(</span><span class="n">train_file</span><span class="p">)</span>
+            
+            <span class="c1"># Hitung jarak DTW</span>
+            <span class="n">dtw_distance</span> <span class="o">=</span> <span class="n">dtw</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">new_features</span><span class="p">,</span> <span class="n">train_features</span><span class="p">)</span>
+            
+            <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s1">&#39;rank&#39;</span><span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="s1">&#39;filename&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">train_file</span><span class="p">),</span>
+                <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">label</span><span class="p">,</span>
+                <span class="s1">&#39;dtw_distance&#39;</span><span class="p">:</span> <span class="n">dtw_distance</span><span class="p">,</span>
+                <span class="s1">&#39;file_path&#39;</span><span class="p">:</span> <span class="n">train_file</span>
+            <span class="p">})</span>
+            
+                
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Error processing </span><span class="si">{</span><span class="n">train_file</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">continue</span>
+    
+    <span class="n">df_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+    <span class="n">df_results</span> <span class="o">=</span> <span class="n">df_results</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;dtw_distance&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">df_results</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_results</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">df_results</span>
+
+<span class="c1"># Path audio baru</span>
+<span class="n">new_audio_path</span> <span class="o">=</span> <span class="s2">&quot;gabunganaudio/train/tutupnew.wav&quot;</span>
+
+<span class="c1"># Hitung jarak DTW</span>
+<span class="n">dtw_results</span> <span class="o">=</span> <span class="n">calculate_dtw_distances</span><span class="p">(</span><span class="n">new_audio_path</span><span class="p">,</span> <span class="n">train_path</span><span class="p">,</span> <span class="n">max_files</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">dtw_results</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== RANKING JARAK DTW (Top 20) ===&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">dtw_results</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== STATISTIK HASIL ===&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total file dianalisis: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">dtw_results</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Jarak minimum: </span><span class="si">{</span><span class="n">dtw_results</span><span class="p">[</span><span class="s1">&#39;dtw_distance&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Jarak maksimum: </span><span class="si">{</span><span class="n">dtw_results</span><span class="p">[</span><span class="s1">&#39;dtw_distance&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Jarak rata-rata: </span><span class="si">{</span><span class="n">dtw_results</span><span class="p">[</span><span class="s1">&#39;dtw_distance&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== RANKING JARAK DTW (Top 20) ===
+ rank                 filename label  dtw_distance                                          file_path
+    1              Tutup20.wav tutup      0.000000              gabunganaudio/train/tutup/Tutup20.wav
+    2 Tutup20_aug_shift_13.wav tutup     30.815539 gabunganaudio/train/tutup/Tutup20_aug_shift_13.wav
+    3 Tutup20_aug_shift_10.wav tutup    106.067127 gabunganaudio/train/tutup/Tutup20_aug_shift_10.wav
+    4              Tutup10.wav tutup    187.487968              gabunganaudio/train/tutup/Tutup10.wav
+    5  Tutup7_aug_noise_29.wav tutup    192.054720  gabunganaudio/train/tutup/Tutup7_aug_noise_29.wav
+    6               Tutup6.wav tutup    192.945325               gabunganaudio/train/tutup/Tutup6.wav
+    7  Tutup9_aug_noise_26.wav tutup    219.962346  gabunganaudio/train/tutup/Tutup9_aug_noise_26.wav
+    8              Tutup19.wav tutup    232.378244              gabunganaudio/train/tutup/Tutup19.wav
+    9              Tutup16.wav tutup    234.219749              gabunganaudio/train/tutup/Tutup16.wav
+   10 Tutup18_aug_speed_11.wav tutup    236.572515 gabunganaudio/train/tutup/Tutup18_aug_speed_11.wav
+   11              Tutup14.wav tutup    238.276576              gabunganaudio/train/tutup/Tutup14.wav
+   12  Tutup18_aug_pitch_1.wav tutup    244.708348  gabunganaudio/train/tutup/Tutup18_aug_pitch_1.wav
+   13              Tutup15.wav tutup    251.552345              gabunganaudio/train/tutup/Tutup15.wav
+   14               Tutup3.wav tutup    258.211003               gabunganaudio/train/tutup/Tutup3.wav
+   15 Tutup19_aug_speed_22.wav tutup    261.896002 gabunganaudio/train/tutup/Tutup19_aug_speed_22.wav
+   16               Tutup7.wav tutup    271.630839               gabunganaudio/train/tutup/Tutup7.wav
+   17               Tutup5.wav tutup    275.792622               gabunganaudio/train/tutup/Tutup5.wav
+   18  Tutup19_aug_pitch_4.wav tutup    283.493676  gabunganaudio/train/tutup/Tutup19_aug_pitch_4.wav
+   19               Tutup8.wav tutup    293.069411               gabunganaudio/train/tutup/Tutup8.wav
+   20  Tutup8_aug_noise_23.wav tutup    306.586397  gabunganaudio/train/tutup/Tutup8_aug_noise_23.wav
+
+=== STATISTIK HASIL ===
+Total file dianalisis: 50
+Jarak minimum: 0.0000
+Jarak maksimum: 1123.6811
+Jarak rata-rata: 379.2039
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id3">
+<h3>Perangkingan dan Perbandingan<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">visualize_dtw_results</span><span class="p">(</span><span class="n">dtw_results</span><span class="p">,</span> <span class="n">new_audio_path</span><span class="p">):</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+    
+    <span class="c1"># Top 20 ranking</span>
+    <span class="n">top_20</span> <span class="o">=</span> <span class="n">dtw_results</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span> <span class="k">if</span> <span class="n">label</span> <span class="o">==</span> <span class="s1">&#39;tutup&#39;</span> <span class="k">else</span> <span class="s1">&#39;blue&#39;</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">top_20</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]]</span>
+    
+    <span class="n">ax</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">top_20</span><span class="p">)),</span> <span class="n">top_20</span><span class="p">[</span><span class="s1">&#39;dtw_distance&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">top_20</span><span class="p">)))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;filename&#39;</span><span class="p">][:</span><span class="mi">15</span><span class="p">]</span><span class="si">}</span><span class="s2">...&quot;</span> 
+                        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">top_20</span><span class="o">.</span><span class="n">iterrows</span><span class="p">()],</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;DTW Distance&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Top 20 Terdekat (Merah=Tutup, Biru=Buka)&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== PERBANDINGAN WAVEFORM ===&quot;</span><span class="p">)</span>
+    <span class="n">plot_waveform_comparison</span><span class="p">(</span><span class="n">new_audio_path</span><span class="p">,</span> <span class="n">dtw_results</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_waveform_comparison</span><span class="p">(</span><span class="n">new_audio_path</span><span class="p">,</span> <span class="n">top_matches</span><span class="p">):</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+    
+    <span class="c1"># Audio baru</span>
+    <span class="n">y_new</span><span class="p">,</span> <span class="n">sr_new</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">new_audio_path</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">)</span>
+    <span class="n">time_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_new</span><span class="p">)</span><span class="o">/</span><span class="n">sr_new</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_new</span><span class="p">))</span>
+    
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time_new</span><span class="p">,</span> <span class="n">y_new</span><span class="p">,</span> <span class="s1">&#39;g-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Audio Baru: </span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">new_audio_path</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Amplitude&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">top_matches</span><span class="o">.</span><span class="n">iterrows</span><span class="p">()):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">5</span><span class="p">:</span>
+            <span class="k">break</span>
+            
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">y_match</span><span class="p">,</span> <span class="n">sr_match</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;file_path&#39;</span><span class="p">],</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">)</span>
+            <span class="n">time_match</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_match</span><span class="p">)</span><span class="o">/</span><span class="n">sr_match</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_match</span><span class="p">))</span>
+            
+            <span class="n">row_idx</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+            <span class="n">col_idx</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span>
+            
+            <span class="k">if</span> <span class="n">row_idx</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span> <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;tutup&#39;</span> <span class="k">else</span> <span class="s1">&#39;blue&#39;</span>
+                <span class="n">axes</span><span class="p">[</span><span class="n">row_idx</span><span class="p">,</span> <span class="n">col_idx</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time_match</span><span class="p">,</span> <span class="n">y_match</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">axes</span><span class="p">[</span><span class="n">row_idx</span><span class="p">,</span> <span class="n">col_idx</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Rank </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;rank&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;filename&quot;</span><span class="p">][:</span><span class="mi">20</span><span class="p">]</span><span class="si">}</span><span class="s1">...</span><span class="se">\n</span><span class="s1">Label: </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">, Distance: </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;dtw_distance&quot;</span><span class="p">]</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="n">axes</span><span class="p">[</span><span class="n">row_idx</span><span class="p">,</span> <span class="n">col_idx</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">)</span>
+                <span class="n">axes</span><span class="p">[</span><span class="n">row_idx</span><span class="p">,</span> <span class="n">col_idx</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Amplitude&#39;</span><span class="p">)</span>
+                <span class="n">axes</span><span class="p">[</span><span class="n">row_idx</span><span class="p">,</span> <span class="n">col_idx</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error loading </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;filename&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">continue</span>
+    
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">dtw_results</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">visualize_dtw_results</span><span class="p">(</span><span class="n">dtw_results</span><span class="p">,</span> <span class="n">new_audio_path</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== SEMUA RANKING DTW (1-</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">dtw_results</span><span class="p">)</span><span class="si">}</span><span class="s2">) ===&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">dtw_results</span><span class="p">[[</span><span class="s1">&#39;rank&#39;</span><span class="p">,</span> <span class="s1">&#39;filename&#39;</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">,</span> <span class="s1">&#39;dtw_distance&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/2d924f267ea2b66275db11fad39a829395387cd53f8a6d489a1518fbbbc33eeb.png" src="_images/2d924f267ea2b66275db11fad39a829395387cd53f8a6d489a1518fbbbc33eeb.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== PERBANDINGAN WAVEFORM ===
+</pre></div>
+</div>
+<img alt="_images/4ff7f47a09f942143cc250caa5f6e7132451a909c11326201602e4ed46427c7b.png" src="_images/4ff7f47a09f942143cc250caa5f6e7132451a909c11326201602e4ed46427c7b.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== SEMUA RANKING DTW (1-50) ===
+ rank                 filename label  dtw_distance
+    1              Tutup20.wav tutup      0.000000
+    2 Tutup20_aug_shift_13.wav tutup     30.815539
+    3 Tutup20_aug_shift_10.wav tutup    106.067127
+    4              Tutup10.wav tutup    187.487968
+    5  Tutup7_aug_noise_29.wav tutup    192.054720
+    6               Tutup6.wav tutup    192.945325
+    7  Tutup9_aug_noise_26.wav tutup    219.962346
+    8              Tutup19.wav tutup    232.378244
+    9              Tutup16.wav tutup    234.219749
+   10 Tutup18_aug_speed_11.wav tutup    236.572515
+   11              Tutup14.wav tutup    238.276576
+   12  Tutup18_aug_pitch_1.wav tutup    244.708348
+   13              Tutup15.wav tutup    251.552345
+   14               Tutup3.wav tutup    258.211003
+   15 Tutup19_aug_speed_22.wav tutup    261.896002
+   16               Tutup7.wav tutup    271.630839
+   17               Tutup5.wav tutup    275.792622
+   18  Tutup19_aug_pitch_4.wav tutup    283.493676
+   19               Tutup8.wav tutup    293.069411
+   20  Tutup8_aug_noise_23.wav tutup    306.586397
+   21               Tutup4.wav tutup    311.507674
+   22  Tutup8_aug_shift_30.wav tutup    312.747102
+   23   Tutup9_aug_noise_3.wav tutup    320.994061
+   24               Tutup9.wav tutup    322.041195
+   25              Tutup13.wav tutup    325.722106
+   26   Tutup4_aug_shift_6.wav tutup    330.671098
+   27  Tutup11_aug_shift_2.wav tutup    337.190101
+   28 Tutup10_aug_pitch_15.wav tutup    347.444139
+   29  Tutup17_aug_pitch_9.wav tutup    351.177295
+   30              Tutup11.wav tutup    365.077903
+   31              Tutup18.wav tutup    368.382189
+   32   Tutup5_aug_speed_7.wav tutup    371.252146
+   33 Tutup13_aug_speed_27.wav tutup    382.481209
+   34 Tutup16_aug_pitch_21.wav tutup    440.627500
+   35  Tutup5_aug_pitch_18.wav tutup    442.417012
+   36 Tutup15_aug_speed_16.wav tutup    442.877805
+   37               Tutup1.wav tutup    445.813372
+   38 Tutup14_aug_speed_17.wav tutup    455.619479
+   39              Tutup17.wav tutup    474.272733
+   40  Tutup2_aug_shift_20.wav tutup    484.671957
+   41 Tutup15_aug_speed_19.wav tutup    501.015594
+   42               Tutup2.wav tutup    512.588529
+   43  Tutup12_aug_pitch_8.wav tutup    533.748156
+   44              Tutup12.wav tutup    535.914172
+   45  Tutup17_aug_shift_5.wav tutup    554.431776
+   46  Tutup2_aug_speed_14.wav tutup    588.016077
+   47  Tutup1_aug_noise_28.wav tutup    638.567122
+   48  Tutup4_aug_noise_25.wav tutup    927.430186
+   49 Tutup11_aug_noise_12.wav tutup   1094.094089
+   50 Tutup12_aug_noise_24.wav tutup   1123.681060
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Modelling-bukatutup.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Modelling Suara Buka Tutup &amp; Deployment</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-time-warping-dtw">Dynamic Time Warping (DTW)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inti-kerja-dtw">Inti Kerja DTW</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suara-buka">Suara Buka</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-suara-waveforms">Visualisasi Suara Waveforms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-dynamic-time-warping">Perhitungan Dynamic Time Warping</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perangkingan-dan-perbandingan">Perangkingan dan Perbandingan</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suara-tutup">Suara Tutup</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Visualisasi Suara Waveforms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Perhitungan Dynamic Time Warping</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Perangkingan dan Perbandingan</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
