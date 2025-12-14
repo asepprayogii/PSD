@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Proyek Klasifikasi ECG200 &#8212; My sample book</title>
+    <title>PSD &#8212; My sample book</title>
   
   
   
@@ -57,11 +57,9 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'BusinessUnderstandingECG200';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'README';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="2. Data Understanding" href="DataUnderstandingECG200.html" />
-    <link rel="prev" title="Mencari Jarak Suara Menggunakan DTW" href="timeseriesDTW.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -123,6 +121,8 @@
     <div class="bd-container__inner bd-page-width">
       
       
+      
+        
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -227,10 +227,13 @@
 
 <li class="toctree-l1"><a class="reference internal" href="timeseriesDTW.html">Mencari Jarak Suara Menggunakan DTW</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Analisis dan Klasifikasi Time Series ECG200 (UAS)</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Business Understanding ECG200</a></li>
-<li class="toctree-l1"><a class="reference internal" href="DataUnderstandingECG200.html">Data Understanding ECG200</a></li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Project UAS (ECG200)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Businessunderstandingecg200.html">Business Understanding ECG200</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DataUnderstandingecg200.html">Data Understanding ECG200</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PreProcessingecg200.html">Preprocessing ECG200</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modellingecg200.html">Modelling &amp; Evaluasi Klasifikasi untuk Deteksi Abnormalitas ECG</a></li>
+
 </ul>
 
     </div>
@@ -302,7 +305,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FBusinessUnderstandingECG200.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FREADME.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -332,7 +335,7 @@
       
       
       
-      <li><a href="_sources/BusinessUnderstandingECG200.ipynb" target="_blank"
+      <li><a href="_sources/README.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -342,7 +345,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.ipynb</span>
+<span class="btn__text-container">.md</span>
 </a>
 </li>
       
@@ -403,9 +406,7 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</button>
+
 </div></div>
       
     </div>
@@ -416,24 +417,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Proyek Klasifikasi ECG200</h1>
+    <h1>PSD</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#business-understanding">1. Business Understanding</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-proyek-business-objective">1.1. Tujuan Proyek (Business Objective)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-analisis-data-mining-objective">1.2. Tujuan Analisis (Data Mining Objective)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kriteria-keberhasilan">1.3. Kriteria Keberhasilan</a></li>
-</ul>
-</li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -443,35 +431,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="proyek-klasifikasi-ecg200">
-<h1>Proyek Klasifikasi ECG200<a class="headerlink" href="#proyek-klasifikasi-ecg200" title="Link to this heading">#</a></h1>
-<section id="business-understanding">
-<h2>1. Business Understanding<a class="headerlink" href="#business-understanding" title="Link to this heading">#</a></h2>
-<section id="tujuan-proyek-business-objective">
-<h3>1.1. Tujuan Proyek (Business Objective)<a class="headerlink" href="#tujuan-proyek-business-objective" title="Link to this heading">#</a></h3>
-<p>Tujuan utama dari proyek ini adalah melakukan klasifikasi time series pada data <strong>ECG200</strong> untuk membedakan antara dua kelas kondisi jantung berdasarkan rekaman elektrokardiogram (ECG). Dalam konteks medis, hal ini relevan untuk membantu identifikasi awal kelainan jantung, seperti:</p>
-<ul class="simple">
-<li><p><strong>Normal</strong> (healthy heart rhythm)</p></li>
-<li><p><strong>Abnormal</strong> (e.g., myocardial infarction or other cardiac anomalies)</p></li>
-</ul>
-</section>
-<section id="tujuan-analisis-data-mining-objective">
-<h3>1.2. Tujuan Analisis (Data Mining Objective)<a class="headerlink" href="#tujuan-analisis-data-mining-objective" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Membangun model machine learning yang mampu mengklasifikasikan sinyal ECG ke dalam dua kelas dengan akurasi tinggi.</p></li>
-<li><p>Memastikan model dapat digeneralisasi pada data ECG baru yang tidak terlihat sebelumnya.</p></li>
-<li><p>Menghasilkan aplikasi berbasis web (Streamlit) yang memungkinkan pengguna mengunggah atau memasukkan data ECG (dalam bentuk array/CSV) dan menerima prediksi kelas secara real-time.</p></li>
-</ul>
-</section>
-<section id="kriteria-keberhasilan">
-<h3>1.3. Kriteria Keberhasilan<a class="headerlink" href="#kriteria-keberhasilan" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Akurasi klasifikasi ≥ 80% (dapat disesuaikan berdasarkan benchmark ECG200).</p></li>
-<li><p>Aplikasi Streamlit berfungsi dengan baik dan mudah digunakan.</p></li>
-<li><p>Seluruh tahapan CRISP-DM terdokumentasi secara jelas dalam laporan akhir.</p></li>
-</ul>
-</section>
-</section>
+  <section class="tex2jax_ignore mathjax_ignore" id="psd">
+<h1>PSD<a class="headerlink" href="#psd" title="Link to this heading">#</a></h1>
 </section>
 
     <script type="text/x-thebe-config">
@@ -504,50 +465,12 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="timeseriesDTW.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Mencari Jarak Suara Menggunakan DTW</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="DataUnderstandingECG200.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">2. Data Understanding</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#business-understanding">1. Business Understanding</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-proyek-business-objective">1.1. Tujuan Proyek (Business Objective)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-analisis-data-mining-objective">1.2. Tujuan Analisis (Data Mining Objective)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kriteria-keberhasilan">1.3. Kriteria Keberhasilan</a></li>
-</ul>
-</li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>

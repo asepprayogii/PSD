@@ -1,0 +1,1161 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Data Understanding &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'DataUnderstandingecg200';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Preprocessing Data" href="PreProcessingecg200.html" />
+    <link rel="prev" title="1. Business Understanding" href="Businessunderstandingecg200.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.jpg" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/logo.jpg" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome — Asep Prayogi
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Business Understanding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="BusinessUnderstanding.html">Business Understanding (Iris)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Understanding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="DataUnderstanding.html">Data Understanding &amp; Explorasi Data (Iris)</a></li>
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Preprocessing Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="PreprocessingData.html">Preprocessing (Iris)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PreprocessingDataEcoliKNIME.html"><strong>Preprocessing Data Ecoli Menggunakan KNIME (Pra UTS)</strong></a></li>
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Modelling</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="PenyeimbanganDataEcoli.html">Penyeimbangan Data (Ecoli)</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="klasifikasi_baggingclasifier.html"><strong>Klasifikasi Dan BaggingClassifier(Ecoli)</strong></a></li>
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Prediksi NO2 Kota Medan</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="BusinessUnderstandingNO2Medan.html">Business Understanding (NO2 Medan)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DataUnderstandingNO2Medan.html">Data Understanding (NO2 Medan)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PreprocessingNO2Medan.html">Preprocessing (NO2 Medan)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModeellingNO2Medan.html">KNN Regression Data (NO₂ Medan) &amp; Deployment</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Identifikasi Suara Buka Tutup</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="DataUnderstanding-bukatutup.html">Data Understanding Suara Buka Tutup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preprocessing-bukatutup.html">Preprocessing Suara Buka Tutup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Modelling-bukatutup.html">Modelling Suara Buka Tutup &amp; Deployment</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="timeseriesDTW.html">Mencari Jarak Suara Menggunakan DTW</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Project UAS (ECG200)</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Businessunderstandingecg200.html">Business Understanding ECG200</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Data Understanding ECG200</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PreProcessingecg200.html">Preprocessing ECG200</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modellingecg200.html">Modelling &amp; Evaluasi Klasifikasi untuk Deteksi Abnormalitas ECG</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FDataUnderstandingecg200.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/DataUnderstandingecg200.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Data Understanding</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sumber-data">2.1 Sumber Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#asal-dan-cara-pengambilan-data">Asal dan Cara Pengambilan Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#komposisi-dataset">Komposisi Dataset</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eksplorasi-data">2.2 Eksplorasi Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library-dan-muat-data">2.2.1 Import Library dan Muat Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struktur-kolom-dan-informasi-dataset">2.2.2 Struktur Kolom dan Informasi Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#identifikasi-missing-value">2.2.3 Identifikasi Missing Value</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-kelas">2.2.4 Distribusi Kelas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-time-series-contoh-per-kelas">2.2.5 Visualisasi Time Series Contoh Per Kelas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deteksi-outlier-menggunakan-abod-angle-based-outlier-detection">2.2.6 Deteksi Outlier Menggunakan ABOD (Angle-Based Outlier Detection)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relevansi-terhadap-tujuan-analisis">2.3 Relevansi terhadap Tujuan Analisis</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="data-understanding">
+<h1>Data Understanding<a class="headerlink" href="#data-understanding" title="Link to this heading">#</a></h1>
+<section id="sumber-data">
+<h2>2.1 Sumber Data<a class="headerlink" href="#sumber-data" title="Link to this heading">#</a></h2>
+<p>Dataset <strong>ECG200</strong> diambil dari repositori <a class="reference external" href="https://www.timeseriesclassification.com/dataset.php">Time Series Classification</a>, yang menyediakan kumpulan data time series untuk keperluan <em>benchmarking</em> klasifikasi. Meskipun halaman saat ini mengalami kendala tampilan (menampilkan <em>“No matching records found”</em>), dataset ECG200 tetap tersedia secara publik melalui arsip UCR/UEA dan telah digunakan secara luas dalam literatur <em>time series classification</em>.</p>
+<section id="asal-dan-cara-pengambilan-data">
+<h3>Asal dan Cara Pengambilan Data<a class="headerlink" href="#asal-dan-cara-pengambilan-data" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Asal data</strong>: Dataset ini diformat oleh <strong>R. Olszewski</strong> sebagai bagian dari tesis doktoralnya di Carnegie Mellon University tahun <strong>2001</strong>.</p></li>
+<li><p><strong>Sumber sinyal</strong>: Setiap sampel mewakili satu denyut jantung, direkam dari aktivitas listrik jantung pasien menggunakan sistem perekaman ECG klinis.</p></li>
+<li><p><strong>Alat yang digunakan</strong>: Rekaman ECG diperoleh menggunakan <strong>perangkat elektrokardiografi medis standar</strong>, yang terdiri dari:</p>
+<ul>
+<li><p><strong>Elektroda permukaan</strong> yang ditempelkan pada dada dan anggota tubuh pasien,</p></li>
+<li><p><strong>Amplifier sinyal</strong> untuk memperkuat sinyal bioelektrik yang lemah,</p></li>
+<li><p><strong>Analog-to-Digital Converter (ADC)</strong> untuk mengubah sinyal analog menjadi data digital berupa deret waktu.</p></li>
+</ul>
+</li>
+<li><p><strong>Proses pengambilan</strong>:</p>
+<ul>
+<li><p>Sinyal ECG mentah direkam selama sesi klinis,</p></li>
+<li><p>Segmen yang merepresentasikan <strong>satu siklus denyut jantung lengkap</strong> dipilih secara manual oleh ahli,</p></li>
+<li><p>Segmen tersebut kemudian dipotong, dinormalisasi, dan diberi label berdasarkan diagnosis klinis pasien.</p></li>
+</ul>
+</li>
+<li><p><strong>Waktu pengambilan asli</strong>: Data dikumpulkan sebelum atau selama penelitian tesis (sekitar awal 2000-an).</p></li>
+<li><p><strong>Format data</strong>: Disimpan dalam format <strong>ARFF</strong> (<em>Attribute-Relation File Format</em>), sesuai standar WEKA.</p></li>
+<li><p><strong>Preprocessing oleh penyedia</strong>:</p>
+<ul>
+<li><p>Setiap sampel mewakili satu denyut jantung, dengan panjang tetap <strong>96 titik waktu</strong>.</p></li>
+<li><p>Dinormalisasi secara global.</p></li>
+<li><p>Label: <strong><code class="docutils literal notranslate"><span class="pre">1</span></code> (normal heartbeat)</strong> dan <strong><code class="docutils literal notranslate"><span class="pre">-1</span></code> (Myocardial Infarction / Ischemia)</strong>.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="komposisi-dataset">
+<h3>Komposisi Dataset<a class="headerlink" href="#komposisi-dataset" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Data latih</strong>: 100 sampel</p></li>
+<li><p><strong>Data uji</strong>: 100 sampel</p></li>
+<li><p><strong>Jumlah fitur per sampel</strong>: 96 (time steps)</p></li>
+<li><p><strong>Jumlah kelas</strong>: 2 (normal vs. infark miokard)</p></li>
+<li><p><strong>Dimensi</strong>: Univariat (1 dimensi)</p></li>
+</ul>
+</section>
+</section>
+<section id="eksplorasi-data">
+<h2>2.2 Eksplorasi Data<a class="headerlink" href="#eksplorasi-data" title="Link to this heading">#</a></h2>
+<section id="import-library-dan-muat-data">
+<h3>2.2.1 Import Library dan Muat Data<a class="headerlink" href="#import-library-dan-muat-data" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">arff</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_palette</span><span class="p">(</span><span class="s2">&quot;Set2&quot;</span><span class="p">)</span>
+
+<span class="n">train_path</span> <span class="o">=</span> <span class="s1">&#39;ECG200/ECG200_TRAIN.arff&#39;</span>
+<span class="n">test_path</span> <span class="o">=</span> <span class="s1">&#39;ECG200/ECG200_TEST.arff&#39;</span>
+
+<span class="n">data_train</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">arff</span><span class="o">.</span><span class="n">loadarff</span><span class="p">(</span><span class="n">train_path</span><span class="p">)</span>
+<span class="n">data_test</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">arff</span><span class="o">.</span><span class="n">loadarff</span><span class="p">(</span><span class="n">test_path</span><span class="p">)</span>
+
+<span class="n">df_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data_train</span><span class="p">)</span>
+<span class="n">df_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data_test</span><span class="p">)</span>
+
+<span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)))</span>
+<span class="n">df_test</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_test</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Data berhasil dimuat dan label telah dikonversi ke integer.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✅ Data berhasil dimuat dan label telah dikonversi ke integer.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="struktur-kolom-dan-informasi-dataset">
+<h3>2.2.2 Struktur Kolom dan Informasi Dataset<a class="headerlink" href="#struktur-kolom-dan-informasi-dataset" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Struktur Kolom ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_train</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Informasi Dataset Latih ===&quot;</span><span class="p">)</span>
+<span class="n">df_train</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Statistik Deskriptif ===&quot;</span><span class="p">)</span>
+<span class="n">df_train</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Struktur Kolom ===
+[&#39;att1&#39;, &#39;att2&#39;, &#39;att3&#39;, &#39;att4&#39;, &#39;att5&#39;, &#39;att6&#39;, &#39;att7&#39;, &#39;att8&#39;, &#39;att9&#39;, &#39;att10&#39;, &#39;att11&#39;, &#39;att12&#39;, &#39;att13&#39;, &#39;att14&#39;, &#39;att15&#39;, &#39;att16&#39;, &#39;att17&#39;, &#39;att18&#39;, &#39;att19&#39;, &#39;att20&#39;, &#39;att21&#39;, &#39;att22&#39;, &#39;att23&#39;, &#39;att24&#39;, &#39;att25&#39;, &#39;att26&#39;, &#39;att27&#39;, &#39;att28&#39;, &#39;att29&#39;, &#39;att30&#39;, &#39;att31&#39;, &#39;att32&#39;, &#39;att33&#39;, &#39;att34&#39;, &#39;att35&#39;, &#39;att36&#39;, &#39;att37&#39;, &#39;att38&#39;, &#39;att39&#39;, &#39;att40&#39;, &#39;att41&#39;, &#39;att42&#39;, &#39;att43&#39;, &#39;att44&#39;, &#39;att45&#39;, &#39;att46&#39;, &#39;att47&#39;, &#39;att48&#39;, &#39;att49&#39;, &#39;att50&#39;, &#39;att51&#39;, &#39;att52&#39;, &#39;att53&#39;, &#39;att54&#39;, &#39;att55&#39;, &#39;att56&#39;, &#39;att57&#39;, &#39;att58&#39;, &#39;att59&#39;, &#39;att60&#39;, &#39;att61&#39;, &#39;att62&#39;, &#39;att63&#39;, &#39;att64&#39;, &#39;att65&#39;, &#39;att66&#39;, &#39;att67&#39;, &#39;att68&#39;, &#39;att69&#39;, &#39;att70&#39;, &#39;att71&#39;, &#39;att72&#39;, &#39;att73&#39;, &#39;att74&#39;, &#39;att75&#39;, &#39;att76&#39;, &#39;att77&#39;, &#39;att78&#39;, &#39;att79&#39;, &#39;att80&#39;, &#39;att81&#39;, &#39;att82&#39;, &#39;att83&#39;, &#39;att84&#39;, &#39;att85&#39;, &#39;att86&#39;, &#39;att87&#39;, &#39;att88&#39;, &#39;att89&#39;, &#39;att90&#39;, &#39;att91&#39;, &#39;att92&#39;, &#39;att93&#39;, &#39;att94&#39;, &#39;att95&#39;, &#39;att96&#39;, &#39;target&#39;]
+
+=== Informasi Dataset Latih ===
+&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 100 entries, 0 to 99
+Data columns (total 97 columns):
+ #   Column  Non-Null Count  Dtype  
+---  ------  --------------  -----  
+ 0   att1    100 non-null    float64
+ 1   att2    100 non-null    float64
+ 2   att3    100 non-null    float64
+ 3   att4    100 non-null    float64
+ 4   att5    100 non-null    float64
+ 5   att6    100 non-null    float64
+ 6   att7    100 non-null    float64
+ 7   att8    100 non-null    float64
+ 8   att9    100 non-null    float64
+ 9   att10   100 non-null    float64
+ 10  att11   100 non-null    float64
+ 11  att12   100 non-null    float64
+ 12  att13   100 non-null    float64
+ 13  att14   100 non-null    float64
+ 14  att15   100 non-null    float64
+ 15  att16   100 non-null    float64
+ 16  att17   100 non-null    float64
+ 17  att18   100 non-null    float64
+ 18  att19   100 non-null    float64
+ 19  att20   100 non-null    float64
+ 20  att21   100 non-null    float64
+ 21  att22   100 non-null    float64
+ 22  att23   100 non-null    float64
+ 23  att24   100 non-null    float64
+ 24  att25   100 non-null    float64
+ 25  att26   100 non-null    float64
+ 26  att27   100 non-null    float64
+ 27  att28   100 non-null    float64
+ 28  att29   100 non-null    float64
+ 29  att30   100 non-null    float64
+ 30  att31   100 non-null    float64
+ 31  att32   100 non-null    float64
+ 32  att33   100 non-null    float64
+ 33  att34   100 non-null    float64
+ 34  att35   100 non-null    float64
+ 35  att36   100 non-null    float64
+ 36  att37   100 non-null    float64
+ 37  att38   100 non-null    float64
+ 38  att39   100 non-null    float64
+ 39  att40   100 non-null    float64
+ 40  att41   100 non-null    float64
+ 41  att42   100 non-null    float64
+ 42  att43   100 non-null    float64
+ 43  att44   100 non-null    float64
+ 44  att45   100 non-null    float64
+ 45  att46   100 non-null    float64
+ 46  att47   100 non-null    float64
+ 47  att48   100 non-null    float64
+ 48  att49   100 non-null    float64
+ 49  att50   100 non-null    float64
+ 50  att51   100 non-null    float64
+ 51  att52   100 non-null    float64
+ 52  att53   100 non-null    float64
+ 53  att54   100 non-null    float64
+ 54  att55   100 non-null    float64
+ 55  att56   100 non-null    float64
+ 56  att57   100 non-null    float64
+ 57  att58   100 non-null    float64
+ 58  att59   100 non-null    float64
+ 59  att60   100 non-null    float64
+ 60  att61   100 non-null    float64
+ 61  att62   100 non-null    float64
+ 62  att63   100 non-null    float64
+ 63  att64   100 non-null    float64
+ 64  att65   100 non-null    float64
+ 65  att66   100 non-null    float64
+ 66  att67   100 non-null    float64
+ 67  att68   100 non-null    float64
+ 68  att69   100 non-null    float64
+ 69  att70   100 non-null    float64
+ 70  att71   100 non-null    float64
+ 71  att72   100 non-null    float64
+ 72  att73   100 non-null    float64
+ 73  att74   100 non-null    float64
+ 74  att75   100 non-null    float64
+ 75  att76   100 non-null    float64
+ 76  att77   100 non-null    float64
+ 77  att78   100 non-null    float64
+ 78  att79   100 non-null    float64
+ 79  att80   100 non-null    float64
+ 80  att81   100 non-null    float64
+ 81  att82   100 non-null    float64
+ 82  att83   100 non-null    float64
+ 83  att84   100 non-null    float64
+ 84  att85   100 non-null    float64
+ 85  att86   100 non-null    float64
+ 86  att87   100 non-null    float64
+ 87  att88   100 non-null    float64
+ 88  att89   100 non-null    float64
+ 89  att90   100 non-null    float64
+ 90  att91   100 non-null    float64
+ 91  att92   100 non-null    float64
+ 92  att93   100 non-null    float64
+ 93  att94   100 non-null    float64
+ 94  att95   100 non-null    float64
+ 95  att96   100 non-null    float64
+ 96  target  100 non-null    int64  
+dtypes: float64(96), int64(1)
+memory usage: 75.9 KB
+
+=== Statistik Deskriptif ===
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>att1</th>
+      <td>100.0</td>
+      <td>0.708438</td>
+      <td>0.593513</td>
+      <td>-0.706305</td>
+      <td>0.318643</td>
+      <td>0.581008</td>
+      <td>0.994760</td>
+      <td>2.689017</td>
+    </tr>
+    <tr>
+      <th>att2</th>
+      <td>100.0</td>
+      <td>1.422151</td>
+      <td>0.927972</td>
+      <td>-1.100715</td>
+      <td>0.779810</td>
+      <td>1.232191</td>
+      <td>2.093703</td>
+      <td>3.535038</td>
+    </tr>
+    <tr>
+      <th>att3</th>
+      <td>100.0</td>
+      <td>2.039149</td>
+      <td>1.046880</td>
+      <td>-1.321589</td>
+      <td>1.525548</td>
+      <td>2.152552</td>
+      <td>2.707411</td>
+      <td>3.850263</td>
+    </tr>
+    <tr>
+      <th>att4</th>
+      <td>100.0</td>
+      <td>2.126455</td>
+      <td>1.098754</td>
+      <td>-1.076313</td>
+      <td>1.511639</td>
+      <td>2.234408</td>
+      <td>2.865394</td>
+      <td>4.199145</td>
+    </tr>
+    <tr>
+      <th>att5</th>
+      <td>100.0</td>
+      <td>1.551616</td>
+      <td>0.954734</td>
+      <td>-1.247922</td>
+      <td>0.966292</td>
+      <td>1.746861</td>
+      <td>2.163355</td>
+      <td>3.720899</td>
+    </tr>
+    <tr>
+      <th>att6</th>
+      <td>100.0</td>
+      <td>0.762251</td>
+      <td>0.963111</td>
+      <td>-1.482391</td>
+      <td>0.022470</td>
+      <td>0.574297</td>
+      <td>1.502335</td>
+      <td>3.026452</td>
+    </tr>
+    <tr>
+      <th>att7</th>
+      <td>100.0</td>
+      <td>0.282647</td>
+      <td>1.096712</td>
+      <td>-1.598712</td>
+      <td>-0.603378</td>
+      <td>0.120230</td>
+      <td>1.226563</td>
+      <td>2.454195</td>
+    </tr>
+    <tr>
+      <th>att8</th>
+      <td>100.0</td>
+      <td>0.333630</td>
+      <td>0.877640</td>
+      <td>-1.508060</td>
+      <td>-0.464767</td>
+      <td>0.366122</td>
+      <td>1.008876</td>
+      <td>2.220327</td>
+    </tr>
+    <tr>
+      <th>att9</th>
+      <td>100.0</td>
+      <td>0.372973</td>
+      <td>0.761753</td>
+      <td>-1.609777</td>
+      <td>-0.075355</td>
+      <td>0.457255</td>
+      <td>0.990675</td>
+      <td>2.122435</td>
+    </tr>
+    <tr>
+      <th>att10</th>
+      <td>100.0</td>
+      <td>0.210769</td>
+      <td>0.739185</td>
+      <td>-1.600454</td>
+      <td>-0.205867</td>
+      <td>0.182365</td>
+      <td>0.776566</td>
+      <td>1.916524</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="identifikasi-missing-value">
+<h3>2.2.3 Identifikasi Missing Value<a class="headerlink" href="#identifikasi-missing-value" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Jumlah Missing Value ===&quot;</span><span class="p">)</span>
+<span class="n">missing_train</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">missing_test</span> <span class="o">=</span> <span class="n">df_test</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data Latih:&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">missing_train</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tidak ada missing value.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">missing_train</span><span class="p">[</span><span class="n">missing_train</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Data Uji:&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">missing_test</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tidak ada missing value.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">missing_test</span><span class="p">[</span><span class="n">missing_test</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">])</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="c1"># Heatmap hanya menunjukkan keberadaan missing (True = putih/merah, False = putih)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">df_train</span><span class="o">.</span><span class="n">isnull</span><span class="p">(),</span> <span class="n">cbar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Reds&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">yticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">xticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Missing Value - Data Latih&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">df_test</span><span class="o">.</span><span class="n">isnull</span><span class="p">(),</span> <span class="n">cbar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Reds&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">yticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">xticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Missing Value - Data Uji&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ax</span><span class="p">:</span>
+    <span class="n">a</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Jumlah Missing Value ===
+Data Latih:
+Tidak ada missing value.
+
+Data Uji:
+Tidak ada missing value.
+</pre></div>
+</div>
+<img alt="_images/e19e7c3802b392e151611f0e9b85e71c1e679c06e0be60291170d3536ebb6840.png" src="_images/e19e7c3802b392e151611f0e9b85e71c1e679c06e0be60291170d3536ebb6840.png" />
+</div>
+</div>
+</section>
+<section id="distribusi-kelas">
+<h3>2.2.4 Distribusi Kelas<a class="headerlink" href="#distribusi-kelas" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Distribusi Kelas ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data Latih:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">())</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Data Uji:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_test</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">())</span>
+
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df_train</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;target&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;pastel&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Distribusi Kelas - Data Latih&#39;</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df_test</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;target&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;pastel&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Distribusi Kelas - Data Uji&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Distribusi Kelas ===
+Data Latih:
+target
+-1    31
+ 1    69
+Name: count, dtype: int64
+
+Data Uji:
+target
+-1    36
+ 1    64
+Name: count, dtype: int64
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_17518/1495402320.py:12: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.countplot(data=df_train, x=&#39;target&#39;, ax=ax[0], palette=&#39;pastel&#39;)
+/tmp/ipykernel_17518/1495402320.py:15: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.countplot(data=df_test, x=&#39;target&#39;, ax=ax[1], palette=&#39;pastel&#39;)
+</pre></div>
+</div>
+<img alt="_images/daff440e1267afe6d9f3d08f62f47d47fdd28e22f86a2cc9b6b25390cbbdbcd0.png" src="_images/daff440e1267afe6d9f3d08f62f47d47fdd28e22f86a2cc9b6b25390cbbdbcd0.png" />
+</div>
+</div>
+</section>
+<section id="visualisasi-time-series-contoh-per-kelas">
+<h3>2.2.5 Visualisasi Time Series Contoh Per Kelas<a class="headerlink" href="#visualisasi-time-series-contoh-per-kelas" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Jumlah sampel normal:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Jumlah sampel abnormal:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;⚠️ Peringatan: Tidak ada data ditemukan untuk salah satu kelas!&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+    <span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+    <span class="n">sample_normal</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">sample_abnormal</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sample_normal</span><span class="o">.</span><span class="n">iterrows</span><span class="p">()):</span>
+        <span class="n">idx</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">row</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Normal Sample </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sample_abnormal</span><span class="o">.</span><span class="n">iterrows</span><span class="p">()):</span>
+        <span class="n">idx</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">row</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Abnormal Sample </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah sampel normal: 69
+Jumlah sampel abnormal: 31
+</pre></div>
+</div>
+<img alt="_images/3d0279ac1aeebb5ef0fc172196fc7968211491dc6215bba679249523c3ba380b.png" src="_images/3d0279ac1aeebb5ef0fc172196fc7968211491dc6215bba679249523c3ba380b.png" />
+</div>
+</div>
+</section>
+<section id="deteksi-outlier-menggunakan-abod-angle-based-outlier-detection">
+<h3>2.2.6 Deteksi Outlier Menggunakan ABOD (Angle-Based Outlier Detection)<a class="headerlink" href="#deteksi-outlier-menggunakan-abod-angle-based-outlier-detection" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyod.models.abod</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABOD</span>
+
+<span class="n">df_combined</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_train</span><span class="p">,</span> <span class="n">df_test</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">df_combined</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> 
+<span class="n">y</span> <span class="o">=</span> <span class="n">df_combined</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+<span class="n">abod</span> <span class="o">=</span> <span class="n">ABOD</span><span class="p">(</span><span class="n">contamination</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>  
+<span class="n">outlier_labels</span> <span class="o">=</span> <span class="n">abod</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="n">df_combined</span><span class="p">[</span><span class="s1">&#39;outlier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">outlier_labels</span>
+
+<span class="n">n_outliers</span> <span class="o">=</span> <span class="p">(</span><span class="n">outlier_labels</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🔍 Jumlah outlier terdeteksi: </span><span class="si">{</span><span class="n">n_outliers</span><span class="si">}</span><span class="s2"> dari </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df_combined</span><span class="p">)</span><span class="si">}</span><span class="s2"> sampel&quot;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">normal_sample</span> <span class="o">=</span> <span class="n">df_combined</span><span class="p">[</span><span class="n">df_combined</span><span class="p">[</span><span class="s1">&#39;outlier&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">normal_sample</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Normal Sample&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">n_outliers</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">outlier_sample</span> <span class="o">=</span> <span class="n">df_combined</span><span class="p">[</span><span class="n">df_combined</span><span class="p">[</span><span class="s1">&#39;outlier&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">outlier_sample</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Detected Outlier&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;⚠️ Tidak ada outlier terdeteksi — hanya menampilkan sampel normal.&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Contoh Time Series: Normal vs. Outlier (ABOD)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/python/3.12.1/lib/python3.12/site-packages/sklearn/utils/deprecation.py:87: FutureWarning: Function fit_predict is deprecated
+  warnings.warn(msg, category=FutureWarning)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>🔍 Jumlah outlier terdeteksi: 0 dari 200 sampel
+⚠️ Tidak ada outlier terdeteksi — hanya menampilkan sampel normal.
+</pre></div>
+</div>
+<img alt="_images/4da3b414feabf2d9535c7f8090372f9b5641392252e826e26a5b7ff1d2b90fb7.png" src="_images/4da3b414feabf2d9535c7f8090372f9b5641392252e826e26a5b7ff1d2b90fb7.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="relevansi-terhadap-tujuan-analisis">
+<h2>2.3 Relevansi terhadap Tujuan Analisis<a class="headerlink" href="#relevansi-terhadap-tujuan-analisis" title="Link to this heading">#</a></h2>
+<p>Dataset ini relevan karena:</p>
+<ul class="simple">
+<li><p><strong>Mewakili masalah nyata</strong>: Deteksi infark miokard dari sinyal ECG merupakan aplikasi klinis penting dalam diagnosis jantung.</p></li>
+<li><p><strong>Ukuran kecil namun representatif</strong>: Cocok untuk eksperimen awal dalam klasifikasi time series tanpa memerlukan sumber daya besar.</p></li>
+<li><p><strong>Struktur sederhana</strong>: Data univariat dan panjang tetap mempermudah implementasi model (misalnya: Random Forest, 1D-CNN, atau ekstraksi fitur statistik).</p></li>
+<li><p><strong>Siap untuk demonstrasi</strong>: Format dan ukuran dataset memungkinkan integrasi ke dalam aplikasi berbasis <strong>Streamlit</strong> sebagai demo prediksi real-time atau batch.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Businessunderstandingecg200.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">1. Business Understanding</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="PreProcessingecg200.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Preprocessing Data</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sumber-data">2.1 Sumber Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#asal-dan-cara-pengambilan-data">Asal dan Cara Pengambilan Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#komposisi-dataset">Komposisi Dataset</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eksplorasi-data">2.2 Eksplorasi Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library-dan-muat-data">2.2.1 Import Library dan Muat Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struktur-kolom-dan-informasi-dataset">2.2.2 Struktur Kolom dan Informasi Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#identifikasi-missing-value">2.2.3 Identifikasi Missing Value</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-kelas">2.2.4 Distribusi Kelas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-time-series-contoh-per-kelas">2.2.5 Visualisasi Time Series Contoh Per Kelas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deteksi-outlier-menggunakan-abod-angle-based-outlier-detection">2.2.6 Deteksi Outlier Menggunakan ABOD (Angle-Based Outlier Detection)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relevansi-terhadap-tujuan-analisis">2.3 Relevansi terhadap Tujuan Analisis</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
