@@ -564,38 +564,38 @@ document.write(`
 [01] Naive Bayes
      → Akurasi : 0.7900
      → F1-Score: 0.7838
-     → Waktu   : 0.0041 detik
+     → Waktu   : 0.0057 detik
 
 [02] Logistic Regression
      → Akurasi : 0.8300
      → F1-Score: 0.8222
-     → Waktu   : 0.0116 detik
+     → Waktu   : 0.1233 detik
 
 [03] Decision Tree
      → Akurasi : 0.8100
      → F1-Score: 0.7926
-     → Waktu   : 0.0093 detik
+     → Waktu   : 0.0183 detik
 
 [04] Random Forest
      → Akurasi : 0.8200
      → F1-Score: 0.8069
-     → Waktu   : 0.1478 detik
+     → Waktu   : 0.1505 detik
 
 [05] KNN (k=5)
      → Akurasi : 0.8800
      → F1-Score: 0.8727
-     → Waktu   : 0.0029 detik
+     → Waktu   : 0.0033 detik
 
 [06] SVM (RBF)
      → Akurasi : 0.8600
      → F1-Score: 0.8514
-     → Waktu   : 0.0061 detik
+     → Waktu   : 0.0056 detik
 
 🏆 MODEL TERBAIK BERDASARKAN F1-SCORE:
    Nama     : KNN (k=5)
    F1-Score : 0.8727
    Akurasi  : 0.8800
-   Waktu    : 0.0029 detik
+   Waktu    : 0.0033 detik
 </pre></div>
 </div>
 </div>
@@ -659,11 +659,11 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VISUALISASI KOMPARASI MODEL (Diagram Batang)
 </pre></div>
 </div>
-<img alt="_images/a2f7d3b3f59f94fc151a4d3996b62245cc3db696441bf761785e09a2ce0d8586.png" src="_images/a2f7d3b3f59f94fc151a4d3996b62245cc3db696441bf761785e09a2ce0d8586.png" />
+<img alt="_images/3e5874da221d8bde5a3029fa7cee1ae5f4d574f94a2720cfc1dd4cff713e38c1.png" src="_images/3e5874da221d8bde5a3029fa7cee1ae5f4d574f94a2720cfc1dd4cff713e38c1.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>📊 Interpretasi:
    - Batang biru = Akurasi, oranye = F1-Score.
    - Semakin tinggi dan sejajar kedua batang, semakin stabil modelnya.
-   - Model dengan batang &gt;0.90 dianggap sangat baik untuk dataset ini.
+   - Model dengan batang paling tinggi dianggap sangat baik untuk dataset ini.
 </pre></div>
 </div>
 </div>
@@ -682,7 +682,15 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>💾 Model terbaik (KNN (k=5)) berhasil disimpan sebagai &#39;ECG200/best_model.pkl&#39;
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">joblib</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># Simpan model terbaik untuk deploy</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">best_model_obj</span><span class="p">,</span> <span class="s1">&#39;ECG200/best_model.pkl&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">💾 Model terbaik (</span><span class="si">{</span><span class="n">best_model_name</span><span class="si">}</span><span class="s2">) berhasil disimpan sebagai &#39;ECG200/best_model.pkl&#39;&quot;</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;best_model_obj&#39; is not defined
 </pre></div>
 </div>
 </div>
