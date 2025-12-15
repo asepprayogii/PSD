@@ -438,7 +438,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simpan-model-terbaik">Simpan Model Terbaik</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi">Evaluasi</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi-model-dan-analisis-performa">Evaluasi Model dan Analisis Performa</a></li>
 </ul>
 
             </nav>
@@ -651,7 +651,7 @@ document.write(`
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">📊 Interpretasi:&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   - Batang biru = Akurasi, oranye = F1-Score.&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   - Semakin tinggi dan sejajar kedua batang, semakin stabil modelnya.&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   - Model dengan batang &gt;0.90 dianggap sangat baik untuk dataset ini.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   - Model dengan batang paling tinggi dianggap sangat baik untuk dataset ini.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -689,69 +689,108 @@ document.write(`
 </div>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="evaluasi">
-<h1>Evaluasi<a class="headerlink" href="#evaluasi" title="Link to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="evaluasi-model-dan-analisis-performa">
+<h1>Evaluasi Model dan Analisis Performa<a class="headerlink" href="#evaluasi-model-dan-analisis-performa" title="Link to this heading">#</a></h1>
+<p>Model terbaik (<code class="docutils literal notranslate"><span class="pre">best_model.pkl</span></code>) dievaluasi pada data uji asli (<code class="docutils literal notranslate"><span class="pre">ECG200_TEST.arff</span></code>) untuk mengukur kemampuannya dalam membedakan dua kondisi jantung:</p>
+<ul class="simple">
+<li><p><strong>Kelas <code class="docutils literal notranslate"><span class="pre">1</span></code></strong>: Normal heartbeat</p></li>
+<li><p><strong>Kelas <code class="docutils literal notranslate"><span class="pre">-1</span></code></strong>: Abnormal heartbeat (Myocardial Infarction)</p></li>
+</ul>
+<p>Metrik evaluasi utama meliputi:</p>
+<ul class="simple">
+<li><p><strong>Akurasi</strong>: Persentase prediksi benar secara keseluruhan.</p></li>
+<li><p><strong>Presisi</strong>: Seberapa akurat prediksi “abnormal” yang dihasilkan model.</p></li>
+<li><p><strong>Recall (Sensitivity)</strong>: Seberapa baik model mendeteksi semua kasus abnormal nyata.</p></li>
+<li><p><strong>F1-Score</strong>: Ukuran keseimbangan antara presisi dan recall — sangat penting dalam konteks medis.</p></li>
+</ul>
+<p>Hasil di bawah ini dihitung secara otomatis dari data uji yang belum pernah dilihat selama pelatihan.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Evaluasi Lengkap: Akurasi, Presisi, Recall, F1-Score + Confusion Matrix</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">arff</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">joblib</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">confusion_matrix</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">accuracy_score</span><span class="p">,</span>
+    <span class="n">precision_score</span><span class="p">,</span>
+    <span class="n">recall_score</span><span class="p">,</span>
+    <span class="n">f1_score</span><span class="p">,</span>
+    <span class="n">classification_report</span><span class="p">,</span>
+    <span class="n">confusion_matrix</span>
+<span class="p">)</span>
 
+<span class="c1"># Muat model dan scaler</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;ECG200/best_model.pkl&#39;</span><span class="p">)</span>
 <span class="n">scaler</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;ECG200/scaler.pkl&#39;</span><span class="p">)</span>
 
+<span class="c1"># Muat data uji asli</span>
 <span class="n">data_test</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">arff</span><span class="o">.</span><span class="n">loadarff</span><span class="p">(</span><span class="s1">&#39;ECG200/ECG200_TEST.arff&#39;</span><span class="p">)</span>
 <span class="n">df_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data_test</span><span class="p">)</span>
 
-<span class="n">X_test_raw</span> <span class="o">=</span> <span class="n">df_test</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="c1"># Siapkan data</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">df_test</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
 <span class="n">y_test_true</span> <span class="o">=</span> <span class="n">df_test</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;1&#39;</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
 
-<span class="n">X_test_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test_raw</span><span class="p">)</span>
-
+<span class="c1"># Normalisasi dan prediksi</span>
+<span class="n">X_test_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 <span class="n">y_test_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_scaled</span><span class="p">)</span>
 
+<span class="c1"># Hitung metrik utama</span>
+<span class="n">acc</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test_true</span><span class="p">,</span> <span class="n">y_test_pred</span><span class="p">)</span>
+<span class="n">prec</span> <span class="o">=</span> <span class="n">precision_score</span><span class="p">(</span><span class="n">y_test_true</span><span class="p">,</span> <span class="n">y_test_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;macro&#39;</span><span class="p">)</span>
+<span class="n">rec</span> <span class="o">=</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">y_test_true</span><span class="p">,</span> <span class="n">y_test_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;macro&#39;</span><span class="p">)</span>
+<span class="n">f1</span> <span class="o">=</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_test_true</span><span class="p">,</span> <span class="n">y_test_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;macro&#39;</span><span class="p">)</span>
+
+<span class="c1"># Tampilkan metrik ringkas</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🎯 METRIK EVALUASI UTAMA:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   • Akurasi : </span><span class="si">{</span><span class="n">acc</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   • Presisi : </span><span class="si">{</span><span class="n">prec</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   • Recall  : </span><span class="si">{</span><span class="n">rec</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   • F1-Score: </span><span class="si">{</span><span class="n">f1</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Tampilkan classification report lengkap</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;📋 LAPORAN KLASIFIKASI (per kelas):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test_true</span><span class="p">,</span> <span class="n">y_test_pred</span><span class="p">,</span> 
+                            <span class="n">target_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Abnormal (-1)&#39;</span><span class="p">,</span> <span class="s1">&#39;Normal (1)&#39;</span><span class="p">]))</span>
+
+<span class="c1"># Visualisasi Confusion Matrix</span>
 <span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test_true</span><span class="p">,</span> <span class="n">y_test_pred</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">cm</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">,</span>
             <span class="n">xticklabels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Abnormal (-1)&#39;</span><span class="p">,</span> <span class="s1">&#39;Normal (1)&#39;</span><span class="p">],</span>
-            <span class="n">yticklabels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Abnormal (-1)&#39;</span><span class="p">,</span> <span class="s1">&#39;Normal (1)&#39;</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Confusion Matrix – Seluruh Data Uji&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Prediksi&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Sebenarnya&#39;</span><span class="p">)</span>
+            <span class="n">yticklabels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Abnormal (-1)&#39;</span><span class="p">,</span> <span class="s1">&#39;Normal (1)&#39;</span><span class="p">],</span>
+            <span class="n">annot_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="mi">14</span><span class="p">})</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Confusion Matrix – Data Uji Asli&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Prediksi&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Nilai Sebenarnya&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-<span class="n">sample_index</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">y_true</span> <span class="o">=</span> <span class="n">y_test_true</span><span class="p">[</span><span class="n">sample_index</span><span class="p">]</span>
-<span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_test_pred</span><span class="p">[</span><span class="n">sample_index</span><span class="p">]</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">🔍 Prediksi untuk sampel index </span><span class="si">{</span><span class="n">sample_index</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   - Input: 96 titik waktu (1 deret ECG)&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   - Output model: 1 nilai (1 kolom prediksi kelas)&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   - Label sebenarnya: </span><span class="si">{</span><span class="n">y_true</span><span class="si">}</span><span class="s2"> → </span><span class="si">{</span><span class="s1">&#39;Normal&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">y_true</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;Abnormal&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   - Prediksi model   : </span><span class="si">{</span><span class="n">y_pred</span><span class="si">}</span><span class="s2"> → </span><span class="si">{</span><span class="s1">&#39;Normal&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">y_pred</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;Abnormal&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="k">if</span> <span class="n">y_true</span> <span class="o">==</span> <span class="n">y_pred</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   ✅ Prediksi BENAR!&quot;</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   ❌ Prediksi SALAH!&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1f3559e52bb4e5698ba5b6008c690bbd1c73b7fc642a0fdeaebaf98ccf88b794.png" src="_images/1f3559e52bb4e5698ba5b6008c690bbd1c73b7fc642a0fdeaebaf98ccf88b794.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>🔍 Prediksi untuk sampel index 0:
-   - Input: 96 titik waktu (1 deret ECG)
-   - Output model: 1 nilai (1 kolom prediksi kelas)
-   - Label sebenarnya: 1 → Normal
-   - Prediksi model   : 1 → Normal
-   ✅ Prediksi BENAR!
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>🎯 METRIK EVALUASI UTAMA:
+   • Akurasi : 0.8800
+   • Presisi : 0.8667
+   • Recall  : 0.8819
+   • F1-Score: 0.8727
+
+📋 LAPORAN KLASIFIKASI (per kelas):
+               precision    recall  f1-score   support
+
+Abnormal (-1)       0.80      0.89      0.84        36
+   Normal (1)       0.93      0.88      0.90        64
+
+     accuracy                           0.88       100
+    macro avg       0.87      0.88      0.87       100
+ weighted avg       0.89      0.88      0.88       100
 </pre></div>
 </div>
+<img alt="_images/5b6e4136d862fd6e4de012ef7085b6f57d3b52b942cd59e2d75b245716450fe2.png" src="_images/5b6e4136d862fd6e4de012ef7085b6f57d3b52b942cd59e2d75b245716450fe2.png" />
 </div>
 </div>
 </section>
@@ -828,7 +867,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simpan-model-terbaik">Simpan Model Terbaik</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi">Evaluasi</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi-model-dan-analisis-performa">Evaluasi Model dan Analisis Performa</a></li>
 </ul>
 
   </nav></div>
