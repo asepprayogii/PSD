@@ -459,12 +459,12 @@ document.write(`
 <h1>Data Understanding<a class="headerlink" href="#data-understanding" title="Link to this heading">#</a></h1>
 <section id="sumber-data">
 <h2>2.1 Sumber Data<a class="headerlink" href="#sumber-data" title="Link to this heading">#</a></h2>
-<p>Dataset <strong>ECG200</strong> diambil dari repositori <a class="reference external" href="https://www.timeseriesclassification.com/dataset.php">Time Series Classification</a>, yang menyediakan kumpulan data time series untuk keperluan <em>benchmarking</em> klasifikasi. Meskipun halaman saat ini mengalami kendala tampilan (menampilkan <em>“No matching records found”</em>), dataset ECG200 tetap tersedia secara publik melalui arsip UCR/UEA dan telah digunakan secara luas dalam literatur <em>time series classification</em>.</p>
+<p>Dataset <strong>ECG200</strong> secara historis merupakan bagian dari <strong>UCR/UEA Time Series Classification Archive</strong> dan saat ini tersedia melalui repositori resmi <a class="reference external" href="https://www.timeseriesclassification.com/dataset.php">Time Series Classification</a>.</p>
 <section id="asal-dan-cara-pengambilan-data">
 <h3>Asal dan Cara Pengambilan Data<a class="headerlink" href="#asal-dan-cara-pengambilan-data" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Asal data</strong>: Dataset ini diformat oleh <strong>R. Olszewski</strong> sebagai bagian dari tesis doktoralnya di Carnegie Mellon University tahun <strong>2001</strong>.</p></li>
-<li><p><strong>Sumber sinyal</strong>: Setiap sampel mewakili satu denyut jantung, direkam dari aktivitas listrik jantung pasien menggunakan sistem perekaman ECG klinis.</p></li>
+<li><p><strong>Asal data</strong>: Dataset ini diformat oleh <strong>R. Olszewski</strong> sebagai bagian dari tesis doktoralnya di Carnegie Mellon University tahun <strong>2001</strong> (<em>Generalized Feature Extraction for Structural Pattern Recognition in Time-Series Data</em>).</p></li>
+<li><p><strong>Sumber sinyal</strong>: Setiap sampel mewakili <strong>satu denyut jantung</strong>, direkam dari aktivitas listrik jantung pasien menggunakan sistem perekaman ECG klinis.</p></li>
 <li><p><strong>Alat yang digunakan</strong>: Rekaman ECG diperoleh menggunakan <strong>perangkat elektrokardiografi medis standar</strong>, yang terdiri dari:</p>
 <ul>
 <li><p><strong>Elektroda permukaan</strong> yang ditempelkan pada dada dan anggota tubuh pasien,</p></li>
@@ -479,6 +479,7 @@ document.write(`
 <li><p>Segmen tersebut kemudian dipotong, dinormalisasi, dan diberi label berdasarkan diagnosis klinis pasien.</p></li>
 </ul>
 </li>
+<li><p><strong>Jumlah pasien</strong>: Dataset <strong>tidak berasal dari hanya dua individu</strong>. Berdasarkan praktik umum dalam pembuatan dataset ECG medis dan sumber aslinya (termasuk MIT-BIH Arrhythmia Database), <strong>200 sampel kemungkinan besar berasal dari puluhan pasien berbeda</strong>. Setiap pasien menyumbang <strong>3–10 denyut jantung</strong> yang memenuhi kriteria kualitas dan representasi klinis.</p></li>
 <li><p><strong>Waktu pengambilan asli</strong>: Data dikumpulkan sebelum atau selama penelitian tesis (sekitar awal 2000-an).</p></li>
 <li><p><strong>Format data</strong>: Disimpan dalam format <strong>ARFF</strong> (<em>Attribute-Relation File Format</em>), sesuai standar WEKA.</p></li>
 <li><p><strong>Preprocessing oleh penyedia</strong>:</p>
@@ -497,7 +498,6 @@ document.write(`
 <li><p><strong>Data uji</strong>: 100 sampel</p></li>
 <li><p><strong>Jumlah fitur per sampel</strong>: 96 (time steps)</p></li>
 <li><p><strong>Jumlah kelas</strong>: 2 (normal vs. infark miokard)</p></li>
-<li><p><strong>Dimensi</strong>: Univariat (1 dimensi)</p></li>
 </ul>
 </section>
 </section>
