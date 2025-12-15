@@ -430,12 +430,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#latar-belakang">1.1 Latar Belakang</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sumber-dan-cara-pengambilan-data">1.2 Sumber dan Cara Pengambilan Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#business-problem">1.3 Business Problem</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-analisis">1.4 Tujuan Analisis</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manfaat-proyek">1.5 Manfaat Proyek</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ruang-lingkup-dan-batasan">1.6 Ruang Lingkup dan Batasan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#latar-belakang">1. Latar Belakang</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#business-problem">2. Business Problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-analisis">3. Tujuan Analisis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manfaat-proyek">4. Manfaat Proyek</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ruang-lingkup-proyek">5. Ruang Lingkup Proyek</a></li>
 </ul>
             </nav>
         </div>
@@ -450,64 +449,64 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="business-understanding">
 <h1>1. Business Understanding<a class="headerlink" href="#business-understanding" title="Link to this heading">#</a></h1>
 <section id="latar-belakang">
-<h2>1.1 Latar Belakang<a class="headerlink" href="#latar-belakang" title="Link to this heading">#</a></h2>
-<p>Elektrokardiogram (ECG) adalah rekaman aktivitas kelistrikan jantung yang digunakan secara luas dalam praktik klinis untuk mendeteksi gangguan irama jantung dan kelainan struktural, termasuk <strong>infark miokard</strong> (serangan jantung). Setiap kondisi jantung menghasilkan pola gelombang ECG yang khas—misalnya, elevasi segmen ST atau gelombang Q patologis sering muncul pada pasien dengan kerusakan miokard akut.</p>
-<p>Dataset <strong>ECG200</strong> merupakan salah satu <em>benchmark</em> standar dalam klasifikasi <em>time series</em>, yang awalnya dikembangkan oleh <strong>Robert Olszewski</strong> dalam tesis doktoralnya di <strong>Carnegie Mellon University (2001)</strong>. Dataset ini dirancang untuk menguji kemampuan sistem pengenalan pola dalam membedakan dua kategori denyut jantung berdasarkan morfologi gelombang ECG.</p>
-</section>
-<section id="sumber-dan-cara-pengambilan-data">
-<h2>1.2 Sumber dan Cara Pengambilan Data<a class="headerlink" href="#sumber-dan-cara-pengambilan-data" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><strong>Sumber asli</strong>: Rekaman ECG berasal dari pasien dalam lingkungan klinis (rumah sakit/laboratorium medis).</p></li>
-<li><p><strong>Alat pengambilan</strong>: Sistem perekam ECG medis standar, terdiri dari <strong>elektroda permukaan</strong>, <strong>amplifier</strong>, dan <strong>analog-to-digital converter (ADC)</strong>.</p></li>
-<li><p><strong>Seleksi data</strong>: Segmen ECG yang merepresentasikan <strong>satu siklus denyut jantung lengkap</strong> dipilih secara manual oleh ahli.</p></li>
-<li><p><strong>Preprocessing oleh penyedia</strong>:</p>
-<ul>
-<li><p>Dipotong menjadi panjang tetap <strong>96 titik waktu</strong>,</p></li>
-<li><p>Dinormalisasi (<em>z-score</em>: mean ≈ 0, std ≈ 1),</p></li>
-<li><p>Diberi label: <strong><code class="docutils literal notranslate"><span class="pre">1</span></code> (normal)</strong> dan <strong><code class="docutils literal notranslate"><span class="pre">-1</span></code> (abnormal – mengindikasikan infark miokard)</strong>.</p></li>
-</ul>
-</li>
-<li><p><strong>Format distribusi</strong>: Disimpan dalam format <strong>ARFF</strong> (<em>Attribute-Relation File Format</em>).</p></li>
-</ul>
+<h2>1. Latar Belakang<a class="headerlink" href="#latar-belakang" title="Link to this heading">#</a></h2>
+<p>Klasifikasi <em>time series</em> merupakan salah satu tantangan utama dalam <em>machine learning</em>, terutama ketika data memiliki makna temporal yang kritis—seperti dalam sinyal fisiologis. Berbeda dengan data tabular, urutan nilai dalam <em>time series</em> menyimpan informasi struktural yang tidak boleh diabaikan. Kemampuan untuk mengenali pola temporal secara akurat memiliki aplikasi luas, mulai dari prediksi kegagalan mesin hingga <strong>diagnosis dini penyakit kardiovaskular berdasarkan sinyal elektrokardiogram (ECG)</strong>.</p>
+<p>Dataset <strong>ECG200</strong> adalah salah satu <em>benchmark</em> standar dalam repositori klasifikasi <em>time series</em>, yang awalnya dikembangkan oleh <strong>Robert Olszewski</strong> dalam tesis doktoralnya di <strong>Carnegie Mellon University (2001)</strong>. Dataset ini terdiri dari segmen ECG yang telah diproses menjadi deret waktu univariat sepanjang 96 titik, dengan tujuan khusus: <strong>mengklasifikasikan denyut jantung menjadi dua kategori—normal atau abnormal (mengindikasikan infark miokard)</strong>.</p>
+<p>Meskipun tampak sederhana, dataset ini menjadi ujian penting bagi algoritma klasifikasi karena perbedaan antar kelas tidak terletak pada amplitudo umum, melainkan pada <strong>morfologi halus gelombang ECG</strong>, seperti elevasi segmen ST atau keberadaan gelombang Q patologis. Dengan memanfaatkan pendekatan <em>machine learning</em>—khususnya melalui perbandingan beberapa algoritma klasik seperti Random Forest, KNN, dan SVM—analisis ini bertujuan untuk membangun model yang mampu menangkap pola klinis tersebut secara otomatis dan akurat.</p>
 </section>
 <section id="business-problem">
-<h2>1.3 Business Problem<a class="headerlink" href="#business-problem" title="Link to this heading">#</a></h2>
-<p>Interpretasi ECG memerlukan pelatihan klinis khusus dan waktu yang tidak sebentar. Di daerah dengan keterbatasan tenaga medis, risiko keterlambatan diagnosis infark miokard meningkat signifikan. Oleh karena itu, diperlukan sistem pendukung keputusan berbasis <em>machine learning</em> yang mampu:</p>
+<h2>2. Business Problem<a class="headerlink" href="#business-problem" title="Link to this heading">#</a></h2>
+<p>Dalam praktik klinis, interpretasi ECG membutuhkan keahlian spesialis dan waktu yang tidak sebentar. Di daerah terpencil atau fasilitas kesehatan dengan keterbatasan tenaga ahli, risiko keterlambatan diagnosis infark miokard sangat tinggi—padahal, waktu adalah otot: setiap menit keterlambatan dapat menyebabkan kerusakan jantung yang permanen.</p>
+<p>Permasalahan spesifik yang ingin dijawab dalam proyek ini meliputi:</p>
 <ul class="simple">
-<li><p>Menganalisis sinyal ECG secara otomatis,</p></li>
-<li><p>Memberikan prediksi awal yang andal,</p></li>
-<li><p>Diakses melalui antarmuka yang sederhana dan cepat.</p></li>
+<li><p>Bagaimana membangun model <em>machine learning</em> yang mampu <strong>mengenali perbedaan morfologis halus</strong> antara ECG normal dan abnormal hanya berdasarkan 96 titik waktu?</p></li>
+<li><p>Apakah algoritma klasifikasi konvensional (seperti Random Forest, KNN, SVM) cukup efektif untuk menangani karakteristik <em>time series</em> medis yang bersifat struktural namun berdimensi rendah?</p></li>
+<li><p>Bagaimana memastikan model tidak hanya akurat, tetapi juga <strong>adil dalam mengenali kedua kelas</strong>, mengingat konsekuensi medis yang kritis jika kelas abnormal terlewat?</p></li>
 </ul>
 </section>
 <section id="tujuan-analisis">
-<h2>1.4 Tujuan Analisis<a class="headerlink" href="#tujuan-analisis" title="Link to this heading">#</a></h2>
-<p>Proyek ini bertujuan untuk:</p>
+<h2>3. Tujuan Analisis<a class="headerlink" href="#tujuan-analisis" title="Link to this heading">#</a></h2>
+<p>Proyek ini bertujuan untuk membangun sistem klasifikasi <em>time series</em> pada dataset ECG200 menggunakan pendekatan <em>machine learning</em>. Tujuan utamanya meliputi:</p>
 <ul class="simple">
-<li><p>Membangun model klasifikasi yang mampu membedakan <strong>sinyal ECG normal</strong> dan <strong>abnormal</strong> menggunakan dataset ECG200,</p></li>
-<li><p>Mencapai <strong>F1-score ≥ 0.90</strong> pada data uji sebagai ukuran keseimbangan antara presisi dan <em>recall</em>,</p></li>
-<li><p>Mengimplementasikan model dalam aplikasi berbasis <strong>Streamlit</strong> yang memungkinkan pengguna mengunggah file CSV berisi 96 nilai ECG dan menerima prediksi <em>real-time</em>.</p></li>
+<li><p>Membangun dan membandingkan kinerja <strong>enam algoritma klasifikasi</strong> (Naive Bayes, Logistic Regression, Decision Tree, Random Forest, KNN, SVM) dalam membedakan <strong>sinyal ECG normal</strong> (<code class="docutils literal notranslate"><span class="pre">1</span></code>) dan <strong>abnormal</strong> (<code class="docutils literal notranslate"><span class="pre">-1</span></code>).</p></li>
+<li><p>Mencapai <strong>F1-score ≥ 0.80</strong> pada data uji sebagai indikator keseimbangan antara presisi (menghindari false positive) dan <em>recall</em> (menghindari false negative).</p></li>
+<li><p>Mengimplementasikan model terbaik dalam aplikasi berbasis <strong>Streamlit</strong> yang memungkinkan pengguna mengunggah file CSV berisi 96 nilai ECG dan menerima prediksi instan beserta visualisasi sinyal.</p></li>
 </ul>
 </section>
 <section id="manfaat-proyek">
-<h2>1.5 Manfaat Proyek<a class="headerlink" href="#manfaat-proyek" title="Link to this heading">#</a></h2>
+<h2>4. Manfaat Proyek<a class="headerlink" href="#manfaat-proyek" title="Link to this heading">#</a></h2>
+<p>Hasil analisis ini diharapkan memberikan manfaat sebagai berikut:</p>
 <ul class="simple">
-<li><p><strong>Akademik</strong>: Menjadi studi kasus penerapan CRISP-DM pada data time series medis.</p></li>
-<li><p><strong>Teknologi</strong>: Menunjukkan bahwa model klasik (seperti Random Forest atau KNN) dapat mencapai performa tinggi pada data kecil jika diproses dengan baik.</p></li>
-<li><p><strong>Sosial</strong>: Memberikan wawasan tentang potensi AI dalam mendukung deteksi dini penyakit kardiovaskular.</p></li>
+<li><p><strong>Edukasi</strong>: Memahami penerapan metodologi CRISP-DM pada data <em>time series</em> medis, termasuk tantangan dalam preprocessing, pemilihan model, dan evaluasi.</p></li>
+<li><p><strong>Teknologi</strong>: Menunjukkan bahwa model klasik dapat mencapai performa tinggi bahkan pada dataset kecil (200 sampel) jika diproses dengan benar—tanpa perlu arsitektur deep learning yang kompleks.</p></li>
+<li><p><strong>Sosial</strong>: Memberikan wawasan tentang potensi AI sebagai alat bantu skrining awal dalam layanan kesehatan, terutama di wilayah dengan akses terbatas terhadap tenaga medis spesialis.</p></li>
 </ul>
 </section>
-<section id="ruang-lingkup-dan-batasan">
-<h2>1.6 Ruang Lingkup dan Batasan<a class="headerlink" href="#ruang-lingkup-dan-batasan" title="Link to this heading">#</a></h2>
+<section id="ruang-lingkup-proyek">
+<h2>5. Ruang Lingkup Proyek<a class="headerlink" href="#ruang-lingkup-proyek" title="Link to this heading">#</a></h2>
+<p>Ruang lingkup proyek ini mencakup:</p>
 <ul class="simple">
-<li><p><strong>Dataset</strong>: Hanya menggunakan ECG200 (100 latih, 100 uji, panjang 96, 2 kelas).</p></li>
-<li><p><strong>Preprocessing</strong>: Normalisasi ulang, penanganan ketidakseimbangan (jika terjadi), tanpa augmentasi.</p></li>
-<li><p><strong>Modelling</strong>: Perbandingan 6 algoritma klasifikasi.</p></li>
-<li><p><strong>Deployment</strong>: Aplikasi Streamlit untuk prediksi satu sampel (96 nilai dalam 1 file CSV).</p></li>
+<li><p>Penggunaan <strong>dataset ECG200</strong> dari repositori <em>Time Series Classification</em>, yang terdiri dari:</p>
+<ul>
+<li><p><strong>100 sampel latih</strong>,</p></li>
+<li><p><strong>100 sampel uji</strong>,</p></li>
+<li><p>Setiap sampel: <strong>96 titik waktu</strong>, <strong>1 dimensi</strong>, <strong>2 kelas</strong> (<code class="docutils literal notranslate"><span class="pre">1</span></code> = normal, <code class="docutils literal notranslate"><span class="pre">-1</span></code> = infark miokard).</p></li>
+</ul>
+</li>
+<li><p>Tahapan analisis meliputi:</p>
+<ul>
+<li><p><strong>Eksplorasi data (EDA)</strong>: distribusi kelas, visualisasi pola ECG per kelas, pemeriksaan kualitas data.</p></li>
+<li><p><strong>Preprocessing</strong>: normalisasi ulang, penanganan ketidakseimbangan kelas (jika diperlukan).</p></li>
+<li><p><strong>Benchmarking model</strong>: pelatihan dan evaluasi 6 algoritma klasifikasi.</p></li>
+<li><p><strong>Pemilihan model terbaik</strong> berdasarkan F1-score dan stabilitas.</p></li>
+</ul>
+</li>
+<li><p><strong>Deployment</strong>: Implementasi model terbaik dalam aplikasi Streamlit untuk prediksi <em>real-time</em> berbasis unggah file CSV (1 baris × 96 kolom).</p></li>
 <li><p><strong>Batasan</strong>:</p>
 <ul>
-<li><p>Bukan alat diagnosis medis,</p></li>
-<li><p>Tidak menangani noise atau artefak klinis (karena data sudah bersih),</p></li>
-<li><p>Tidak melakukan deteksi fitur ECG eksplisit (misalnya, QRS complex).</p></li>
+<li><p>Bukan alat diagnosis medis—hanya untuk keperluan edukasi dan eksperimen.</p></li>
+<li><p>Tidak menangani noise klinis atau artefak gerakan (karena data sudah diproses dan bersih).</p></li>
+<li><p>Tidak melakukan deteksi eksplisit fitur ECG (misalnya: puncak QRS), melainkan mengandalkan representasi time series secara utuh.</p></li>
 </ul>
 </li>
 </ul>
@@ -578,12 +577,11 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#latar-belakang">1.1 Latar Belakang</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sumber-dan-cara-pengambilan-data">1.2 Sumber dan Cara Pengambilan Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#business-problem">1.3 Business Problem</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-analisis">1.4 Tujuan Analisis</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manfaat-proyek">1.5 Manfaat Proyek</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ruang-lingkup-dan-batasan">1.6 Ruang Lingkup dan Batasan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#latar-belakang">1. Latar Belakang</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#business-problem">2. Business Problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-analisis">3. Tujuan Analisis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manfaat-proyek">4. Manfaat Proyek</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ruang-lingkup-proyek">5. Ruang Lingkup Proyek</a></li>
 </ul>
   </nav></div>
 
