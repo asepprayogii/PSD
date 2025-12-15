@@ -551,7 +551,7 @@ document.write(`
 <span class="c1"># Ambil model terbaik</span>
 <span class="n">winner_row</span> <span class="o">=</span> <span class="n">df_results</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># ini Series</span>
 <span class="n">best_model_name</span> <span class="o">=</span> <span class="n">winner_row</span><span class="p">[</span><span class="s1">&#39;Model&#39;</span><span class="p">]</span>
-<span class="n">best_model_obj</span> <span class="o">=</span> <span class="n">winner_row</span><span class="p">[</span><span class="s1">&#39;Model_Obj&#39;</span><span class="p">]</span>  <span class="c1"># ✅ Ini objek model yang valid</span>
+<span class="n">best_model_obj</span> <span class="o">=</span> <span class="n">winner_row</span><span class="p">[</span><span class="s1">&#39;Model_Obj&#39;</span><span class="p">]</span> 
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🏆 MODEL TERBAIK BERDASARKAN F1-SCORE:&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Nama     : </span><span class="si">{</span><span class="n">best_model_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -567,38 +567,38 @@ document.write(`
 [01] Naive Bayes
      → Akurasi : 0.7900
      → F1-Score: 0.7838
-     → Waktu   : 0.0046 detik
+     → Waktu   : 0.0053 detik
 
 [02] Logistic Regression
      → Akurasi : 0.8300
      → F1-Score: 0.8222
-     → Waktu   : 0.0095 detik
+     → Waktu   : 0.0128 detik
 
 [03] Decision Tree
      → Akurasi : 0.8100
      → F1-Score: 0.7926
-     → Waktu   : 0.0108 detik
+     → Waktu   : 0.0102 detik
 
 [04] Random Forest
      → Akurasi : 0.8200
      → F1-Score: 0.8069
-     → Waktu   : 0.1796 detik
+     → Waktu   : 0.1475 detik
 
 [05] KNN (k=5)
      → Akurasi : 0.8800
      → F1-Score: 0.8727
-     → Waktu   : 0.0042 detik
+     → Waktu   : 0.0031 detik
 
 [06] SVM (RBF)
      → Akurasi : 0.8600
      → F1-Score: 0.8514
-     → Waktu   : 0.0054 detik
+     → Waktu   : 0.0059 detik
 
 🏆 MODEL TERBAIK BERDASARKAN F1-SCORE:
    Nama     : KNN (k=5)
    F1-Score : 0.8727
    Akurasi  : 0.8800
-   Waktu    : 0.0042 detik
+   Waktu    : 0.0031 detik
 </pre></div>
 </div>
 </div>
